@@ -1,14 +1,42 @@
 package com.chuansongmen.base;
 
-import android.arch.lifecycle.ViewModel;
-import android.arch.lifecycle.ViewModelProvider;
+import android.app.Activity;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
-public abstract class BaseFragment<T extends ViewModel> extends Fragment{
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+
+public abstract class BaseFragment<T extends BaseViewModel> extends Fragment {
     protected T viewModel;
 
-    public BaseFragment(Class<T> model) {
-        viewModel = ViewModelProviders.of(this).get(model);
+    protected void startActivity(Class<? extends Activity> activity, @Nullable Bundle bundle) {
+        Intent intent = new Intent(getContext(), activity);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        startActivity(intent);
+    }
+
+    protected void startFragment(Fragment target, boolean isAddBack) {
+        //todo:封装一个跳转Fragment的方法
+
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        //这里用了反射，获取了子类泛型
+        Type superClass = getClass().getGenericSuperclass();
+        if (superClass instanceof ParameterizedType) {
+            Type[] types =
+                    ((ParameterizedType) superClass).getActualTypeArguments();
+            if (types.length > 0)
+                viewModel = ViewModelProviders.of(this).get((Class<T>) types[0]);
+        }
     }
 }

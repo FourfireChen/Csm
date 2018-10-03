@@ -25,9 +25,7 @@ public class SendGetFragment extends BaseFragment<SendGetViewModel> {
     private SendGetListAdapter adapter;
     Unbinder unbinder;
 
-    public SendGetFragment() {
-        super(SendGetViewModel.class);
-    }
+
 
     @Nullable
     @Override

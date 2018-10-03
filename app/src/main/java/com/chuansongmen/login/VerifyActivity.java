@@ -24,8 +24,7 @@ public class VerifyActivity extends BaseActivity {
     Button verifyConfirm;
     @BindView(R.id.verify_code)
     EditText verifyCode;
-    @BindView(R.id.verifying_text)
-    TextView verifyingText;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,7 +35,7 @@ public class VerifyActivity extends BaseActivity {
     }
 
     private void initView() {
-        Util.setTypeface("fonts/type.ttf", getAssets(), verifyTitle, verifyingText);
+        Util.setTypeface("fonts/type.ttf", getAssets(), verifyTitle);
     }
 
 
@@ -58,8 +57,8 @@ public class VerifyActivity extends BaseActivity {
 
                     @Override
                     public void onFinish() {
-                        startActivity(MainActivity.class, null);
                         VerifyActivity.this.finish();
+                        startActivity(MainActivity.class, null);
                     }
                 });
                 break;

@@ -11,7 +11,7 @@
         app:qrcv_maskColor="@color/colorAccent"
         app:qrcv_rectWidth="300dp"
         app:qrcv_isBarcode="true"
-        app:qrcv_topOffset="20dp"
+        app:qrcv_topOffset="30dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </cn.bingoogolapple.qrcode.zbar.ZBarView>
@@ -22,7 +22,7 @@
         android:layout_height="40dp"
         android:layout_centerHorizontal="true"
         android:layout_above="@id/scan_confirm"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/edittext_background"
         android:gravity="center"
         android:hint="手动输入单号" />
@@ -33,14 +33,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
         android:text="确认" />
 
     <android.support.v7.widget.CardView
         android:id="@+id/scan_bottom"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="230dp"
         android:layout_margin="5dp"
         android:elevation="10dp">
 

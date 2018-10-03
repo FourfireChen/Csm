@@ -15,7 +15,7 @@ public enum MainItem {
     EMERGENCY_CONTACT("紧急状态联系"),
     NEXT_DEPATRUE_TIME("下个发车时间"),
     NEXT_HANDOVER("下个交接员"),
-    CHARGE("收款"),
+    RECEIPT("收款"),
     STAR("评分");
 
     private String title;

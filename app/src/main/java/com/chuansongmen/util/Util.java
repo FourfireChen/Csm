@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.chuansongmen.R;
 import com.chuansongmen.common.ProgressListener;
 import com.chuansongmen.common.StartListener;
+import com.victor.loading.newton.NewtonCradleLoading;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -61,13 +62,13 @@ public class Util {
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                stopProgress(context);
                 if (progressListener != null) {
                     if (context instanceof Activity) {
                         ((Activity) context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 progressListener.onFinish();
+                                stopProgress(context);
                             }
                         });
                     }

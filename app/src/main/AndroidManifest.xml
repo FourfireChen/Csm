@@ -1,9 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.chuansongmen">
+
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -13,20 +14,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".login.LoginActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:name=".login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
         </activity>
-        <activity android:name=".MainActivity"></activity>
         <activity
-            android:name=".login.VerifyActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".TestActivity">
-        </activity>
-        <activity android:name=".worker.ScanActivity"/>
+            android:name=".MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
+        <activity
+            android:name=".login.VerifyActivity"/>
+        <activity android:name=".TestActivity"></activity>
+        <activity android:name=".worker.scan.ScanActivity" />
+        <activity android:name=".worker.sendget.SendGetActivity" />
+        <activity android:name=".worker.receipt.WorkerReceiptActivity" />
     </application>
 </manifest>

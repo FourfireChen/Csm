@@ -21,6 +21,6 @@ public abstract class BaseViewModel extends AndroidViewModel{
     @Override
     protected void onCleared() {
         super.onCleared();
-
+        //todo:停止repo中正在进行的工作
     }
 }

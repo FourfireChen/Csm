@@ -3,7 +3,6 @@ package com.chuansongmen;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,8 +10,8 @@ import android.widget.TextView;
 
 import com.chuansongmen.base.BaseActivity;
 import com.chuansongmen.util.Util;
-import com.chuansongmen.worker.ScanActivity;
-import com.chuansongmen.worker.WorkerFragment;
+import com.chuansongmen.worker.scan.ScanActivity;
+import com.chuansongmen.worker.main.WorkerFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="150dp">
+    <ImageView
+        android:id="@+id/main_drawer_head_image"
+        android:src="@drawable/ic_camera_amber_800_36dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="40dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+    <TextView
+        android:id="@+id/main_drawer_head_name"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@id/main_drawer_head_image"
+        android:layout_alignTop="@id/main_drawer_head_image"
+        android:layout_marginStart="20dp"
+        android:textSize="30dp"
+        android:text="名字"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/main_drawer_head_career"
+        android:layout_toEndOf="@id/main_drawer_head_image"
+        android:layout_below="@id/main_drawer_head_name"
+        android:layout_alignStart="@id/main_drawer_head_name"
+        android:textSize="25dp"
+        android:text="名字"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

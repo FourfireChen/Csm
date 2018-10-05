@@ -15,7 +15,7 @@ import com.chuansongmen.common.MainItem;
 import com.chuansongmen.util.Util;
 import com.chuansongmen.worker.receipt.ReceiptActivity;
 import com.chuansongmen.worker.sendget.SendGetActivity;
-import com.chuansongmen.worker.star.StarActivity;
+import com.chuansongmen.worker.career_info.CareerInfoActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -107,7 +107,7 @@ public class MainFragment extends BaseFragment<MainViewModel> implements MainGri
                 break;
             }
             case STAR: {
-                startActivity(StarActivity.class, null);
+                startActivity(CareerInfoActivity.class, null);
                 break;
             }
         }

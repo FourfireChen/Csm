@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="#fff"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/main_activity_drawer_head"
+        android:layout_width="match_parent"
+        android:layout_height="150dp" />
+
+    <LinearLayout
+        android:id="@+id/main_drawer_id"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:src="@drawable/ic_perm_identity_black_24dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+
+        <TextView
+            android:text="职工ID"
+            android:layout_marginStart="10dp"
+            android:layout_width="160dp"
+            android:layout_height="match_parent"
+            android:gravity="center|start" />
+
+        <ImageView
+            android:src="@drawable/ic_chevron_right_black_24dp"
+            android:layout_gravity="end"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:src="@drawable/ic_work_black_24dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+
+        <TextView
+            android:text="工作时段"
+            android:layout_marginStart="10dp"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:gravity="center|start" />
+
+        <Switch
+            android:layout_gravity="center"
+            android:id="@+id/main_drawer_workswitch"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/main_drawer_careersound"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:src="@drawable/ic_hearing_black_24dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+
+        <TextView
+            android:text="职工之声"
+            android:layout_marginStart="10dp"
+            android:layout_width="160dp"
+            android:layout_height="match_parent"
+            android:gravity="center|start" />
+
+        <ImageView
+            android:src="@drawable/ic_chevron_right_black_24dp"
+            android:layout_gravity="end"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+    </LinearLayout>
+</LinearLayout>

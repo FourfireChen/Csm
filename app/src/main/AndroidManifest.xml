@@ -29,6 +29,6 @@
         <activity android:name=".worker.scan.ScanActivity" />
         <activity android:name=".worker.sendget.SendGetActivity" />
         <activity android:name=".worker.receipt.ReceiptActivity" />
-        <activity android:name=".worker.star.StarActivity" />
+        <activity android:name=".worker.career_info.CareerInfoActivity" />
     </application>
 </manifest>

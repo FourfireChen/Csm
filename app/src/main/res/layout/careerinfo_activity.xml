@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/careerinfo_name"
+        android:layout_marginTop="60dp"
+        android:text="name"
+        android:textSize="25dp"
+        android:textColor="@color/colorWarning"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/careerinfo_career"
+        android:text="职位"
+        android:layout_below="@id/careerinfo_name"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/careerinfo_entrytime"
+        android:textSize="15dp"
+        android:text="入职时间"
+        android:layout_below="@id/careerinfo_career"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+</RelativeLayout>

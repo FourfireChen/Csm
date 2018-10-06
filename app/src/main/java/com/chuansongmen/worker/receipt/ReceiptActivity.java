@@ -16,7 +16,6 @@ public class ReceiptActivity extends BaseActivity {
         setContentView(R.layout.worker_receipt_activity);
         FragmentTransaction transaction =
                 getSupportFragmentManager().beginTransaction()
-                        .addToBackStack(null)
                         .replace(R.id.receipt_container, new InputFragment());
         transaction.commit();
     }

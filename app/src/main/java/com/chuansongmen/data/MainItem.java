@@ -12,9 +12,10 @@ public enum MainItem {
     TO_UNLOAD("回站待卸"),
     NEXT_ARRIVAL_TIME("下个到站时间"),
     NEXT_SITE("下一个站点"),
-    EMERGENCY_CONTACT("紧急状态联系"),
+    EMERGENCY_CONTACT("紧急联系"),
     NEXT_DEPATRUE_TIME("下个发车时间"),
     NEXT_HANDOVER("下个交接员"),
+    RUNNING("运行过程中"),
     RECEIPT("收款"),
     STAR("评分");
 

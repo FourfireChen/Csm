@@ -14,8 +14,9 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.chuansongmen.base.BaseActivity;
+import com.chuansongmen.driver.DriverMainFragemnt;
 import com.chuansongmen.util.Util;
-import com.chuansongmen.worker.main.MainFragment;
+import com.chuansongmen.worker.main.WorkerMainFragment;
 import com.chuansongmen.worker.scan.ScanActivity;
 import com.chuansongmen.worker.sendget.SendGetActivity;
 
@@ -70,9 +71,11 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initFragment() {
+        //todo:这里要判断是员工还是司机
+
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction()
-                .replace(R.id.main_fragment_container, new MainFragment())
+                .replace(R.id.main_fragment_container, new DriverMainFragemnt())
                 .commit();
 
     }
@@ -112,4 +115,15 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    /**
+     * 拦截返回键，如果Drawer是打开的，把它关回去
+     */
+    @Override
+    public void onBackPressed() {
+        if (mainDrawerLayout.isDrawerOpen(Gravity.START)) {
+            mainDrawerLayout.closeDrawer(Gravity.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
 }

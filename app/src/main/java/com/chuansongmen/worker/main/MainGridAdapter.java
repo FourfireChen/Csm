@@ -3,14 +3,13 @@ package com.chuansongmen.worker.main;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chuansongmen.R;
+import com.chuansongmen.base.BaseGridAdapter;
 import com.chuansongmen.data.MainItem;
 import com.chuansongmen.util.Util;
 
@@ -23,15 +22,12 @@ import static com.chuansongmen.data.MainItem.KEY_GOOD;
 import static com.chuansongmen.data.MainItem.RECEIPT;
 import static com.chuansongmen.data.MainItem.STAR;
 
-public class MainGridAdapter extends BaseAdapter {
-    private GridView gridView;
-    private int gridviewHeight;
+public class MainGridAdapter extends BaseGridAdapter<MainItem> {
     private List<MainItem> mainItems;
-    private WorkerPageItemsClickListener listener;
 
     MainGridAdapter(GridView gridView, List<MainItem> mainItem) {
-        this.gridView = gridView;
-        this.mainItems = mainItem;
+        super(gridView, mainItem);
+        this.mainItems = super.items;
     }
 
     @Override
@@ -49,24 +45,9 @@ public class MainGridAdapter extends BaseAdapter {
         return position;
     }
 
-    public void setListener(WorkerPageItemsClickListener listener) {
-        this.listener = listener;
-    }
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            convertView = View.inflate(parent.getContext(), R.layout.main_item, null);
-        }
-        if (gridviewHeight == 0) {
-            gridviewHeight = gridView.getHeight();
-        }
-        //此处设置每个view的高度，让它铺满整个gridview
-        AbsListView.LayoutParams layoutParams =
-                new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                        gridviewHeight / 3);
-        convertView.setLayoutParams(layoutParams);
-
+        convertView = fullScreen(convertView, parent, position, R.layout.worker_main_item);
 
         TextView title = convertView.findViewById(R.id.main_item_title);
         TextView value = convertView.findViewById(R.id.main_item_value);
@@ -116,16 +97,6 @@ public class MainGridAdapter extends BaseAdapter {
         //改字体
         Util.setTypeface("fonts/type.ttf", parent.getContext().getAssets(), title, value);
 
-
-        if (listener != null) {
-            convertView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    listener.onClick(mainItem);
-                }
-            });
-        }
-
         return convertView;
     }
 
@@ -134,8 +105,5 @@ public class MainGridAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    interface WorkerPageItemsClickListener {
-        void onClick(MainItem item);
-    }
 
 }

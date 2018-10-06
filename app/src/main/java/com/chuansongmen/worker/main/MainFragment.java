@@ -11,11 +11,12 @@ import android.widget.TextView;
 
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseFragment;
+import com.chuansongmen.base.BaseGridAdapter;
 import com.chuansongmen.data.MainItem;
 import com.chuansongmen.util.Util;
+import com.chuansongmen.worker.career_info.CareerInfoActivity;
 import com.chuansongmen.worker.receipt.ReceiptActivity;
 import com.chuansongmen.worker.sendget.SendGetActivity;
-import com.chuansongmen.worker.career_info.CareerInfoActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,7 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class MainFragment extends BaseFragment<MainViewModel> implements MainGridAdapter.WorkerPageItemsClickListener {
+public class MainFragment extends BaseFragment<MainViewModel> implements BaseGridAdapter.ItemOnClickListener<MainItem> {
     @BindView(R.id.worker_page)
     GridView workerPage;
     Unbinder unbinder;

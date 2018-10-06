@@ -2,18 +2,23 @@ package com.chuansongmen.driver;
 
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.GridView;
 
+import com.chuansongmen.R;
+import com.chuansongmen.base.BaseGridAdapter;
 import com.chuansongmen.data.MainItem;
 
 import java.util.List;
 
-public class MainGridAdapter extends BaseAdapter {
+public class MainGridAdapter extends BaseGridAdapter<MainItem> {
     private List<MainItem> mainItems;
 
-    public MainGridAdapter(List<MainItem> mainItems) {
-        this.mainItems = mainItems;
+    public MainGridAdapter(GridView gridView,
+                           List<MainItem> items) {
+        super(gridView, items);
+        this.mainItems = items;
     }
+
 
     public List<MainItem> getMainItems() {
         return mainItems;
@@ -40,6 +45,7 @@ public class MainGridAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        convertView = fullScreen(convertView, parent, position, R.layout.driver_main_item);
 
         return convertView;
     }

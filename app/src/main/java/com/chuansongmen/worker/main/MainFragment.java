@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseFragment;
-import com.chuansongmen.common.MainItem;
+import com.chuansongmen.data.MainItem;
 import com.chuansongmen.util.Util;
 import com.chuansongmen.worker.receipt.ReceiptActivity;
 import com.chuansongmen.worker.sendget.SendGetActivity;

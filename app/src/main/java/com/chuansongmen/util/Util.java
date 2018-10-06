@@ -13,7 +13,6 @@ import android.widget.Toast;
 import com.chuansongmen.R;
 import com.chuansongmen.common.ProgressListener;
 import com.chuansongmen.common.StartListener;
-import com.victor.loading.newton.NewtonCradleLoading;
 
 import java.util.Timer;
 import java.util.TimerTask;

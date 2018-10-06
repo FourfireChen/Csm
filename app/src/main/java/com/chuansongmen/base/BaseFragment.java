@@ -5,8 +5,10 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -22,9 +24,17 @@ public abstract class BaseFragment<T extends BaseViewModel> extends Fragment {
         startActivity(intent);
     }
 
-    protected void startFragment(Fragment target, boolean isAddBack) {
+    protected void startFragmentInActivity(@IdRes int container,
+                                           Fragment target,
+                                           boolean isAddBack) {
         //todo:封装一个跳转Fragment的方法
-
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(container, target);
+        if (isAddBack){
+            transaction.addToBackStack(null);
+        }
+        transaction.commit();
     }
 
     @Override

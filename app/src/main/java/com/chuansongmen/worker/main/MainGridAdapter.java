@@ -1,6 +1,5 @@
 package com.chuansongmen.worker.main;
 
-import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,18 +11,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chuansongmen.R;
-import com.chuansongmen.common.MainItem;
+import com.chuansongmen.data.MainItem;
 import com.chuansongmen.util.Util;
 
-import java.net.PasswordAuthentication;
 import java.util.List;
 
 import static android.widget.RelativeLayout.CENTER_VERTICAL;
 import static android.widget.RelativeLayout.END_OF;
-import static com.chuansongmen.common.MainItem.DETAINED_GOOD;
-import static com.chuansongmen.common.MainItem.KEY_GOOD;
-import static com.chuansongmen.common.MainItem.RECEIPT;
-import static com.chuansongmen.common.MainItem.STAR;
+import static com.chuansongmen.data.MainItem.DETAINED_GOOD;
+import static com.chuansongmen.data.MainItem.KEY_GOOD;
+import static com.chuansongmen.data.MainItem.RECEIPT;
+import static com.chuansongmen.data.MainItem.STAR;
 
 public class MainGridAdapter extends BaseAdapter {
     private GridView gridView;

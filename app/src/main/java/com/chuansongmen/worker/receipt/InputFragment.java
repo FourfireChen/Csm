@@ -55,11 +55,7 @@ public class InputFragment extends BaseFragment {
 
     @OnClick(R.id.receipt_confirm)
     public void onViewClicked() {
-        //todo:弹出收款二维码
-        getActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.receipt_container, new PayFragment())
-                .commit();
+        startFragmentInActivity(R.id.receipt_container, new PayFragment(), true);
     }
 
     @Override

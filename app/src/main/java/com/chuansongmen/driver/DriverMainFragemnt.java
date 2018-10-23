@@ -11,7 +11,7 @@ import android.widget.GridView;
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseFragment;
 import com.chuansongmen.common.MainGridAdapter;
-import com.chuansongmen.data.MainItem;
+import com.chuansongmen.common.MainItem;
 
 import java.util.Arrays;
 import java.util.List;

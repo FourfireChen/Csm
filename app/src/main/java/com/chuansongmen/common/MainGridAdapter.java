@@ -12,14 +12,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chuansongmen.R;
-import com.chuansongmen.data.MainItem;
 import com.chuansongmen.util.Util;
 
 import java.util.List;
 
 import static android.widget.RelativeLayout.CENTER_VERTICAL;
 import static android.widget.RelativeLayout.END_OF;
-import static com.chuansongmen.data.MainItem.RECEIPT;
+import static com.chuansongmen.common.MainItem.RECEIPT;
 
 public class MainGridAdapter extends BaseAdapter {
     private List<MainItem> mainItems;

@@ -28,8 +28,7 @@ public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatAct
     private void initViewModel() {
         Type superClass = getClass().getGenericSuperclass();
         if (superClass instanceof ParameterizedType) {
-            Type[] types =
-                    ((ParameterizedType) superClass).getActualTypeArguments();
+            Type[] types = ((ParameterizedType) superClass).getActualTypeArguments();
             if (types.length > 0)
                 viewModel = ViewModelProviders.of(this).get((Class<T>) types[0]);
         }

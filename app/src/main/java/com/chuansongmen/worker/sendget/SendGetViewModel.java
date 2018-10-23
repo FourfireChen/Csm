@@ -5,7 +5,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 import com.chuansongmen.base.BaseViewModel;
-import com.chuansongmen.data.Task;
+import com.chuansongmen.data.bean.Task;
 import java.util.ArrayList;
 
 public class SendGetViewModel extends BaseViewModel {

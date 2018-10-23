@@ -1,5 +1,6 @@
 package com.chuansongmen;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
@@ -8,12 +9,14 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
 import com.chuansongmen.base.BaseActivity;
+import com.chuansongmen.common.Career;
 import com.chuansongmen.driver.DriverMainFragemnt;
 import com.chuansongmen.util.Util;
 import com.chuansongmen.worker.main.WorkerMainFragment;
@@ -56,28 +59,61 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.main_toolbar_info)
     ImageView mainToolbarInfo;
 
+    private Career career;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
         ButterKnife.bind(this);
+
         setSupportActionBar(toolbar);
-        initBottomNavigation();
-        initFragment();
+
+        setBottomNavigationTypeface();
+
+        judge();
+        initWorker();
+        /*
+        switch (career) {
+            case DRIVER:
+                initDriver();
+                break;
+            case WORKER:
+                initWorker();
+                break;
+            default:
+                initWorker();
+                break;
+        }*/
     }
 
-    private void initBottomNavigation() {
+    private void setBottomNavigationTypeface() {
         Util.setTypeface("fonts/type.ttf", getAssets(), mainBottomLeft, mainBottomRight, mainTitle);
     }
 
-    private void initFragment() {
-        //todo:这里要判断是员工还是司机
+    private void judge() {
+        //todo:判断后修改career的值
+    }
 
+    private void initWorker() {
+        FragmentManager manager = getSupportFragmentManager();
+        manager.beginTransaction()
+                .replace(R.id.main_fragment_container, new WorkerMainFragment())
+                .commit();
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+    }
+
+    private void initDriver() {
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction()
                 .replace(R.id.main_fragment_container, new DriverMainFragemnt())
                 .commit();
-
+        mainBottomLeft.setText("历史记录");
+        mainBottomRight.setText("路线信息");
     }
 
     @OnClick({R.id.main_bottom_left,

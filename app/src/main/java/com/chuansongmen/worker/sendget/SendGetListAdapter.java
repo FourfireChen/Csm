@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import com.chuansongmen.R;
-import com.chuansongmen.data.Task;
+import com.chuansongmen.data.bean.Task;
 import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;

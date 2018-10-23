@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseFragment;
-import com.chuansongmen.data.Task;
+import com.chuansongmen.data.bean.Task;
 
 import java.util.ArrayList;
 

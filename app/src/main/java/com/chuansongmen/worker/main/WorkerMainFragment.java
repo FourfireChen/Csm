@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseFragment;
 import com.chuansongmen.common.MainGridAdapter;
-import com.chuansongmen.data.MainItem;
+import com.chuansongmen.common.MainItem;
 import com.chuansongmen.util.Util;
 import com.chuansongmen.worker.career_info.CareerInfoActivity;
 import com.chuansongmen.worker.receipt.ReceiptActivity;

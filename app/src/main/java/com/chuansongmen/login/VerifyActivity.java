@@ -6,11 +6,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import com.chuansongmen.MainActivity;
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseActivity;
 import com.chuansongmen.common.ProgressListener;
 import com.chuansongmen.util.Util;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -18,12 +20,14 @@ import butterknife.OnClick;
 public class VerifyActivity extends BaseActivity {
     @BindView(R.id.verify_title)
     TextView verifyTitle;
-    @BindView(R.id.verify_sendagain)
-    Button verifySendagain;
+    @BindView(R.id.verify_send)
+    Button verifySend;
     @BindView(R.id.verify_confirm)
     Button verifyConfirm;
     @BindView(R.id.verify_code)
     EditText verifyCode;
+    @BindView(R.id.verify_phonenumber)
+    EditText verifyPhonenumber;
 
 
     @Override
@@ -39,11 +43,11 @@ public class VerifyActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.verify_sendagain, R.id.verify_confirm})
+    @OnClick({R.id.verify_send, R.id.verify_confirm})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.verify_sendagain:
-                //todo:重新发送验证码
+            case R.id.verify_send:
+                //todo:发送验证码
                 break;
             case R.id.verify_confirm:
                 //todo:验证登录
@@ -51,7 +55,7 @@ public class VerifyActivity extends BaseActivity {
                 Util.showProgress(this, 2000, new ProgressListener() {
                     @Override
                     public void onStart() {
-                        verifySendagain.setVisibility(View.INVISIBLE);
+                        verifySend.setVisibility(View.INVISIBLE);
                         verifyConfirm.setVisibility(View.INVISIBLE);
                     }
 

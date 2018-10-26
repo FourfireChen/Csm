@@ -1,8 +1,8 @@
 package com.chuansongmen.base;
 
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
-import android.support.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.annotation.NonNull;
 
 import com.chuansongmen.data.DataRepository;
 import com.chuansongmen.data.IDataRepository;

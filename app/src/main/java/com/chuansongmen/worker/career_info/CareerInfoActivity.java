@@ -1,13 +1,12 @@
 package com.chuansongmen.worker.career_info;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseActivity;
-import com.idlestar.ratingstar.RatingStarView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,15 +24,13 @@ public class CareerInfoActivity extends BaseActivity<CareerInfoViewModel> {
     ImageView careerinfoQrcode;
     @BindView(R.id.careerinfo_id)
     TextView careerinfoId;
-    @BindView(R.id.careerinfo_ratebar)
-    RatingStarView careerinfoRatebar;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.careerinfo_activity);
         ButterKnife.bind(this);
-        //测试而已
-        careerinfoRatebar.setRating((float) 4.7);
+
     }
 }

@@ -1,9 +1,9 @@
 package com.chuansongmen.worker.sendget;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
+import androidx.annotation.Nullable;
+import com.google.android.material.tabs.TabLayout;
+import androidx.viewpager.widget.ViewPager;
 
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseActivity;
@@ -26,6 +26,7 @@ public class SendGetActivity extends BaseActivity<SendGetViewModel> {
     private List<SendGetFragment> sendGetFragments = new ArrayList<>();
     private String[] titles;
     private SendGetViewModel viewModel = super.viewModel;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +44,7 @@ public class SendGetActivity extends BaseActivity<SendGetViewModel> {
             initSend();
         }
 
-        if (type.equals("unload")){
+        if (type.equals("unload")) {
             //todo:翻到已收件页
         }
 

@@ -27,7 +27,9 @@ public class Worker {
 
     /**
      * 员工分类
-     * todo:说明有什么分类
+     * 分类：0：站长
+     * 1：司机
+     * 2：收派员
      */
     private int category;
 
@@ -40,6 +42,26 @@ public class Worker {
      * 收派员收单量、派单量
      */
     private int collectNum, sendNum;
+
+    private static Worker worker;
+
+    private Worker(int id,
+                   String name,
+                   int sex,
+                   int status,
+                   String regId,
+                   Position now, int category, String belongStation, int collectNum, int sendNum) {
+        this.id = id;
+        this.name = name;
+        this.sex = sex;
+        this.status = status;
+        this.regId = regId;
+        this.now = now;
+        this.category = category;
+        this.belongStation = belongStation;
+        this.collectNum = collectNum;
+        this.sendNum = sendNum;
+    }
 
     public int getId() {
         return id;
@@ -119,5 +141,82 @@ public class Worker {
 
     public void setSendNum(int sendNum) {
         this.sendNum = sendNum;
+    }
+
+    public static class WorkerBuilder {
+        private int id;
+        private String name;
+        private int sex;
+        private int status;
+        private String regId;
+        private Position now;
+        private int category;
+        private String belongStation;
+        private int collectNum, sendNum;
+
+        public WorkerBuilder setId(int id) {
+            this.id = id;
+            return this;
+        }
+
+        public WorkerBuilder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public WorkerBuilder setSex(int sex) {
+            this.sex = sex;
+            return this;
+        }
+
+        public WorkerBuilder setStatus(int status) {
+            this.status = status;
+            return this;
+        }
+
+        public WorkerBuilder setRegId(String regId) {
+            this.regId = regId;
+            return this;
+        }
+
+        public WorkerBuilder setNow(Position now) {
+            this.now = now;
+            return this;
+        }
+
+        public WorkerBuilder setCategory(int category) {
+            this.category = category;
+            return this;
+        }
+
+        public WorkerBuilder setBelongStation(String belongStation) {
+            this.belongStation = belongStation;
+            return this;
+        }
+
+        public WorkerBuilder setCollectNum(int collectNum) {
+            this.collectNum = collectNum;
+            return this;
+        }
+
+        public WorkerBuilder setSendNum(int sendNum) {
+            this.sendNum = sendNum;
+            return this;
+        }
+
+        public Worker build() {
+            if (worker == null)
+                worker = new Worker(id,
+                        name,
+                        sex,
+                        status,
+                        regId,
+                        now,
+                        category,
+                        belongStation,
+                        collectNum,
+                        sendNum);
+            return worker;
+        }
     }
 }

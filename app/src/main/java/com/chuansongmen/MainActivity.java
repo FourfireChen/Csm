@@ -1,22 +1,20 @@
 package com.chuansongmen;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentManager;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.cardview.widget.CardView;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
 import com.chuansongmen.base.BaseActivity;
-import com.chuansongmen.common.Career;
 import com.chuansongmen.driver.DriverMainFragemnt;
 import com.chuansongmen.util.Util;
 import com.chuansongmen.worker.main.WorkerMainFragment;
@@ -59,8 +57,6 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.main_toolbar_info)
     ImageView mainToolbarInfo;
 
-    private Career career;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,19 +68,8 @@ public class MainActivity extends BaseActivity {
         setBottomNavigationTypeface();
 
         judge();
+        //todo:这里是测试，记得删
         initWorker();
-        /*
-        switch (career) {
-            case DRIVER:
-                initDriver();
-                break;
-            case WORKER:
-                initWorker();
-                break;
-            default:
-                initWorker();
-                break;
-        }*/
     }
 
     private void setBottomNavigationTypeface() {
@@ -95,16 +80,22 @@ public class MainActivity extends BaseActivity {
         //todo:判断后修改career的值
     }
 
+    private void initCommon(){
+        mainDrawerWorkswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+
+                }
+            }
+        });
+    }
+
     private void initWorker() {
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction()
                 .replace(R.id.main_fragment_container, new WorkerMainFragment())
                 .commit();
-    }
-
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
     }
 
     private void initDriver() {
@@ -120,7 +111,7 @@ public class MainActivity extends BaseActivity {
             R.id.main_bottom_center,
             R.id.main_bottom_right,
             R.id.main_toolbar_me,
-            R.id.main_toolbar_info})
+            R.id.main_toolbar_info,})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.main_bottom_left: {

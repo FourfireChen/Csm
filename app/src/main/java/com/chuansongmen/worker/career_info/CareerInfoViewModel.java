@@ -1,7 +1,7 @@
 package com.chuansongmen.worker.career_info;
 
 import android.app.Application;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.chuansongmen.base.BaseViewModel;
 

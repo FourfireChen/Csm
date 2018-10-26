@@ -1,6 +1,7 @@
 package com.chuansongmen.data.bean;
 
 public class Order {
+
     /**
      * 流水号
      */
@@ -33,7 +34,12 @@ public class Order {
 
     /**
      * 订单状态
-     * todo:这里要说明一下有哪几种状态
+     * 类别：0：收派员未区间
+     * 1：收派员已区间
+     * 2：在仓储站
+     * 3：正在运输
+     * 4：收派员正在派送中
+     * 5：收派员收派完毕
      */
     private int status;
 
@@ -67,7 +73,7 @@ public class Order {
 
     /**
      * 寄件类别
-     * todo:这里要说明有什么类别
+     * 值：
      */
     private int category;
 

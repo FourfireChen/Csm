@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp">
     </GridView>
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_margin="5dp"
         android:layout_weight="1"
         android:layout_width="match_parent"
@@ -40,5 +40,5 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 </LinearLayout>

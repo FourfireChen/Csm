@@ -1,14 +1,19 @@
 package com.chuansongmen.base;
 
-import android.arch.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+
+/**
+ * 这个类是本项目中封装的基本类，提供一些自己封装的方法，并且提供默认的viewModel
+ * @param <T> 这个泛型需要指定的是继承该类的Activity对应的viewModel，这里会自动通过反射获取viewmodel对象
+ */
 
 public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatActivity {
     protected T viewModel;

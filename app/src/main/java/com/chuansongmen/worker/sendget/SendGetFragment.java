@@ -1,17 +1,17 @@
 package com.chuansongmen.worker.sendget;
 
-import android.arch.lifecycle.Observer;
+import androidx.lifecycle.Observer;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseFragment;
-import com.chuansongmen.data.bean.Task;
+import com.chuansongmen.data.bean.Order;
 
 import java.util.ArrayList;
 
@@ -26,7 +26,6 @@ public class SendGetFragment extends BaseFragment<SendGetViewModel> {
     Unbinder unbinder;
 
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -34,13 +33,13 @@ public class SendGetFragment extends BaseFragment<SendGetViewModel> {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.worker_send_get_fragment, container, false);
         unbinder = ButterKnife.bind(this, view);
-        initTasks();
+        initOrder();
 
         return view;
     }
 
-    public void initTasks() {
-        adapter = new SendGetListAdapter(viewModel.getTasks().getValue(),
+    public void initOrder() {
+        adapter = new SendGetListAdapter(viewModel.getOrder().getValue(),
                 new SendGetListAdapter.sendgetItemOnClickListener() {
                     @Override
                     public void onClick(int id, int position) {
@@ -48,10 +47,10 @@ public class SendGetFragment extends BaseFragment<SendGetViewModel> {
                     }
                 });
         sendgetLists.setAdapter(adapter);
-        viewModel.getTasks().observe(this, new Observer<ArrayList<Task>>() {
+        viewModel.getOrder().observe(this, new Observer<ArrayList<Order>>() {
             @Override
-            public void onChanged(@Nullable ArrayList<Task> tasks) {
-                adapter.setTasks(tasks);
+            public void onChanged(@Nullable ArrayList<Order> orders) {
+                adapter.setOrders(orders);
                 adapter.notifyDataSetChanged();
             }
         });

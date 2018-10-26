@@ -1,29 +1,32 @@
 package com.chuansongmen.worker.sendget;
 
-import android.support.annotation.IdRes;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
 import com.chuansongmen.R;
-import com.chuansongmen.data.bean.Task;
+import com.chuansongmen.data.bean.Order;
+
 import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SendGetListAdapter extends RecyclerView.Adapter<SendGetListAdapter.SendGetViewHolder> {
-    private ArrayList<Task> tasks;
+    private ArrayList<Order> orders;
     private sendgetItemOnClickListener listener;
 
-    public SendGetListAdapter(ArrayList<Task> tasks) {
-        this.tasks = tasks;
+    public SendGetListAdapter(ArrayList<Order> orders) {
+        this.orders = orders;
     }
 
-    public SendGetListAdapter(ArrayList<Task> tasks,
+    public SendGetListAdapter(ArrayList<Order> orders,
                               sendgetItemOnClickListener listener) {
-        this.tasks = tasks;
+        this.orders = orders;
         this.listener = listener;
     }
 
@@ -31,8 +34,8 @@ public class SendGetListAdapter extends RecyclerView.Adapter<SendGetListAdapter.
         this.listener = listener;
     }
 
-    public void setTasks(ArrayList<Task> tasks) {
-        this.tasks = tasks;
+    public void setOrders(ArrayList<Order> orders) {
+        this.orders = orders;
     }
 
     @NonNull
@@ -47,10 +50,11 @@ public class SendGetListAdapter extends RecyclerView.Adapter<SendGetListAdapter.
     @Override
     public void onBindViewHolder(@NonNull SendGetViewHolder sendGetViewHolder,
                                  final int i) {
-        sendGetViewHolder.sendgetAddress.setText(tasks.get(i).getSpecificAddress());
-        sendGetViewHolder.sendgetArea.setText(tasks.get(i).getArea());
-        sendGetViewHolder.sendgetName.setText(tasks.get(i).getClientName());
-        sendGetViewHolder.sendgetPhone.setText(tasks.get(i).getPhoneNumber());
+        //todo:重新解析订单数据
+        //sendGetViewHolder.sendgetAddress.setText(orders.get(i).getRecipientAddress());
+        //sendGetViewHolder.sendgetArea.setText(orders.get(i).getRecipientAddress());
+        sendGetViewHolder.sendgetName.setText(orders.get(i).getRecipientName());
+        sendGetViewHolder.sendgetPhone.setText(orders.get(i).getRecipientPhone());
         sendGetViewHolder.sendgetCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,7 +71,7 @@ public class SendGetListAdapter extends RecyclerView.Adapter<SendGetListAdapter.
 
     @Override
     public int getItemCount() {
-        return tasks == null ? 0 : tasks.size();
+        return orders == null ? 0 : orders.size();
     }
 
     class SendGetViewHolder extends RecyclerView.ViewHolder {

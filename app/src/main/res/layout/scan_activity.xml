@@ -36,7 +36,7 @@
         android:layout_marginBottom="10dp"
         android:text="确认" />
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/scan_bottom"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
@@ -48,5 +48,5 @@
             android:id="@+id/scan_sign"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 </RelativeLayout>

@@ -32,18 +32,12 @@
         android:text="入职时间"
         android:textSize="15dp" />
 
-    <com.idlestar.ratingstar.RatingStarView
-        android:id="@+id/careerinfo_ratebar"
-        android:layout_width="150dp"
-        android:layout_height="25dp"
-        android:layout_below="@id/careerinfo_entrytime"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp" />
+
     <TextView
         android:id="@+id/careerinfo_rate"
         android:text="4.7"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/careerinfo_ratebar"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

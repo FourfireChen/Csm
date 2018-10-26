@@ -1,5 +1,7 @@
 package com.chuansongmen.data;
 
+import androidx.lifecycle.LiveData;
+
 import com.chuansongmen.data.bean.Order;
 import com.chuansongmen.data.bean.Position;
 import com.chuansongmen.data.bean.Worker;
@@ -22,10 +24,9 @@ public interface IDataRepository {
     /**
      * 更新订单数据
      *
-     * @param order          更新的订单，这里是根据主键来查找的原订单，所以主键不能变
-     * @param resultCallback 回调接口，返回的结果是新的订单，如果是null，则失败。
+     * @param order 更新的订单，这里是根据主键来查找的原订单，所以主键不能变
      */
-    void updateOrder(Order order, Callback<Order> resultCallback);
+    void updateOrder(LiveData<Order> order);
 
 
     /**
@@ -41,9 +42,9 @@ public interface IDataRepository {
      * 获取与某个员工绑定的订单
      *
      * @param workerId      要查找的员工的id
-     * @param ordersCallbak 回调接口，返回所有与该员工有关的订单，如果是null，查询失败；如果list为空，数据库中没有结果
+     * @return 返回的是获取的订单
      */
-    void getWorkerOrders(int workerId, Callback<List<Order>> ordersCallbak);
+    LiveData<List<Order>> getWorkerOrders(int workerId);
 
 
     /**
@@ -80,7 +81,9 @@ public interface IDataRepository {
      * 获取员工信息
      *
      * @param workerId       要获取的员工的Id
-     * @param workerCallback 获取的员工的信息
+     * @return  获取的员工的信息
      */
-    void getWorkerInfo(int workerId, Callback<Worker> workerCallback);
+    LiveData<Worker> getWorkerInfo(int workerId);
+
+
 }

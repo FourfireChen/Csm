@@ -2,48 +2,49 @@ package com.chuansongmen.data;
 
 import com.chuansongmen.data.bean.Order;
 import com.chuansongmen.data.bean.Position;
+import com.chuansongmen.data.bean.Route;
 import com.chuansongmen.data.bean.Worker;
 
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.http.POST;
+import androidx.lifecycle.LiveData;
+import retrofit2.http.GET;
+import retrofit2.http.PATCH;
+import retrofit2.http.Part;
+import retrofit2.http.Query;
 
 public interface IRemoteData {
-    /**
-     * 添加订单
-     *
-     * @param order    要添加的订单
-     */
-    @POST
-    Call<Boolean> addOrder(Order order);
-
 
     /**
      * 更新订单数据
      *
-     * @param order          更新的订单，这里是根据主键来查找的原订单，所以主键不能变
-     * @deprecated  回调接口，返回的结果是新的订单，如果是null，则失败。
+     * @param demandOrderStr 能确定目标订单的信息，以;分割，如“status=1;now_worker=123213”
+     * @param targetOrderStr 要修改的信息，以;分割，如“status=2;now_worker=2132131”
+     * @return 是否修改成功
      */
-    Call<Order> updateOrder(Order order);
+    @PATCH("/order/")
+    boolean updateOrder(@Query("demand_order_str") String demandOrderStr,
+                        @Query("target_order_str") String targetOrderStr);
 
 
     /**
      * 查找当前订单的位置
      *
-     * @param order            要查找的订单
-     * @param positionCallback 回调接口，返回的是要查询的结果，如果是null，则失败
+     * @param orderId 要查询的订单号
+     * @return 订单位置
      */
-    void queryOrderPos(Order order, Callback<Position> positionCallback);
+    @GET("/order/location")
+    Position queryOrderPos(@Query("order_paper_id") int orderId);
 
 
     /**
      * 获取与某个员工绑定的订单
      *
-     * @param workerId      要查找的员工的id
-     * @param ordersCallbak 回调接口，返回所有与该员工有关的订单，如果是null，查询失败；如果list为空，数据库中没有结果
+     * @param workerId 要查找的员工的id
+     * @return 返回所有与该员工有关的订单，如果是null，查询失败；如果list为空，数据库中没有结果
      */
-    void getWorkerOrders(int workerId, Callback<List<Order>> ordersCallbak);
+    @GET("/order/one")
+    List<Order> getWorkerOrders(@Query("user_id") int workerId);
 
 
     /**
@@ -51,46 +52,53 @@ public interface IRemoteData {
      *
      * @param workerId 要上传的员工id
      * @param regId    设备id
-     * @param result   上传结果
+     * @return 是否上传成功
      */
-    void uploadForPush(int workerId, String regId, Callback<Boolean> result);
+    @PATCH("/worker/reg")
+    boolean uploadForPush(@Query("worker_id") int workerId, @Query("reg_id") String regId);
 
 
     /**
      * 上传员工当前位置
      *
-     * @param workerId 要上传的员工id
-     * @param position 当前位置
-     * @param result   上传结果
+     * @param workerId  要上传的员工id
+     * @param longitude 当前经度
+     * @param latitude  当前纬度
+     * @return 是否上传成功
      */
-    void uploadPos(int workerId, Position position, Callback<Boolean> result);
+    @PATCH("/worker/location")
+    boolean uploadPos(@Query("worker_id") int workerId,
+                      @Query("longitude") double longitude,
+                      @Query("latitude") double latitude);
 
     /**
      * 改变员工工作状态，就是上下班
      *
-     * @param workerId           该要变的员工id
-     * @param status             新的状态
-     *                           0：表示下班
-     *                           1：表示上班
-     * @param updateStatusResult 改变的结果
+     * @param workerId 该要变的员工id
+     * @param status   新的状态
+     *                 0：表示下班
+     *                 1：表示上班
+     * @return 是否改变成功
      */
-    void updateWorkerStatus(int workerId, int status, Callback<Boolean> updateStatusResult);
+    @PATCH("/worker/status")
+    boolean updateWorkerStatus(@Query("worker_id") int workerId,
+                               @Query("status") int status);
 
     /**
      * 获取员工信息
      *
-     * @param workerId       要获取的员工的Id
-     * @param workerCallback 获取的员工的信息
+     * @param workerId 要获取的员工的Id/手机号码
+     * @return 查询到的员工信息
      */
-    void getWorkerInfo(int workerId, Callback<Worker> workerCallback);
+    @GET("/worker/one")
+    Worker getWorkerInfo(@Query("worker_id") int workerId);
 
 
     /**
      * 获取所有的路径信息
-     * @param routeId
-     * @param driverId
-     * @param routeName
-     * @param workerName
+     *
+     * @return 获取到的所有路径
      */
-    void getAllRoutes(String routeId, int driverId, String routeName, String workerName);
+    @GET("/route")
+    List<Route> getAllRoutes();
 }

@@ -1,21 +1,30 @@
 package com.chuansongmen.data;
 
-import androidx.lifecycle.LiveData;
-
 import com.chuansongmen.data.bean.Order;
 import com.chuansongmen.data.bean.Position;
+import com.chuansongmen.data.bean.Route;
 import com.chuansongmen.data.bean.Worker;
+import com.chuansongmen.data.retrofit_util.ConvertorFactory;
+import com.chuansongmen.data.retrofit_util.LivedataCallAdatperFactory;
 
 import java.util.List;
 
+import androidx.lifecycle.LiveData;
+import retrofit2.Retrofit;
+
 public class DataRepository implements IDataRepository {
     private static IDataRepository instance;
-    private RemoteRepository remoteRepository;
-    private LocalRepository localRepository;
+    private IRemoteData remoteData;
+    //todo:补充URL
+    private static final String URL = "127.0.0.1";
 
     private DataRepository() {
-        remoteRepository = new RemoteRepository();
-        localRepository = new LocalRepository();
+        Retrofit retrofit =
+                new Retrofit.Builder().baseUrl(URL)
+                        .addCallAdapterFactory(new LivedataCallAdatperFactory())
+                        .addConverterFactory(new ConvertorFactory())
+                        .build();
+        remoteData = retrofit.create(IRemoteData.class);
     }
 
     public static IDataRepository getInstance() {
@@ -26,42 +35,43 @@ public class DataRepository implements IDataRepository {
 
 
     @Override
-    public void addOrder(Order order, Callback<Boolean> callback) {
-
+    public boolean updateOrder(String demandOrderStr, String targetOrderStr) {
+        return false;
     }
 
     @Override
-    public void updateOrder(LiveData<Order> order) {
-
-    }
-
-    @Override
-    public void queryOrderPos(Order order, Callback<Position> positionCallback) {
-
-    }
-
-    @Override
-    public LiveData<List<Order>> getWorkerOrders(int workerId) {
+    public Position queryOrderPos(Order order) {
         return null;
     }
 
     @Override
-    public void uploadForPush(int workerId, String regId, Callback<Boolean> result) {
+    public List<Order> getWorkerOrders(int workerId) {
+        return null;
+    }
 
+
+    @Override
+    public boolean uploadForPush(int workerId, String regId) {
+        return false;
     }
 
     @Override
-    public void uploadPos(int workerId, Position position, Callback<Boolean> result) {
-
+    public boolean uploadPos(int workerId, Position position) {
+        return false;
     }
 
     @Override
-    public void updateWorkerStatus(int workerId, int status, Callback<Boolean> updateStatusResult) {
-
+    public boolean updateWorkerStatus(int workerId, int status) {
+        return false;
     }
 
     @Override
-    public LiveData<Worker> getWorkerInfo(int workerId) {
+    public Worker getWorkerInfo(int workerId) {
+        return null;
+    }
+
+    @Override
+    public List<Route> getAllRoute() {
         return null;
     }
 }

@@ -1,5 +1,4 @@
 package com.chuansongmen.data;
 
-public class LocalRepository {
-
+public class LocalData {
 }

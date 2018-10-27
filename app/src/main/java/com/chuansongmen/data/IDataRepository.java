@@ -1,50 +1,45 @@
 package com.chuansongmen.data;
 
-import androidx.lifecycle.LiveData;
-
 import com.chuansongmen.data.bean.Order;
 import com.chuansongmen.data.bean.Position;
+import com.chuansongmen.data.bean.Route;
 import com.chuansongmen.data.bean.Worker;
 
 import java.util.List;
+
+import androidx.lifecycle.LiveData;
 
 /**
  * 数据仓库接口，所有与数据有关的操作都经过它
  */
 public interface IDataRepository {
-    /**
-     * 添加订单
-     *
-     * @param order    要添加的订单
-     * @param callback 回调返回，结果是添加是否成功的结果
-     */
-    void addOrder(Order order, Callback<Boolean> callback);
-
 
     /**
      * 更新订单数据
      *
-     * @param order 更新的订单，这里是根据主键来查找的原订单，所以主键不能变
+     * @param demandOrderStr 能确定目标订单的信息，以;分割，如“status=1;now_worker=123213”
+     * @param targetOrderStr 要修改的信息，以;分割，如“status=2;now_worker=2132131”
      */
-    void updateOrder(LiveData<Order> order);
+    boolean updateOrder(String demandOrderStr,
+                     String targetOrderStr);
 
 
     /**
      * 查找当前订单的位置
      *
      * @param order            要查找的订单
-     * @param positionCallback 回调接口，返回的是要查询的结果，如果是null，则失败
+     * @return 订单位置
      */
-    void queryOrderPos(Order order, Callback<Position> positionCallback);
+    Position queryOrderPos(Order order);
 
 
     /**
      * 获取与某个员工绑定的订单
      *
-     * @param workerId      要查找的员工的id
+     * @param workerId 要查找的员工的id
      * @return 返回的是获取的订单
      */
-    LiveData<List<Order>> getWorkerOrders(int workerId);
+    List<Order> getWorkerOrders(int workerId);
 
 
     /**
@@ -52,9 +47,9 @@ public interface IDataRepository {
      *
      * @param workerId 要上传的员工id
      * @param regId    设备id
-     * @param result   上传结果
+     * @return    上传结果
      */
-    void uploadForPush(int workerId, String regId, Callback<Boolean> result);
+    boolean uploadForPush(int workerId, String regId);
 
 
     /**
@@ -62,9 +57,9 @@ public interface IDataRepository {
      *
      * @param workerId 要上传的员工id
      * @param position 当前位置
-     * @param result   上传结果
+     * @return 上传结果
      */
-    void uploadPos(int workerId, Position position, Callback<Boolean> result);
+    boolean uploadPos(int workerId, Position position);
 
     /**
      * 改变员工工作状态，就是上下班
@@ -73,17 +68,22 @@ public interface IDataRepository {
      * @param status             新的状态
      *                           0：表示下班
      *                           1：表示上班
-     * @param updateStatusResult 改变的结果
+     * @return  改变的结果
      */
-    void updateWorkerStatus(int workerId, int status, Callback<Boolean> updateStatusResult);
+    boolean updateWorkerStatus(int workerId, int status);
 
     /**
      * 获取员工信息
      *
-     * @param workerId       要获取的员工的Id
-     * @return  获取的员工的信息
+     * @param workerId 要获取的员工的Id
+     * @return 获取的员工的信息
      */
-    LiveData<Worker> getWorkerInfo(int workerId);
+    Worker getWorkerInfo(int workerId);
+
+    /**
+     * 获取所有路线信息
+     */
+    List<Route> getAllRoute();
 
 
 }

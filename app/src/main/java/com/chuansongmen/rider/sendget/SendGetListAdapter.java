@@ -1,4 +1,4 @@
-package com.chuansongmen.worker.sendget;
+package com.chuansongmen.rider.sendget;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;

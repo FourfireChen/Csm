@@ -1,4 +1,4 @@
-package com.chuansongmen.worker.career_info;
+package com.chuansongmen.rider.career_info;
 
 import android.os.Bundle;
 import androidx.annotation.Nullable;

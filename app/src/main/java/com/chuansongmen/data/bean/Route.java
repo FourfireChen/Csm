@@ -1,7 +1,7 @@
 package com.chuansongmen.data.bean;
 
 public class Route {
-    private int id;
+    private String id;
 
     /**
      * 司机Id
@@ -13,11 +13,18 @@ public class Route {
      */
     private String workerName;
 
-    public int getId() {
+    public Route() {
+    }
+
+    public Route(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

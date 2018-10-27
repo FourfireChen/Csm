@@ -1,4 +1,4 @@
-package com.chuansongmen.worker.sendget;
+package com.chuansongmen.rider.sendget;
 
 import android.os.Bundle;
 import androidx.annotation.Nullable;

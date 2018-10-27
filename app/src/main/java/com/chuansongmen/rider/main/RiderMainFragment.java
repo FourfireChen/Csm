@@ -1,4 +1,4 @@
-package com.chuansongmen.worker.main;
+package com.chuansongmen.rider.main;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -14,9 +14,9 @@ import com.chuansongmen.base.BaseFragment;
 import com.chuansongmen.common.MainGridAdapter;
 import com.chuansongmen.common.MainItem;
 import com.chuansongmen.util.Util;
-import com.chuansongmen.worker.career_info.CareerInfoActivity;
-import com.chuansongmen.worker.receipt.ReceiptActivity;
-import com.chuansongmen.worker.sendget.SendGetActivity;
+import com.chuansongmen.rider.career_info.CareerInfoActivity;
+import com.chuansongmen.rider.receipt.ReceiptActivity;
+import com.chuansongmen.rider.sendget.SendGetActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,7 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class WorkerMainFragment extends BaseFragment<MainViewModel> implements MainGridAdapter.ItemOnClickListener<MainItem> {
+public class RiderMainFragment extends BaseFragment<MainViewModel> implements MainGridAdapter.ItemOnClickListener<MainItem> {
     @BindView(R.id.worker_page)
     GridView workerPage;
     Unbinder unbinder;

@@ -1,4 +1,4 @@
-package com.chuansongmen.worker.receipt;
+package com.chuansongmen.rider.receipt;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;

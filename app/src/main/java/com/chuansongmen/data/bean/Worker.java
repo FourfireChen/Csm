@@ -13,7 +13,7 @@ public class Worker {
     /**
      * 当前状态，是否在工作
      */
-    private int status;
+    private boolean isWorking;
 
     /**
      * 小米推送中使用的设备id
@@ -31,12 +31,12 @@ public class Worker {
      * 1：司机
      * 2：收派员
      */
-    private int category;
+    private Category category;
 
     /**
      * 该员工所属的站点名称
      */
-    private String belongStation;
+    private Station belongStation;
 
     /**
      * 收派员收单量、派单量
@@ -48,13 +48,17 @@ public class Worker {
     private Worker(int id,
                    String name,
                    int sex,
-                   int status,
+                   boolean isWorking,
                    String regId,
-                   Position now, int category, String belongStation, int collectNum, int sendNum) {
+                   Position now,
+                   Category category,
+                   Station belongStation,
+                   int collectNum,
+                   int sendNum) {
         this.id = id;
         this.name = name;
         this.sex = sex;
-        this.status = status;
+        this.isWorking = isWorking;
         this.regId = regId;
         this.now = now;
         this.category = category;
@@ -87,12 +91,12 @@ public class Worker {
         this.sex = sex;
     }
 
-    public int getStatus() {
-        return status;
+    public boolean isWorking() {
+        return isWorking;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setWorking(boolean working) {
+        isWorking = working;
     }
 
     public String getRegId() {
@@ -111,19 +115,19 @@ public class Worker {
         this.now = now;
     }
 
-    public int getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(int category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
-    public String getBelongStation() {
+    public Station getBelongStation() {
         return belongStation;
     }
 
-    public void setBelongStation(String belongStation) {
+    public void setBelongStation(Station belongStation) {
         this.belongStation = belongStation;
     }
 
@@ -147,11 +151,11 @@ public class Worker {
         private int id;
         private String name;
         private int sex;
-        private int status;
+        private boolean status;
         private String regId;
         private Position now;
-        private int category;
-        private String belongStation;
+        private Category category;
+        private Station belongStation;
         private int collectNum, sendNum;
 
         public WorkerBuilder setId(int id) {
@@ -169,7 +173,7 @@ public class Worker {
             return this;
         }
 
-        public WorkerBuilder setStatus(int status) {
+        public WorkerBuilder setWorked(boolean status) {
             this.status = status;
             return this;
         }
@@ -184,12 +188,12 @@ public class Worker {
             return this;
         }
 
-        public WorkerBuilder setCategory(int category) {
+        public WorkerBuilder setCategory(Category category) {
             this.category = category;
             return this;
         }
 
-        public WorkerBuilder setBelongStation(String belongStation) {
+        public WorkerBuilder setBelongStation(Station belongStation) {
             this.belongStation = belongStation;
             return this;
         }
@@ -218,5 +222,9 @@ public class Worker {
                         sendNum);
             return worker;
         }
+    }
+
+    public enum Category {
+        SATATION_MASTER, DRIVER, RIDER
     }
 }

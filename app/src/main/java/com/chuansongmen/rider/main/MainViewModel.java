@@ -1,12 +1,12 @@
-package com.chuansongmen.worker.career_info;
+package com.chuansongmen.rider.main;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
 
 import com.chuansongmen.base.BaseViewModel;
 
-public class CareerInfoViewModel extends BaseViewModel {
-    public CareerInfoViewModel(
+public class MainViewModel extends BaseViewModel {
+    public MainViewModel(
             @NonNull Application application) {
         super(application);
     }

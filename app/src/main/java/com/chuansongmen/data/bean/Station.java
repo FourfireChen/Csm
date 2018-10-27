@@ -16,6 +16,13 @@ public class Station {
      */
     private int workerId;
 
+    public Station() {
+    }
+
+    public Station(String id) {
+        this.id = id;
+    }
+
     public String getId() {
         return id;
     }

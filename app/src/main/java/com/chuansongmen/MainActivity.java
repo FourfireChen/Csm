@@ -17,9 +17,9 @@ import android.widget.TextView;
 import com.chuansongmen.base.BaseActivity;
 import com.chuansongmen.driver.DriverMainFragemnt;
 import com.chuansongmen.util.Util;
-import com.chuansongmen.worker.main.WorkerMainFragment;
-import com.chuansongmen.worker.scan.ScanActivity;
-import com.chuansongmen.worker.sendget.SendGetActivity;
+import com.chuansongmen.rider.main.RiderMainFragment;
+import com.chuansongmen.rider.scan.ScanActivity;
+import com.chuansongmen.rider.sendget.SendGetActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -94,7 +94,7 @@ public class MainActivity extends BaseActivity {
     private void initWorker() {
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction()
-                .replace(R.id.main_fragment_container, new WorkerMainFragment())
+                .replace(R.id.main_fragment_container, new RiderMainFragment())
                 .commit();
     }
 

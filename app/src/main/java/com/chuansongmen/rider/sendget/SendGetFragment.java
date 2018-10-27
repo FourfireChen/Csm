@@ -1,4 +1,4 @@
-package com.chuansongmen.worker.sendget;
+package com.chuansongmen.rider.sendget;
 
 import androidx.lifecycle.Observer;
 import android.os.Bundle;

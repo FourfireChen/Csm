@@ -1,5 +1,7 @@
 package com.chuansongmen.data.bean;
 
+import java.util.List;
+
 public class Order {
 
     /**
@@ -11,6 +13,7 @@ public class Order {
      * 订单号
      */
     private String pagerId;
+
     /**
      * 发起订单的用户ID/电话号码
      */
@@ -19,8 +22,7 @@ public class Order {
     /**
      * 收发件的经纬度
      */
-    private Position from;
-    private Position to;
+    private Position from, to;
 
     /**
      * 当前员工工号
@@ -41,12 +43,12 @@ public class Order {
      * 4：收派员正在派送中
      * 5：收派员收派完毕
      */
-    private int status;
+    private Status status;
 
     /**
      * 是否滞留
      */
-    private int isDelay;
+    private boolean isDelay;
 
     /**
      * 收件人姓名、电话号码（用户Id)、收件人具体地址
@@ -79,15 +81,14 @@ public class Order {
 
     /**
      * 途径的中转站点信息
-     * 以;分割：A1;B2;C3
      */
-    private String station;
+    private List<Station> stations;
 
     /**
      * 路线信息拼成的字符串，表示该商品要经过的所有路线
      * 也以;分割
      */
-    private String route;
+    private List<Route> routes;
 
     /**
      * 该商品的下条路线
@@ -160,20 +161,20 @@ public class Order {
         this.price = price;
     }
 
-    public int getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
-    public int getIsDelay() {
+    public boolean isDelay() {
         return isDelay;
     }
 
-    public void setIsDelay(int isDelay) {
-        this.isDelay = isDelay;
+    public void setDelay(boolean delay) {
+        isDelay = delay;
     }
 
     public String getRecipientName() {
@@ -232,20 +233,20 @@ public class Order {
         this.category = category;
     }
 
-    public String getStation() {
-        return station;
+    public List<Station> getStations() {
+        return stations;
     }
 
-    public void setStation(String station) {
-        this.station = station;
+    public void setStations(List<Station> station) {
+        this.stations = station;
     }
 
-    public String getRoute() {
-        return route;
+    public List<Route> getRoutes() {
+        return routes;
     }
 
-    public void setRoute(String route) {
-        this.route = route;
+    public void setRoutes(List<Route> routes) {
+        this.routes = routes;
     }
 
     public String getNextRoute() {
@@ -270,5 +271,9 @@ public class Order {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public enum Status{
+        NON_PICK_UP, HAS_PICKED_UP, IN_STATION, TRANSPOTING, SENDING, HAS_SENDED
     }
 }

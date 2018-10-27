@@ -1,4 +1,4 @@
-package com.chuansongmen.worker.sendget;
+package com.chuansongmen.rider.sendget;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;

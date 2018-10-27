@@ -5,11 +5,10 @@ import com.chuansongmen.data.bean.Position;
 import com.chuansongmen.data.bean.Route;
 import com.chuansongmen.data.bean.Worker;
 import com.chuansongmen.data.retrofit_util.ConvertorFactory;
-import com.chuansongmen.data.retrofit_util.LivedataCallAdatperFactory;
+import com.chuansongmen.data.retrofit_util.CallAdatperFactory;
 
 import java.util.List;
 
-import androidx.lifecycle.LiveData;
 import retrofit2.Retrofit;
 
 public class DataRepository implements IDataRepository {
@@ -21,7 +20,7 @@ public class DataRepository implements IDataRepository {
     private DataRepository() {
         Retrofit retrofit =
                 new Retrofit.Builder().baseUrl(URL)
-                        .addCallAdapterFactory(new LivedataCallAdatperFactory())
+                        .addCallAdapterFactory(new CallAdatperFactory())
                         .addConverterFactory(new ConvertorFactory())
                         .build();
         remoteData = retrofit.create(IRemoteData.class);

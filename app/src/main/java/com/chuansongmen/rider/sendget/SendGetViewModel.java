@@ -1,4 +1,4 @@
-package com.chuansongmen.worker.sendget;
+package com.chuansongmen.rider.sendget;
 
 import android.app.Application;
 import androidx.lifecycle.LiveData;

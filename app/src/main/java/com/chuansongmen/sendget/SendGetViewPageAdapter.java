@@ -1,4 +1,4 @@
-package com.chuansongmen.rider.sendget;
+package com.chuansongmen.sendget;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -12,9 +12,9 @@ public class SendGetViewPageAdapter extends FragmentPagerAdapter {
     private String[] titles;
 
 
-    public SendGetViewPageAdapter(FragmentManager fm,
-                                  List<? extends Fragment> fragments,
-                                  String[] titles) {
+    SendGetViewPageAdapter(FragmentManager fm,
+                           List<? extends Fragment> fragments,
+                           String[] titles) {
         super(fm);
         this.fragments = fragments;
         this.titles = titles;

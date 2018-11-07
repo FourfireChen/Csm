@@ -1,4 +1,4 @@
-package com.chuansongmen.rider.sendget;
+package com.chuansongmen.sendget;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
@@ -24,8 +24,8 @@ public class SendGetListAdapter extends RecyclerView.Adapter<SendGetListAdapter.
         this.orders = orders;
     }
 
-    public SendGetListAdapter(ArrayList<Order> orders,
-                              sendgetItemOnClickListener listener) {
+    SendGetListAdapter(ArrayList<Order> orders,
+                       sendgetItemOnClickListener listener) {
         this.orders = orders;
         this.listener = listener;
     }
@@ -34,7 +34,7 @@ public class SendGetListAdapter extends RecyclerView.Adapter<SendGetListAdapter.
         this.listener = listener;
     }
 
-    public void setOrders(ArrayList<Order> orders) {
+    void setOrders(ArrayList<Order> orders) {
         this.orders = orders;
     }
 
@@ -88,7 +88,7 @@ public class SendGetListAdapter extends RecyclerView.Adapter<SendGetListAdapter.
         @BindView(R.id.sendget_detail)
         Button sendgetDetail;
 
-        public SendGetViewHolder(@NonNull View itemView) {
+        SendGetViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }

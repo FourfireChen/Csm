@@ -1,4 +1,4 @@
-package com.chuansongmen.rider.sendget;
+package com.chuansongmen.sendget;
 
 import androidx.lifecycle.Observer;
 import android.os.Bundle;
@@ -38,7 +38,7 @@ public class SendGetFragment extends BaseFragment<SendGetViewModel> {
         return view;
     }
 
-    public void initOrder() {
+    private void initOrder() {
         adapter = new SendGetListAdapter(viewModel.getOrder().getValue(),
                 new SendGetListAdapter.sendgetItemOnClickListener() {
                     @Override

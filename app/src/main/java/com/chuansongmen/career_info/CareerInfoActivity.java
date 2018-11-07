@@ -31,7 +31,11 @@ public class CareerInfoActivity extends BaseActivity<CareerInfoViewModel> {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.careerinfo_activity);
         ButterKnife.bind(this);
+        initView();
+    }
 
+    @Override
+    protected void initView() {
 
     }
 }

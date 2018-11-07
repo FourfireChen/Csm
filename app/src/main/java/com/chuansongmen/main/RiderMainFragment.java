@@ -1,8 +1,6 @@
 package com.chuansongmen.main;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,17 +9,19 @@ import android.widget.TextView;
 
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseFragment;
+import com.chuansongmen.career_info.CareerInfoActivity;
 import com.chuansongmen.common.MainGridAdapter;
 import com.chuansongmen.common.MainItem;
-import com.chuansongmen.util.Util;
-import com.chuansongmen.career_info.CareerInfoActivity;
 import com.chuansongmen.receipt.ReceiptActivity;
-import com.chuansongmen.rider.sendget.SendGetActivity;
+import com.chuansongmen.sendget.SendGetActivity;
+import com.chuansongmen.util.Util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -87,21 +87,22 @@ public class RiderMainFragment extends BaseFragment<MainViewModel> implements Ma
         switch (item) {
             case TO_SEND: {
                 Bundle choice = new Bundle();
-                choice.putString("type", "send");
+                choice.putString(getString(R.string.TYPE), getString(R.string.SEND));
                 startActivity(SendGetActivity.class, choice);
                 break;
             }
 
             case TO_GET: {
                 Bundle choice = new Bundle();
-                choice.putString("type", "get");
+                choice.putString(getString(R.string.TYPE), getString(R.string.GET));
                 startActivity(SendGetActivity.class, choice);
                 break;
             }
             case TO_UNLOAD: {
                 Bundle choice = new Bundle();
-                choice.putString("type", "unload");
+                choice.putString(getString(R.string.TYPE), getString(R.string.UNLOAD));
                 startActivity(SendGetActivity.class, choice);
+                break;
             }
             case RECEIPT: {
                 startActivity(ReceiptActivity.class, null);

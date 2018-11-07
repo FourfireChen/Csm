@@ -85,5 +85,8 @@ public interface IDataRepository {
      */
     List<Route> getAllRoute();
 
-
+    /**
+     * 停止所有正在进行的操作
+     */
+    void stopAll();
 }

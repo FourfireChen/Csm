@@ -1,16 +1,15 @@
-package com.chuansongmen.rider.sendget;
+package com.chuansongmen.sendget;
 
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import com.google.android.material.tabs.TabLayout;
-import androidx.viewpager.widget.ViewPager;
 
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseActivity;
-
+import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.Nullable;
+import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -25,31 +24,38 @@ public class SendGetActivity extends BaseActivity<SendGetViewModel> {
     ViewPager getsendViewpager;
     private List<SendGetFragment> sendGetFragments = new ArrayList<>();
     private String[] titles;
-    private SendGetViewModel viewModel = super.viewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.send_get_activity);
         ButterKnife.bind(this);
-
-        String type = getIntent().getExtras().getString("type");
-        if (type == null)
+        Bundle bundle = getIntent().getExtras();
+        if (bundle == null) {
+            throw new NullPointerException("必须传入该Activity的类型，是派件页还是收件页");
+        }
+        String type = bundle.getString(getString(R.string.TYPE));
+        if (type == null || type.isEmpty())
             throw new NullPointerException("必须传入该Activity的类型，是派件页还是收件页");
 
         //分别初始化
-        if (type.equals("get") || type.equals("unload")) {
+        if (type.equals(getString(R.string.GET)) || type.equals(getString(R.string.UNLOAD))) {
             initGet();
-        } else if (type.equals("send")) {
+        } else if (type.equals(getString(R.string.SEND))) {
             initSend();
         }
 
-        if (type.equals("unload")) {
+        if (type.equals(getString(R.string.UNLOAD))) {
             //todo:翻到已收件页
         }
 
         //做一些相同的初始化工作
         initCommon();
+    }
+
+    @Override
+    protected void initView() {
+
     }
 
     private void initCommon() {
@@ -63,7 +69,6 @@ public class SendGetActivity extends BaseActivity<SendGetViewModel> {
 
     private void initGet() {
         titles = new String[]{"待收件", "已收件", "重点件", "滞留收件"};
-
     }
 
     private void initSend() {

@@ -1,7 +1,6 @@
 package com.chuansongmen.scan;
 
 import android.os.Bundle;
-import androidx.annotation.Nullable;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -10,6 +9,7 @@ import com.chuansongmen.R;
 import com.chuansongmen.base.BaseActivity;
 import com.chuansongmen.view.SignView;
 
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -32,6 +32,11 @@ public class ScanActivity extends BaseActivity implements QRCodeView.Delegate {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scan_activity);
         ButterKnife.bind(this);
+        initView();
+    }
+
+    @Override
+    protected void initView() {
         scanScanView.setDelegate(this);
     }
 

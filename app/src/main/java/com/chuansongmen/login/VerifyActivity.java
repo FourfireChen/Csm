@@ -38,7 +38,7 @@ public class VerifyActivity extends BaseActivity {
         initView();
     }
 
-    private void initView() {
+    protected void initView() {
         Util.setTypeface("fonts/type.ttf", getAssets(), verifyTitle);
     }
 

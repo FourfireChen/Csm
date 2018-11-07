@@ -1,4 +1,4 @@
-package com.chuansongmen.data.retrofit_util;
+package com.chuansongmen.util;
 
 import com.chuansongmen.data.bean.Order;
 import com.chuansongmen.data.bean.Position;

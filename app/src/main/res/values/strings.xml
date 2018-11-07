@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">传送门</string>
+    <string name="TYPE">type</string>
+    <string name="GET">get</string>
+    <string name="SEND">send</string>
+    <string name="FONT">fonts/type.ttf</string>
+    <string name="UNLOAD">unload</string>
 </resources>

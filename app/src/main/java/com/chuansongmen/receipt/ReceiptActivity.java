@@ -14,6 +14,11 @@ public class ReceiptActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.receipt_activity);
+        initView();
+    }
+
+    @Override
+    protected void initView() {
         FragmentTransaction transaction =
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.receipt_container, new InputFragment());

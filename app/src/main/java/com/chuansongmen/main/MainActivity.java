@@ -12,7 +12,8 @@ import android.widget.TextView;
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseActivity;
 import com.chuansongmen.scan.ScanActivity;
-import com.chuansongmen.rider.sendget.SendGetActivity;
+
+import com.chuansongmen.sendget.SendGetActivity;
 import com.chuansongmen.util.Util;
 
 import androidx.annotation.Nullable;
@@ -24,7 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity<MainViewModel> {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.main_bottom_left)
@@ -61,41 +62,30 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
         ButterKnife.bind(this);
+        initView();
 
+
+
+    }
+
+    @Override
+    protected void initView() {
         setSupportActionBar(toolbar);
 
         setBottomNavigationTypeface();
 
-        judge();
-        //todo:这里是测试，记得删
-        initWorker();
-    }
-
-    private void setBottomNavigationTypeface() {
-        Util.setTypeface("fonts/type.ttf", getAssets(), mainBottomLeft, mainBottomRight, mainTitle);
-    }
-
-    private void judge() {
-        //todo:判断后修改career的值
-    }
-
-    private void initCommon() {
-        mainDrawerWorkswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-
-                }
-            }
-        });
-    }
-
-    private void initWorker() {
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction()
                 .replace(R.id.main_fragment_container, new RiderMainFragment())
                 .commit();
     }
+
+    private void setBottomNavigationTypeface() {
+        Util.setTypeface(getString(R.string.FONT), getAssets(), mainBottomLeft, mainBottomRight, mainTitle);
+    }
+
+
+
 
 
     @OnClick({R.id.main_bottom_left,
@@ -107,7 +97,7 @@ public class MainActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.main_bottom_left: {
                 Bundle choice = new Bundle();
-                choice.putString("type", "get");
+                choice.putString(getString(R.string.TYPE), getString(R.string.GET));
                 startActivity(SendGetActivity.class, choice);
                 break;
             }
@@ -117,7 +107,7 @@ public class MainActivity extends BaseActivity {
             }
             case R.id.main_bottom_right: {
                 Bundle choice = new Bundle();
-                choice.putString("type", "send");
+                choice.putString(getString(R.string.TYPE), getString(R.string.SEND));
                 startActivity(SendGetActivity.class, choice);
                 break;
             }

@@ -1,22 +1,23 @@
 package com.chuansongmen.base;
 
-import android.app.Activity;
-import androidx.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.IdRes;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
+import androidx.annotation.IdRes;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProviders;
+
 public abstract class BaseFragment<T extends BaseViewModel> extends Fragment {
     protected T viewModel;
 
-    protected void startActivity(Class<? extends Activity> activity, @Nullable Bundle bundle) {
+    protected void startActivity(Class<? extends AppCompatActivity> activity, @Nullable Bundle bundle) {
         Intent intent = new Intent(getContext(), activity);
         if (bundle != null) {
             intent.putExtras(bundle);
@@ -27,7 +28,6 @@ public abstract class BaseFragment<T extends BaseViewModel> extends Fragment {
     protected void startFragmentInActivity(@IdRes int container,
                                            Fragment target,
                                            boolean isAddBack) {
-        //todo:封装一个跳转Fragment的方法
         FragmentTransaction transaction = getActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .replace(container, target);

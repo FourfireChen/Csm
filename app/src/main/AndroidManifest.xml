@@ -24,9 +24,8 @@
         <activity android:name=".login.VerifyActivity" />
         <activity android:name=".TestActivity" />
         <activity android:name=".scan.ScanActivity" />
-        <activity android:name=".rider.sendget.SendGetActivity" />
         <activity android:name=".receipt.ReceiptActivity" />
         <activity android:name=".career_info.CareerInfoActivity" />
-        <activity android:name=".driver.RouteActivity" />
+        <activity android:name=".sendget.SendGetActivity" />
     </application>
 </manifest>

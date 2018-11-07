@@ -1,4 +1,4 @@
-package com.chuansongmen.rider.receipt;
+package com.chuansongmen.receipt;
 
 import android.os.Bundle;
 import androidx.annotation.Nullable;
@@ -13,7 +13,7 @@ public class ReceiptActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.worker_receipt_activity);
+        setContentView(R.layout.receipt_activity);
         FragmentTransaction transaction =
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.receipt_container, new InputFragment());

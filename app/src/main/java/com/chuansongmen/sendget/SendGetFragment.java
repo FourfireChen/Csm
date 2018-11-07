@@ -31,7 +31,7 @@ public class SendGetFragment extends BaseFragment<SendGetViewModel> {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.worker_send_get_fragment, container, false);
+        View view = inflater.inflate(R.layout.send_get_fragment, container, false);
         unbinder = ButterKnife.bind(this, view);
         initOrder();
 

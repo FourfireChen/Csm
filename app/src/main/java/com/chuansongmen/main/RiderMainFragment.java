@@ -1,4 +1,4 @@
-package com.chuansongmen.rider.main;
+package com.chuansongmen.main;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -14,8 +14,8 @@ import com.chuansongmen.base.BaseFragment;
 import com.chuansongmen.common.MainGridAdapter;
 import com.chuansongmen.common.MainItem;
 import com.chuansongmen.util.Util;
-import com.chuansongmen.rider.career_info.CareerInfoActivity;
-import com.chuansongmen.rider.receipt.ReceiptActivity;
+import com.chuansongmen.career_info.CareerInfoActivity;
+import com.chuansongmen.receipt.ReceiptActivity;
 import com.chuansongmen.rider.sendget.SendGetActivity;
 
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ public class RiderMainFragment extends BaseFragment<MainViewModel> implements Ma
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.worker_main_fragment, container, false);
+        View view = inflater.inflate(R.layout.main_fragment, container, false);
         unbinder = ButterKnife.bind(this, view);
         initPage();
         return view;

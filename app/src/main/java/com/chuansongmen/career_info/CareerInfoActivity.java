@@ -1,4 +1,4 @@
-package com.chuansongmen.rider.career_info;
+package com.chuansongmen.career_info;
 
 import android.os.Bundle;
 import androidx.annotation.Nullable;
@@ -31,6 +31,7 @@ public class CareerInfoActivity extends BaseActivity<CareerInfoViewModel> {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.careerinfo_activity);
         ButterKnife.bind(this);
+
 
     }
 }

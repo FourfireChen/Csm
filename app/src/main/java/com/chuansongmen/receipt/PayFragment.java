@@ -1,4 +1,4 @@
-package com.chuansongmen.rider.receipt;
+package com.chuansongmen.receipt;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -28,7 +28,7 @@ public class PayFragment extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.worker_receipt_pay_fragment, container, false);
+        View view = inflater.inflate(R.layout.receipt_pay_fragment, container, false);
         unbinder = ButterKnife.bind(this, view);
         return view;
     }

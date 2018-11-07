@@ -1,11 +1,6 @@
-package com.chuansongmen;
+package com.chuansongmen.main;
 
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentManager;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.cardview.widget.CardView;
-import androidx.appcompat.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -14,13 +9,17 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.chuansongmen.R;
 import com.chuansongmen.base.BaseActivity;
-import com.chuansongmen.driver.DriverMainFragemnt;
-import com.chuansongmen.util.Util;
-import com.chuansongmen.rider.main.RiderMainFragment;
-import com.chuansongmen.rider.scan.ScanActivity;
+import com.chuansongmen.scan.ScanActivity;
 import com.chuansongmen.rider.sendget.SendGetActivity;
+import com.chuansongmen.util.Util;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -80,11 +79,11 @@ public class MainActivity extends BaseActivity {
         //todo:判断后修改career的值
     }
 
-    private void initCommon(){
+    private void initCommon() {
         mainDrawerWorkswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
+                if (isChecked) {
 
                 }
             }
@@ -98,14 +97,6 @@ public class MainActivity extends BaseActivity {
                 .commit();
     }
 
-    private void initDriver() {
-        FragmentManager manager = getSupportFragmentManager();
-        manager.beginTransaction()
-                .replace(R.id.main_fragment_container, new DriverMainFragemnt())
-                .commit();
-        mainBottomLeft.setText("历史记录");
-        mainBottomRight.setText("路线信息");
-    }
 
     @OnClick({R.id.main_bottom_left,
             R.id.main_bottom_center,

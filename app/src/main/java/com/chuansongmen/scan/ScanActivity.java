@@ -1,4 +1,4 @@
-package com.chuansongmen.rider.scan;
+package com.chuansongmen.scan;
 
 import android.os.Bundle;
 import androidx.annotation.Nullable;

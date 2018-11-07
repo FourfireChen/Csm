@@ -30,7 +30,7 @@ public class SendGetActivity extends BaseActivity<SendGetViewModel> {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.worker_send_get_activity);
+        setContentView(R.layout.send_get_activity);
         ButterKnife.bind(this);
 
         String type = getIntent().getExtras().getString("type");

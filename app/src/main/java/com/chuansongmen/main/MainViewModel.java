@@ -1,4 +1,4 @@
-package com.chuansongmen.rider.main;
+package com.chuansongmen.main;
 
 import android.app.Application;
 import androidx.annotation.NonNull;

@@ -1,4 +1,4 @@
-package com.chuansongmen.rider.career_info;
+package com.chuansongmen.career_info;
 
 import android.app.Application;
 import androidx.annotation.NonNull;

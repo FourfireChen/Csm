@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -23,10 +23,10 @@
         </activity>
         <activity android:name=".login.VerifyActivity" />
         <activity android:name=".TestActivity" />
-        <activity android:name=".rider.scan.ScanActivity" />
+        <activity android:name=".scan.ScanActivity" />
         <activity android:name=".rider.sendget.SendGetActivity" />
-        <activity android:name=".rider.receipt.ReceiptActivity" />
-        <activity android:name=".rider.career_info.CareerInfoActivity" />
+        <activity android:name=".receipt.ReceiptActivity" />
+        <activity android:name=".career_info.CareerInfoActivity" />
         <activity android:name=".driver.RouteActivity" />
     </application>
 </manifest>

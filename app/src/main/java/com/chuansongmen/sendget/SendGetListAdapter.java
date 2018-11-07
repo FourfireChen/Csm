@@ -43,7 +43,7 @@ public class SendGetListAdapter extends RecyclerView.Adapter<SendGetListAdapter.
     public SendGetViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup,
                                                 int i) {
         return new SendGetViewHolder(View.inflate(viewGroup.getContext(),
-                R.layout.worker_send_get_item,
+                R.layout.send_get_item,
                 viewGroup));
     }
 

@@ -8,6 +8,7 @@ import com.chuansongmen.data.bean.Worker;
 import java.util.List;
 
 import androidx.lifecycle.LiveData;
+import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.PATCH;
 import retrofit2.http.Part;
@@ -23,8 +24,8 @@ public interface IRemoteData {
      * @return 是否修改成功
      */
     @PATCH("/order/")
-    boolean updateOrder(@Query("demand_order_str") String demandOrderStr,
-                        @Query("target_order_str") String targetOrderStr);
+    Call<Boolean> updateOrder(@Query("demand_order_str") String demandOrderStr,
+                     @Query("target_order_str") String targetOrderStr);
 
 
     /**
@@ -34,7 +35,7 @@ public interface IRemoteData {
      * @return 订单位置
      */
     @GET("/order/location")
-    Position queryOrderPos(@Query("order_paper_id") int orderId);
+    Call<Position> queryOrderPos(@Query("order_paper_id") int orderId);
 
 
     /**
@@ -44,7 +45,7 @@ public interface IRemoteData {
      * @return 返回所有与该员工有关的订单，如果是null，查询失败；如果list为空，数据库中没有结果
      */
     @GET("/order/one")
-    List<Order> getWorkerOrders(@Query("user_id") int workerId);
+    Call<List<Order>> getWorkerOrders(@Query("user_id") int workerId);
 
 
     /**
@@ -55,7 +56,7 @@ public interface IRemoteData {
      * @return 是否上传成功
      */
     @PATCH("/worker/reg")
-    boolean uploadForPush(@Query("worker_id") int workerId, @Query("reg_id") String regId);
+    Call<Boolean> uploadForPush(@Query("worker_id") int workerId, @Query("reg_id") String regId);
 
 
     /**
@@ -67,7 +68,7 @@ public interface IRemoteData {
      * @return 是否上传成功
      */
     @PATCH("/worker/location")
-    boolean uploadPos(@Query("worker_id") int workerId,
+    Call<Boolean> uploadPos(@Query("worker_id") int workerId,
                       @Query("longitude") double longitude,
                       @Query("latitude") double latitude);
 
@@ -81,7 +82,7 @@ public interface IRemoteData {
      * @return 是否改变成功
      */
     @PATCH("/worker/status")
-    boolean updateWorkerStatus(@Query("worker_id") int workerId,
+    Call<Boolean> updateWorkerStatus(@Query("worker_id") int workerId,
                                @Query("status") int status);
 
     /**
@@ -91,7 +92,7 @@ public interface IRemoteData {
      * @return 查询到的员工信息
      */
     @GET("/worker/one")
-    Worker getWorkerInfo(@Query("worker_id") int workerId);
+    Call<Worker> getWorkerInfo(@Query("worker_id") int workerId);
 
 
     /**
@@ -100,5 +101,5 @@ public interface IRemoteData {
      * @return 获取到的所有路径
      */
     @GET("/route")
-    List<Route> getAllRoutes();
+    Call<List<Route>> getAllRoutes();
 }

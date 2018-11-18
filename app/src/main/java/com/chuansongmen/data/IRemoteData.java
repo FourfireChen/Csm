@@ -39,7 +39,7 @@ public interface IRemoteData {
      * @param orderId 要查询的订单号
      * @return 订单位置
      */
-    @GET("/order/location")
+    @GET("order/location")
     Call<Position> queryOrderPos(@Query("order_paper_id") int orderId);
 
 
@@ -60,8 +60,8 @@ public interface IRemoteData {
      * @param regId    设备id
      * @return 是否上传成功
      */
-    @PATCH("/worker/reg")
-    Call<Boolean> uploadForPush(@Query("worker_id") int workerId, @Query("reg_id") String regId);
+    @PATCH("worker/reg")
+    Call<ResponseBody> uploadForPush(@Query("worker_id") int workerId, @Query("reg_id") String regId);
 
 
     /**
@@ -73,7 +73,7 @@ public interface IRemoteData {
      * @return 是否上传成功
      */
     @PATCH("/worker/location")
-    Call<Boolean> uploadPos(@Query("worker_id") int workerId,
+    Call<ResponseBody> uploadPos(@Query("worker_id") int workerId,
                             @Query("longitude") double longitude,
                             @Query("latitude") double latitude);
 

@@ -28,7 +28,7 @@ public class WorkerConvertor implements Converter<ResponseBody, Worker> {
     @Override
     public Worker convert(ResponseBody value) throws IOException {
         String body = value.string();
-        Worker.WorkerBuilder workerBuilder = new Worker.WorkerBuilder();
+        Worker.WorkerBuilder workerBuilder = Worker.WorkerBuilder.builder;
         try {
             JSONObject bodyObj = new JSONObject(body);
             if (bodyObj.getString("code").equals("200")) {

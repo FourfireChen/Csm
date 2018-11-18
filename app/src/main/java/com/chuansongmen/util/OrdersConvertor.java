@@ -71,7 +71,7 @@ public class OrdersConvertor implements Converter<ResponseBody, List<Order>> {
         return orders;
     }
 
-    private List<Order> analysisOrders(String ordersString) throws JSONException {
+    private List<Order> analysisOrders(String ordersString) {
         Gson gson =
                 new GsonBuilder().registerTypeAdapter(Order.class, new OrderJsonAdatper()).create();
         return new ArrayList<>(Arrays.asList(gson.fromJson(ordersString, Order[].class)));

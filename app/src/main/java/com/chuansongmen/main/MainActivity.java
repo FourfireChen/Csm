@@ -1,12 +1,15 @@
 package com.chuansongmen.main;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.widget.TextView;
 
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseActivity;
+import com.chuansongmen.data.bean.Worker;
+import com.chuansongmen.service.PositionService;
 import com.chuansongmen.util.Util;
 
 import androidx.annotation.Nullable;
@@ -26,7 +29,16 @@ public class MainActivity extends BaseActivity<MainViewModel> {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
         ButterKnife.bind(this);
+        testInitWorker();
         initView();
+        initService();
+    }
+
+    /**
+     * 这里做必须对员工信息做初始化，不然会nullpoint，但之后这里要向服务器请求员工信息。
+     */
+    private void testInitWorker() {
+        Worker.WorkerBuilder.builder.setId(120).build();
     }
 
     @Override
@@ -37,6 +49,11 @@ public class MainActivity extends BaseActivity<MainViewModel> {
                 .addToBackStack(null)
                 .commit();
 
+    }
+
+    private void initService() {
+        Intent intent = new Intent(this, PositionService.class);
+        startService(intent);
     }
 
     /**

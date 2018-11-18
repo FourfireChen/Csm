@@ -53,7 +53,7 @@ public interface IDataRepository {
      * @param regId    设备id
      * @return    上传结果
      */
-    boolean uploadForPush(int workerId, String regId);
+    void uploadForPush(int workerId, String regId, Callback<Boolean> callback);
 
 
     /**
@@ -63,7 +63,7 @@ public interface IDataRepository {
      * @param position 当前位置
      * @return 上传结果
      */
-    boolean uploadPos(int workerId, Position position);
+    void uploadPos(int workerId, Position position, Callback<Boolean> callback);
 
     /**
      * 改变员工工作状态，就是上下班

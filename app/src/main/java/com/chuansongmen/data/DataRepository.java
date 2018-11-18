@@ -113,31 +113,44 @@ public class DataRepository implements IDataRepository {
 
 
     @Override
-    public boolean uploadForPush(int workerId, String regId) {
-        try {
-            Response<Boolean> response = remoteData.uploadForPush(workerId, regId).execute();
-            if (response.isSuccessful()) {
-                return response.body() == null ? false : response.body();
+    public void uploadForPush(int workerId, final String regId, final Callback<Boolean> callback) {
+        remoteData.uploadForPush(workerId, regId).enqueue(new retrofit2.Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    callback.onResponse(true);
+                } else {
+                    callback.onResponse(false);
+                }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                callback.onResponse(false);
+                Log.e(TAG, "onFailure: ", t);
+            }
+        });
     }
 
     @Override
-    public boolean uploadPos(int workerId, Position position) {
-        try {
-            Response<Boolean> response =
-                    remoteData.uploadPos(workerId, position.getLongitude(), position.getLatitude())
-                            .execute();
-            if (response.isSuccessful()) {
-                return response.body() == null ? false : response.body();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
+    public void uploadPos(int workerId, Position position, final Callback<Boolean> callback) {
+        remoteData.uploadPos(workerId, position.getLongitude(), position.getLatitude())
+                .enqueue(new retrofit2.Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call,
+                                           Response<ResponseBody> response) {
+                        if (response.isSuccessful()) {
+                            callback.onResponse(true);
+                        } else {
+                            callback.onResponse(false);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        callback.onResponse(false);
+                        Log.e(TAG, "onFailure: ", t);
+                    }
+                });
     }
 
     @Override

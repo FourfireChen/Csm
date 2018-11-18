@@ -3,8 +3,6 @@ package com.chuansongmen.data.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.concurrent.ExecutionException;
-
 public class Worker implements Parcelable {
     /**
      * 员工id/电话号码
@@ -166,55 +164,59 @@ public class Worker implements Parcelable {
         private Category category;
         private Station belongStation;
         private int collectNum, sendNum;
+        public static WorkerBuilder builder = new WorkerBuilder();
+
+        private WorkerBuilder() {
+        }
 
         public WorkerBuilder setId(int id) {
-            this.id = id;
-            return this;
+            builder.id = id;
+            return builder;
         }
 
         public WorkerBuilder setName(String name) {
-            this.name = name;
-            return this;
+            builder.name = name;
+            return builder;
         }
 
         public WorkerBuilder setSex(int sex) {
-            this.sex = sex;
-            return this;
+            builder.sex = sex;
+            return builder;
         }
 
         public WorkerBuilder setWorked(boolean status) {
-            this.status = status;
-            return this;
+            builder.status = status;
+            return builder;
         }
 
         public WorkerBuilder setRegId(String regId) {
-            this.regId = regId;
-            return this;
+            builder.regId = regId;
+            return builder;
         }
 
         public WorkerBuilder setNow(Position now) {
-            this.now = now;
-            return this;
+            builder.now = now;
+            return builder;
         }
 
         public WorkerBuilder setCategory(Category category) {
-            this.category = category;
-            return this;
+            builder.category = category;
+            return builder;
         }
 
         public WorkerBuilder setBelongStation(Station belongStation) {
-            this.belongStation = belongStation;
-            return this;
+            builder.belongStation = belongStation;
+            return builder;
         }
 
         public WorkerBuilder setCollectNum(int collectNum) {
-            this.collectNum = collectNum;
-            return this;
+            builder.collectNum = collectNum;
+            return builder;
         }
 
         public WorkerBuilder setSendNum(int sendNum) {
-            this.sendNum = sendNum;
-            return this;
+            builder.sendNum = sendNum;
+            return builder;
         }
 
         public Worker build() {
@@ -234,9 +236,8 @@ public class Worker implements Parcelable {
     }
 
 
-
     public enum Category {
-        SATATION_MASTER, DRIVER, RIDER
+        STATION_MASTER, DRIVER, RIDER
     }
 
     @Override

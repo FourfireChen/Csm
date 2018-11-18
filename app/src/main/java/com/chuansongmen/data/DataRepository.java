@@ -18,6 +18,7 @@ import java.util.List;
 import androidx.lifecycle.MutableLiveData;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
@@ -45,17 +46,31 @@ public class DataRepository implements IDataRepository {
 
 
     @Override
-    public boolean updateOrder(String demandOrderStr, String targetOrderStr) {
-        try {
-            Response<Boolean> result =
-                    remoteData.updateOrder(demandOrderStr, targetOrderStr).execute();
-            if (result.isSuccessful()) {
-                return result.body() == null ? false : result.body();
+    public void updateOrder(String demandOrderStr,
+                            String targetOrderStr,
+                            final MutableLiveData<Boolean> isSuccess) {
+        Call<ResponseBody> call = remoteData.updateOrder(demandOrderStr, targetOrderStr);
+        call.enqueue(new retrofit2.Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    isSuccess.postValue(true);
+                } else {
+                    try {
+                        Log.e(TAG, "onResponse: " + response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    isSuccess.postValue(false);
+                }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                isSuccess.postValue(false);
+                Log.e(TAG, "onFailure: ", t);
+            }
+        });
     }
 
     @Override
@@ -71,15 +86,15 @@ public class DataRepository implements IDataRepository {
         return null;
     }
 
+
     @Override
-    public void getWorkerOrders(int workerId, final MutableLiveData<List<Order>> orders) {
+    public void getWorkerOrders(int workerId, final Callback<List<Order>> orders) {
         Call<List<Order>> call = remoteData.getWorkerOrders(workerId);
         call.enqueue(new retrofit2.Callback<List<Order>>() {
             @Override
             public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
-                List<Order> orders1 = response.body();
                 if (response.isSuccessful()) {
-                    orders.postValue(response.body());
+                    orders.onResponse(response.body());
                 } else {
                     try {
                         Log.e(TAG, "onResponse: " + response.errorBody().string());
@@ -88,6 +103,7 @@ public class DataRepository implements IDataRepository {
                     }
                 }
             }
+
             @Override
             public void onFailure(Call<List<Order>> call, Throwable t) {
                 Log.e(TAG, "onResponse: ", t);
@@ -142,7 +158,6 @@ public class DataRepository implements IDataRepository {
                     }
                     isSuccess.postValue(false);
                 }
-//                isSuccess.postValue(false);
             }
 
             @Override

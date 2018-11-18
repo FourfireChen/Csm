@@ -36,19 +36,12 @@ public class SendGetFragment extends BaseFragment<SendGetViewModel> {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.send_get_fragment, container, false);
         unbinder = ButterKnife.bind(this, view);
+        adapter.setOrders(getArguments().<Order>getParcelableArrayList(getString(R.string.ORDER)));
         sendgetLists.setAdapter(adapter);
         sendgetLists.setLayoutManager(new LinearLayoutManager(container.getContext()));
         return view;
     }
 
-
-    void showOrders(List<Order> orders) {
-        if (orders.size() != 0) {
-            sendgetProgress.setVisibility(View.GONE);
-            adapter.setOrders(orders);
-            adapter.notifyDataSetChanged();
-        }
-    }
 
     @Override
     public void onDestroyView() {

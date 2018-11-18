@@ -3,9 +3,10 @@ package com.chuansongmen.data.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Order {
+public class Order implements Parcelable{
 
     /**
      * 流水号
@@ -276,7 +277,81 @@ public class Order {
         this.remark = remark;
     }
 
+
+
     public enum Status{
         NON_PICK_UP, HAS_PICKED_UP, IN_STATION, TRANSPOTING, SENDING, HAS_SENDED
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
+        dest.writeString(this.pagerId);
+        dest.writeInt(this.userId);
+        dest.writeParcelable(this.from, flags);
+        dest.writeParcelable(this.to, flags);
+        dest.writeInt(this.nowWoker);
+        dest.writeInt(this.price);
+        dest.writeInt(this.status == null ? -1 : this.status.ordinal());
+        dest.writeByte(this.isDelay ? (byte) 1 : (byte) 0);
+        dest.writeString(this.recipientName);
+        dest.writeString(this.recipientPhone);
+        dest.writeString(this.recipientAddress);
+        dest.writeInt(this.priceProtection);
+        dest.writeInt(this.weight);
+        dest.writeString(this.receiveTime);
+        dest.writeInt(this.category);
+        dest.writeList(this.stations);
+        dest.writeList(this.routes);
+        dest.writeString(this.nextRoute);
+        dest.writeInt(this.couponId);
+        dest.writeString(this.remark);
+    }
+
+    public Order() {
+    }
+
+    protected Order(Parcel in) {
+        this.id = in.readInt();
+        this.pagerId = in.readString();
+        this.userId = in.readInt();
+        this.from = in.readParcelable(Position.class.getClassLoader());
+        this.to = in.readParcelable(Position.class.getClassLoader());
+        this.nowWoker = in.readInt();
+        this.price = in.readInt();
+        int tmpStatus = in.readInt();
+        this.status = tmpStatus == -1 ? null : Status.values()[tmpStatus];
+        this.isDelay = in.readByte() != 0;
+        this.recipientName = in.readString();
+        this.recipientPhone = in.readString();
+        this.recipientAddress = in.readString();
+        this.priceProtection = in.readInt();
+        this.weight = in.readInt();
+        this.receiveTime = in.readString();
+        this.category = in.readInt();
+        this.stations = new ArrayList<>();
+        in.readList(this.stations, Station.class.getClassLoader());
+        this.routes = new ArrayList<>();
+        in.readList(this.routes, Route.class.getClassLoader());
+        this.nextRoute = in.readString();
+        this.couponId = in.readInt();
+        this.remark = in.readString();
+    }
+
+    public static final Creator<Order> CREATOR = new Creator<Order>() {
+        @Override
+        public Order createFromParcel(Parcel source) {
+            return new Order(source);
+        }
+
+        @Override
+        public Order[] newArray(int size) {
+            return new Order[size];
+        }
+    };
 }

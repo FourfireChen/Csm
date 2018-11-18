@@ -5,4 +5,7 @@
     <string name="SEND">send</string>
     <string name="FONT">fonts/type.ttf</string>
     <string name="UNLOAD">unload</string>
+    <string name="DATA_KEY">data</string>
+    <string name="TITLE">title</string>
+    <string name="ORDER">orders</string>
 </resources>

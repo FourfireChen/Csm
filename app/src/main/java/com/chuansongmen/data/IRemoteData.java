@@ -28,8 +28,8 @@ public interface IRemoteData {
      * @param targetOrderStr 要修改的信息，以;分割，如“status=2;now_worker=2132131”
      * @return 是否修改成功
      */
-    @PATCH("/order/")
-    Call<Boolean> updateOrder(@Query("demand_order_str") String demandOrderStr,
+    @PATCH("order/")
+    Call<ResponseBody> updateOrder(@Query("demand_order_str") String demandOrderStr,
                               @Query("target_order_str") String targetOrderStr);
 
 

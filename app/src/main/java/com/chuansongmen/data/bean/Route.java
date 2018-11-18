@@ -1,6 +1,9 @@
 package com.chuansongmen.data.bean;
 
-public class Route {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Route implements Parcelable {
     private String id;
 
     /**
@@ -43,4 +46,35 @@ public class Route {
     public void setWorkerName(String workerName) {
         this.workerName = workerName;
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeInt(this.workerId);
+        dest.writeString(this.workerName);
+    }
+
+    protected Route(Parcel in) {
+        this.id = in.readString();
+        this.workerId = in.readInt();
+        this.workerName = in.readString();
+    }
+
+    public static final Parcelable.Creator<Route> CREATOR = new Parcelable.Creator<Route>() {
+        @Override
+        public Route createFromParcel(Parcel source) {
+            return new Route(source);
+        }
+
+        @Override
+        public Route[] newArray(int size) {
+            return new Route[size];
+        }
+    };
 }

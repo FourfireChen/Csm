@@ -13,9 +13,12 @@ import android.widget.Toast;
 
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseActivity;
+import com.chuansongmen.data.bean.Order;
 import com.chuansongmen.scan.ScanActivity;
 import com.chuansongmen.sendget.SendGetActivity;
 import com.chuansongmen.util.Util;
+
+import java.util.List;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -58,8 +61,6 @@ public class MainActivity extends BaseActivity<MainViewModel> implements Compoun
     ImageView mainToolbarMe;
     @BindView(R.id.main_toolbar_info)
     ImageView mainToolbarInfo;
-    //这里是为了上班状态切换失败的时候，把按钮调回来
-    private volatile boolean isSwitchError = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,7 +78,7 @@ public class MainActivity extends BaseActivity<MainViewModel> implements Compoun
 
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction()
-                .replace(R.id.main_fragment_container, new RiderMainFragment())
+                .replace(R.id.main_fragment_container, new MainFragment())
                 .commit();
 
         mainDrawerWorkSwitch.setOnCheckedChangeListener(this);

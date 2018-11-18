@@ -23,8 +23,9 @@ public interface IDataRepository {
      * @param demandOrderStr 能确定目标订单的信息，以;分割，如“status=1;now_worker=123213”
      * @param targetOrderStr 要修改的信息，以;分割，如“status=2;now_worker=2132131”
      */
-    boolean updateOrder(String demandOrderStr,
-                     String targetOrderStr);
+    void updateOrder(String demandOrderStr,
+                     String targetOrderStr,
+                     MutableLiveData<Boolean> isSuccess);
 
 
     /**
@@ -42,7 +43,7 @@ public interface IDataRepository {
      * @param workerId 要查找的员工的id
      * @return 返回的是获取的订单
      */
-    void getWorkerOrders(int workerId, MutableLiveData<List<Order>> orders);
+    void getWorkerOrders(int workerId, Callback<List<Order>> orders);
 
 
     /**

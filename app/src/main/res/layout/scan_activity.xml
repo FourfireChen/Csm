@@ -44,6 +44,14 @@
         android:layout_margin="5dp"
         android:elevation="10dp">
 
+        <Button
+            android:id="@+id/scan_sign_clear"
+            android:layout_gravity="right"
+            android:gravity="center"
+            android:background="@drawable/ic_delete_brown_200_24dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+
         <com.chuansongmen.view.SignView
             android:id="@+id/scan_sign"
             android:layout_width="match_parent"

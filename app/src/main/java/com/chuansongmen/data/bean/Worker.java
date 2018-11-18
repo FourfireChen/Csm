@@ -1,8 +1,11 @@
 package com.chuansongmen.data.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.concurrent.ExecutionException;
 
-public class Worker {
+public class Worker implements Parcelable {
     /**
      * 员工id/电话号码
      */
@@ -230,7 +233,54 @@ public class Worker {
         }
     }
 
+
+
     public enum Category {
         SATATION_MASTER, DRIVER, RIDER
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
+        dest.writeString(this.name);
+        dest.writeInt(this.sex);
+        dest.writeByte(this.isWorking ? (byte) 1 : (byte) 0);
+        dest.writeString(this.regId);
+        dest.writeParcelable(this.now, flags);
+        dest.writeInt(this.category == null ? -1 : this.category.ordinal());
+        dest.writeParcelable(this.belongStation, flags);
+        dest.writeInt(this.collectNum);
+        dest.writeInt(this.sendNum);
+    }
+
+    protected Worker(Parcel in) {
+        this.id = in.readInt();
+        this.name = in.readString();
+        this.sex = in.readInt();
+        this.isWorking = in.readByte() != 0;
+        this.regId = in.readString();
+        this.now = in.readParcelable(Position.class.getClassLoader());
+        int tmpCategory = in.readInt();
+        this.category = tmpCategory == -1 ? null : Category.values()[tmpCategory];
+        this.belongStation = in.readParcelable(Station.class.getClassLoader());
+        this.collectNum = in.readInt();
+        this.sendNum = in.readInt();
+    }
+
+    public static final Parcelable.Creator<Worker> CREATOR = new Parcelable.Creator<Worker>() {
+        @Override
+        public Worker createFromParcel(Parcel source) {
+            return new Worker(source);
+        }
+
+        @Override
+        public Worker[] newArray(int size) {
+            return new Worker[size];
+        }
+    };
 }

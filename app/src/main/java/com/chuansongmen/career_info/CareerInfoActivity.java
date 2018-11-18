@@ -1,5 +1,6 @@
 package com.chuansongmen.career_info;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import android.widget.ImageView;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseActivity;
 
+import androidx.lifecycle.Observer;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -36,6 +38,12 @@ public class CareerInfoActivity extends BaseActivity<CareerInfoViewModel> {
 
     @Override
     protected void initView() {
-
+        viewModel.getCareerQRCode().observe(this, new Observer<Bitmap>() {
+            @Override
+            public void onChanged(Bitmap bitmap) {
+                careerinfoQrcode.setImageBitmap(bitmap);
+            }
+        });
+        viewModel.createQRCode();
     }
 }

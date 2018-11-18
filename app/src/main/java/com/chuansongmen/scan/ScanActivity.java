@@ -72,6 +72,11 @@ public class ScanActivity extends BaseActivity<ScanViewModel> implements QRCodeV
         scanScanView.startSpot();
     }
 
+    @Override
+    public void onCameraAmbientBrightnessChanged(boolean isDark) {
+
+    }
+
     /**
      * 检查扫描到的单号是否符合格式
      *

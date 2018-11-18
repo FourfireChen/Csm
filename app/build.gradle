@@ -41,7 +41,8 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'org.jetbrains:annotations-java5:15.0'
-    implementation 'com.google.code.gson:gson:2.8.5'
 
+    implementation 'com.github.dmytrodanylyk:android-morphing-button:98a4986e56'
+    implementation 'com.github.dmytrodanylyk.android-process-button:library:1.0.4'
 
 }

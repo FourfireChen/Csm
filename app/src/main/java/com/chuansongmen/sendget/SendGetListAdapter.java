@@ -1,8 +1,5 @@
 package com.chuansongmen.sendget;
 
-import androidx.annotation.IdRes;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -12,29 +9,37 @@ import com.chuansongmen.R;
 import com.chuansongmen.data.bean.Order;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SendGetListAdapter extends RecyclerView.Adapter<SendGetListAdapter.SendGetViewHolder> {
-    private ArrayList<Order> orders;
-    private sendgetItemOnClickListener listener;
 
-    public SendGetListAdapter(ArrayList<Order> orders) {
+    private List<Order> orders;
+    private ItemClickListener itemCallButtonListener;
+
+    SendGetListAdapter() {
+    }
+
+    SendGetListAdapter(ArrayList<Order> orders) {
         this.orders = orders;
     }
 
-    SendGetListAdapter(ArrayList<Order> orders,
-                       sendgetItemOnClickListener listener) {
+    SendGetListAdapter(List<Order> orders,
+                       ItemClickListener itemCallButtonListener) {
         this.orders = orders;
-        this.listener = listener;
+        this.itemCallButtonListener = itemCallButtonListener;
     }
 
-    public void setListener(sendgetItemOnClickListener listener) {
-        this.listener = listener;
+    void setItemCallButtonListener(ItemClickListener itemCallButtonListener) {
+        this.itemCallButtonListener = itemCallButtonListener;
     }
 
-    void setOrders(ArrayList<Order> orders) {
+    void setOrders(List<Order> orders) {
         this.orders = orders;
     }
 
@@ -42,29 +47,31 @@ public class SendGetListAdapter extends RecyclerView.Adapter<SendGetListAdapter.
     @Override
     public SendGetViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup,
                                                 int i) {
-        return new SendGetViewHolder(View.inflate(viewGroup.getContext(),
+        View view = View.inflate(viewGroup.getContext(),
                 R.layout.send_get_item,
-                viewGroup));
+                null);
+        return new SendGetViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull SendGetViewHolder sendGetViewHolder,
                                  final int i) {
-        //todo:重新解析订单数据
-        //sendGetViewHolder.sendgetAddress.setText(orders.get(i).getRecipientAddress());
-        //sendGetViewHolder.sendgetArea.setText(orders.get(i).getRecipientAddress());
-        sendGetViewHolder.sendgetName.setText(orders.get(i).getRecipientName());
-        sendGetViewHolder.sendgetPhone.setText(orders.get(i).getRecipientPhone());
-        sendGetViewHolder.sendgetCall.setOnClickListener(new View.OnClickListener() {
+        Order order = orders.get(i);
+        /*sendGetViewHolder.sendgetItemAddress.setText(order.getRecipientAddress());
+        sendGetViewHolder.sendgetItemArea.setText(order.getRecipientAddress());
+        sendGetViewHolder.sendgetItemName.setText(order.getRecipientName());
+        sendGetViewHolder.sendgetItemTime.setText(order.getReceiveTime());
+        sendGetViewHolder.sendgetItemPhonenumber.setText(order.getRecipientPhone());*/
+        sendGetViewHolder.sendgetItemCallButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onClick(v.getId(), i);
+                itemCallButtonListener.onClick(v.getId(), i);
             }
         });
-        sendGetViewHolder.sendgetDetail.setOnClickListener(new View.OnClickListener() {
+        sendGetViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onClick(v.getId(), i);
+                // TODO: 2018/11/18 跳转activity，订单详情
             }
         });
     }
@@ -75,18 +82,19 @@ public class SendGetListAdapter extends RecyclerView.Adapter<SendGetListAdapter.
     }
 
     class SendGetViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.sendget_area)
-        TextView sendgetArea;
-        @BindView(R.id.sendget_address)
-        TextView sendgetAddress;
-        @BindView(R.id.sendget_name)
-        TextView sendgetName;
-        @BindView(R.id.sendget_phone)
-        TextView sendgetPhone;
-        @BindView(R.id.sendget_call)
-        Button sendgetCall;
-        @BindView(R.id.sendget_detail)
-        Button sendgetDetail;
+
+        @BindView(R.id.sendget_item_address)
+        TextView sendgetItemAddress;
+        @BindView(R.id.sendget_item_area)
+        TextView sendgetItemArea;
+        @BindView(R.id.sendget_item_time)
+        TextView sendgetItemTime;
+        @BindView(R.id.sendget_item_name)
+        TextView sendgetItemName;
+        @BindView(R.id.sendget_item_call_button)
+        Button sendgetItemCallButton;
+        @BindView(R.id.sendget_item_phonenumber)
+        TextView sendgetItemPhonenumber;
 
         SendGetViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -94,7 +102,7 @@ public class SendGetListAdapter extends RecyclerView.Adapter<SendGetListAdapter.
         }
     }
 
-    public interface sendgetItemOnClickListener {
+    interface ItemClickListener {
         void onClick(@IdRes int id, int position);
     }
 }

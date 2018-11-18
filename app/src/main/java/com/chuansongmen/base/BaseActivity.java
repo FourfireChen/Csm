@@ -39,7 +39,7 @@ public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatAct
         }
     }
 
-    protected abstract void initView();
+    protected void initView() {}
 
     protected void startActivity(Class<?> target, @Nullable Bundle bundle) {
         Intent intent = new Intent(this, target);

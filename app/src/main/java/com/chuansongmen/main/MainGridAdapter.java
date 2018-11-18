@@ -1,4 +1,4 @@
-package com.chuansongmen.common;
+package com.chuansongmen.main;
 
 import androidx.annotation.LayoutRes;
 import androidx.core.content.ContextCompat;
@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chuansongmen.R;
+import com.chuansongmen.common.MainItem;
 import com.chuansongmen.util.Util;
 
 import java.util.List;

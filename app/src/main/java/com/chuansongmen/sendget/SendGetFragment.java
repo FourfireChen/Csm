@@ -1,20 +1,21 @@
 package com.chuansongmen.sendget;
 
-import androidx.lifecycle.Observer;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseFragment;
 import com.chuansongmen.data.bean.Order;
 
-import java.util.ArrayList;
+import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -22,7 +23,9 @@ import butterknife.Unbinder;
 public class SendGetFragment extends BaseFragment<SendGetViewModel> {
     @BindView(R.id.sendget_lists)
     RecyclerView sendgetLists;
-    private SendGetListAdapter adapter;
+    @BindView(R.id.sendget_progress)
+    ProgressBar sendgetProgress;
+    private SendGetListAdapter adapter = new SendGetListAdapter();
     Unbinder unbinder;
 
 
@@ -33,27 +36,18 @@ public class SendGetFragment extends BaseFragment<SendGetViewModel> {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.send_get_fragment, container, false);
         unbinder = ButterKnife.bind(this, view);
-        initOrder();
-
+        sendgetLists.setAdapter(adapter);
+        sendgetLists.setLayoutManager(new LinearLayoutManager(container.getContext()));
         return view;
     }
 
-    private void initOrder() {
-        adapter = new SendGetListAdapter(viewModel.getOrder().getValue(),
-                new SendGetListAdapter.sendgetItemOnClickListener() {
-                    @Override
-                    public void onClick(int id, int position) {
-                        //todo:做响应
-                    }
-                });
-        sendgetLists.setAdapter(adapter);
-        viewModel.getOrder().observe(this, new Observer<ArrayList<Order>>() {
-            @Override
-            public void onChanged(@Nullable ArrayList<Order> orders) {
-                adapter.setOrders(orders);
-                adapter.notifyDataSetChanged();
-            }
-        });
+
+    void showOrders(List<Order> orders) {
+        if (orders.size() != 0) {
+            sendgetProgress.setVisibility(View.GONE);
+            adapter.setOrders(orders);
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override

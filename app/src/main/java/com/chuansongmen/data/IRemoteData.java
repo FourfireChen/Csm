@@ -7,11 +7,16 @@ import com.chuansongmen.data.bean.Worker;
 
 import java.util.List;
 
-import androidx.lifecycle.LiveData;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.PATCH;
-import retrofit2.http.Part;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface IRemoteData {
@@ -25,7 +30,7 @@ public interface IRemoteData {
      */
     @PATCH("/order/")
     Call<Boolean> updateOrder(@Query("demand_order_str") String demandOrderStr,
-                     @Query("target_order_str") String targetOrderStr);
+                              @Query("target_order_str") String targetOrderStr);
 
 
     /**
@@ -44,8 +49,8 @@ public interface IRemoteData {
      * @param workerId 要查找的员工的id
      * @return 返回所有与该员工有关的订单，如果是null，查询失败；如果list为空，数据库中没有结果
      */
-    @GET("/order/one")
-    Call<List<Order>> getWorkerOrders(@Query("user_id") int workerId);
+    @GET("order/one")
+    Call<List<Order>> getWorkerOrders(@Query("userId") int workerId);
 
 
     /**
@@ -69,8 +74,8 @@ public interface IRemoteData {
      */
     @PATCH("/worker/location")
     Call<Boolean> uploadPos(@Query("worker_id") int workerId,
-                      @Query("longitude") double longitude,
-                      @Query("latitude") double latitude);
+                            @Query("longitude") double longitude,
+                            @Query("latitude") double latitude);
 
     /**
      * 改变员工工作状态，就是上下班
@@ -81,9 +86,9 @@ public interface IRemoteData {
      *                 1：表示上班
      * @return 是否改变成功
      */
-    @PATCH("/worker/status")
-    Call<Boolean> updateWorkerStatus(@Query("worker_id") int workerId,
-                               @Query("status") int status);
+    @PATCH("worker/status")
+    Call<ResponseBody> updateWorkerStatus(@Query("workerId") Integer workerId,
+                                     @Query("status") Integer status);
 
     /**
      * 获取员工信息
@@ -102,4 +107,12 @@ public interface IRemoteData {
      */
     @GET("/route")
     Call<List<Route>> getAllRoutes();
+
+
+    /**
+     * 测试添加员工
+     */
+    // TODO: 2018/11/17 测试接口，记得删除
+    @POST("worker")
+    Call<ResponseBody> addMan(@Body RequestBody body);
 }

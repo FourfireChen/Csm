@@ -1,27 +1,28 @@
 package com.chuansongmen;
 
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.chuansongmen.base.BaseActivity;
 import com.chuansongmen.view.SignView;
 
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class TestActivity extends AppCompatActivity {
+public class TestActivity extends BaseActivity<TestViewModel> {
     @BindView(R.id.test_sign)
     SignView testSign;
-    @BindView(R.id.clear)
+    @BindView(R.id.add)
     Button clear;
     @BindView(R.id.show)
     Button show;
     @BindView(R.id.test_show)
     ImageView testShow;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,11 +31,16 @@ public class TestActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.clear, R.id.show})
+    @Override
+    protected void initView() {
+
+    }
+
+    @OnClick({R.id.add, R.id.show})
     public void onViewClicked(View view) {
-        switch (view.getId()){
-            case R.id.clear:
-                testSign.clear();
+        switch (view.getId()) {
+            case R.id.add:
+                viewModel.addTestWorker();
                 break;
             case R.id.show:
                 testShow.setImageBitmap(testSign.getBitmap());

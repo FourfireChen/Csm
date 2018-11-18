@@ -1,5 +1,7 @@
 package com.chuansongmen.data.bean;
 
+import java.util.concurrent.ExecutionException;
+
 public class Worker {
     /**
      * 员工id/电话号码
@@ -65,6 +67,10 @@ public class Worker {
         this.belongStation = belongStation;
         this.collectNum = collectNum;
         this.sendNum = sendNum;
+    }
+
+    public static Worker getInstance() {
+        return worker;
     }
 
     public int getId() {

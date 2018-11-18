@@ -4,28 +4,28 @@ public class Field {
     /**
      * Order
      */
-    public static final String ORDER_ID = "order_id";
-    public static final String ORDER_PAGER_ID = "order_pager_id";
-    public static final String ORDER_USER_ID = "order_user_id";
-    public static final String FROM_LONGITUDE = "from_longitude";
-    public static final String FROM_LATITUDE = "from_latitude";
-    public static final String TO_LONGTITUDE = "to_longitude";
-    public static final String TO_LATITUDE = "to_latitude";
-    public static final String NOW_WORKER = "now_worker";
+    public static final String ORDER_ID = "orderId";
+    public static final String ORDER_PAGER_ID = "orderPaperId";
+    public static final String ORDER_USER_ID = "orderUserId";
+    public static final String FROM_LONGITUDE = "fromLongitude";
+    public static final String FROM_LATITUDE = "fromLatitude";
+    public static final String TO_LONGTITUDE = "toLongitude";
+    public static final String TO_LATITUDE = "toLatitude";
+    public static final String NOW_WORKER = "nowWorker";
     public static final String PRICE = "price";
     public static final String ORDER_STATUS = "status";
-    public static final String IS_DELAY = "is_delay";
-    public static final String RECIPIENT_NAME = "recipient_name";
-    public static final String RECIPIENT_PHONE = "recipient_phone";
-    public static final String RECIPIENT_ADDRESS = "recipient_address";
-    public static final String PRICE_PROTECTION = "price_protection";
+    public static final String IS_DELAY = "isDelay";
+    public static final String RECIPIENT_NAME = "recipientName";
+    public static final String RECIPIENT_PHONE = "recipientPhone";
+    public static final String RECIPIENT_ADDRESS = "recipientAddress";
+    public static final String PRICE_PROTECTION = "priceProtection";
     public static final String WEIGHT = "weight";
-    public static final String RECEIVE_TIME = "receive_time";
+    public static final String RECEIVE_TIME = "receiveTime";
     public static final String ORDER_CATEGORY = "category";
     public static final String STATION = "station";
     public static final String ROUTE = "route";
-    public static final String NEXT_ROUTE = "next_route";
-    public static final String COUPON_ID = "coupon_id";
+    public static final String NEXT_ROUTE = "nextRoute";
+    public static final String COUPON_ID = "couponId";
     public static final String REMARK = "remark";
 
     /**

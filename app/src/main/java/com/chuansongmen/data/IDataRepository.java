@@ -1,5 +1,6 @@
 package com.chuansongmen.data;
 
+import com.chuansongmen.common.Callback;
 import com.chuansongmen.data.bean.Order;
 import com.chuansongmen.data.bean.Position;
 import com.chuansongmen.data.bean.Route;
@@ -8,6 +9,8 @@ import com.chuansongmen.data.bean.Worker;
 import java.util.List;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
 
 /**
  * 数据仓库接口，所有与数据有关的操作都经过它
@@ -39,7 +42,7 @@ public interface IDataRepository {
      * @param workerId 要查找的员工的id
      * @return 返回的是获取的订单
      */
-    List<Order> getWorkerOrders(int workerId);
+    void getWorkerOrders(int workerId, MutableLiveData<List<Order>> orders);
 
 
     /**
@@ -70,7 +73,7 @@ public interface IDataRepository {
      *                           1：表示上班
      * @return  改变的结果
      */
-    boolean updateWorkerStatus(int workerId, int status);
+    void updateWorkerStatus(Integer workerId, Integer status, MutableLiveData<Boolean> isSuccess);
 
     /**
      * 获取员工信息
@@ -89,4 +92,16 @@ public interface IDataRepository {
      * 停止所有正在进行的操作
      */
     void stopAll();
+
+
+    /**
+     * 短信验证
+     */
+    // TODO: 2018/11/17
+
+
+    /**
+     * 测试添加员工
+     */
+    void addTestWorker(Callback<Boolean> callback);
 }

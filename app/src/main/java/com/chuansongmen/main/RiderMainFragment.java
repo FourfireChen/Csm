@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseFragment;
 import com.chuansongmen.career_info.CareerInfoActivity;
-import com.chuansongmen.common.MainGridAdapter;
 import com.chuansongmen.common.MainItem;
 import com.chuansongmen.receipt.ReceiptActivity;
 import com.chuansongmen.sendget.SendGetActivity;
@@ -30,11 +29,13 @@ public class RiderMainFragment extends BaseFragment<MainViewModel> implements Ma
     @BindView(R.id.worker_page)
     GridView workerPage;
     Unbinder unbinder;
-    @BindView(R.id.worker_next_backtime)
-    TextView workerNextBacktime;
     @BindView(R.id.textbottom)
     TextView textbottom;
+    @BindView(R.id.worker_next_backtime)
+    TextView workerNextBacktime;
     private MainGridAdapter adapter;
+    private boolean isWorked = false;
+
 
     @Nullable
     @Override
@@ -69,10 +70,11 @@ public class RiderMainFragment extends BaseFragment<MainViewModel> implements Ma
         workerPage.setAdapter(adapter);
         adapter.setListener(this);
 
-        Util.setTypeface("fonts/type.ttf",
-                getContext().getAssets(),
-                workerNextBacktime,
-                textbottom);
+        Util.setTypeface(getString(R.string.FONT),
+                getActivity().getAssets(),
+                textbottom,
+                workerNextBacktime);
+
     }
 
     @Override
@@ -114,4 +116,6 @@ public class RiderMainFragment extends BaseFragment<MainViewModel> implements Ma
             }
         }
     }
+
+
 }

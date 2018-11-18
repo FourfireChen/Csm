@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 
 import org.json.JSONException;
@@ -21,15 +22,17 @@ import java.util.List;
 import okhttp3.ResponseBody;
 import retrofit2.Converter;
 
-import static com.chuansongmen.data.bean.Field.ORDER_CATEGORY;
 import static com.chuansongmen.data.bean.Field.COUPON_ID;
 import static com.chuansongmen.data.bean.Field.FROM_LATITUDE;
 import static com.chuansongmen.data.bean.Field.FROM_LONGITUDE;
 import static com.chuansongmen.data.bean.Field.IS_DELAY;
 import static com.chuansongmen.data.bean.Field.NEXT_ROUTE;
 import static com.chuansongmen.data.bean.Field.NOW_WORKER;
+import static com.chuansongmen.data.bean.Field.ORDER_CATEGORY;
 import static com.chuansongmen.data.bean.Field.ORDER_ID;
 import static com.chuansongmen.data.bean.Field.ORDER_PAGER_ID;
+import static com.chuansongmen.data.bean.Field.ORDER_STATUS;
+import static com.chuansongmen.data.bean.Field.ORDER_USER_ID;
 import static com.chuansongmen.data.bean.Field.PRICE;
 import static com.chuansongmen.data.bean.Field.PRICE_PROTECTION;
 import static com.chuansongmen.data.bean.Field.RECEIVE_TIME;
@@ -39,10 +42,8 @@ import static com.chuansongmen.data.bean.Field.RECIPIENT_PHONE;
 import static com.chuansongmen.data.bean.Field.REMARK;
 import static com.chuansongmen.data.bean.Field.ROUTE;
 import static com.chuansongmen.data.bean.Field.STATION;
-import static com.chuansongmen.data.bean.Field.ORDER_STATUS;
 import static com.chuansongmen.data.bean.Field.TO_LATITUDE;
 import static com.chuansongmen.data.bean.Field.TO_LONGTITUDE;
-import static com.chuansongmen.data.bean.Field.ORDER_USER_ID;
 import static com.chuansongmen.data.bean.Field.WEIGHT;
 
 
@@ -56,7 +57,7 @@ public class OrdersConvertor implements Converter<ResponseBody, List<Order>> {
         try {
             jsonObject = new JSONObject(string);
 
-            isSuccess = jsonObject.getString("code").equals("200");
+            isSuccess = jsonObject.getString("code").equals("SUCCESS");
             if (isSuccess) {
                 String ordersString = jsonObject.getString("data");
                 orders.addAll(analysisOrders(ordersString));
@@ -93,7 +94,8 @@ public class OrdersConvertor implements Converter<ResponseBody, List<Order>> {
             out.name(PRICE).value(value.getPrice());
 
             //这里给状态做了一个枚举
-            out.name(ORDER_STATUS).value(Arrays.asList(Order.Status.values()).indexOf(value.getStatus()));
+            out.name(ORDER_STATUS)
+                    .value(Arrays.asList(Order.Status.values()).indexOf(value.getStatus()));
 
             out.name(RECIPIENT_NAME).value(value.getRecipientName());
             out.name(RECIPIENT_PHONE).value(value.getRecipientPhone());
@@ -137,7 +139,12 @@ public class OrdersConvertor implements Converter<ResponseBody, List<Order>> {
 
             in.beginObject();
             while (in.hasNext()) {
-                switch (in.nextName()) {
+                String name = in.nextName();
+                if (in.peek() == JsonToken.NULL) {
+                    in.nextNull();
+                    continue;
+                }
+                switch (name) {
                     case ORDER_ID:
                         order.setId(in.nextInt());
                         break;
@@ -172,7 +179,7 @@ public class OrdersConvertor implements Converter<ResponseBody, List<Order>> {
                     case IS_DELAY:
                         if (in.nextInt() == 1)
                             order.setDelay(true);
-                        else if (in.nextInt() == 0)
+                        else
                             order.setDelay(false);
                         break;
                     case RECIPIENT_NAME:
@@ -223,6 +230,7 @@ public class OrdersConvertor implements Converter<ResponseBody, List<Order>> {
                         break;
                 }
             }
+            in.endObject();
             order.setFrom(from);
             order.setTo(to);
             return order;

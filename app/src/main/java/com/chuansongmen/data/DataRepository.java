@@ -1,18 +1,29 @@
 package com.chuansongmen.data;
 
+import android.util.Log;
+
+import com.chuansongmen.common.Callback;
 import com.chuansongmen.data.bean.Order;
 import com.chuansongmen.data.bean.Position;
 import com.chuansongmen.data.bean.Route;
 import com.chuansongmen.data.bean.Worker;
 import com.chuansongmen.util.ConvertorFactory;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.List;
 
+import androidx.lifecycle.MutableLiveData;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class DataRepository implements IDataRepository {
+    private static final String TAG = "datarepository";
     private static IDataRepository instance;
     private IRemoteData remoteData;
     // TODO: 2018/11/7 这里的URL是暂时的
@@ -61,16 +72,27 @@ public class DataRepository implements IDataRepository {
     }
 
     @Override
-    public List<Order> getWorkerOrders(int workerId) {
-        try {
-            Response<List<Order>> response = remoteData.getWorkerOrders(workerId).execute();
-            if (response.isSuccessful()) {
-                return response.body();
+    public void getWorkerOrders(int workerId, final MutableLiveData<List<Order>> orders) {
+        Call<List<Order>> call = remoteData.getWorkerOrders(workerId);
+        call.enqueue(new retrofit2.Callback<List<Order>>() {
+            @Override
+            public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
+                List<Order> orders1 = response.body();
+                if (response.isSuccessful()) {
+                    orders.postValue(response.body());
+                } else {
+                    try {
+                        Log.e(TAG, "onResponse: " + response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+            @Override
+            public void onFailure(Call<List<Order>> call, Throwable t) {
+                Log.e(TAG, "onResponse: ", t);
+            }
+        });
     }
 
 
@@ -84,7 +106,6 @@ public class DataRepository implements IDataRepository {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return false;
     }
 
@@ -104,16 +125,33 @@ public class DataRepository implements IDataRepository {
     }
 
     @Override
-    public boolean updateWorkerStatus(int workerId, int status) {
-        try {
-            Response<Boolean> response = remoteData.updateWorkerStatus(workerId, status).execute();
-            if (response.isSuccessful()) {
-                return response.body() == null ? false : response.body();
+    public void updateWorkerStatus(Integer workerId,
+                                   Integer status,
+                                   final MutableLiveData<Boolean> isSuccess) {
+        Call call = remoteData.updateWorkerStatus(workerId, status);
+        call.enqueue(new retrofit2.Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                if (response.isSuccessful()) {
+                    isSuccess.postValue(true);
+                } else {
+                    try {
+                        Log.e(TAG, "onResponse: " + response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    isSuccess.postValue(false);
+                }
+//                isSuccess.postValue(false);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                isSuccess.postValue(false);
+                Log.e(TAG, "onFailure: ", t);
+                t.printStackTrace();
+            }
+        });
     }
 
     @Override
@@ -145,5 +183,38 @@ public class DataRepository implements IDataRepository {
     @Override
     public void stopAll() {
         // TODO: 2018/11/7 停止所有正在进行的操作
+    }
+
+    @Override
+    public void addTestWorker(final Callback<Boolean> callback) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("worker_id", 2);
+                    jsonObject.put("worker_name", "test2");
+                    jsonObject.put("worker_sex", 1);
+                    jsonObject.put("category", 3);
+                    jsonObject.put("belong_station", "test2");
+                    RequestBody body = RequestBody.create(MediaType.parse("application/json"),
+                            jsonObject.toString());
+                    Call call = remoteData.addMan(body);
+                    Log.i(TAG, "run: " + call.request().body().contentType().toString());
+                    Response response = call.execute();
+
+                    if (response.isSuccessful()) {
+                        callback.onResponse(true);
+                        Log.i(TAG, "addTestWorker: 成功");
+                    } else {
+                        callback.onResponse(false);
+                        Log.i(TAG, "addTestWorker: 失败" + response.errorBody().string());
+                    }
+                } catch (IOException | JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
     }
 }

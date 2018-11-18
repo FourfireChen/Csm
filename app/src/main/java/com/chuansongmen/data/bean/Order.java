@@ -1,5 +1,8 @@
 package com.chuansongmen.data.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 public class Order {
@@ -36,8 +39,8 @@ public class Order {
 
     /**
      * 订单状态
-     * 类别：0：收派员未区间
-     * 1：收派员已区间
+     * 类别：0：收派员未取件
+     * 1：收派员已取件
      * 2：在仓储站
      * 3：正在运输
      * 4：收派员正在派送中

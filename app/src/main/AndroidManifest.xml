@@ -55,6 +55,8 @@
         <service android:name=".service.PositionService" />
         <receiver android:name=".service.PositionUploadReceiver" />
         <service android:name="com.amap.api.location.APSService"></service>
+        <service android:name=".service.PositionServiceFore" />
+
         <meta-data android:name="com.amap.api.v2.apikey" android:value="fa989ce2f1b0f38a74d14e5e373c81d2"/>
     </application>
 </manifest>

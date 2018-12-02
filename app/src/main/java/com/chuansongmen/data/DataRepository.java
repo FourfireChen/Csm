@@ -23,7 +23,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class DataRepository implements IDataRepository {
-    private static final String TAG = "datarepository";
+    private static final String TAG = "DataRepository";
     private static IDataRepository instance;
     private IRemoteData remoteData;
     // TODO: 2018/11/7 这里的URL是暂时的

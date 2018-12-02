@@ -28,7 +28,12 @@ public class MainViewModel extends BaseViewModel {
         if (isWorked == null) {
             isWorked = new MutableLiveData<>();
         }
-        dataRepo.updateWorkerStatus(1, status, isWorked);
+        dataRepo.updateWorkerStatus(1, status, new Callback<Boolean>() {
+            @Override
+            public void onResponse(Boolean result) {
+                isWorked.postValue(result);
+            }
+        });
         return isWorked;
     }
 

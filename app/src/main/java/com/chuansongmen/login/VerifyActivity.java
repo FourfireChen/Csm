@@ -39,6 +39,7 @@ public class VerifyActivity extends BaseActivity {
         setContentView(R.layout.verify_activity);
         ButterKnife.bind(this);
         initView();
+
     }
 
     protected void initView() {

@@ -15,7 +15,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.List;
 
-import androidx.lifecycle.MutableLiveData;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -48,42 +47,50 @@ public class DataRepository implements IDataRepository {
     @Override
     public void updateOrder(String demandOrderStr,
                             String targetOrderStr,
-                            final MutableLiveData<Boolean> isSuccess) {
+                            final Callback<Boolean> isSuccess) {
         Call<ResponseBody> call = remoteData.updateOrder(demandOrderStr, targetOrderStr);
         call.enqueue(new retrofit2.Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
-                    isSuccess.postValue(true);
+                    isSuccess.onResponse(true);
                 } else {
                     try {
                         Log.e(TAG, "onResponse: " + response.errorBody().string());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    isSuccess.postValue(false);
+                    isSuccess.onResponse(false);
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                isSuccess.postValue(false);
+                isSuccess.onResponse(false);
                 Log.e(TAG, "onFailure: ", t);
             }
         });
     }
 
     @Override
-    public Position queryOrderPos(Order order) {
-        try {
-            Response<Position> result = remoteData.queryOrderPos(order.getId()).execute();
-            if (result.isSuccessful()) {
-                return result.body();
+    public void queryOrderPos(Order order, final Callback<Position> callback) {
+        Call<Position> call = remoteData.queryOrderPos(order.getId());
+        call.enqueue(new retrofit2.Callback<Position>() {
+            @Override
+            public void onResponse(Call<Position> call, Response<Position> response) {
+                if (response.isSuccessful()) {
+                    callback.onResponse(response.body());
+                } else {
+                    callback.onResponse(null);
+                }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+
+            @Override
+            public void onFailure(Call<Position> call, Throwable t) {
+                callback.onResponse(null);
+                Log.e(TAG, "onFailure: ", t);
+            }
+        });
     }
 
 
@@ -123,6 +130,7 @@ public class DataRepository implements IDataRepository {
                     callback.onResponse(false);
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 callback.onResponse(false);
@@ -156,26 +164,26 @@ public class DataRepository implements IDataRepository {
     @Override
     public void updateWorkerStatus(Integer workerId,
                                    Integer status,
-                                   final MutableLiveData<Boolean> isSuccess) {
+                                   final Callback<Boolean> isSuccess) {
         Call call = remoteData.updateWorkerStatus(workerId, status);
         call.enqueue(new retrofit2.Callback() {
             @Override
             public void onResponse(Call call, Response response) {
                 if (response.isSuccessful()) {
-                    isSuccess.postValue(true);
+                    isSuccess.onResponse(true);
                 } else {
                     try {
                         Log.e(TAG, "onResponse: " + response.errorBody().string());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    isSuccess.postValue(false);
+                    isSuccess.onResponse(false);
                 }
             }
 
             @Override
             public void onFailure(Call call, Throwable t) {
-                isSuccess.postValue(false);
+                isSuccess.onResponse(false);
                 Log.e(TAG, "onFailure: ", t);
                 t.printStackTrace();
             }
@@ -183,29 +191,41 @@ public class DataRepository implements IDataRepository {
     }
 
     @Override
-    public Worker getWorkerInfo(int workerId) {
-        try {
-            Response<Worker> response = remoteData.getWorkerInfo(workerId).execute();
-            if (response.isSuccessful()) {
-                return response.body();
+    public void getWorkerInfo(int workerId, final Callback<Worker> callback) {
+        remoteData.getWorkerInfo(workerId).enqueue(new retrofit2.Callback<Worker>() {
+            @Override
+            public void onResponse(Call<Worker> call, Response<Worker> response) {
+                if (response.isSuccessful())
+                    callback.onResponse(response.body());
+                else
+                    callback.onResponse(null);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+
+            @Override
+            public void onFailure(Call<Worker> call, Throwable t) {
+                callback.onResponse(null);
+                Log.e(TAG, "onFailure: ", t);
+            }
+        });
     }
 
     @Override
-    public List<Route> getAllRoute() {
-        try {
-            Response<List<Route>> response = remoteData.getAllRoutes().execute();
-            if (response.isSuccessful()) {
-                return response.body();
+    public void getAllRoute(final Callback<List<Route>> callback) {
+        remoteData.getAllRoutes().enqueue(new retrofit2.Callback<List<Route>>() {
+            @Override
+            public void onResponse(Call<List<Route>> call, Response<List<Route>> response) {
+                if (response.isSuccessful())
+                    callback.onResponse(response.body());
+                else
+                    callback.onResponse(null);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+
+            @Override
+            public void onFailure(Call<List<Route>> call, Throwable t) {
+                callback.onResponse(null);
+                Log.e(TAG, "onFailure: ", t);
+            }
+        });
     }
 
     @Override

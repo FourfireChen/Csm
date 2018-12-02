@@ -1,5 +1,7 @@
 package com.chuansongmen.data;
 
+import android.telecom.Call;
+
 import com.chuansongmen.common.Callback;
 import com.chuansongmen.data.bean.Order;
 import com.chuansongmen.data.bean.Position;
@@ -23,9 +25,13 @@ public interface IDataRepository {
      * @param demandOrderStr 能确定目标订单的信息，以;分割，如“status=1;now_worker=123213”
      * @param targetOrderStr 要修改的信息，以;分割，如“status=2;now_worker=2132131”
      */
+//    void updateOrder(String demandOrderStr,
+//                     String targetOrderStr,
+//                     MutableLiveData<Boolean> isSuccess);
+
     void updateOrder(String demandOrderStr,
                      String targetOrderStr,
-                     MutableLiveData<Boolean> isSuccess);
+                     Callback<Boolean> isSuccess);
 
 
     /**
@@ -34,7 +40,7 @@ public interface IDataRepository {
      * @param order            要查找的订单
      * @return 订单位置
      */
-    Position queryOrderPos(Order order);
+    void queryOrderPos(Order order, Callback<Position> callback);
 
 
     /**
@@ -74,7 +80,8 @@ public interface IDataRepository {
      *                           1：表示上班
      * @return  改变的结果
      */
-    void updateWorkerStatus(Integer workerId, Integer status, MutableLiveData<Boolean> isSuccess);
+//    void updateWorkerStatus(Integer workerId, Integer status, MutableLiveData<Boolean> isSuccess);
+    void updateWorkerStatus(Integer workerId, Integer status, Callback<Boolean> isSuccess);
 
     /**
      * 获取员工信息
@@ -82,12 +89,12 @@ public interface IDataRepository {
      * @param workerId 要获取的员工的Id
      * @return 获取的员工的信息
      */
-    Worker getWorkerInfo(int workerId);
+    void getWorkerInfo(int workerId, Callback<Worker> callback);
 
     /**
      * 获取所有路线信息
      */
-    List<Route> getAllRoute();
+    void getAllRoute(Callback<List<Route>> callback);
 
     /**
      * 停止所有正在进行的操作

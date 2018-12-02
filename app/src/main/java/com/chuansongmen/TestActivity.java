@@ -1,5 +1,6 @@
 package com.chuansongmen;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,21 +15,23 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class TestActivity extends BaseActivity<TestViewModel> {
+
+
     @BindView(R.id.test_sign)
     SignView testSign;
     @BindView(R.id.add)
-    Button clear;
+    Button add;
     @BindView(R.id.show)
     Button show;
     @BindView(R.id.test_show)
     ImageView testShow;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_activity);
         ButterKnife.bind(this);
+        getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
@@ -47,4 +50,5 @@ public class TestActivity extends BaseActivity<TestViewModel> {
                 break;
         }
     }
+
 }

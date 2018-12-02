@@ -29,7 +29,6 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.Observer;
@@ -216,7 +215,10 @@ public class MainFragment extends BaseFragment<MainViewModel> implements Compoun
             startActivity(target, data);
     }
 
-    @OnClick({R.id.main_bottom_left, R.id.main_bottom_center, R.id.main_bottom_right, R.id.main_toolbar_me})
+    @OnClick({R.id.main_bottom_left,
+            R.id.main_bottom_center,
+            R.id.main_bottom_right,
+            R.id.main_toolbar_me})
     public void onViewClicked(View view) {
         Class<? extends AppCompatActivity> target = null;
         Bundle data = null;

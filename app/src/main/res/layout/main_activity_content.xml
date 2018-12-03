@@ -37,7 +37,7 @@
                 android:layout_gravity="center"
                 android:text="@string/app_name"
                 android:textColor="#000"
-                android:textSize="30dp" />
+                android:textSize="30sp" />
 
             <ImageView
                 android:id="@+id/main_toolbar_info"

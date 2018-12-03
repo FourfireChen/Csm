@@ -15,7 +15,7 @@ import androidx.lifecycle.MutableLiveData;
 
 
 public class MainViewModel extends BaseViewModel {
-    private MutableLiveData<Boolean> isWorked;
+    private MutableLiveData<Boolean> isWorked = new MutableLiveData<>();;
     private static final int POINT_ORDER_PRICE = 10;
     private MutableLiveData<List<List<Order>>> orders = new MutableLiveData<>();
 
@@ -24,27 +24,30 @@ public class MainViewModel extends BaseViewModel {
         super(application);
     }
 
-    LiveData<Boolean> changeWorkState(int status) {
-        if (isWorked == null) {
-            isWorked = new MutableLiveData<>();
-        }
+    LiveData<Boolean> getWorkerStatus() {
+        return isWorked;
+    }
+
+    void updateWorkerStatus(int status) {
         dataRepo.updateWorkerStatus(1, status, new Callback<Boolean>() {
             @Override
             public void onResponse(Boolean result) {
                 isWorked.postValue(result);
             }
         });
-        return isWorked;
     }
 
-    public MutableLiveData<List<List<Order>>> getOrders() {
+    MutableLiveData<List<List<Order>>> getOrders() {
+        return orders;
+    }
+
+    void updateOrders() {
         dataRepo.getWorkerOrders(1, new Callback<List<Order>>() {
             @Override
             public void onResponse(List<Order> result) {
                 orders.postValue(classifyOrders(result));
             }
         });
-        return orders;
     }
 
 

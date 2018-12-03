@@ -4,25 +4,21 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.widget.TextView;
 
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseActivity;
 import com.chuansongmen.data.bean.Worker;
 import com.chuansongmen.service.PositionService;
-import com.chuansongmen.util.Util;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 public class MainActivity extends BaseActivity<MainViewModel> {
 
     Unbinder unbinder;
-    private MainFragment mainFragment = new MainFragment();
+    private OldMainFragment oldMainFragment = new OldMainFragment();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,7 +41,7 @@ public class MainActivity extends BaseActivity<MainViewModel> {
     protected void initView() {
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction()
-                .replace(R.id.main_fragment_container, mainFragment)
+                .replace(R.id.main_fragment_container, oldMainFragment)
                 .addToBackStack(null)
                 .commit();
 
@@ -62,8 +58,8 @@ public class MainActivity extends BaseActivity<MainViewModel> {
     @SuppressLint("WrongConstant")
     @Override
     public void onBackPressed() {
-        if (mainFragment.getMainDrawerLayout().isDrawerOpen(Gravity.START)) {
-            mainFragment.getMainDrawerLayout().closeDrawer(Gravity.START);
+        if (oldMainFragment.getMainDrawerLayout().isDrawerOpen(Gravity.START)) {
+            oldMainFragment.getMainDrawerLayout().closeDrawer(Gravity.START);
         } else {
             super.onBackPressed();
         }

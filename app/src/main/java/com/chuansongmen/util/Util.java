@@ -78,7 +78,7 @@ public class Util {
         timer.schedule(timerTask, delayToClose);
     }
 
-    public static void stopProgress(Context context) {
+    private static void stopProgress(Context context) {
         if (progress == null) {
             Toast.makeText(context, "没有弹出进度", Toast.LENGTH_SHORT).show();
         } else {

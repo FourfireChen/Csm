@@ -2,13 +2,13 @@ package com.chuansongmen.career_info;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseActivity;
 
+import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import butterknife.BindView;
 import butterknife.ButterKnife;

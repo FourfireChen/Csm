@@ -25,7 +25,7 @@ public class SendGetListAdapter extends RecyclerView.Adapter<SendGetListAdapter.
     SendGetListAdapter() {
     }
 
-    SendGetListAdapter(ArrayList<Order> orders) {
+    SendGetListAdapter(List<Order> orders) {
         this.orders = orders;
     }
 

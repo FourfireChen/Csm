@@ -36,10 +36,14 @@ public class SendGetFragment extends BaseFragment<SendGetViewModel> {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.send_get_fragment, container, false);
         unbinder = ButterKnife.bind(this, view);
-        adapter.setOrders(getArguments().<Order>getParcelableArrayList(getString(R.string.ORDER)));
         sendgetLists.setAdapter(adapter);
         sendgetLists.setLayoutManager(new LinearLayoutManager(container.getContext()));
         return view;
+    }
+
+    public void refreshList(List<Order> orders) {
+        adapter.setOrders(orders);
+        adapter.notifyDataSetChanged();
     }
 
 

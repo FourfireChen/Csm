@@ -1,7 +1,5 @@
 package com.chuansongmen.main;
 
-import androidx.annotation.LayoutRes;
-import androidx.core.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -16,6 +14,9 @@ import com.chuansongmen.common.MainItem;
 import com.chuansongmen.util.Util;
 
 import java.util.List;
+
+import androidx.annotation.LayoutRes;
+import androidx.core.content.ContextCompat;
 
 import static android.widget.RelativeLayout.CENTER_VERTICAL;
 import static android.widget.RelativeLayout.END_OF;

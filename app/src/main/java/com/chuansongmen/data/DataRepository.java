@@ -108,12 +108,14 @@ public class DataRepository implements IDataRepository {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                    orders.onResponse(null);
                 }
             }
 
             @Override
             public void onFailure(Call<List<Order>> call, Throwable t) {
                 Log.e(TAG, "onResponse: ", t);
+                orders.onResponse(null);
             }
         });
     }

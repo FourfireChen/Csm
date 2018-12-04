@@ -7,10 +7,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
-import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+
+import androidx.annotation.Nullable;
 
 public class SignView extends View {
     private float mX, mY;
@@ -104,7 +105,7 @@ public class SignView extends View {
         float dx = Math.abs(thisX - mX);
         float dy = Math.abs(thisY - mY);
         //在一定范围内触发重绘贝塞尔曲线
-        if (dx >= 2 || dy >= 2){
+        if (dx >= 2 || dy >= 2) {
             //算贝塞尔曲线的操作点
             float oX = (mX + thisX) / 2;
             float oY = (mY + thisY) / 2;
@@ -121,14 +122,14 @@ public class SignView extends View {
         path.moveTo(mX, mY);
     }
 
-    public void clear(){
-        if (cacheCanvas != null){
+    public void clear() {
+        if (cacheCanvas != null) {
             cacheCanvas.drawColor(backColor, PorterDuff.Mode.CLEAR);
             invalidate();
         }
     }
 
-    public Bitmap getBitmap(){
+    public Bitmap getBitmap() {
         return cacheBitmap;
     }
 

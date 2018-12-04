@@ -1,11 +1,12 @@
 package com.chuansongmen.receipt;
 
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseActivity;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentTransaction;
 
 public class ReceiptActivity extends BaseActivity {
 

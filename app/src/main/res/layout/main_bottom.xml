@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView android:id="@+id/main_bottom_navigation"
+<androidx.cardview.widget.CardView
+    android:id="@+id/main_bottom_navigation"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -13,11 +14,12 @@
         <TextView
             android:id="@+id/main_bottom_left"
             android:layout_width="0dp"
+            android:textColor="@color/textColor"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="收件页"
-            android:textSize="30dp" />
+            android:textSize="30sp" />
 
         <ImageView
             android:id="@+id/main_bottom_center"
@@ -33,6 +35,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="派件页"
-            android:textSize="30dp" />
+            android:textColor="@color/textColor"
+            android:textSize="30sp" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

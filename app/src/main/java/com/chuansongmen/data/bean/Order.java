@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Order implements Parcelable{
+public class Order implements Parcelable {
 
     /**
      * 流水号
@@ -278,8 +278,7 @@ public class Order implements Parcelable{
     }
 
 
-
-    public enum Status{
+    public enum Status {
         NON_PICK_UP, HAS_PICKED_UP, IN_STATION, TRANSPOTING, SENDING, HAS_SENDED
     }
 

@@ -12,7 +12,7 @@ public class SendGetViewPageAdapter extends FragmentPagerAdapter {
     private String[] titles;
 
 
-    SendGetViewPageAdapter(FragmentManager fm) {
+    public SendGetViewPageAdapter(FragmentManager fm) {
         super(fm);
     }
 

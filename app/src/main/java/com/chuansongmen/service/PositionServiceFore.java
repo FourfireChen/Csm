@@ -29,6 +29,7 @@ public class PositionServiceFore extends Service {
     private static final String TAG = "PositionServiceFore";
     private ScreenOnReceiver screenOnReceiver = new ScreenOnReceiver();
     private Timer positionUploadTimer;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -99,7 +100,8 @@ public class PositionServiceFore extends Service {
                             }
                         });
                     } else {
-                        Log.e(TAG, "onLocationChanged: " + "第一次请求定位失败:" + aMapLocation.getErrorInfo());
+                        Log.e(TAG,
+                                "onLocationChanged: " + "第一次请求定位失败:" + aMapLocation.getErrorInfo());
                     }
                 }
             });

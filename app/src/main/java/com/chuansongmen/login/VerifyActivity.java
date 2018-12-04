@@ -1,21 +1,19 @@
 package com.chuansongmen.login;
 
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.chuansongmen.main.MainActivity;
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseActivity;
 import com.chuansongmen.common.ProgressListener;
+import com.chuansongmen.main.MainActivity;
 import com.chuansongmen.util.Util;
 
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;

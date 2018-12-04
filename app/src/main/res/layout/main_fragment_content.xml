@@ -12,27 +12,17 @@
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
         <com.google.android.material.tabs.TabLayout
+            android:id="@+id/main_tabs"
+            app:tabMode="scrollable"
+            app:tabMinWidth="90dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </com.google.android.material.tabs.TabLayout>
-        <androidx.core.widget.NestedScrollView
 
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/main_viewpager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/textContent" />
-        </androidx.core.widget.NestedScrollView>
-
+            android:layout_height="match_parent" />
     </LinearLayout>
-
-    <include
-        layout="@layout/main_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom" />
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

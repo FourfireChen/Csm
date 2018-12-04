@@ -43,11 +43,11 @@
                     android:textSize="30sp" />
 
                 <ImageView
-                    android:id="@+id/main_toolbar_info"
+                    android:id="@+id/main_toolbar_pay"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center|end"
-                    app:srcCompat="@drawable/ic_info_outline_black_24dp" />
+                    app:srcCompat="@drawable/ic_payment_black_24dp" />
             </FrameLayout>
         </androidx.appcompat.widget.Toolbar>
 
@@ -65,6 +65,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="下个回站时间"
@@ -76,7 +77,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="12:17"
-                    android:textSize="50sp" />
+                    android:textSize="60sp" />
             </LinearLayout>
 
 
@@ -86,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/next_time_layout"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
                 <TextView

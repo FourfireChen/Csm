@@ -1,16 +1,17 @@
 package com.chuansongmen.base;
 
 import android.app.Application;
-import androidx.lifecycle.AndroidViewModel;
-import androidx.annotation.NonNull;
 
 import com.chuansongmen.data.DataRepository;
 import com.chuansongmen.data.IDataRepository;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
+
 /**
  * 由于需要context,所以继承了androidviewmodel而不是viewmodel
  */
-public abstract class BaseViewModel extends AndroidViewModel{
+public abstract class BaseViewModel extends AndroidViewModel {
     protected IDataRepository dataRepo;
 
     public BaseViewModel(@NonNull Application application) {

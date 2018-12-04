@@ -1,7 +1,5 @@
 package com.chuansongmen.data;
 
-import android.telecom.Call;
-
 import com.chuansongmen.common.Callback;
 import com.chuansongmen.data.bean.Order;
 import com.chuansongmen.data.bean.Position;
@@ -9,9 +7,6 @@ import com.chuansongmen.data.bean.Route;
 import com.chuansongmen.data.bean.Worker;
 
 import java.util.List;
-
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
 
 /**
@@ -37,7 +32,7 @@ public interface IDataRepository {
     /**
      * 查找当前订单的位置
      *
-     * @param order            要查找的订单
+     * @param order 要查找的订单
      * @return 订单位置
      */
     void queryOrderPos(Order order, Callback<Position> callback);
@@ -57,7 +52,7 @@ public interface IDataRepository {
      *
      * @param workerId 要上传的员工id
      * @param regId    设备id
-     * @return    上传结果
+     * @return 上传结果
      */
     void uploadForPush(int workerId, String regId, Callback<Boolean> callback);
 
@@ -74,11 +69,11 @@ public interface IDataRepository {
     /**
      * 改变员工工作状态，就是上下班
      *
-     * @param workerId           该要变的员工id
-     * @param status             新的状态
-     *                           0：表示下班
-     *                           1：表示上班
-     * @return  改变的结果
+     * @param workerId 该要变的员工id
+     * @param status   新的状态
+     *                 0：表示下班
+     *                 1：表示上班
+     * @return 改变的结果
      */
 //    void updateWorkerStatus(Integer workerId, Integer status, MutableLiveData<Boolean> isSuccess);
     void updateWorkerStatus(Integer workerId, Integer status, Callback<Boolean> isSuccess);

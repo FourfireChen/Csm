@@ -7,6 +7,7 @@ import android.util.Log;
 
 public class ScreenOnReceiver extends BroadcastReceiver {
     private static final String TAG = "ScreenOnReceiver";
+
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.i(TAG, "onReceive: 解锁屏幕");

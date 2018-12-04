@@ -1,8 +1,6 @@
 package com.chuansongmen.receipt;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +10,8 @@ import android.widget.TextView;
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseFragment;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -33,7 +33,7 @@ public class PayFragment extends BaseFragment {
         return view;
     }
 
-    private void paySuccessfully(){
+    private void paySuccessfully() {
 
     }
 

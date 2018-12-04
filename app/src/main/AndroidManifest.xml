@@ -37,7 +37,10 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".main.MainActivity">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
         <activity android:name=".login.VerifyActivity" />
@@ -50,7 +53,7 @@
         <activity android:name=".scan.ScanActivity" />
         <activity android:name=".receipt.ReceiptActivity" />
         <activity android:name=".career_info.CareerInfoActivity" />
-        <activity android:name=".sendget.SendGetActivity" />
+        <activity android:name=".detail.DetailActivity" />
 
         <service android:name=".service.PositionService" />
         <receiver android:name=".service.PositionUploadReceiver" />

@@ -11,10 +11,7 @@ import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Headers;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -30,7 +27,7 @@ public interface IRemoteData {
      */
     @PATCH("order/")
     Call<ResponseBody> updateOrder(@Query("demand_order_str") String demandOrderStr,
-                              @Query("target_order_str") String targetOrderStr);
+                                   @Query("target_order_str") String targetOrderStr);
 
 
     /**
@@ -49,8 +46,8 @@ public interface IRemoteData {
      * @param workerId 要查找的员工的id
      * @return 返回所有与该员工有关的订单，如果是null，查询失败；如果list为空，数据库中没有结果
      */
-    @GET("order/one")
-    Call<List<Order>> getWorkerOrders(@Query("userId") int workerId);
+    @GET("order")
+    Call<List<Order>> getWorkerOrders(@Query("worker_id") int workerId);
 
 
     /**
@@ -61,7 +58,8 @@ public interface IRemoteData {
      * @return 是否上传成功
      */
     @PATCH("worker/reg")
-    Call<ResponseBody> uploadForPush(@Query("worker_id") int workerId, @Query("reg_id") String regId);
+    Call<ResponseBody> uploadForPush(@Query("worker_id") int workerId,
+                                     @Query("reg_id") String regId);
 
 
     /**
@@ -74,8 +72,8 @@ public interface IRemoteData {
      */
     @PATCH("/worker/location")
     Call<ResponseBody> uploadPos(@Query("worker_id") int workerId,
-                            @Query("longitude") double longitude,
-                            @Query("latitude") double latitude);
+                                 @Query("longitude") double longitude,
+                                 @Query("latitude") double latitude);
 
     /**
      * 改变员工工作状态，就是上下班
@@ -88,7 +86,7 @@ public interface IRemoteData {
      */
     @PATCH("worker/status")
     Call<ResponseBody> updateWorkerStatus(@Query("workerId") Integer workerId,
-                                     @Query("status") Integer status);
+                                          @Query("status") Integer status);
 
     /**
      * 获取员工信息

@@ -17,7 +17,8 @@ import androidx.lifecycle.ViewModelProviders;
 public abstract class BaseFragment<T extends BaseViewModel> extends Fragment {
     protected T viewModel;
 
-    protected void startActivity(Class<? extends AppCompatActivity> activity, @Nullable Bundle bundle) {
+    protected void startActivity(Class<? extends AppCompatActivity> activity,
+                                 @Nullable Bundle bundle) {
         Intent intent = new Intent(getContext(), activity);
         if (bundle != null) {
             intent.putExtras(bundle);

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.ViewManager;
 
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseActivity;
@@ -43,7 +42,7 @@ public class MainActivity extends BaseActivity<MainViewModel> implements IMainAc
      */
     private void initData() {
         // TODO: 2018/12/4 向服务器请求员工信息
-        Worker.WorkerBuilder.builder.setId(120).build();
+        Worker.WorkerBuilder.builder.setId("120").build();
     }
 
     @Override
@@ -51,7 +50,6 @@ public class MainActivity extends BaseActivity<MainViewModel> implements IMainAc
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction()
                 .replace(R.id.main_fragment_container, mainFragment)
-                .addToBackStack(null)
                 .commit();
 
     }

@@ -37,7 +37,7 @@ public interface IRemoteData {
      * @return 订单位置
      */
     @GET("order/location")
-    Call<Position> queryOrderPos(@Query("order_paper_id") int orderId);
+    Call<Position> queryOrderPos(@Query("order_paper_id") String orderId);
 
 
     /**
@@ -47,7 +47,7 @@ public interface IRemoteData {
      * @return 返回所有与该员工有关的订单，如果是null，查询失败；如果list为空，数据库中没有结果
      */
     @GET("order")
-    Call<List<Order>> getWorkerOrders(@Query("worker_id") int workerId);
+    Call<List<Order>> getWorkerOrders(@Query("worker_id") String workerId);
 
 
     /**
@@ -58,7 +58,7 @@ public interface IRemoteData {
      * @return 是否上传成功
      */
     @PATCH("worker/reg")
-    Call<ResponseBody> uploadForPush(@Query("worker_id") int workerId,
+    Call<ResponseBody> uploadForPush(@Query("worker_id") String workerId,
                                      @Query("reg_id") String regId);
 
 
@@ -71,7 +71,7 @@ public interface IRemoteData {
      * @return 是否上传成功
      */
     @PATCH("/worker/location")
-    Call<ResponseBody> uploadPos(@Query("worker_id") int workerId,
+    Call<ResponseBody> uploadPos(@Query("worker_id") String workerId,
                                  @Query("longitude") double longitude,
                                  @Query("latitude") double latitude);
 
@@ -85,7 +85,7 @@ public interface IRemoteData {
      * @return 是否改变成功
      */
     @PATCH("worker/status")
-    Call<ResponseBody> updateWorkerStatus(@Query("workerId") Integer workerId,
+    Call<ResponseBody> updateWorkerStatus(@Query("workerId") String workerId,
                                           @Query("status") Integer status);
 
     /**
@@ -95,7 +95,7 @@ public interface IRemoteData {
      * @return 查询到的员工信息
      */
     @GET("/worker/one")
-    Call<Worker> getWorkerInfo(@Query("worker_id") int workerId);
+    Call<Worker> getWorkerInfo(@Query("worker_id") String workerId);
 
 
     /**

@@ -7,7 +7,7 @@ public class Worker implements Parcelable {
     /**
      * 员工id/电话号码
      */
-    private int id;
+    private String id;
 
     private String name;
 
@@ -48,7 +48,7 @@ public class Worker implements Parcelable {
 
     private static Worker worker;
 
-    private Worker(int id,
+    private Worker(String id,
                    String name,
                    int sex,
                    boolean isWorking,
@@ -74,11 +74,11 @@ public class Worker implements Parcelable {
         return worker;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -155,7 +155,7 @@ public class Worker implements Parcelable {
     }
 
     public static class WorkerBuilder {
-        private int id;
+        private String id;
         private String name;
         private int sex;
         private boolean status;
@@ -169,7 +169,7 @@ public class Worker implements Parcelable {
         private WorkerBuilder() {
         }
 
-        public WorkerBuilder setId(int id) {
+        public WorkerBuilder setId(String id) {
             builder.id = id;
             return builder;
         }
@@ -247,7 +247,7 @@ public class Worker implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.id);
+        dest.writeString(this.id);
         dest.writeString(this.name);
         dest.writeInt(this.sex);
         dest.writeByte(this.isWorking ? (byte) 1 : (byte) 0);
@@ -260,7 +260,7 @@ public class Worker implements Parcelable {
     }
 
     protected Worker(Parcel in) {
-        this.id = in.readInt();
+        this.id = in.readString();
         this.name = in.readString();
         this.sex = in.readInt();
         this.isWorking = in.readByte() != 0;

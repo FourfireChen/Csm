@@ -44,7 +44,7 @@ public interface IDataRepository {
      * @param workerId 要查找的员工的id
      * @return 返回的是获取的订单
      */
-    void getWorkerOrders(int workerId, Callback<List<Order>> orders);
+    void getWorkerOrders(String workerId, Callback<List<Order>> orders);
 
 
     /**
@@ -54,7 +54,7 @@ public interface IDataRepository {
      * @param regId    设备id
      * @return 上传结果
      */
-    void uploadForPush(int workerId, String regId, Callback<Boolean> callback);
+    void uploadForPush(String workerId, String regId, Callback<Boolean> callback);
 
 
     /**
@@ -64,7 +64,7 @@ public interface IDataRepository {
      * @param position 当前位置
      * @return 上传结果
      */
-    void uploadPos(int workerId, Position position, Callback<Boolean> callback);
+    void uploadPos(String workerId, Position position, Callback<Boolean> callback);
 
     /**
      * 改变员工工作状态，就是上下班
@@ -76,7 +76,7 @@ public interface IDataRepository {
      * @return 改变的结果
      */
 //    void updateWorkerStatus(Integer workerId, Integer status, MutableLiveData<Boolean> isSuccess);
-    void updateWorkerStatus(Integer workerId, Integer status, Callback<Boolean> isSuccess);
+    void updateWorkerStatus(String workerId, Integer status, Callback<Boolean> isSuccess);
 
     /**
      * 获取员工信息
@@ -84,7 +84,7 @@ public interface IDataRepository {
      * @param workerId 要获取的员工的Id
      * @return 获取的员工的信息
      */
-    void getWorkerInfo(int workerId, Callback<Worker> callback);
+    void getWorkerInfo(String workerId, Callback<Worker> callback);
 
     /**
      * 获取所有路线信息

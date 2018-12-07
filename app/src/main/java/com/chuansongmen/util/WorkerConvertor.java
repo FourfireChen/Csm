@@ -34,7 +34,7 @@ public class WorkerConvertor implements Converter<ResponseBody, Worker> {
             if (bodyObj.getString("code").equals("200")) {
                 String workerString = bodyObj.getString("data");
                 JSONObject workerJson = new JSONObject(workerString);
-                workerBuilder.setId(workerJson.getInt(WORKER_ID))
+                workerBuilder.setId(workerJson.getString(WORKER_ID))
                         .setBelongStation(new Station(workerJson.getString(BELONG_STATION)))
                         .setCollectNum(workerJson.getInt(COLLECT_NUM))
                         .setName(workerJson.getString(WORKER_NAME))

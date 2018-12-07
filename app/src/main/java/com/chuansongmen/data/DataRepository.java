@@ -1,5 +1,6 @@
 package com.chuansongmen.data;
 
+import android.mtp.MtpConstants;
 import android.util.Log;
 
 import com.chuansongmen.common.Callback;
@@ -13,7 +14,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -95,34 +98,67 @@ public class DataRepository implements IDataRepository {
 
 
     @Override
-    public void getWorkerOrders(int workerId, final Callback<List<Order>> orders) {
-        Call<List<Order>> call = remoteData.getWorkerOrders(workerId);
-        call.enqueue(new retrofit2.Callback<List<Order>>() {
-            @Override
-            public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
-                if (response.isSuccessful()) {
-                    orders.onResponse(response.body());
-                } else {
-                    try {
-                        Log.e(TAG, "onResponse: " + response.errorBody().string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    orders.onResponse(null);
-                }
-            }
+    public void getWorkerOrders(String workerId, final Callback<List<Order>> orders) {
+//        Call<List<Order>> call = remoteData.getWorkerOrders(workerId);
+//        call.enqueue(new retrofit2.Callback<List<Order>>() {
+//            @Override
+//            public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
+//                if (response.isSuccessful()) {
+//                    orders.onResponse(response.body());
+//                } else {
+//                    try {
+//                        Log.e(TAG, "onResponse: " + response.errorBody().string());
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                    orders.onResponse(null);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<Order>> call, Throwable t) {
+//                Log.e(TAG, "onResponse: ", t);
+//                orders.onResponse(null);
+//            }
+//        });
+        orders.onResponse(testGenerateOrders());
+    }
 
-            @Override
-            public void onFailure(Call<List<Order>> call, Throwable t) {
-                Log.e(TAG, "onResponse: ", t);
-                orders.onResponse(null);
-            }
-        });
+    private List<Order> testGenerateOrders() {
+        List<Order> orders = new ArrayList<>();
+        String[] name = {"张三", "里斯", "王五", "赵六", "陈七", "邓八"};
+        String[] address = {"武汉", "洪山", "澄海", "汕头", "鄂尔多斯", "上海"};
+        String[] phone = {"1324567891231",
+                "3526412589745",
+                "2356985471256",
+                "1325489635124",
+                "1324567894562",
+                "5412365897452"};
+        String[] remark = {"hhh", "aaa", "bbb", "ccc", "ddd", "eee"};
+        String[] id = {"239481", "df234235", "df2345", "sdfsdf32", "345234", "235235"};
+        Random random = new Random();
+        for (int i = 0; i < 20; i++) {
+            Order order = new Order();
+            order.setStatus(Order.Status.values()[Math.abs(random.nextInt()) % 6]);
+            order.setRemark(remark[Math.abs(random.nextInt()) % 6]);
+            order.setDelay(random.nextBoolean());
+            order.setPrice(Math.abs(random.nextInt()));
+            order.setRecipientAddress(address[Math.abs(random.nextInt()) % 6]);
+            order.setRecipientPhone(phone[Math.abs(random.nextInt()) % 6]);
+            order.setRecipientName(name[Math.abs(random.nextInt()) % 6]);
+            order.setUserId(phone[Math.abs(random.nextInt()) % 6]);
+            order.setId(id[Math.abs(random.nextInt()) % 6]);
+            order.setPagerId(id[Math.abs(random.nextInt()) % 6]);
+            orders.add(order);
+        }
+        return orders;
     }
 
 
     @Override
-    public void uploadForPush(int workerId, final String regId, final Callback<Boolean> callback) {
+    public void uploadForPush(String workerId,
+                              final String regId,
+                              final Callback<Boolean> callback) {
         remoteData.uploadForPush(workerId, regId).enqueue(new retrofit2.Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -142,7 +178,7 @@ public class DataRepository implements IDataRepository {
     }
 
     @Override
-    public void uploadPos(int workerId, Position position, final Callback<Boolean> callback) {
+    public void uploadPos(String workerId, Position position, final Callback<Boolean> callback) {
         remoteData.uploadPos(workerId, position.getLongitude(), position.getLatitude())
                 .enqueue(new retrofit2.Callback<ResponseBody>() {
                     @Override
@@ -164,7 +200,7 @@ public class DataRepository implements IDataRepository {
     }
 
     @Override
-    public void updateWorkerStatus(Integer workerId,
+    public void updateWorkerStatus(String workerId,
                                    Integer status,
                                    final Callback<Boolean> isSuccess) {
         Call call = remoteData.updateWorkerStatus(workerId, status);
@@ -193,7 +229,7 @@ public class DataRepository implements IDataRepository {
     }
 
     @Override
-    public void getWorkerInfo(int workerId, final Callback<Worker> callback) {
+    public void getWorkerInfo(String workerId, final Callback<Worker> callback) {
         remoteData.getWorkerInfo(workerId).enqueue(new retrofit2.Callback<Worker>() {
             @Override
             public void onResponse(Call<Worker> call, Response<Worker> response) {

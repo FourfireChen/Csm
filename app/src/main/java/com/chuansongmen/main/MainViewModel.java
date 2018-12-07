@@ -18,8 +18,6 @@ public class MainViewModel extends BaseViewModel {
     private MutableLiveData<Boolean> isWorked = new MutableLiveData<>();
     private static final int POINT_ORDER_PRICE = 10;
     private MutableLiveData<List<List<Order>>> orders = new MutableLiveData<>();
-    private MutableLiveData<List<List<Order>>> getOrders = new MutableLiveData<>();
-    private MutableLiveData<List<List<Order>>> sendOrders = new MutableLiveData<>();
 
     public MainViewModel(
             @NonNull Application application) {
@@ -31,7 +29,7 @@ public class MainViewModel extends BaseViewModel {
     }
 
     void updateWorkerStatus(int status) {
-        dataRepo.updateWorkerStatus(1, status, new Callback<Boolean>() {
+        dataRepo.updateWorkerStatus("1", status, new Callback<Boolean>() {
             @Override
             public void onResponse(Boolean result) {
                 isWorked.postValue(result);
@@ -45,12 +43,13 @@ public class MainViewModel extends BaseViewModel {
     }
 
     void updateOrders() {
-        dataRepo.getWorkerOrders(1, new Callback<List<Order>>() {
+        dataRepo.getWorkerOrders("1", new Callback<List<Order>>() {
             @Override
             public void onResponse(List<Order> result) {
                 List<List<Order>> value;
                 if (result == null) {
-                    value = orders.getValue() == null ? new ArrayList<List<Order>>() : orders.getValue();
+                    value = orders.getValue() == null ? new ArrayList<List<Order>>() :
+                            orders.getValue();
                 } else {
                     value = classifyOrders(result);
                 }
@@ -71,22 +70,24 @@ public class MainViewModel extends BaseViewModel {
             switch (order.getStatus()) {
                 case NON_PICK_UP:
                     if (order.isDelay()) {
-                        index = 3;
-                    } else if (order.getPrice() > POINT_ORDER_PRICE) {
                         index = 2;
+                    } else if (order.isImportant()) {
+                        index = 3;
                     } else {
                         index = 0;
                     }
                     break;
                 case SENDING:
                     if (order.isDelay()) {
-                        index = 7;
-                    } else if (order.getPrice() > POINT_ORDER_PRICE) {
                         index = 6;
+                    } else if (order.isImportant()) {
+                        index = 7;
                     } else {
                         index = 4;
                     }
                     break;
+                case IN_STATION:
+                case TRANSPOTING:
                 case HAS_PICKED_UP:
                     index = 1;
                     break;

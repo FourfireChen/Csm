@@ -11,7 +11,7 @@ public class Order implements Parcelable {
     /**
      * 流水号
      */
-    private int id;
+    private String id;
 
     /**
      * 订单号
@@ -21,7 +21,7 @@ public class Order implements Parcelable {
     /**
      * 发起订单的用户ID/电话号码
      */
-    private int userId;
+    private String userId;
 
     /**
      * 收发件的经纬度
@@ -31,7 +31,7 @@ public class Order implements Parcelable {
     /**
      * 当前员工工号
      */
-    private int nowWoker;
+    private String nowWoker;
 
     /**
      * 订单价格
@@ -53,6 +53,11 @@ public class Order implements Parcelable {
      * 是否滞留
      */
     private boolean isDelay;
+
+    /**
+     * 是否是重点件
+     */
+    private boolean isImportant;
 
     /**
      * 收件人姓名、电话号码（用户Id)、收件人具体地址
@@ -109,28 +114,17 @@ public class Order implements Parcelable {
      */
     private String remark;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    /**
+     * 订单号
+     *
+     * @return
+     */
     public String getPagerId() {
         return pagerId;
     }
 
     public void setPagerId(String pagerId) {
         this.pagerId = pagerId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public Position getFrom() {
@@ -149,19 +143,13 @@ public class Order implements Parcelable {
         this.to = to;
     }
 
-    public int getNowWoker() {
-        return nowWoker;
-    }
-
-    public void setNowWoker(int nowWoker) {
-        this.nowWoker = nowWoker;
-    }
-
     public int getPrice() {
         return price;
     }
 
     public void setPrice(int price) {
+        if (price > 15)
+            this.isImportant = true;
         this.price = price;
     }
 
@@ -277,9 +265,60 @@ public class Order implements Parcelable {
         this.remark = remark;
     }
 
+    /**
+     * 流水号
+     *
+     * @return
+     */
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getNowWoker() {
+        return nowWoker;
+    }
+
+    public void setNowWoker(String nowWoker) {
+        this.nowWoker = nowWoker;
+    }
+
+    public boolean isImportant() {
+        return isImportant;
+    }
+
+    public void setImportant(boolean important) {
+        isImportant = important;
+    }
 
     public enum Status {
-        NON_PICK_UP, HAS_PICKED_UP, IN_STATION, TRANSPOTING, SENDING, HAS_SENDED
+        NON_PICK_UP("未收件"),
+        HAS_PICKED_UP("已收件"),
+        IN_STATION("在仓库"),
+        TRANSPOTING("正在运输"),
+        SENDING("正在派送"),
+        HAS_SENDED("已派送");
+        private String description;
+
+        Status(String description) {
+            this.description = description;
+        }
+
+        @Override
+        public String toString() {
+            return description;
+        }
     }
 
     @Override
@@ -289,15 +328,16 @@ public class Order implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.id);
+        dest.writeString(this.id);
         dest.writeString(this.pagerId);
-        dest.writeInt(this.userId);
+        dest.writeString(this.userId);
         dest.writeParcelable(this.from, flags);
         dest.writeParcelable(this.to, flags);
-        dest.writeInt(this.nowWoker);
+        dest.writeString(this.nowWoker);
         dest.writeInt(this.price);
         dest.writeInt(this.status == null ? -1 : this.status.ordinal());
         dest.writeByte(this.isDelay ? (byte) 1 : (byte) 0);
+        dest.writeByte((byte) (this.isImportant ? 1 : 0));
         dest.writeString(this.recipientName);
         dest.writeString(this.recipientPhone);
         dest.writeString(this.recipientAddress);
@@ -316,16 +356,17 @@ public class Order implements Parcelable {
     }
 
     protected Order(Parcel in) {
-        this.id = in.readInt();
+        this.id = in.readString();
         this.pagerId = in.readString();
-        this.userId = in.readInt();
+        this.userId = in.readString();
         this.from = in.readParcelable(Position.class.getClassLoader());
         this.to = in.readParcelable(Position.class.getClassLoader());
-        this.nowWoker = in.readInt();
+        this.nowWoker = in.readString();
         this.price = in.readInt();
         int tmpStatus = in.readInt();
         this.status = tmpStatus == -1 ? null : Status.values()[tmpStatus];
         this.isDelay = in.readByte() != 0;
+        this.isImportant = in.readByte() != 0;
         this.recipientName = in.readString();
         this.recipientPhone = in.readString();
         this.recipientAddress = in.readString();

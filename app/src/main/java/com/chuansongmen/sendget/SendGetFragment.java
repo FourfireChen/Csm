@@ -5,10 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseFragment;
 import com.chuansongmen.data.bean.Order;
+import com.chuansongmen.detail.DetailActivity;
+import com.chuansongmen.detail.DetailAdapter;
 
 import java.util.List;
 
@@ -37,11 +40,25 @@ public class SendGetFragment extends BaseFragment<SendGetViewModel> {
         View view = inflater.inflate(R.layout.send_get_fragment, container, false);
         unbinder = ButterKnife.bind(this, view);
         sendgetLists.setAdapter(adapter);
+        adapter.setItemCallButtonListener(new SendGetListAdapter.ItemClickListener() {
+            @Override
+            public void onClick(int position) {
+                Toast.makeText(getContext(), "打电话按钮被点击了", Toast.LENGTH_SHORT).show();
+            }
+        });
         sendgetLists.setLayoutManager(new LinearLayoutManager(container.getContext()));
         return view;
     }
 
-    public void refreshList(List<Order> orders) {
+    public void refreshList(final List<Order> orders) {
+        adapter.setItemClickListener(new SendGetListAdapter.ItemClickListener() {
+            @Override
+            public void onClick(int position) {
+                Bundle data = new Bundle();
+                data.putParcelable(getString(R.string.ORDER), orders.get(position));
+                startActivity(DetailActivity.class, data);
+            }
+        });
         adapter.setOrders(orders);
         adapter.notifyDataSetChanged();
     }

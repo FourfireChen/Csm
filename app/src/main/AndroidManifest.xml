@@ -53,6 +53,12 @@
         <activity android:name=".scan.ScanActivity" />
         <activity android:name=".receipt.ReceiptActivity" />
         <activity android:name=".career_info.CareerInfoActivity" />
+        <activity android:name=".detail.DetailActivityOld" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".detail.DetailActivity" />
 
         <service android:name=".service.PositionService" />

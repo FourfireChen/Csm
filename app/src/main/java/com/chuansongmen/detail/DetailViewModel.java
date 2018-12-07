@@ -13,5 +13,4 @@ class DetailViewModel extends BaseViewModel {
     }
 
 
-
 }

@@ -41,7 +41,7 @@ import butterknife.Unbinder;
 import static android.view.Gravity.START;
 
 public class MainFragment extends BaseFragment<MainViewModel> implements View.OnClickListener,
-        CompoundButton.OnCheckedChangeListener {
+        CompoundButton.OnCheckedChangeListener, IMainActivity.IMainView {
     private static final String[] TITLE = {"待收件", "已收件", "滞留件", "重点件", "待派件", "已派件", "滞留件", "重点件"};
 
     @BindView(R.id.main_toolbar_me)
@@ -78,6 +78,7 @@ public class MainFragment extends BaseFragment<MainViewModel> implements View.On
     private Unbinder unbinder;
 
     private SendGetViewPageAdapter viewPageAdapter;
+    private List<SendGetFragment> fragments = new ArrayList<>();
 
 
     @Nullable
@@ -90,7 +91,17 @@ public class MainFragment extends BaseFragment<MainViewModel> implements View.On
 
         initData();
 
+        initView();
+
+
         return view;
+    }
+
+    private void initView() {
+        for (int i = 0; i < 8; i++) {
+            SendGetFragment fragment = new SendGetFragment();
+            fragments.add(fragment);
+        }
     }
 
     private void initData() {
@@ -111,13 +122,13 @@ public class MainFragment extends BaseFragment<MainViewModel> implements View.On
 
         mainActivity = (IMainActivity) getActivity();
 
-        initView();
+        initActivityView();
     }
 
     /**
      * 初始化在Activity布局里面的控件，把UI控件全部移到碎片里面来处理
      */
-    private void initView() {
+    private void initActivityView() {
         mainDrawerLayout = mainActivity.getDrawerLayout();
         workerStatus = mainDrawerLayout.findViewById(R.id.main_drawer_workswitch);
         LinearLayout workerSound = mainDrawerLayout.findViewById(R.id.main_drawer_careersound);
@@ -159,23 +170,16 @@ public class MainFragment extends BaseFragment<MainViewModel> implements View.On
 
     private void initViewPager() {
         viewPageAdapter = new SendGetViewPageAdapter(getActivity().getSupportFragmentManager());
-        final List<SendGetFragment> fragments = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
-            SendGetFragment fragment = new SendGetFragment();
-            fragments.add(fragment);
-        }
+
         viewModel.getOrders().observe(this, new Observer<List<List<Order>>>() {
             @Override
             public void onChanged(List<List<Order>> lists) {
                 if (!lists.isEmpty()) {
-                    for (int i = 0; i < 8; i++) {
-                        SendGetFragment fragment = fragments.get(i);
-                        fragment.refreshList(lists.get(i));
-                    }
-                    viewPageAdapter.notifyDataSetChanged();
+                    refreshList(lists);
                 }
             }
         });
+
         mainViewpager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             int lastPos;
 
@@ -254,5 +258,18 @@ public class MainFragment extends BaseFragment<MainViewModel> implements View.On
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         viewModel.updateWorkerStatus(isChecked ? 1 : 0);
+    }
+
+    @Override
+    public void changeWorkderStatus(boolean status) {
+        workerStatus.setChecked(status);
+    }
+
+    @Override
+    public void refreshList(List<List<Order>> data) {
+        for (int i = 0; i < 8; i++) {
+            fragments.get(i).refreshList(data.get(i));
+        }
+        viewPageAdapter.notifyDataSetChanged();
     }
 }

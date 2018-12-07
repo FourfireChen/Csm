@@ -146,13 +146,13 @@ public class OrdersConvertor implements Converter<ResponseBody, List<Order>> {
                 }
                 switch (name) {
                     case ORDER_ID:
-                        order.setId(in.nextInt());
+                        order.setId(in.nextString());
                         break;
                     case ORDER_PAGER_ID:
                         order.setPagerId(in.nextString());
                         break;
                     case ORDER_USER_ID:
-                        order.setUserId(in.nextInt());
+                        order.setUserId(in.nextString());
                         break;
                     case FROM_LONGITUDE:
                         from.setLongitude(in.nextDouble());
@@ -167,7 +167,7 @@ public class OrdersConvertor implements Converter<ResponseBody, List<Order>> {
                         to.setLongitude(in.nextDouble());
                         break;
                     case NOW_WORKER:
-                        order.setNowWoker(in.nextInt());
+                        order.setNowWoker(in.nextString());
                         break;
                     case PRICE:
                         order.setPrice(in.nextInt());

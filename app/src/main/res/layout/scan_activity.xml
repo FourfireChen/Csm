@@ -13,8 +13,7 @@
         app:qrcv_isBarcode="true"
         app:qrcv_topOffset="30dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </cn.bingoogolapple.qrcode.zbar.ZBarView>
+        android:layout_height="match_parent" />
 
     <EditText
         android:id="@+id/scan_edit"

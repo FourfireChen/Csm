@@ -1,6 +1,5 @@
 package com.chuansongmen.data;
 
-import android.mtp.MtpConstants;
 import android.util.Log;
 
 import com.chuansongmen.common.Callback;
@@ -9,6 +8,7 @@ import com.chuansongmen.data.bean.Position;
 import com.chuansongmen.data.bean.Route;
 import com.chuansongmen.data.bean.Worker;
 import com.chuansongmen.util.ConvertorFactory;
+import com.chuansongmen.util.ThreadUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -272,8 +272,35 @@ public class DataRepository implements IDataRepository {
     }
 
     @Override
+    public void changeDelay(final String orderPagerId,
+                            final int isDelay,
+                            final Callback<String> result) {
+        ThreadUtil.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put(orderPagerId, isDelay);
+                    Call<ResponseBody> call = remoteData.changeDelay(mapToJson(jsonObject));
+                    Response response = call.execute();
+                    if (response != null) {
+                        if (response.isSuccessful()) {
+                            result.onResponse(null);
+                        } else {
+                            result.onResponse(response.errorBody().string());
+                        }
+                    }
+                } catch (JSONException | IOException e) {
+                    e.printStackTrace();
+                    result.onResponse(e.getMessage());
+                }
+            }
+        });
+    }
+
+    @Override
     public void addTestWorker(final Callback<Boolean> callback) {
-        new Thread(new Runnable() {
+        ThreadUtil.execute(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -300,7 +327,10 @@ public class DataRepository implements IDataRepository {
                     e.printStackTrace();
                 }
             }
-        }).start();
+        });
+    }
 
+    private RequestBody mapToJson(JSONObject jsonObject) {
+        return RequestBody.create(MediaType.parse("application/json"), jsonObject.toString());
     }
 }

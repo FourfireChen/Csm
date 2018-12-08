@@ -11,7 +11,6 @@ import com.chuansongmen.R;
 import com.chuansongmen.base.BaseFragment;
 import com.chuansongmen.data.bean.Order;
 import com.chuansongmen.detail.DetailActivity;
-import com.chuansongmen.detail.DetailAdapter;
 
 import java.util.List;
 
@@ -55,7 +54,7 @@ public class SendGetFragment extends BaseFragment<SendGetViewModel> {
             @Override
             public void onClick(int position) {
                 Bundle data = new Bundle();
-                data.putParcelable(getString(R.string.ORDER), orders.get(position));
+                data.putParcelable(getString(R.string.order), orders.get(position));
                 startActivity(DetailActivity.class, data);
             }
         });

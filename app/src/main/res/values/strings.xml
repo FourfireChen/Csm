@@ -1,39 +1,12 @@
 <resources>
     <string name="app_name">传送门</string>
-    <string name="TYPE">type</string>
-    <string name="GET">get</string>
-    <string name="SEND">send</string>
-    <string name="FONT">fonts/type.ttf</string>
-    <string name="UNLOAD">unload</string>
-    <string name="DATA_KEY">data</string>
-    <string name="TITLE">title</string>
-    <string name="ORDER">orders</string>
-    <string name="textContent">
-        要实现这样的效果, 需要用到:
-CoordinatorLayout和AppbarLayout的配合, 以及实现了NestedScrollView的布局或控件.
-AppbarLayout是一种支持响应滚动手势的app bar布局, CollapsingToolbarLayout则是专门用来实现子布局内不同元素响应滚动细节的布局.
-与AppbarLayout组合的滚动布局(RecyclerView, NestedScrollView等),需要设置 app:layout_behavior = "@string/appbar_scrolling_view_behavior" .没有设置的话, AppbarLayout将不会响应滚动布局的滚动事件.
-我们回到再前面一章"Toolbar的使用", 将布局改动如下:
-
-作者：朋朋彭哥
-链接：https://www.jianshu.com/p/bbc703a0015e
-來源：简书
-简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。可以看到,
-
-
-随着文本往上滚动, 顶部的toolbar也往上滚动, 直到消失.
-随着文本往下滚动, 一直滚到文本的第一行露出来, toolbar也逐渐露出来
-
-解释:
-从上面的布局中可以看到, 其实在整个父布局CoordinatorLayout下面, 是有2个子布局
-
-AppbarLayout
-NestedScrollView
-NestedScrollView先放一放, 我们来看AppbarLayout.
-
-作者：朋朋彭哥
-链接：https://www.jianshu.com/p/bbc703a0015e
-來源：简书
-简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。
-    </string>
+    <string name="type">type</string>
+    <string name="get">get</string>
+    <string name="send">send</string>
+    <string name="font">fonts/type.ttf</string>
+    <string name="unload">unload</string>
+    <string name="data">data</string>
+    <string name="title">title</string>
+    <string name="order">orders</string>
+    <string name="confirm_warning">在客户的要求下 与客户明确约定其他时间收派 才可选择滞留 私自滞留导致客户投诉将受到重罚</string>
 </resources>

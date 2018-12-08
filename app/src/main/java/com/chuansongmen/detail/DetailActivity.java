@@ -82,7 +82,7 @@ public class DetailActivity extends BaseActivity<DetailViewModel> {
         Bundle data = getIntent().getExtras();
 
         if (data != null) {
-            order = data.getParcelable(getString(R.string.ORDER));
+            order = data.getParcelable(getString(R.string.order));
         }
 
         if (order != null)
@@ -94,7 +94,7 @@ public class DetailActivity extends BaseActivity<DetailViewModel> {
     @Override
     protected void initView() {
         super.initView();
-        Util.setTypeface(getString(R.string.FONT),
+        Util.setTypeface(getString(R.string.font),
                 getAssets(),
                 textView,
                 textView2,
@@ -141,39 +141,7 @@ public class DetailActivity extends BaseActivity<DetailViewModel> {
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        switch (status.getText()) {
-                                // 滞留件点击处理
-                            case "取消滞留":
-
-                                break;
-                                // 下面这两个是重点件的处理
-                            case "收件":
-
-                                break;
-                            case "派出":
-
-                                break;
-                                // 正在收件、正在派件两种处理，要再分开一下
-                            case "滞留":
-
-                                break;
-                                // 正在收件处理，扫描录入
-                            case "录入":
-
-                                break;
-                                // 已收件补差
-                            case "补差":
-
-                                break;
-                                // 已收件印单
-                            case "印单":
-
-                                break;
-                                // 正在派件移交
-                            case "移交":
-
-                                break;
-                        }
+                        viewModel.handleClickEvent(DetailActivity.this, status.getText(), order);
                     }
                 });
             }

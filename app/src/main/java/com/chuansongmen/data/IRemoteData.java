@@ -107,6 +107,10 @@ public interface IRemoteData {
     Call<List<Route>> getAllRoutes();
 
 
+    @POST("/order/delay")
+    Call<ResponseBody> changeDelay(@Body RequestBody requestBody);
+
+
     /**
      * 测试添加员工
      */

@@ -147,7 +147,7 @@ public class MainFragment extends BaseFragment<MainViewModel> implements View.On
         mainBottomSend.setOnClickListener(this);
         mainBottomCenter.setOnClickListener(this);
 
-        Util.setTypeface(getString(R.string.FONT),
+        Util.setTypeface(getString(R.string.font),
                 getActivity().getAssets(),
                 mainBottomGet,
                 mainBottomSend,

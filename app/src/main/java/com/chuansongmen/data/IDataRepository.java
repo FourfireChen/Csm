@@ -98,10 +98,17 @@ public interface IDataRepository {
 
     /**
      * 改变滞留状态
+     *
      * @param orderPagerId 订单号
-     * @param isDelay 1为滞留，0为取消滞留
+     * @param isDelay      1为滞留，0为取消滞留
      */
     void changeDelay(String orderPagerId, int isDelay, Callback<String> result);
+
+
+    void receiveOrderFromUser(String orderSerialId,
+                              String pagerId,
+                              String workerId,
+                              Callback<String> messageCallback);
 
     /**
      * 短信验证

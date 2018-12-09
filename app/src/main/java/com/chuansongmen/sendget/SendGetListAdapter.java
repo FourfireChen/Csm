@@ -10,7 +10,6 @@ import com.chuansongmen.data.bean.Order;
 
 import java.util.List;
 
-import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -21,6 +20,7 @@ public class SendGetListAdapter extends RecyclerView.Adapter<SendGetListAdapter.
     private List<Order> orders;
     private ItemClickListener itemCallButtonListener;
     private ItemClickListener itemClickListener;
+
     SendGetListAdapter() {
     }
 

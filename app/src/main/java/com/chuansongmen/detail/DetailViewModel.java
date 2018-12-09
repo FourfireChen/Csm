@@ -46,7 +46,7 @@ class DetailViewModel extends BaseViewModel {
                 break;
             // 正在收件处理，扫描录入
             case "录入":
-                
+
                 break;
             // 已收件补差
             case "补差":

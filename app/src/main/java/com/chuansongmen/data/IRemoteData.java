@@ -110,6 +110,9 @@ public interface IRemoteData {
     @POST("/order/delay")
     Call<ResponseBody> changeDelay(@Body RequestBody requestBody);
 
+    @POST("/order/changeOrder/receiveOrderFromUser")
+    Call<ResponseBody> receiveOrderFromUser(@Body RequestBody requestBody);
+
 
     /**
      * 测试添加员工

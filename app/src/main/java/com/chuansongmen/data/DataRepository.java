@@ -31,6 +31,8 @@ public class DataRepository implements IDataRepository {
     private IRemoteData remoteData;
     // TODO: 2018/11/7 这里的URL是暂时的
     private static final String URL = "http://178.128.184.142:8080/portal/";
+    public static final String SUCCESS = "成功";
+    public static final String FAIL = "失败";
 
     private DataRepository() {
         Retrofit retrofit =
@@ -285,14 +287,45 @@ public class DataRepository implements IDataRepository {
                     Response response = call.execute();
                     if (response != null) {
                         if (response.isSuccessful()) {
-                            result.onResponse(null);
+                            result.onResponse(SUCCESS);
                         } else {
-                            result.onResponse(response.errorBody().string());
+                            result.onResponse(
+                                    response.errorBody() != null ? response.errorBody().string() :
+                                            FAIL);
                         }
                     }
                 } catch (JSONException | IOException e) {
                     e.printStackTrace();
                     result.onResponse(e.getMessage());
+                }
+            }
+        });
+    }
+
+    @Override
+    public void receiveOrderFromUser(final String orderSerialId,
+                                     final String pagerId,
+                                     final String workerId,
+                                     final Callback<String> messageCallback) {
+        ThreadUtil.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("order_id", orderSerialId);
+                    jsonObject.put("order_paper_id", pagerId);
+                    jsonObject.put("worker_id", workerId);
+                    Response body =
+                            remoteData.receiveOrderFromUser(mapToJson(jsonObject)).execute();
+                    if (body != null && body.isSuccessful()) {
+                        messageCallback.onResponse(SUCCESS);
+                    } else {
+                        messageCallback.onResponse(body != null ?
+                                body.errorBody() != null ? body.errorBody().string() : FAIL : FAIL);
+                    }
+                } catch (JSONException | IOException e) {
+                    e.printStackTrace();
+                    messageCallback.onResponse(e.getMessage());
                 }
             }
         });

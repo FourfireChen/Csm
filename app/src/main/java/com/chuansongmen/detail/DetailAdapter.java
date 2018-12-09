@@ -13,6 +13,7 @@ import java.util.List;
 public class DetailAdapter implements IDetailAdapter {
     private Order order;
     private DetailViewModel viewModel;
+
     DetailAdapter(Order order, DetailViewModel viewModel) {
         this.order = order;
         this.viewModel = viewModel;

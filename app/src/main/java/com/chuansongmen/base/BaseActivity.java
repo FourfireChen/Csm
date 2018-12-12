@@ -3,6 +3,7 @@ package com.chuansongmen.base;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -58,4 +59,12 @@ public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatAct
         startActivity(intent);
     }
 
+    public void toast(final String content) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(BaseActivity.this, content, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }

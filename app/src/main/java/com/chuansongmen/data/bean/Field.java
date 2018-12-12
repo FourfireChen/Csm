@@ -27,6 +27,12 @@ public class Field {
     public static final String NEXT_ROUTE = "nextRoute";
     public static final String COUPON_ID = "couponId";
     public static final String REMARK = "remark";
+    public static final String USERNAME = "username";
+    public static final String USERADDRESS = "useraddress";
+    public static final String ISINCAINIAO = "is_order_in_cainiao";
+    public static final String DELAY_TIME = "delay_time";
+    public static final String START_TIME = "order_start_time";
+    public static final String COMPLETE_TIME = "order_complete_time";
 
     /**
      * Route

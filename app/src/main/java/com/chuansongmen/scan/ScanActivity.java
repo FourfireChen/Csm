@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseActivity;
+import com.chuansongmen.util.ScanDelegate;
 import com.chuansongmen.view.SignView;
 
 import androidx.annotation.Nullable;
@@ -18,7 +19,7 @@ import cn.bingoogolapple.qrcode.core.BarcodeType;
 import cn.bingoogolapple.qrcode.core.QRCodeView;
 import cn.bingoogolapple.qrcode.zbar.ZBarView;
 
-public class ScanActivity extends BaseActivity<ScanViewModel> implements QRCodeView.Delegate {
+public class ScanActivity extends BaseActivity<ScanViewModel>{
     @BindView(R.id.scan_zxingview)
     ZBarView scanScanView;
     @BindView(R.id.scan_edit)
@@ -40,7 +41,18 @@ public class ScanActivity extends BaseActivity<ScanViewModel> implements QRCodeV
 
     @Override
     protected void initView() {
-        scanScanView.setDelegate(this);
+        scanScanView.setDelegate(new ScanDelegate(scanScanView, new ScanDelegate.ScanCallback() {
+            @Override
+            public void onSuccess(String result) {
+                Toast.makeText(ScanActivity.this, "扫描成功" + result, Toast.LENGTH_SHORT).show();
+                scanEdit.setText(result);
+            }
+
+            @Override
+            public void onFail() {
+                Toast.makeText(ScanActivity.this, "相机打开有问题，请检查相机权限", Toast.LENGTH_SHORT).show();
+            }
+        }, true));
     }
 
     @Override
@@ -64,19 +76,6 @@ public class ScanActivity extends BaseActivity<ScanViewModel> implements QRCodeV
         super.onStop();
     }
 
-
-    @Override
-    public void onScanQRCodeSuccess(String result) {
-        Toast.makeText(this, "扫描成功" + result, Toast.LENGTH_SHORT).show();
-        scanEdit.setText(result);
-        scanScanView.startSpot();
-    }
-
-    @Override
-    public void onCameraAmbientBrightnessChanged(boolean isDark) {
-
-    }
-
     /**
      * 检查扫描到的单号是否符合格式
      *
@@ -87,10 +86,6 @@ public class ScanActivity extends BaseActivity<ScanViewModel> implements QRCodeV
         return "";
     }
 
-    @Override
-    public void onScanQRCodeOpenCameraError() {
-        Toast.makeText(this, "相机打开有问题，请检查相机权限", Toast.LENGTH_SHORT).show();
-    }
 
 
     @OnClick({R.id.scan_confirm, R.id.scan_sign_clear})

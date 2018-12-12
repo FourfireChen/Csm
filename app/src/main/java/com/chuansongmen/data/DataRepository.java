@@ -79,7 +79,7 @@ public class DataRepository implements IDataRepository {
 
     @Override
     public void queryOrderPos(Order order, final Callback<Position> callback) {
-        Call<Position> call = remoteData.queryOrderPos(order.getId());
+        Call<Position> call = remoteData.queryOrderPos(order.getOrderId());
         call.enqueue(new retrofit2.Callback<Position>() {
             @Override
             public void onResponse(Call<Position> call, Response<Position> response) {
@@ -148,8 +148,8 @@ public class DataRepository implements IDataRepository {
             order.setRecipientAddress(address[Math.abs(random.nextInt()) % 6]);
             order.setRecipientPhone(phone[Math.abs(random.nextInt()) % 6]);
             order.setRecipientName(name[Math.abs(random.nextInt()) % 6]);
-            order.setUserId(phone[Math.abs(random.nextInt()) % 6]);
-            order.setId(id[Math.abs(random.nextInt()) % 6]);
+            order.setUserPhone(phone[Math.abs(random.nextInt()) % 6]);
+            order.setOrderId(id[Math.abs(random.nextInt()) % 6]);
             order.setPagerId(id[Math.abs(random.nextInt()) % 6]);
             orders.add(order);
         }
@@ -361,6 +361,11 @@ public class DataRepository implements IDataRepository {
                 }
             }
         });
+    }
+
+    @Override
+    public void sendMessage(String code, Callback<Boolean> resultCallback) {
+        
     }
 
     private RequestBody mapToJson(JSONObject jsonObject) {

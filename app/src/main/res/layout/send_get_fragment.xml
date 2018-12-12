@@ -13,8 +13,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="6dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/sendget_lists"
-        app:layout_constraintEnd_toEndOf="@+id/sendget_lists"
+        app:layout_constraintBottom_toBottomOf="@id/sendget_lists"
+        app:layout_constraintEnd_toEndOf="@id/sendget_lists"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

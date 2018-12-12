@@ -35,7 +35,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.07"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@id/textView2" />
 
     <TextView
         android:id="@+id/detail_from_phone"
@@ -47,8 +47,8 @@
         android:text="电话号码"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/detail_from_name"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintStart_toEndOf="@id/detail_from_name"
+        app:layout_constraintTop_toBottomOf="@id/textView2" />
 
     <TextView
         android:id="@+id/detail_from_address"
@@ -61,7 +61,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.07"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detail_from_name" />
+        app:layout_constraintTop_toBottomOf="@id/detail_from_name" />
 
     <ImageView
         android:id="@+id/detail_call_sender"
@@ -73,7 +73,7 @@
         android:src="@drawable/ic_phone_black_24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.041"
-        app:layout_constraintStart_toEndOf="@+id/detail_from_phone"
+        app:layout_constraintStart_toEndOf="@id/detail_from_phone"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -89,7 +89,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.028"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detail_from_address" />
+        app:layout_constraintTop_toBottomOf="@id/detail_from_address" />
 
     <TextView
         android:id="@+id/detail_to_name"
@@ -102,7 +102,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.07"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@id/textView" />
 
     <TextView
         android:id="@+id/detail_to_phone"
@@ -114,8 +114,8 @@
         android:text="电话号码"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/detail_to_name"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintStart_toEndOf="@id/detail_to_name"
+        app:layout_constraintTop_toBottomOf="@id/textView" />
 
     <TextView
         android:id="@+id/detail_to_address"
@@ -126,8 +126,8 @@
         android:text="地址"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/detail_to_name"
-        app:layout_constraintTop_toBottomOf="@+id/detail_to_name" />
+        app:layout_constraintStart_toStartOf="@id/detail_to_name"
+        app:layout_constraintTop_toBottomOf="@id/detail_to_name" />
 
     <ImageView
         android:id="@+id/detail_call_getter"
@@ -138,8 +138,8 @@
         android:src="@drawable/ic_phone_black_24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.041"
-        app:layout_constraintStart_toEndOf="@+id/detail_to_phone"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintStart_toEndOf="@id/detail_to_phone"
+        app:layout_constraintTop_toBottomOf="@id/textView" />
 
     <TextView
         android:id="@+id/textView3"
@@ -153,7 +153,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detail_to_address" />
+        app:layout_constraintTop_toBottomOf="@id/detail_to_address" />
 
     <TextView
         android:id="@+id/detail_serialnumber"
@@ -164,8 +164,8 @@
         android:text="流水号"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toTopOf="@+id/textView3" />
+        app:layout_constraintStart_toEndOf="@id/textView3"
+        app:layout_constraintTop_toTopOf="@id/textView3" />
 
     <TextView
         android:id="@+id/textView4"
@@ -174,8 +174,8 @@
         android:layout_marginTop="8dp"
         android:text="单号"
         android:textColor="@color/colorAccent"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintStart_toStartOf="@id/textView3"
+        app:layout_constraintTop_toBottomOf="@id/textView3" />
 
     <TextView
         android:id="@+id/order_id"
@@ -186,8 +186,8 @@
         android:text="单号"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.032"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toTopOf="@+id/textView4" />
+        app:layout_constraintStart_toEndOf="@id/textView4"
+        app:layout_constraintTop_toTopOf="@id/textView4" />
 
     <TextView
         android:id="@+id/detail_order_status"
@@ -202,7 +202,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@id/textView5" />
 
     <TextView
         android:id="@+id/detail_finish_time"
@@ -215,7 +215,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detail_order_status" />
+        app:layout_constraintTop_toBottomOf="@id/detail_order_status" />
 
     <TextView
         android:id="@+id/textView5"
@@ -227,8 +227,8 @@
         android:textColor="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintStart_toStartOf="@id/textView3"
+        app:layout_constraintTop_toBottomOf="@id/textView4" />
 
     <TextView
         android:id="@+id/detail_remark"
@@ -240,8 +240,8 @@
         android:text="无"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.064"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toTopOf="@+id/textView5" />
+        app:layout_constraintStart_toEndOf="@id/textView5"
+        app:layout_constraintTop_toTopOf="@id/textView5" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -269,8 +269,9 @@
 
                 <ImageView
                     android:id="@+id/detail_first_icon"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="40dp"
+                    android:layout_margin="5dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_restore_black_48dp" />
 
@@ -299,8 +300,9 @@
 
                 <ImageView
                     android:id="@+id/detail_second_icon"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="40dp"
+                    android:layout_margin="5dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_camera_amber_800_36dp" />
 
@@ -329,8 +331,9 @@
 
                 <ImageView
                     android:id="@+id/detail_third_icon"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="40dp"
+                    android:layout_margin="5dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_print_black_24dp" />
 

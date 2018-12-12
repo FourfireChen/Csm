@@ -23,7 +23,7 @@ public class DetailAdapter implements IDetailAdapter {
     public IDetailAdapter.Customer getFrom() {
         String name = "";
         String address = "";
-        String phone = order.getUserId();
+        String phone = order.getUserPhone();
         return new IDetailAdapter.Customer(name, phone == null ? "" : phone, address);
     }
 
@@ -76,7 +76,7 @@ public class DetailAdapter implements IDetailAdapter {
 
     @Override
     public String getSerialId() {
-        String serialId = order.getId();
+        String serialId = order.getOrderId();
         return serialId != null ? serialId : "";
     }
 
@@ -91,17 +91,9 @@ public class DetailAdapter implements IDetailAdapter {
                 status.setIcon(context.getDrawable(R.drawable.logo_icon));
                 status.setText("取消滞留");
                 buttonStatuses.add(status);
-            } else if (order.isImportant()) {
+            } else if (order.isImportant() && order.getStatus() == Order.Status.NON_PICK_UP) {
                 ButtonStatus status = new ButtonStatus();
-                String text = "";
-                switch (order.getStatus()) {
-                    case NON_PICK_UP:
-                        text = "收件";
-                        break;
-                    case SENDING:
-                        text = "派出";
-                        break;
-                }
+                String text = "录入";
                 status.setText(text);
                 status.setIcon(context.getDrawable(R.drawable.logo_icon));
                 buttonStatuses.add(status);

@@ -33,7 +33,7 @@ class InputViewModel extends BaseViewModel {
         return inputMessage;
     }
 
-    public MutableLiveData<String> getPageIdLegality() {
+    MutableLiveData<String> getPageIdLegality() {
         return pageIdLegality;
     }
 

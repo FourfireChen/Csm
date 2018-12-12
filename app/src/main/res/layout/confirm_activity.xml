@@ -29,7 +29,7 @@
         android:textColor="@color/red_error"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@id/imageView" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
@@ -38,7 +38,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="24dp"
         app:cardCornerRadius="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/confirm_confirm_delay"
+        app:layout_constraintBottom_toTopOf="@id/confirm_confirm_delay"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 

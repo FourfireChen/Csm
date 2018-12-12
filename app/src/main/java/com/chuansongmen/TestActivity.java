@@ -63,7 +63,7 @@ public class TestActivity extends BaseActivity<TestViewModel> {
 
 //    @OnClick({R.id.main_toolbar_me, R.id.main_toolbar_info})
 //    public void onViewClicked(View view) {
-//        switch (view.getId()) {
+//        switch (view.getOrderId()) {
 //            case R.id.main_toolbar_me:
 //
 //                break;

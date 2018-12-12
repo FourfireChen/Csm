@@ -9,6 +9,7 @@ import com.chuansongmen.R;
 import com.chuansongmen.base.BaseActivity;
 import com.chuansongmen.data.DataRepository;
 import com.chuansongmen.data.bean.Order;
+import com.chuansongmen.util.ScanDelegate;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
@@ -19,7 +20,7 @@ import cn.bingoogolapple.qrcode.core.BarcodeType;
 import cn.bingoogolapple.qrcode.core.QRCodeView;
 import cn.bingoogolapple.qrcode.zbar.ZBarView;
 
-public class InputActivity extends BaseActivity<InputViewModel> implements QRCodeView.Delegate {
+public class InputActivity extends BaseActivity<InputViewModel> {
     @BindView(R.id.input_scan)
     ZBarView inputScan;
     @BindView(R.id.input_order_status)
@@ -36,9 +37,26 @@ public class InputActivity extends BaseActivity<InputViewModel> implements QRCod
         super.onCreate(savedInstanceState);
         setContentView(R.layout.input_activity);
         ButterKnife.bind(this);
+        initView();
         initData();
     }
 
+    @Override
+    protected void initView() {
+        super.initView();
+        inputScan.setDelegate(new ScanDelegate(inputScan, new ScanDelegate.ScanCallback() {
+            @Override
+            public void onSuccess(String result) {
+                inputOrderPagerId.setText(result);
+                viewModel.checkPageIdLegality(result);
+            }
+
+            @Override
+            public void onFail() {
+                Toast.makeText(InputActivity.this, "相机打开有问题，请检查相机权限", Toast.LENGTH_SHORT).show();
+            }
+        }, true));
+    }
 
     private void initData() {
         order = getIntent().getExtras().getParcelable(getString(R.string.order));
@@ -47,7 +65,8 @@ public class InputActivity extends BaseActivity<InputViewModel> implements QRCod
             @Override
             public void onChanged(String s) {
                 if (s.equals(DataRepository.SUCCESS)) {
-                    // TODO: 2018/12/9 成功
+                    Toast.makeText(InputActivity.this, "录入成功", Toast.LENGTH_SHORT).show();
+                    finish();
                 } else {
                     Toast.makeText(InputActivity.this, s, Toast.LENGTH_SHORT).show();
                     inputScan.startSpot();
@@ -83,29 +102,12 @@ public class InputActivity extends BaseActivity<InputViewModel> implements QRCod
         super.onStop();
     }
 
-    @Override
-    public void onScanQRCodeSuccess(String result) {
-        inputOrderPagerId.setText(result);
-        inputScan.startSpot();
-    }
-
-    @Override
-    public void onCameraAmbientBrightnessChanged(boolean isDark) {
-
-    }
-
-
-    @Override
-    public void onScanQRCodeOpenCameraError() {
-        Toast.makeText(this, "相机打开有问题，请检查相机权限", Toast.LENGTH_SHORT).show();
-    }
-
     @OnClick(R.id.input_confirm)
     public void onViewClicked() {
         if (inputOrderStatus.getText().toString().equals("可使用")) {
-            viewModel.input(order.getId(), inputOrderPagerId.getText().toString());
+            viewModel.input(order.getOrderId(), inputOrderPagerId.getText().toString());
         } else {
-            Toast.makeText(this, "单号不可使用", Toast.LENGTH_SHORT).show();
+            toast("单号不可使用");
         }
     }
 }

@@ -83,9 +83,9 @@ public class OrdersConvertor implements Converter<ResponseBody, List<Order>> {
         @Override
         public void write(JsonWriter out, Order value) throws IOException {
             out.beginObject();
-            out.name(ORDER_ID).value(value.getId());
+            out.name(ORDER_ID).value(value.getOrderId());
             out.name(ORDER_PAGER_ID).value(value.getPagerId());
-            out.name(ORDER_USER_ID).value(value.getUserId());
+            out.name(ORDER_USER_ID).value(value.getUserPhone());
             out.name(FROM_LONGITUDE).value(value.getFrom().getLongitude());
             out.name(FROM_LATITUDE).value(value.getFrom().getLatitude());
             out.name(TO_LONGTITUDE).value(value.getTo().getLongitude());
@@ -146,13 +146,13 @@ public class OrdersConvertor implements Converter<ResponseBody, List<Order>> {
                 }
                 switch (name) {
                     case ORDER_ID:
-                        order.setId(in.nextString());
+                        order.setOrderId(in.nextString());
                         break;
                     case ORDER_PAGER_ID:
                         order.setPagerId(in.nextString());
                         break;
                     case ORDER_USER_ID:
-                        order.setUserId(in.nextString());
+                        order.setUserPhone(in.nextString());
                         break;
                     case FROM_LONGITUDE:
                         from.setLongitude(in.nextDouble());
@@ -223,7 +223,7 @@ public class OrdersConvertor implements Converter<ResponseBody, List<Order>> {
                         order.setNextRoute(in.nextString());
                         break;
                     case COUPON_ID:
-                        order.setCouponId(in.nextInt());
+                        order.setCouponId(in.nextString());
                         break;
                     case REMARK:
                         order.setRemark(in.nextString());

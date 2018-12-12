@@ -1,73 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <cn.bingoogolapple.qrcode.zbar.ZBarView
-        android:id="@+id/input_scan"
+        android:id="@+id/transfer_scanview"
+        app:qrcv_rectWidth="250dp"
+        app:qrcv_topOffset="30dp"
+        app:qrcv_qrCodeTipText="请扫描被移交收派员ID码"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:qrcv_maskColor="@color/colorAccent"
-        app:qrcv_rectWidth="300dp"
-        app:qrcv_topOffset="30dp" />
-
+        android:layout_height="match_parent" />
 
     <TextView
-        android:id="@+id/input_order_status"
-        android:text="无效单号"
+        android:id="@+id/transfer_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="352dp"
         android:layout_marginEnd="8dp"
-        android:textColor="@color/red_error"
+        android:layout_marginBottom="8dp"
+        android:text="名字"
+        android:textColor="@color/colorPrimary"
         android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="32dp"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/transfer_confirm"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_order_status">
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="单号："
-            android:textSize="25sp" />
+            android:text="ID:"
+            android:textSize="30sp" />
 
         <TextView
-            android:id="@+id/input_order_pager_id"
+            android:id="@+id/transfer_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="25sp" />
+            android:textSize="30sp" />
     </LinearLayout>
 
     <Button
-        android:id="@+id/input_confirm"
+        android:id="@+id/transfer_confirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="36dp"
-        android:background="@color/colorPrimary"
-        android:text="确认"
+        android:layout_marginBottom="48dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="确 认"
         android:textColor="@color/colorAccent"
-        android:textSize="23sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

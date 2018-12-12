@@ -97,6 +97,12 @@ public class MainFragment extends BaseFragment<MainViewModel> implements View.On
         return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        viewModel.updateOrders();
+    }
+
     private void initView() {
         for (int i = 0; i < 8; i++) {
             SendGetFragment fragment = new SendGetFragment();
@@ -203,7 +209,6 @@ public class MainFragment extends BaseFragment<MainViewModel> implements View.On
         viewPageAdapter.setFragments(fragments);
         mainViewpager.setAdapter(viewPageAdapter);
         viewPageAdapter.setTitles(TITLE);
-        viewModel.updateOrders();
     }
 
     private float contentToTranslate(float height, float offset) {

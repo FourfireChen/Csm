@@ -85,7 +85,6 @@ public class Util {
         } else {
             WindowManager windowManager =
                     (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-
             windowManager.removeView(progress);
             progress = null;
         }

@@ -11,7 +11,7 @@ public class Order implements Parcelable {
     /**
      * 流水号
      */
-    private String id;
+    private String orderId;
 
     /**
      * 订单号
@@ -21,12 +21,30 @@ public class Order implements Parcelable {
     /**
      * 发起订单的用户ID/电话号码
      */
-    private String userId;
+    private String userPhone;
+
+    /**
+     * 用户的名字
+     */
+    private String userName;
+
+    /**
+     * 发起用户地址
+     */
+    private String userAddress;
+
 
     /**
      * 收发件的经纬度
      */
     private Position from, to;
+
+    /**
+     * 是否在菜鸟
+     */
+    private boolean isInCainiao;
+
+
 
     /**
      * 当前员工工号
@@ -55,6 +73,11 @@ public class Order implements Parcelable {
     private boolean isDelay;
 
     /**
+     * 滞留事件
+     */
+    private String delayTime;
+
+    /**
      * 是否是重点件
      */
     private boolean isImportant;
@@ -75,6 +98,16 @@ public class Order implements Parcelable {
      * 寄件重量
      */
     private int weight;
+
+    /**
+     * 下单时间
+     */
+    private String startTime;
+
+    /**
+     * 订单完成时间
+     */
+    private String completeTime;
 
     /**
      * 取件时间
@@ -107,7 +140,7 @@ public class Order implements Parcelable {
     /**
      * 优惠卷id
      */
-    private int couponId;
+    private String couponId;
 
     /**
      * 收派员给的备注
@@ -115,9 +148,7 @@ public class Order implements Parcelable {
     private String remark;
 
     /**
-     * 订单号
-     *
-     * @return
+     * @return 订单号
      */
     public String getPagerId() {
         return pagerId;
@@ -126,6 +157,7 @@ public class Order implements Parcelable {
     public void setPagerId(String pagerId) {
         this.pagerId = pagerId;
     }
+
 
     public Position getFrom() {
         return from;
@@ -249,14 +281,6 @@ public class Order implements Parcelable {
         this.nextRoute = nextRoute;
     }
 
-    public int getCouponId() {
-        return couponId;
-    }
-
-    public void setCouponId(int couponId) {
-        this.couponId = couponId;
-    }
-
     public String getRemark() {
         return remark;
     }
@@ -265,25 +289,20 @@ public class Order implements Parcelable {
         this.remark = remark;
     }
 
-    /**
-     * 流水号
-     *
-     * @return
-     */
-    public String getId() {
-        return id;
+    public String getOrderId() {
+        return orderId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getUserPhone() {
+        return userPhone;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
     }
 
     public String getNowWoker() {
@@ -300,6 +319,62 @@ public class Order implements Parcelable {
 
     public void setImportant(boolean important) {
         isImportant = important;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserAddress() {
+        return userAddress;
+    }
+
+    public void setUserAddress(String userAddress) {
+        this.userAddress = userAddress;
+    }
+
+    public boolean isInCainiao() {
+        return isInCainiao;
+    }
+
+    public void setInCainiao(boolean inCainiao) {
+        isInCainiao = inCainiao;
+    }
+
+    public String getDelayTime() {
+        return delayTime;
+    }
+
+    public void setDelayTime(String delayTime) {
+        this.delayTime = delayTime;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getCompleteTime() {
+        return completeTime;
+    }
+
+    public void setCompleteTime(String completeTime) {
+        this.completeTime = completeTime;
+    }
+
+    public String getCouponId() {
+        return couponId;
+    }
+
+    public void setCouponId(String couponId) {
+        this.couponId = couponId;
     }
 
     public enum Status {
@@ -321,6 +396,7 @@ public class Order implements Parcelable {
         }
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -328,27 +404,33 @@ public class Order implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.id);
         dest.writeString(this.pagerId);
-        dest.writeString(this.userId);
+        dest.writeString(this.orderId);
+        dest.writeString(this.userPhone);
+        dest.writeString(this.userName);
+        dest.writeString(this.userAddress);
         dest.writeParcelable(this.from, flags);
         dest.writeParcelable(this.to, flags);
+        dest.writeByte(this.isInCainiao ? (byte) 1 : (byte) 0);
         dest.writeString(this.nowWoker);
         dest.writeInt(this.price);
         dest.writeInt(this.status == null ? -1 : this.status.ordinal());
         dest.writeByte(this.isDelay ? (byte) 1 : (byte) 0);
-        dest.writeByte((byte) (this.isImportant ? 1 : 0));
+        dest.writeString(this.delayTime);
+        dest.writeByte(this.isImportant ? (byte) 1 : (byte) 0);
         dest.writeString(this.recipientName);
         dest.writeString(this.recipientPhone);
         dest.writeString(this.recipientAddress);
         dest.writeInt(this.priceProtection);
         dest.writeInt(this.weight);
+        dest.writeString(this.startTime);
+        dest.writeString(this.completeTime);
         dest.writeString(this.receiveTime);
         dest.writeInt(this.category);
-        dest.writeList(this.stations);
-        dest.writeList(this.routes);
+        dest.writeTypedList(this.stations);
+        dest.writeTypedList(this.routes);
         dest.writeString(this.nextRoute);
-        dest.writeInt(this.couponId);
+        dest.writeString(this.couponId);
         dest.writeString(this.remark);
     }
 
@@ -356,30 +438,34 @@ public class Order implements Parcelable {
     }
 
     protected Order(Parcel in) {
-        this.id = in.readString();
         this.pagerId = in.readString();
-        this.userId = in.readString();
+        this.orderId = in.readString();
+        this.userPhone = in.readString();
+        this.userName = in.readString();
+        this.userAddress = in.readString();
         this.from = in.readParcelable(Position.class.getClassLoader());
         this.to = in.readParcelable(Position.class.getClassLoader());
+        this.isInCainiao = in.readByte() != 0;
         this.nowWoker = in.readString();
         this.price = in.readInt();
         int tmpStatus = in.readInt();
         this.status = tmpStatus == -1 ? null : Status.values()[tmpStatus];
         this.isDelay = in.readByte() != 0;
+        this.delayTime = in.readString();
         this.isImportant = in.readByte() != 0;
         this.recipientName = in.readString();
         this.recipientPhone = in.readString();
         this.recipientAddress = in.readString();
         this.priceProtection = in.readInt();
         this.weight = in.readInt();
+        this.startTime = in.readString();
+        this.completeTime = in.readString();
         this.receiveTime = in.readString();
         this.category = in.readInt();
-        this.stations = new ArrayList<>();
-        in.readList(this.stations, Station.class.getClassLoader());
-        this.routes = new ArrayList<>();
-        in.readList(this.routes, Route.class.getClassLoader());
+        this.stations = in.createTypedArrayList(Station.CREATOR);
+        this.routes = in.createTypedArrayList(Route.CREATOR);
         this.nextRoute = in.readString();
-        this.couponId = in.readInt();
+        this.couponId = in.readString();
         this.remark = in.readString();
     }
 

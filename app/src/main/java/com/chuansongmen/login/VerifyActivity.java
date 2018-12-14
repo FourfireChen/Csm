@@ -31,13 +31,13 @@ public class VerifyActivity extends BaseActivity<VerifyViewModel> {
     EditText verifyCode;
     @BindView(R.id.verify_phonenumber)
     EditText verifyPhonenumber;
-    private String rightVerifyCode;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.verify_activity);
+        getLayoutInflater();
         ButterKnife.bind(this);
         initView();
         initData();
@@ -48,7 +48,6 @@ public class VerifyActivity extends BaseActivity<VerifyViewModel> {
             @Override
             public void onChanged(String s) {
                 if (!s.equals(FAIL)) {
-                    rightVerifyCode = s;
                     verifySend.setClickable(false);
                     CountDownTimer countDownTimer = new CountDownTimer(60000, 1000) {
                         @Override
@@ -86,7 +85,8 @@ public class VerifyActivity extends BaseActivity<VerifyViewModel> {
                 }
                 break;
             case R.id.verify_confirm:
-                if (rightVerifyCode.equals(verifyCode.getText().toString())) {
+                if (viewModel.checkVerifyCode(verifyPhonenumber.getText().toString(),
+                        verifyCode.getText().toString())) {
                     toast("登录成功");
                     startActivity(MainActivity.class, null);
                     finish();

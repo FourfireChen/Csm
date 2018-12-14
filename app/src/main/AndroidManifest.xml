@@ -36,15 +36,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".main.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-        </activity>
-        <activity android:name=".login.VerifyActivity" />
-        <activity android:name=".TestActivity">
+        <activity android:name=".main.MainActivity" />
+        <activity android:name=".login.VerifyActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -62,7 +55,7 @@
         <service android:name=".service.PositionService" />
         <receiver android:name=".service.PositionUploadReceiver" />
 
-        <service android:name="com.amap.api.location.APSService"></service>
+        <service android:name="com.amap.api.location.APSService" />
         <service android:name=".service.PositionServiceFore" />
 
         <meta-data

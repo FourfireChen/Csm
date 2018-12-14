@@ -2,6 +2,14 @@ package com.chuansongmen.data;
 
 import android.util.Log;
 
+import com.aliyuncs.DefaultAcsClient;
+import com.aliyuncs.IAcsClient;
+import com.aliyuncs.dysmsapi.model.v20170525.SendSmsRequest;
+import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
+import com.aliyuncs.exceptions.ClientException;
+import com.aliyuncs.http.MethodType;
+import com.aliyuncs.profile.DefaultProfile;
+import com.aliyuncs.profile.IClientProfile;
 import com.chuansongmen.common.Callback;
 import com.chuansongmen.data.bean.Order;
 import com.chuansongmen.data.bean.Position;
@@ -19,6 +27,8 @@ import java.util.List;
 import java.util.Random;
 
 import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -33,6 +43,10 @@ public class DataRepository implements IDataRepository {
     private static final String URL = "http://178.128.184.142:8080/portal/";
     public static final String SUCCESS = "成功";
     public static final String FAIL = "失败";
+    private final String product = "Dysmsapi";
+    private final String domain = "dysmsapi.aliyuncs.com";
+    private final String accessKeyId = "LTAIGwKgsjQoc4aR";
+    private final String accessKeySecret = "n8iIp5mZEsjm3ei9rgvHfiXl6XLN8W";
 
     private DataRepository() {
         Retrofit retrofit =
@@ -364,8 +378,42 @@ public class DataRepository implements IDataRepository {
     }
 
     @Override
-    public void sendMessage(String code, Callback<Boolean> resultCallback) {
-        
+    public void sendMessage(final String phone, final String code, final Callback<Boolean> resultCallback) {
+        ThreadUtil.execute(new Runnable() {
+            @Override
+            public void run() {
+                System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
+                System.setProperty("sun.net.client.defaultReadTimeout", "10000");
+
+                IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId,
+                        accessKeySecret);
+                try {
+                    DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", product, domain);
+                    IAcsClient acsClient = new DefaultAcsClient(profile);
+
+                    SendSmsRequest request = new SendSmsRequest();
+                    //使用post提交
+                    request.setMethod(MethodType.POST);
+                    //必填:待发送手机号。支持以逗号分隔的形式进行批量调用，批量上限为1000个手机号码,批量调用相对于单条调用及时性稍有延迟,验证码类型的短信推荐使用单条调用的方式；发送国际/港澳台消息时，接收号码格式为国际区号+号码，如“85200000000”
+                    request.setPhoneNumbers(phone);
+                    //必填:短信签名-可在短信控制台中找到
+                    request.setSignName("点链科技");
+                    //必填:短信模板-可在短信控制台中找到，发送国际/港澳台消息时，请使用国际/港澳台短信模版
+                    request.setTemplateCode("SMS_151233416");
+                    //可选:模板中的变量替换JSON串,如模板内容为"亲爱的${name},您的验证码为${code}"时,此处的值为
+                    //友情提示:如果JSON中需要带换行符,请参照标准的JSON协议对换行符的要求,比如短信内容中包含\r\n的情况在JSON中需要表示成\\r\\n,否则会导致JSON在服务端解析失败
+                    request.setTemplateParam("{\"code\":\"" + code + "\"}");
+                    SendSmsResponse sendSmsResponse = acsClient.getAcsResponse(request);
+                    if (sendSmsResponse.getCode() != null &&
+                            sendSmsResponse.getCode().equals("OK")) {
+                        resultCallback.onResponse(true);
+                    }
+                } catch (ClientException e) {
+                    e.printStackTrace();
+                    resultCallback.onResponse(false);
+                }
+            }
+        });
     }
 
     private RequestBody mapToJson(JSONObject jsonObject) {

@@ -114,7 +114,7 @@ public interface IDataRepository {
      * 短信验证
      * @param code 验证码
      */
-    void sendMessage(String code, Callback<Boolean> resultCallback);
+    void sendMessage(String phone, String code, Callback<Boolean> resultCallback);
 
 
     /**

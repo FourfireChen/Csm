@@ -90,12 +90,12 @@ public class MainFragment extends BaseFragment<MainViewModel> implements View.On
                              @Nullable final ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_fragment_content, container, false);
+
         unbinder = ButterKnife.bind(this, view);
 
         initData();
 
         initView();
-
 
         return view;
     }

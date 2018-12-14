@@ -11,12 +11,15 @@ import androidx.lifecycle.MutableLiveData;
 public class ScanViewModel extends BaseViewModel {
     private MutableLiveData<Boolean> isSuccess = new MutableLiveData<>();
 
-    public ScanViewModel(@NonNull Application application) {
+    ScanViewModel(@NonNull Application application) {
         super(application);
     }
 
-    public LiveData<Boolean> updateOrder() {
-
+    LiveData<Boolean> updateOrder() {
         return isSuccess;
+    }
+
+    boolean checkCodeFormate(String code){
+        return false;
     }
 }

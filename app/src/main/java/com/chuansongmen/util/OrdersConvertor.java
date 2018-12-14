@@ -22,25 +22,34 @@ import java.util.List;
 import okhttp3.ResponseBody;
 import retrofit2.Converter;
 
+import static com.chuansongmen.data.bean.Field.ARRIVE_STATION_TIME;
+import static com.chuansongmen.data.bean.Field.COLLECT_FROM_STATION_TIME;
+import static com.chuansongmen.data.bean.Field.COLLECT_FROM_USER_TIME;
+import static com.chuansongmen.data.bean.Field.COMPLETE_TIME;
 import static com.chuansongmen.data.bean.Field.COUPON_ID;
+import static com.chuansongmen.data.bean.Field.DELAY_TIME;
 import static com.chuansongmen.data.bean.Field.FROM_LATITUDE;
 import static com.chuansongmen.data.bean.Field.FROM_LONGITUDE;
 import static com.chuansongmen.data.bean.Field.IS_DELAY;
+import static com.chuansongmen.data.bean.Field.IS_ORDER_IN_CAINIAO;
+import static com.chuansongmen.data.bean.Field.MESSAGE_STR;
 import static com.chuansongmen.data.bean.Field.NEXT_ROUTE;
 import static com.chuansongmen.data.bean.Field.NOW_WORKER;
 import static com.chuansongmen.data.bean.Field.ORDER_CATEGORY;
 import static com.chuansongmen.data.bean.Field.ORDER_ID;
 import static com.chuansongmen.data.bean.Field.ORDER_PAGER_ID;
 import static com.chuansongmen.data.bean.Field.ORDER_STATUS;
+import static com.chuansongmen.data.bean.Field.ORDER_USER_ADDRESS;
 import static com.chuansongmen.data.bean.Field.ORDER_USER_ID;
+import static com.chuansongmen.data.bean.Field.ORDER_USER_NAME;
 import static com.chuansongmen.data.bean.Field.PRICE;
 import static com.chuansongmen.data.bean.Field.PRICE_PROTECTION;
-import static com.chuansongmen.data.bean.Field.RECEIVE_TIME;
 import static com.chuansongmen.data.bean.Field.RECIPIENT_ADDRESS;
 import static com.chuansongmen.data.bean.Field.RECIPIENT_NAME;
 import static com.chuansongmen.data.bean.Field.RECIPIENT_PHONE;
 import static com.chuansongmen.data.bean.Field.REMARK;
 import static com.chuansongmen.data.bean.Field.ROUTE;
+import static com.chuansongmen.data.bean.Field.START_TIME;
 import static com.chuansongmen.data.bean.Field.STATION;
 import static com.chuansongmen.data.bean.Field.TO_LATITUDE;
 import static com.chuansongmen.data.bean.Field.TO_LONGTITUDE;
@@ -53,10 +62,9 @@ public class OrdersConvertor implements Converter<ResponseBody, List<Order>> {
         List<Order> orders = new ArrayList<>();
         String string = value.string();
         JSONObject jsonObject;
-        boolean isSuccess = false;
+        boolean isSuccess;
         try {
             jsonObject = new JSONObject(string);
-
             isSuccess = jsonObject.getString("code").equals("SUCCESS");
             if (isSuccess) {
                 String ordersString = jsonObject.getString("data");
@@ -75,7 +83,6 @@ public class OrdersConvertor implements Converter<ResponseBody, List<Order>> {
         Gson gson =
                 new GsonBuilder().registerTypeAdapter(Order.class, new OrderJsonAdatper()).create();
         return new ArrayList<>(Arrays.asList(gson.fromJson(ordersString, Order[].class)));
-
     }
 
     private class OrderJsonAdatper extends TypeAdapter<Order> {
@@ -85,31 +92,29 @@ public class OrdersConvertor implements Converter<ResponseBody, List<Order>> {
             out.beginObject();
             out.name(ORDER_ID).value(value.getOrderId());
             out.name(ORDER_PAGER_ID).value(value.getPagerId());
-            out.name(ORDER_USER_ID).value(value.getUserPhone());
+            out.name(ORDER_USER_ID).value(value.getOrderUserId());
+            out.name(ORDER_USER_NAME).value(value.getUserName());
+            out.name(ORDER_USER_ADDRESS).value(value.getUserAddress());
             out.name(FROM_LONGITUDE).value(value.getFrom().getLongitude());
             out.name(FROM_LATITUDE).value(value.getFrom().getLatitude());
+            out.name(IS_ORDER_IN_CAINIAO).value(value.isInCainiao() ? 1 : 0);
             out.name(TO_LONGTITUDE).value(value.getTo().getLongitude());
             out.name(TO_LATITUDE).value(value.getTo().getLatitude());
-            out.name(NOW_WORKER).value(value.getNowWoker());
+            out.name(NOW_WORKER).value(value.getNowWorker());
             out.name(PRICE).value(value.getPrice());
-
             //这里给状态做了一个枚举
             out.name(ORDER_STATUS)
                     .value(Arrays.asList(Order.Status.values()).indexOf(value.getStatus()));
-
+            out.name(IS_DELAY).value(value.isDelay() ? 1 : 0);
             out.name(RECIPIENT_NAME).value(value.getRecipientName());
             out.name(RECIPIENT_PHONE).value(value.getRecipientPhone());
             out.name(RECIPIENT_ADDRESS).value(value.getRecipientAddress());
             out.name(PRICE_PROTECTION).value(value.getPriceProtection());
             out.name(WEIGHT).value(value.getWeight());
-            out.name(RECEIVE_TIME).value(value.getReceiveTime());
+            out.name(START_TIME).value(value.getStartTime());
+            out.name(COMPLETE_TIME).value(value.getCompleteTime());
             out.name(ORDER_CATEGORY).value(value.getCategory());
-            out.name(NEXT_ROUTE).value(value.getNextRoute());
-            out.name(COUPON_ID).value(value.getCouponId());
-            out.name(REMARK).value(value.getRemark());
 
-
-            out.name(IS_DELAY).value(value.isDelay() ? 1 : 0);
             StringBuilder stationsStringBuilder = new StringBuilder();
             for (int i = 0; i < value.getStations().size(); i++) {
                 stationsStringBuilder.append(value.getStations().get(i).getId());
@@ -117,8 +122,8 @@ public class OrdersConvertor implements Converter<ResponseBody, List<Order>> {
                     stationsStringBuilder.append(";");
                 }
             }
-
             out.name(STATION).value(stationsStringBuilder.toString());
+
             StringBuilder routesStringBuilder = new StringBuilder();
             for (int i = 0; i < value.getRoutes().size(); i++) {
                 stationsStringBuilder.append(value.getRoutes().get(i).getId());
@@ -128,6 +133,13 @@ public class OrdersConvertor implements Converter<ResponseBody, List<Order>> {
             }
             out.name(ROUTE).value(routesStringBuilder.toString());
 
+            out.name(NEXT_ROUTE).value(value.getNextRoute());
+            out.name(COUPON_ID).value(value.getCouponId());
+            out.name(REMARK).value(value.getRemark());
+            out.name(ARRIVE_STATION_TIME).value(value.getArriveStationTime());
+            out.name(COLLECT_FROM_USER_TIME).value(value.getCollectFromUserTime());
+            out.name(COLLECT_FROM_STATION_TIME).value(value.getCollectFromStationTime());
+            out.name(MESSAGE_STR).value(value.getMessageStr());
             out.endObject();
         }
 
@@ -152,13 +164,22 @@ public class OrdersConvertor implements Converter<ResponseBody, List<Order>> {
                         order.setPagerId(in.nextString());
                         break;
                     case ORDER_USER_ID:
-                        order.setUserPhone(in.nextString());
+                        order.setOrderUserId(in.nextString());
+                        break;
+                    case ORDER_USER_NAME:
+                        order.setUserName(in.nextString());
+                        break;
+                    case ORDER_USER_ADDRESS:
+                        order.setUserAddress(in.nextString());
                         break;
                     case FROM_LONGITUDE:
                         from.setLongitude(in.nextDouble());
                         break;
                     case FROM_LATITUDE:
                         from.setLatitude(in.nextDouble());
+                        break;
+                    case IS_ORDER_IN_CAINIAO:
+                        order.setInCainiao(in.nextInt() == 1);
                         break;
                     case TO_LATITUDE:
                         to.setLatitude(in.nextDouble());
@@ -167,7 +188,7 @@ public class OrdersConvertor implements Converter<ResponseBody, List<Order>> {
                         to.setLongitude(in.nextDouble());
                         break;
                     case NOW_WORKER:
-                        order.setNowWoker(in.nextString());
+                        order.setNowWorker(in.nextString());
                         break;
                     case PRICE:
                         order.setPrice(in.nextInt());
@@ -181,6 +202,9 @@ public class OrdersConvertor implements Converter<ResponseBody, List<Order>> {
                             order.setDelay(true);
                         else
                             order.setDelay(false);
+                        break;
+                    case DELAY_TIME:
+                        order.setDelayTime(in.nextString());
                         break;
                     case RECIPIENT_NAME:
                         order.setRecipientName(in.nextString());
@@ -197,8 +221,11 @@ public class OrdersConvertor implements Converter<ResponseBody, List<Order>> {
                     case WEIGHT:
                         order.setWeight(in.nextInt());
                         break;
-                    case RECEIVE_TIME:
-                        order.setReceiveTime(in.nextString());
+                    case START_TIME:
+                        order.setStartTime(in.nextString());
+                        break;
+                    case COMPLETE_TIME:
+                        order.setCompleteTime(in.nextString());
                         break;
                     case ORDER_CATEGORY:
                         order.setCategory(in.nextInt());
@@ -227,6 +254,18 @@ public class OrdersConvertor implements Converter<ResponseBody, List<Order>> {
                         break;
                     case REMARK:
                         order.setRemark(in.nextString());
+                        break;
+                    case ARRIVE_STATION_TIME:
+                        order.setArriveStationTime(in.nextString());
+                        break;
+                    case COLLECT_FROM_USER_TIME:
+                        order.setCollectFromUserTime(in.nextString());
+                        break;
+                    case COLLECT_FROM_STATION_TIME:
+                        order.setCollectFromStationTime(in.nextString());
+                        break;
+                    case MESSAGE_STR:
+                        order.setMessageStr(in.nextString());
                         break;
                 }
             }

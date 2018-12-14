@@ -163,7 +163,7 @@ public class DataRepository implements IDataRepository {
             order.setRecipientAddress(address[Math.abs(random.nextInt()) % 6]);
             order.setRecipientPhone(phone[Math.abs(random.nextInt()) % 6]);
             order.setRecipientName(name[Math.abs(random.nextInt()) % 6]);
-            order.setUserPhone(phone[Math.abs(random.nextInt()) % 6]);
+            order.setOrderUserId(phone[Math.abs(random.nextInt()) % 6]);
             order.setOrderId(id[Math.abs(random.nextInt()) % 6]);
             order.setPagerId(id[Math.abs(random.nextInt()) % 6]);
             orders.add(order);

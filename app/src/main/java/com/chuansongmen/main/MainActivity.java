@@ -7,8 +7,7 @@ import android.view.Gravity;
 
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseActivity;
-import com.chuansongmen.data.bean.Worker;
-import com.chuansongmen.service.PositionService;
+import com.chuansongmen.position.PositionService;
 
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
@@ -47,8 +46,7 @@ public class MainActivity extends BaseActivity<MainViewModel> implements IMainAc
      * 这里做必须对员工信息做初始化，不然会nullpoint，但之后这里要向服务器请求员工信息。
      */
     private void initData() {
-        // TODO: 2018/12/4 向服务器请求员工信息
-        Worker.WorkerBuilder.builder.setId("120").build();
+
     }
 
     @Override
@@ -57,7 +55,6 @@ public class MainActivity extends BaseActivity<MainViewModel> implements IMainAc
         manager.beginTransaction()
                 .replace(R.id.main_fragment_container, mainFragment)
                 .commit();
-
     }
 
     private void initService() {

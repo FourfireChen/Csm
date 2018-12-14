@@ -14,6 +14,7 @@ import retrofit2.Converter;
 
 import static com.chuansongmen.data.bean.Field.BELONG_STATION;
 import static com.chuansongmen.data.bean.Field.COLLECT_NUM;
+import static com.chuansongmen.data.bean.Field.COLLECT_ROOKIE_NUM;
 import static com.chuansongmen.data.bean.Field.NOW_LATITUDE;
 import static com.chuansongmen.data.bean.Field.NOW_LONGITUDE;
 import static com.chuansongmen.data.bean.Field.REG_ID;
@@ -28,13 +29,13 @@ public class WorkerConvertor implements Converter<ResponseBody, Worker> {
     @Override
     public Worker convert(ResponseBody value) throws IOException {
         String body = value.string();
-        Worker.WorkerBuilder workerBuilder = Worker.WorkerBuilder.builder;
+        Worker worker = Worker.getInstance();
         try {
             JSONObject bodyObj = new JSONObject(body);
             if (bodyObj.getString("code").equals("200")) {
                 String workerString = bodyObj.getString("data");
                 JSONObject workerJson = new JSONObject(workerString);
-                workerBuilder.setId(workerJson.getString(WORKER_ID))
+                worker.setId(workerJson.getString(WORKER_ID))
                         .setBelongStation(new Station(workerJson.getString(BELONG_STATION)))
                         .setCollectNum(workerJson.getInt(COLLECT_NUM))
                         .setName(workerJson.getString(WORKER_NAME))
@@ -43,9 +44,10 @@ public class WorkerConvertor implements Converter<ResponseBody, Worker> {
                         .setRegId(workerJson.getString(REG_ID))
                         .setSendNum(workerJson.getInt(SEND_NUM))
                         .setSex(workerJson.getInt(WORKER_SEX))
-                        .setWorked(workerJson.getInt(WORKER_STATUS) > 0)
-                        .setCategory(Worker.Category.values()[workerJson.getInt(WORKER_CATEGORY)]);
-                return workerBuilder.build();
+                        .setWorking(workerJson.getInt(WORKER_STATUS) > 0)
+                        .setCategory(Worker.Category.values()[workerJson.getInt(WORKER_CATEGORY)])
+                        .setCollctRookieNum(workerJson.getInt(COLLECT_ROOKIE_NUM));
+                return worker;
             } else {
                 return null;
             }

@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.chuansongmen.base.BaseViewModel;
 import com.chuansongmen.common.Callback;
+import com.chuansongmen.data.bean.Worker;
 
 import java.util.AbstractMap;
 import java.util.Map;
@@ -21,6 +22,7 @@ public class LoginViewModel extends BaseViewModel {
      * @return 成功时返回验证码，失败是返回{@Link DataRepository.FAIL}
      */
     private MutableLiveData<String> sendMessageResult = new MutableLiveData<>();
+    private MutableLiveData<Boolean> isLoginSuccess = new MutableLiveData<>();
     private Map.Entry<String, String> verify = null;
 
     public LoginViewModel(@NonNull Application application) {
@@ -31,26 +33,46 @@ public class LoginViewModel extends BaseViewModel {
         return sendMessageResult;
     }
 
+    public MutableLiveData<Boolean> getIsLoginSuccess() {
+        return isLoginSuccess;
+    }
+
+
+    /**
+     * 发送验证码
+     * @param phoneNumber 手机号码
+     */
     void sendVerifyCode(String phoneNumber) {
+        generateVerifyCode(phoneNumber);
+        dataRepo.sendMessage(phoneNumber, verify.getValue(), new Callback<Boolean>() {
+            @Override
+            public void onResponse(Boolean isSuccess) {
+                sendMessageResult.postValue(isSuccess ? verify.getValue() : FAIL);
+            }
+        });
+    }
+
+    /**
+     * 生成随机验证码
+     * 并做缓存，存在verify这个Entry里面
+     * @param phoneNumber 手机号码
+     */
+    private void generateVerifyCode(String phoneNumber) {
         Random random = new Random();
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < 4; i++) {
             stringBuilder.append(random.nextInt(10));
         }
-        final String code = stringBuilder.toString();
-        verify = new AbstractMap.SimpleEntry<>(phoneNumber, code);
-        dataRepo.sendMessage(phoneNumber, code, new Callback<Boolean>() {
-            @Override
-            public void onResponse(Boolean isSuccess) {
-                if (isSuccess) {
-                    sendMessageResult.postValue(code);
-                } else {
-                    sendMessageResult.postValue(FAIL);
-                }
-            }
-        });
+        verify = new AbstractMap.SimpleEntry<>(phoneNumber, stringBuilder.toString());
     }
 
+
+    /**
+     * 检查手机号码和验证码是否对应
+     * @param phoneNumber 手机号码
+     * @param code 验证码
+     * @return 是否对应
+     */
     boolean checkVerifyCode(String phoneNumber, String code) {
         return verify != null &&
                 phoneNumber.equals(verify.getKey()) &&
@@ -61,6 +83,7 @@ public class LoginViewModel extends BaseViewModel {
         dataRepo.cacheUserPhoneNumber(getApplication(), phoneNumber);
     }
 
+
     public LiveData<String> hadUserPhoneNumberCache() {
         final MutableLiveData<String> hadCache = new MutableLiveData<>();
         dataRepo.getCacheUserPhoneNumber(getApplication(), new Callback<String>() {
@@ -70,5 +93,18 @@ public class LoginViewModel extends BaseViewModel {
             }
         });
         return hadCache;
+    }
+
+    /**
+     * 登录
+     * @param phone 手机号码
+     */
+    public void login(String phone) {
+        dataRepo.getWorkerInfo(phone, new Callback<Worker>() {
+            @Override
+            public void onResponse(Worker result) {
+                isLoginSuccess.postValue(result != null);
+            }
+        });
     }
 }

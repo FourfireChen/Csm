@@ -45,9 +45,7 @@ public class LoginActivity extends BaseActivity<LoginViewModel> {
             @Override
             public void onChanged(String phonenumber) {
                 if (!phonenumber.isEmpty()) {
-                    // TODO: 2018/12/14 要考虑把手机号码，即员工ID存下来
-                    startActivity(MainActivity.class, null);
-                    finish();
+                    viewModel.login(phonenumber);
                 }
             }
         });
@@ -77,6 +75,20 @@ public class LoginActivity extends BaseActivity<LoginViewModel> {
                 }
             }
         });
+
+        viewModel.getIsLoginSuccess().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean) {
+                    toast("登录成功");
+                    startActivity(MainActivity.class, null);
+                    viewModel.cacheUserPhoneNumber(phone.getText().toString());
+                    finish();
+                } else {
+                    toast("登录失败，请检查网络");
+                }
+            }
+        });
     }
 
     protected void initView() {
@@ -98,9 +110,7 @@ public class LoginActivity extends BaseActivity<LoginViewModel> {
                 if (viewModel.checkVerifyCode(phone.getText().toString(),
                         verifyCode.getText().toString())) {
                     toast("登录成功");
-                    startActivity(MainActivity.class, null);
-                    viewModel.cacheUserPhoneNumber(phone.getText().toString());
-                    finish();
+                    viewModel.login(phone.getText().toString());
                 } else {
                     toast("验证码错误，请重新输入");
                 }

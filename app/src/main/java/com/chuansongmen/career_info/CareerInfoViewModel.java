@@ -4,6 +4,7 @@ import android.app.Application;
 import android.graphics.Bitmap;
 
 import com.chuansongmen.base.BaseViewModel;
+import com.chuansongmen.util.ThreadUtil;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
@@ -22,11 +23,11 @@ public class CareerInfoViewModel extends BaseViewModel {
     }
 
     void createQRCode() {
-        new Thread(new Runnable() {
+        ThreadUtil.execute(new Runnable() {
             @Override
             public void run() {
                 careerQRCode.postValue(QRCodeEncoder.syncEncodeQRCode(String.valueOf(1), 120));
             }
-        }).start();
+        });
     }
 }

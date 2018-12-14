@@ -5,6 +5,7 @@ import android.app.Application;
 import com.chuansongmen.base.BaseViewModel;
 import com.chuansongmen.common.Callback;
 import com.chuansongmen.data.bean.Order;
+import com.chuansongmen.data.bean.Worker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ public class MainViewModel extends BaseViewModel {
     private MutableLiveData<Boolean> isWorked = new MutableLiveData<>();
     private static final int POINT_ORDER_PRICE = 10;
     private MutableLiveData<List<List<Order>>> orders = new MutableLiveData<>();
+    private MutableLiveData<Boolean> isLogoutSuccess = new MutableLiveData<>();
 
     public MainViewModel(
             @NonNull Application application) {
@@ -26,6 +28,14 @@ public class MainViewModel extends BaseViewModel {
 
     LiveData<Boolean> getWorkerStatus() {
         return isWorked;
+    }
+
+    MutableLiveData<List<List<Order>>> getOrders() {
+        return orders;
+    }
+
+    MutableLiveData<Boolean> getIsLogoutSuccess() {
+        return isLogoutSuccess;
     }
 
     void updateWorkerStatus(int status) {
@@ -38,9 +48,7 @@ public class MainViewModel extends BaseViewModel {
     }
 
 
-    MutableLiveData<List<List<Order>>> getOrders() {
-        return orders;
-    }
+
 
     void updateOrders() {
         dataRepo.getWorkerOrders("1", new Callback<List<Order>>() {
@@ -100,7 +108,13 @@ public class MainViewModel extends BaseViewModel {
         return result;
     }
 
-    public void logout() {
-        // TODO: 2018/12/14 退出登录、注销账户
+
+    void logout() {
+        dataRepo.logout(Worker.getInstance().getId(), new Callback<Boolean>() {
+            @Override
+            public void onResponse(Boolean result) {
+                isLogoutSuccess.postValue(result);
+            }
+        });
     }
 }

@@ -44,7 +44,7 @@ public class InputFragment extends BaseFragment {
         return view;
     }
 
-    public void initTextTypeface() {
+    private void initTextTypeface() {
         Util.setTypeface("fonts/type.ttf",
                 getContext().getAssets(),
                 receiptTitle,

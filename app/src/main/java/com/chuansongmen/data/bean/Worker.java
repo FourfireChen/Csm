@@ -46,7 +46,15 @@ public class Worker implements Parcelable {
      */
     private int collectNum, sendNum;
 
+    /**
+     * 从菜鸟的派单量
+     */
+    private int collctRookieNum;
+
     private static Worker worker;
+
+    public Worker() {
+    }
 
     private Worker(String id,
                    String name,
@@ -57,7 +65,8 @@ public class Worker implements Parcelable {
                    Category category,
                    Station belongStation,
                    int collectNum,
-                   int sendNum) {
+                   int sendNum,
+                   int collctRookieNum) {
         this.id = id;
         this.name = name;
         this.sex = sex;
@@ -68,9 +77,12 @@ public class Worker implements Parcelable {
         this.belongStation = belongStation;
         this.collectNum = collectNum;
         this.sendNum = sendNum;
+        this.collctRookieNum = collctRookieNum;
     }
 
     public static Worker getInstance() {
+        if (worker == null)
+            worker = new Worker();
         return worker;
     }
 
@@ -78,161 +90,99 @@ public class Worker implements Parcelable {
         return id;
     }
 
-    public void setId(String id) {
+    public Worker setId(String id) {
         this.id = id;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public Worker setName(String name) {
         this.name = name;
+        return this;
     }
 
     public int getSex() {
         return sex;
     }
 
-    public void setSex(int sex) {
+    public Worker setSex(int sex) {
         this.sex = sex;
+        return this;
     }
 
     public boolean isWorking() {
         return isWorking;
     }
 
-    public void setWorking(boolean working) {
+    public Worker setWorking(boolean working) {
         isWorking = working;
+        return this;
     }
 
     public String getRegId() {
         return regId;
     }
 
-    public void setRegId(String regId) {
+    public Worker setRegId(String regId) {
         this.regId = regId;
+        return this;
     }
 
     public Position getNow() {
         return now;
     }
 
-    public void setNow(Position now) {
+    public Worker setNow(Position now) {
         this.now = now;
+        return this;
     }
 
     public Category getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public Worker setCategory(Category category) {
         this.category = category;
+        return this;
     }
 
     public Station getBelongStation() {
         return belongStation;
     }
 
-    public void setBelongStation(Station belongStation) {
+    public Worker setBelongStation(Station belongStation) {
         this.belongStation = belongStation;
+        return this;
     }
 
     public int getCollectNum() {
         return collectNum;
     }
 
-    public void setCollectNum(int collectNum) {
+    public Worker setCollectNum(int collectNum) {
         this.collectNum = collectNum;
+        return this;
     }
 
     public int getSendNum() {
         return sendNum;
     }
 
-    public void setSendNum(int sendNum) {
+    public Worker setSendNum(int sendNum) {
         this.sendNum = sendNum;
+        return this;
     }
 
-    public static class WorkerBuilder {
-        private String id;
-        private String name;
-        private int sex;
-        private boolean status;
-        private String regId;
-        private Position now;
-        private Category category;
-        private Station belongStation;
-        private int collectNum, sendNum;
-        public static WorkerBuilder builder = new WorkerBuilder();
+    public int getCollctRookieNum() {
+        return collctRookieNum;
+    }
 
-        private WorkerBuilder() {
-        }
-
-        public WorkerBuilder setId(String id) {
-            builder.id = id;
-            return builder;
-        }
-
-        public WorkerBuilder setName(String name) {
-            builder.name = name;
-            return builder;
-        }
-
-        public WorkerBuilder setSex(int sex) {
-            builder.sex = sex;
-            return builder;
-        }
-
-        public WorkerBuilder setWorked(boolean status) {
-            builder.status = status;
-            return builder;
-        }
-
-        public WorkerBuilder setRegId(String regId) {
-            builder.regId = regId;
-            return builder;
-        }
-
-        public WorkerBuilder setNow(Position now) {
-            builder.now = now;
-            return builder;
-        }
-
-        public WorkerBuilder setCategory(Category category) {
-            builder.category = category;
-            return builder;
-        }
-
-        public WorkerBuilder setBelongStation(Station belongStation) {
-            builder.belongStation = belongStation;
-            return builder;
-        }
-
-        public WorkerBuilder setCollectNum(int collectNum) {
-            builder.collectNum = collectNum;
-            return builder;
-        }
-
-        public WorkerBuilder setSendNum(int sendNum) {
-            builder.sendNum = sendNum;
-            return builder;
-        }
-
-        public Worker build() {
-            if (worker == null)
-                worker = new Worker(id,
-                        name,
-                        sex,
-                        status,
-                        regId,
-                        now,
-                        category,
-                        belongStation,
-                        collectNum,
-                        sendNum);
-            return worker;
-        }
+    public Worker setCollctRookieNum(int collctRookieNum) {
+        this.collctRookieNum = collctRookieNum;
+        return this;
     }
 
 
@@ -257,6 +207,7 @@ public class Worker implements Parcelable {
         dest.writeParcelable(this.belongStation, flags);
         dest.writeInt(this.collectNum);
         dest.writeInt(this.sendNum);
+        dest.writeInt(this.collctRookieNum);
     }
 
     protected Worker(Parcel in) {
@@ -271,6 +222,7 @@ public class Worker implements Parcelable {
         this.belongStation = in.readParcelable(Station.class.getClassLoader());
         this.collectNum = in.readInt();
         this.sendNum = in.readInt();
+        this.collctRookieNum = in.readInt();
     }
 
     public static final Parcelable.Creator<Worker> CREATOR = new Parcelable.Creator<Worker>() {

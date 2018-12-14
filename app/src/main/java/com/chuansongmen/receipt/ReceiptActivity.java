@@ -25,6 +25,4 @@ public class ReceiptActivity extends BaseActivity {
                         .replace(R.id.receipt_container, new InputFragment());
         transaction.commit();
     }
-
-
 }

@@ -12,18 +12,16 @@ import java.util.List;
 
 public class DetailAdapter implements IDetailAdapter {
     private Order order;
-    private DetailViewModel viewModel;
 
     DetailAdapter(Order order, DetailViewModel viewModel) {
         this.order = order;
-        this.viewModel = viewModel;
     }
 
     @Override
     public IDetailAdapter.Customer getFrom() {
         String name = "";
         String address = "";
-        String phone = order.getUserPhone();
+        String phone = order.getOrderUserId();
         return new IDetailAdapter.Customer(name, phone == null ? "" : phone, address);
     }
 
@@ -65,7 +63,6 @@ public class DetailAdapter implements IDetailAdapter {
 
     /**
      * 订单号
-     *
      * @return
      */
     @Override

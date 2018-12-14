@@ -33,7 +33,7 @@ public class SendGetListAdapter extends RecyclerView.Adapter<SendGetListAdapter.
         this.itemCallButtonListener = itemCallButtonListener;
     }
 
-    public void setItemClickListener(ItemClickListener itemClickListener) {
+    void setItemClickListener(ItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;
     }
 

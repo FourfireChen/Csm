@@ -3,11 +3,11 @@ package com.chuansongmen.data.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Order implements Parcelable {
 
+    private static final int IMPORTANT_ORDER_PRICE = 15;
     /**
      * 流水号
      */
@@ -21,18 +21,17 @@ public class Order implements Parcelable {
     /**
      * 发起订单的用户ID/电话号码
      */
-    private String userPhone;
+    private String orderUserId;
 
     /**
-     * 用户的名字
+     * 发起订单的用户的名字
      */
     private String userName;
 
     /**
-     * 发起用户地址
+     * 发起订单的用户地址
      */
     private String userAddress;
-
 
     /**
      * 收发件的经纬度
@@ -44,12 +43,11 @@ public class Order implements Parcelable {
      */
     private boolean isInCainiao;
 
-
-
     /**
      * 当前员工工号
      */
-    private String nowWoker;
+    private String nowWorker;
+
 
     /**
      * 订单价格
@@ -110,12 +108,6 @@ public class Order implements Parcelable {
     private String completeTime;
 
     /**
-     * 取件时间
-     * todo:说明一下格式
-     */
-    private String receiveTime;
-
-    /**
      * 寄件类别
      * 值：
      */
@@ -148,8 +140,36 @@ public class Order implements Parcelable {
     private String remark;
 
     /**
-     * @return 订单号
+     * 快件到达每个站点的时间信息,每个时间以;隔开。
+     * 前端部分根据这个字段和快件当前状态生成快递跟踪信息表
+     * 总的信息(这个时间和station字段的站点对应)
      */
+    private String arriveStationTime;
+
+    /**
+     * 收派员从用户手里拿取快件的时间(由服务器生成)
+     */
+    private String collectFromUserTime;
+
+    /**
+     * 收派员从站点拿取快件的时间(由服务器生成)
+     */
+    private String collectFromStationTime;
+
+    /**
+     * 所有的订单跟踪信息(每次改变订单状态修改此字符串)
+     */
+    private String messageStr;
+
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
     public String getPagerId() {
         return pagerId;
     }
@@ -158,6 +178,29 @@ public class Order implements Parcelable {
         this.pagerId = pagerId;
     }
 
+    public String getOrderUserId() {
+        return orderUserId;
+    }
+
+    public void setOrderUserId(String orderUserId) {
+        this.orderUserId = orderUserId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserAddress() {
+        return userAddress;
+    }
+
+    public void setUserAddress(String userAddress) {
+        this.userAddress = userAddress;
+    }
 
     public Position getFrom() {
         return from;
@@ -175,13 +218,29 @@ public class Order implements Parcelable {
         this.to = to;
     }
 
+    public boolean isInCainiao() {
+        return isInCainiao;
+    }
+
+    public void setInCainiao(boolean inCainiao) {
+        isInCainiao = inCainiao;
+    }
+
+    public String getNowWorker() {
+        return nowWorker;
+    }
+
+    public void setNowWorker(String nowWorker) {
+        this.nowWorker = nowWorker;
+    }
+
     public int getPrice() {
         return price;
     }
 
     public void setPrice(int price) {
-        if (price > 15)
-            this.isImportant = true;
+        if (price > IMPORTANT_ORDER_PRICE)
+            setImportant(true);
         this.price = price;
     }
 
@@ -199,6 +258,22 @@ public class Order implements Parcelable {
 
     public void setDelay(boolean delay) {
         isDelay = delay;
+    }
+
+    public String getDelayTime() {
+        return delayTime;
+    }
+
+    public void setDelayTime(String delayTime) {
+        this.delayTime = delayTime;
+    }
+
+    public boolean isImportant() {
+        return isImportant;
+    }
+
+    public void setImportant(boolean important) {
+        isImportant = important;
     }
 
     public String getRecipientName() {
@@ -241,12 +316,20 @@ public class Order implements Parcelable {
         this.weight = weight;
     }
 
-    public String getReceiveTime() {
-        return receiveTime;
+    public String getStartTime() {
+        return startTime;
     }
 
-    public void setReceiveTime(String receiveTime) {
-        this.receiveTime = receiveTime;
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getCompleteTime() {
+        return completeTime;
+    }
+
+    public void setCompleteTime(String completeTime) {
+        this.completeTime = completeTime;
     }
 
     public int getCategory() {
@@ -261,8 +344,8 @@ public class Order implements Parcelable {
         return stations;
     }
 
-    public void setStations(List<Station> station) {
-        this.stations = station;
+    public void setStations(List<Station> stations) {
+        this.stations = stations;
     }
 
     public List<Route> getRoutes() {
@@ -281,6 +364,14 @@ public class Order implements Parcelable {
         this.nextRoute = nextRoute;
     }
 
+    public String getCouponId() {
+        return couponId;
+    }
+
+    public void setCouponId(String couponId) {
+        this.couponId = couponId;
+    }
+
     public String getRemark() {
         return remark;
     }
@@ -289,92 +380,36 @@ public class Order implements Parcelable {
         this.remark = remark;
     }
 
-    public String getOrderId() {
-        return orderId;
+    public String getArriveStationTime() {
+        return arriveStationTime;
     }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
+    public void setArriveStationTime(String arriveStationTime) {
+        this.arriveStationTime = arriveStationTime;
     }
 
-    public String getUserPhone() {
-        return userPhone;
+    public String getCollectFromUserTime() {
+        return collectFromUserTime;
     }
 
-    public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone;
+    public void setCollectFromUserTime(String collectFromUserTime) {
+        this.collectFromUserTime = collectFromUserTime;
     }
 
-    public String getNowWoker() {
-        return nowWoker;
+    public String getCollectFromStationTime() {
+        return collectFromStationTime;
     }
 
-    public void setNowWoker(String nowWoker) {
-        this.nowWoker = nowWoker;
+    public void setCollectFromStationTime(String collectFromStationTime) {
+        this.collectFromStationTime = collectFromStationTime;
     }
 
-    public boolean isImportant() {
-        return isImportant;
+    public String getMessageStr() {
+        return messageStr;
     }
 
-    public void setImportant(boolean important) {
-        isImportant = important;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getUserAddress() {
-        return userAddress;
-    }
-
-    public void setUserAddress(String userAddress) {
-        this.userAddress = userAddress;
-    }
-
-    public boolean isInCainiao() {
-        return isInCainiao;
-    }
-
-    public void setInCainiao(boolean inCainiao) {
-        isInCainiao = inCainiao;
-    }
-
-    public String getDelayTime() {
-        return delayTime;
-    }
-
-    public void setDelayTime(String delayTime) {
-        this.delayTime = delayTime;
-    }
-
-    public String getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
-
-    public String getCompleteTime() {
-        return completeTime;
-    }
-
-    public void setCompleteTime(String completeTime) {
-        this.completeTime = completeTime;
-    }
-
-    public String getCouponId() {
-        return couponId;
-    }
-
-    public void setCouponId(String couponId) {
-        this.couponId = couponId;
+    public void setMessageStr(String messageStr) {
+        this.messageStr = messageStr;
     }
 
     public enum Status {
@@ -404,15 +439,15 @@ public class Order implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.pagerId);
         dest.writeString(this.orderId);
-        dest.writeString(this.userPhone);
+        dest.writeString(this.pagerId);
+        dest.writeString(this.orderUserId);
         dest.writeString(this.userName);
         dest.writeString(this.userAddress);
         dest.writeParcelable(this.from, flags);
         dest.writeParcelable(this.to, flags);
         dest.writeByte(this.isInCainiao ? (byte) 1 : (byte) 0);
-        dest.writeString(this.nowWoker);
+        dest.writeString(this.nowWorker);
         dest.writeInt(this.price);
         dest.writeInt(this.status == null ? -1 : this.status.ordinal());
         dest.writeByte(this.isDelay ? (byte) 1 : (byte) 0);
@@ -425,28 +460,31 @@ public class Order implements Parcelable {
         dest.writeInt(this.weight);
         dest.writeString(this.startTime);
         dest.writeString(this.completeTime);
-        dest.writeString(this.receiveTime);
         dest.writeInt(this.category);
         dest.writeTypedList(this.stations);
         dest.writeTypedList(this.routes);
         dest.writeString(this.nextRoute);
         dest.writeString(this.couponId);
         dest.writeString(this.remark);
+        dest.writeString(this.arriveStationTime);
+        dest.writeString(this.collectFromUserTime);
+        dest.writeString(this.collectFromStationTime);
+        dest.writeString(this.messageStr);
     }
 
     public Order() {
     }
 
     protected Order(Parcel in) {
-        this.pagerId = in.readString();
         this.orderId = in.readString();
-        this.userPhone = in.readString();
+        this.pagerId = in.readString();
+        this.orderUserId = in.readString();
         this.userName = in.readString();
         this.userAddress = in.readString();
         this.from = in.readParcelable(Position.class.getClassLoader());
         this.to = in.readParcelable(Position.class.getClassLoader());
         this.isInCainiao = in.readByte() != 0;
-        this.nowWoker = in.readString();
+        this.nowWorker = in.readString();
         this.price = in.readInt();
         int tmpStatus = in.readInt();
         this.status = tmpStatus == -1 ? null : Status.values()[tmpStatus];
@@ -460,13 +498,16 @@ public class Order implements Parcelable {
         this.weight = in.readInt();
         this.startTime = in.readString();
         this.completeTime = in.readString();
-        this.receiveTime = in.readString();
         this.category = in.readInt();
         this.stations = in.createTypedArrayList(Station.CREATOR);
         this.routes = in.createTypedArrayList(Route.CREATOR);
         this.nextRoute = in.readString();
         this.couponId = in.readString();
         this.remark = in.readString();
+        this.arriveStationTime = in.readString();
+        this.collectFromUserTime = in.readString();
+        this.collectFromStationTime = in.readString();
+        this.messageStr = in.readString();
     }
 
     public static final Creator<Order> CREATOR = new Creator<Order>() {

@@ -76,17 +76,6 @@ public class ScanActivity extends BaseActivity<ScanViewModel>{
         super.onStop();
     }
 
-    /**
-     * 检查扫描到的单号是否符合格式
-     *
-     * @param code
-     * @return 如果不符合，返回""空字符串，如果符合，照常返回单号
-     */
-    private String codeFormatCheck(String code) {
-        return "";
-    }
-
-
 
     @OnClick({R.id.scan_confirm, R.id.scan_sign_clear})
     public void onViewClicked(View view) {

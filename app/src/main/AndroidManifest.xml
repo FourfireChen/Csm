@@ -55,10 +55,10 @@
         <activity android:name=".print.PrintActivity" />
         <activity android:name=".input.InputActivity" />
         <activity android:name=".transfer.TransferActivity" />
-        <service android:name=".service.PositionService" />
-        <receiver android:name=".service.PositionUploadReceiver" />
+        <service android:name=".position.PositionService" />
+        <receiver android:name=".position.PositionUploadReceiver" />
         <service android:name="com.amap.api.location.APSService" />
-        <service android:name=".service.PositionServiceFore" />
+        <service android:name=".position.PositionServiceFore" />
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="fa989ce2f1b0f38a74d14e5e373c81d2" />

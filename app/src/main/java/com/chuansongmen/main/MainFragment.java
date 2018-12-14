@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseFragment;
+import com.chuansongmen.career_info.CareerInfoActivity;
 import com.chuansongmen.data.bean.Order;
 import com.chuansongmen.receipt.ReceiptActivity;
 import com.chuansongmen.scan.ScanActivity;
@@ -71,6 +73,7 @@ public class MainFragment extends BaseFragment<MainViewModel> implements View.On
     @BindView(R.id.main_viewpager)
     ViewPager mainViewpager;
     private TextView mainBottomGet, mainBottomSend;
+    private Button logout;
     private DrawerLayout mainDrawerLayout;
     private Switch workerStatus;
 
@@ -139,12 +142,13 @@ public class MainFragment extends BaseFragment<MainViewModel> implements View.On
         workerStatus = mainDrawerLayout.findViewById(R.id.main_drawer_workswitch);
         LinearLayout workerSound = mainDrawerLayout.findViewById(R.id.main_drawer_careersound);
         LinearLayout workerId = mainDrawerLayout.findViewById(R.id.main_drawer_id);
-
+        logout = mainDrawerLayout.findViewById(R.id.main_logout);
         CardView mainBottom = mainActivity.getBottom();
         mainBottomGet = mainBottom.findViewById(R.id.main_bottom_left);
         mainBottomSend = mainBottom.findViewById(R.id.main_bottom_right);
         ImageView mainBottomCenter = mainBottom.findViewById(R.id.main_bottom_center);
 
+        logout.setOnClickListener(this);
         workerStatus.setOnCheckedChangeListener(this);
         workerSound.setOnClickListener(this);
         workerId.setOnClickListener(this);
@@ -244,7 +248,7 @@ public class MainFragment extends BaseFragment<MainViewModel> implements View.On
 
                 break;
             case R.id.main_drawer_id:
-
+                startActivity(CareerInfoActivity.class, null);
                 break;
             case R.id.main_bottom_left:
                 viewModel.updateOrders();
@@ -256,6 +260,9 @@ public class MainFragment extends BaseFragment<MainViewModel> implements View.On
                 break;
             case R.id.main_bottom_center:
                 startActivity(ScanActivity.class, null);
+                break;
+            case R.id.main_logout:
+                viewModel.logout();
                 break;
         }
     }

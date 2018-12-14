@@ -99,4 +99,8 @@ public class MainViewModel extends BaseViewModel {
         }
         return result;
     }
+
+    public void logout() {
+        // TODO: 2018/12/14 退出登录、注销账户
+    }
 }

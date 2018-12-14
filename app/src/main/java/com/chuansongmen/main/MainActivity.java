@@ -31,10 +31,16 @@ public class MainActivity extends BaseActivity<MainViewModel> implements IMainAc
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
-        ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this);
         initData();
         initView();
         initService();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbinder.unbind();
     }
 
     /**

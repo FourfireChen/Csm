@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Random;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import static com.chuansongmen.data.DataRepository.FAIL;
@@ -50,14 +51,24 @@ public class LoginViewModel extends BaseViewModel {
         });
     }
 
-    boolean checkVerifyCode(String phoneNumber, String code)
-    {
+    boolean checkVerifyCode(String phoneNumber, String code) {
         return verify != null &&
                 phoneNumber.equals(verify.getKey()) &&
                 code.equals(verify.getValue());
     }
 
-    public void cacheUserInfo() {
+    public void cacheUserPhoneNumber(String phoneNumber) {
+        dataRepo.cacheUserPhoneNumber(getApplication(), phoneNumber);
+    }
 
+    public LiveData<String> hadUserPhoneNumberCache() {
+        final MutableLiveData<String> hadCache = new MutableLiveData<>();
+        dataRepo.getCacheUserPhoneNumber(getApplication(), new Callback<String>() {
+            @Override
+            public void onResponse(String result) {
+                hadCache.postValue(result);
+            }
+        });
+        return hadCache;
     }
 }

@@ -1,5 +1,6 @@
 package com.chuansongmen.data;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.aliyuncs.DefaultAcsClient;
@@ -27,8 +28,6 @@ import java.util.List;
 import java.util.Random;
 
 import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -39,6 +38,7 @@ public class DataRepository implements IDataRepository {
     private static final String TAG = "DataRepository";
     private static IDataRepository instance;
     private IRemoteData remoteData;
+    private LocalData localData;
     // TODO: 2018/11/7 这里的URL是暂时的
     private static final String URL = "http://178.128.184.142:8080/portal/";
     public static final String SUCCESS = "成功";
@@ -54,6 +54,7 @@ public class DataRepository implements IDataRepository {
                         .addConverterFactory(new ConvertorFactory())
                         .build();
         remoteData = retrofit.create(IRemoteData.class);
+        localData = new LocalData();
     }
 
     public static IDataRepository getInstance() {
@@ -345,7 +346,6 @@ public class DataRepository implements IDataRepository {
         });
     }
 
-    @Override
     public void addTestWorker(final Callback<Boolean> callback) {
         ThreadUtil.execute(new Runnable() {
             @Override
@@ -378,7 +378,9 @@ public class DataRepository implements IDataRepository {
     }
 
     @Override
-    public void sendMessage(final String phone, final String code, final Callback<Boolean> resultCallback) {
+    public void sendMessage(final String phone,
+                            final String code,
+                            final Callback<Boolean> resultCallback) {
         ThreadUtil.execute(new Runnable() {
             @Override
             public void run() {
@@ -412,6 +414,26 @@ public class DataRepository implements IDataRepository {
                     e.printStackTrace();
                     resultCallback.onResponse(false);
                 }
+            }
+        });
+    }
+
+    @Override
+    public void cacheUserPhoneNumber(final Context context, final String phoneNumber) {
+        ThreadUtil.execute(new Runnable() {
+            @Override
+            public void run() {
+                localData.cacheUserPhoneNumber(context, phoneNumber);
+            }
+        });
+    }
+
+    @Override
+    public void getCacheUserPhoneNumber(final Context context, final Callback<String> callback) {
+        ThreadUtil.execute(new Runnable() {
+            @Override
+            public void run() {
+                callback.onResponse(localData.getCacheUserPhoneNumber(context));
             }
         });
     }

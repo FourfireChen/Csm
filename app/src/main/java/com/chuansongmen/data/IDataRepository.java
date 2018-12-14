@@ -1,5 +1,7 @@
 package com.chuansongmen.data;
 
+import android.content.Context;
+
 import com.chuansongmen.common.Callback;
 import com.chuansongmen.data.bean.Order;
 import com.chuansongmen.data.bean.Position;
@@ -116,9 +118,7 @@ public interface IDataRepository {
      */
     void sendMessage(String phone, String code, Callback<Boolean> resultCallback);
 
+    void getCacheUserPhoneNumber(Context context, Callback<String> callback);
 
-    /**
-     * 测试添加员工
-     */
-    void addTestWorker(Callback<Boolean> callback);
+    void cacheUserPhoneNumber(Context context, String phoneNumber);
 }

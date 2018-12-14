@@ -33,11 +33,24 @@ public class LoginActivity extends BaseActivity<LoginViewModel> {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        hadCache();
         setContentView(R.layout.login_activity);
-        getLayoutInflater();
         ButterKnife.bind(this);
         initView();
         initData();
+    }
+
+    private void hadCache() {
+        viewModel.hadUserPhoneNumberCache().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String phonenumber) {
+                if (!phonenumber.isEmpty()) {
+                    // TODO: 2018/12/14 要考虑把手机号码，即员工ID存下来
+                    startActivity(MainActivity.class, null);
+                    finish();
+                }
+            }
+        });
     }
 
     private void initData() {
@@ -86,7 +99,7 @@ public class LoginActivity extends BaseActivity<LoginViewModel> {
                         verifyCode.getText().toString())) {
                     toast("登录成功");
                     startActivity(MainActivity.class, null);
-                    viewModel.cacheUserInfo();
+                    viewModel.cacheUserPhoneNumber(phone.getText().toString());
                     finish();
                 } else {
                     toast("验证码错误，请重新输入");

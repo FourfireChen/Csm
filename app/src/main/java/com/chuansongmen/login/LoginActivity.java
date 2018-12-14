@@ -5,7 +5,6 @@ import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseActivity;
@@ -20,23 +19,21 @@ import butterknife.OnClick;
 
 import static com.chuansongmen.data.DataRepository.FAIL;
 
-public class VerifyActivity extends BaseActivity<VerifyViewModel> {
-    @BindView(R.id.verify_title)
-    TextView verifyTitle;
-    @BindView(R.id.verify_send)
-    Button verifySend;
-    @BindView(R.id.verify_confirm)
-    Button verifyConfirm;
-    @BindView(R.id.verify_code)
+public class LoginActivity extends BaseActivity<LoginViewModel> {
+    @BindView(R.id.login_send_msg)
+    Button msgSend;
+    @BindView(R.id.login_confirm)
+    Button confirm;
+    @BindView(R.id.login_verify_code)
     EditText verifyCode;
-    @BindView(R.id.verify_phonenumber)
-    EditText verifyPhonenumber;
+    @BindView(R.id.login_phone)
+    EditText phone;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.verify_activity);
+        setContentView(R.layout.login_activity);
         getLayoutInflater();
         ButterKnife.bind(this);
         initView();
@@ -48,17 +45,17 @@ public class VerifyActivity extends BaseActivity<VerifyViewModel> {
             @Override
             public void onChanged(String s) {
                 if (!s.equals(FAIL)) {
-                    verifySend.setClickable(false);
+                    msgSend.setClickable(false);
                     CountDownTimer countDownTimer = new CountDownTimer(60000, 1000) {
                         @Override
                         public void onTick(long millisUntilFinished) {
-                            verifySend.setText("剩余" + (millisUntilFinished / 1000));
+                            msgSend.setText("剩余" + (millisUntilFinished / 1000));
                         }
 
                         @Override
                         public void onFinish() {
-                            verifySend.setText("发送验证码");
-                            verifySend.setClickable(true);
+                            msgSend.setText("发送验证码");
+                            msgSend.setClickable(true);
                         }
                     };
                     countDownTimer.start();
@@ -70,25 +67,26 @@ public class VerifyActivity extends BaseActivity<VerifyViewModel> {
     }
 
     protected void initView() {
-        Util.setTypeface("fonts/type.ttf", getAssets(), verifyTitle);
+        Util.setTypeface("fonts/type.ttf", getAssets());
     }
 
 
-    @OnClick({R.id.verify_send, R.id.verify_confirm})
+    @OnClick({R.id.login_send_msg, R.id.login_confirm})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.verify_send:
-                if (verifyPhonenumber.getText().toString().isEmpty()) {
+            case R.id.login_send_msg:
+                if (phone.getText().toString().isEmpty()) {
                     toast("请填写手机号码");
                 } else {
-                    viewModel.sendVerifyCode(verifyPhonenumber.getText().toString());
+                    viewModel.sendVerifyCode(phone.getText().toString());
                 }
                 break;
-            case R.id.verify_confirm:
-                if (viewModel.checkVerifyCode(verifyPhonenumber.getText().toString(),
+            case R.id.login_confirm:
+                if (viewModel.checkVerifyCode(phone.getText().toString(),
                         verifyCode.getText().toString())) {
                     toast("登录成功");
                     startActivity(MainActivity.class, null);
+                    viewModel.cacheUserInfo();
                     finish();
                 } else {
                     toast("验证码错误，请重新输入");

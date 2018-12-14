@@ -14,7 +14,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import static com.chuansongmen.data.DataRepository.FAIL;
 
-public class VerifyViewModel extends BaseViewModel {
+public class LoginViewModel extends BaseViewModel {
 
     /**
      * @return 成功时返回验证码，失败是返回{@Link DataRepository.FAIL}
@@ -22,7 +22,7 @@ public class VerifyViewModel extends BaseViewModel {
     private MutableLiveData<String> sendMessageResult = new MutableLiveData<>();
     private Map.Entry<String, String> verify = null;
 
-    public VerifyViewModel(@NonNull Application application) {
+    public LoginViewModel(@NonNull Application application) {
         super(application);
     }
 
@@ -55,5 +55,9 @@ public class VerifyViewModel extends BaseViewModel {
         return verify != null &&
                 phoneNumber.equals(verify.getKey()) &&
                 code.equals(verify.getValue());
+    }
+
+    public void cacheUserInfo() {
+
     }
 }

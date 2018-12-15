@@ -110,7 +110,7 @@ public class MainViewModel extends BaseViewModel {
 
 
     void logout() {
-        dataRepo.logout(Worker.getInstance().getId(), new Callback<Boolean>() {
+        dataRepo.logout(getApplication(), Worker.getInstance().getId(), new Callback<Boolean>() {
             @Override
             public void onResponse(Boolean result) {
                 isLogoutSuccess.postValue(result);

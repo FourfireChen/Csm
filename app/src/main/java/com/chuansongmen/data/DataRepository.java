@@ -412,6 +412,7 @@ public class DataRepository implements IDataRepository {
                     }
                 } catch (ClientException e) {
                     e.printStackTrace();
+                    Log.e(TAG, "短信发送失败：", e);
                     resultCallback.onResponse(false);
                 }
             }
@@ -424,6 +425,17 @@ public class DataRepository implements IDataRepository {
             @Override
             public void run() {
                 localData.cacheUserPhoneNumber(context, phoneNumber);
+            }
+        });
+    }
+
+    @Override
+    public void logout(final Context context, final String id, final Callback<Boolean> callback) {
+        ThreadUtil.execute(new Runnable() {
+            @Override
+            public void run() {
+                localData.clearUserCache(context, id);
+                callback.onResponse(true);
             }
         });
     }

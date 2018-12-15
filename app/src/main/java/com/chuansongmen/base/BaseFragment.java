@@ -3,6 +3,7 @@ package com.chuansongmen.base;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -49,5 +50,9 @@ public abstract class BaseFragment<T extends BaseViewModel> extends Fragment {
             if (types.length > 0)
                 viewModel = ViewModelProviders.of(this).get((Class<T>) types[0]);
         }
+    }
+
+    protected void toast(String content) {
+        Toast.makeText(getActivity(), content, Toast.LENGTH_SHORT).show();
     }
 }

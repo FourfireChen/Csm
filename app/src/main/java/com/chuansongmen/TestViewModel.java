@@ -13,14 +13,14 @@ public class TestViewModel extends BaseViewModel {
         super(application);
     }
 
-    public void addTestWorker() {
-        dataRepo.addTestWorker(new Callback<Boolean>() {
-            @Override
-            public void onResponse(Boolean result) {
-
-            }
-        });
-    }
+//    public void addTestWorker() {
+//        dataRepo.addTestWorker(new Callback<Boolean>() {
+//            @Override
+//            public void onResponse(Boolean result) {
+//
+//            }
+//        });
+//    }
 
 
 }

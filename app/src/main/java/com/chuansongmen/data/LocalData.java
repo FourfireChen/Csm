@@ -21,4 +21,13 @@ class LocalData {
         editor.putString(context.getString(R.string.phone), phoneNumber);
         editor.apply();
     }
+
+    void clearUserCache(Context context, String id) {
+        SharedPreferences sharedPreferences =
+                context.getSharedPreferences(context.getString(R.string.sharedpreferences_name),
+                        Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+    }
 }

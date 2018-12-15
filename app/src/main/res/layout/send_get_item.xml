@@ -1,70 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <androidx.cardview.widget.CardView
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="-5dp"
-        android:elevation="10dp"
-        app:cardCornerRadius="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="10dp"
+        android:elevation="10dp"
+        app:cardCornerRadius="6dp">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
                 android:id="@+id/sendget_item_address"
-                android:text="具体地址"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/sendget_item_area"
-                android:text="所在区域"
-                android:layout_alignParentEnd="true"
-                android:layout_margin="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/sendget_item_time"
-                android:text="时间"
-                android:layout_below="@id/sendget_item_address"
-                android:layout_alignStart="@id/sendget_item_address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:text="地址" />
 
             <TextView
                 android:id="@+id/sendget_item_name"
-                android:text="名字"
-                android:layout_marginBottom="10dp"
-                android:layout_alignStart="@id/sendget_item_time"
-                android:layout_below="@id/sendget_item_time"
-                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sendget_item_address"
+                android:layout_alignStart="@id/sendget_item_address"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="名字" />
 
             <Button
                 android:id="@+id/sendget_item_call_button"
-                android:foregroundGravity="center"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
                 android:layout_alignBottom="@id/sendget_item_name"
-                android:layout_marginBottom="-5dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="9dp"
+                android:layout_marginBottom="-5dp"
+                android:backgroundTint="@color/design_default_color_primary"
                 android:foreground="@drawable/ic_phone_black_24dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:foregroundGravity="center"
+                android:foregroundTint="@color/colorAccent" />
 
             <TextView
                 android:id="@+id/sendget_item_phonenumber"
-                android:text="15927157339"
-                android:layout_toStartOf="@id/sendget_item_call_button"
-                android:layout_alignBottom="@id/sendget_item_name"
-                android:layout_marginEnd="10dp"
-                android:inputType="phone"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/sendget_item_name"
+                android:layout_marginEnd="15dp"
+                android:layout_toStartOf="@id/sendget_item_call_button"
+                android:text="电话号码" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>

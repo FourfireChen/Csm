@@ -17,6 +17,7 @@ import com.chuansongmen.R;
 import com.chuansongmen.base.BaseFragment;
 import com.chuansongmen.career_info.CareerInfoActivity;
 import com.chuansongmen.data.bean.Order;
+import com.chuansongmen.login.LoginActivity;
 import com.chuansongmen.receipt.ReceiptActivity;
 import com.chuansongmen.scan.ScanActivity;
 import com.chuansongmen.sendget.SendGetFragment;
@@ -41,6 +42,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 
 import static android.view.Gravity.START;
+import static android.view.Gravity.getAbsoluteGravity;
 
 public class MainFragment extends BaseFragment<MainViewModel> implements View.OnClickListener,
         CompoundButton.OnCheckedChangeListener, IMainActivity.IMainView {
@@ -120,6 +122,17 @@ public class MainFragment extends BaseFragment<MainViewModel> implements View.On
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean != workerStatus.isChecked()) {
                     workerStatus.setChecked(aBoolean);
+                }
+            }
+        });
+        viewModel.getIsLogoutSuccess().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean) {
+                    startActivity(LoginActivity.class, null);
+                    getActivity().finish();
+                } else {
+                    toast("注销账号失败");
                 }
             }
         });

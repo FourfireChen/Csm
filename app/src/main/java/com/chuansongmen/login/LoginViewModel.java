@@ -40,6 +40,7 @@ public class LoginViewModel extends BaseViewModel {
 
     /**
      * 发送验证码
+     *
      * @param phoneNumber 手机号码
      */
     void sendVerifyCode(String phoneNumber) {
@@ -55,6 +56,7 @@ public class LoginViewModel extends BaseViewModel {
     /**
      * 生成随机验证码
      * 并做缓存，存在verify这个Entry里面
+     *
      * @param phoneNumber 手机号码
      */
     private void generateVerifyCode(String phoneNumber) {
@@ -69,11 +71,12 @@ public class LoginViewModel extends BaseViewModel {
 
     /**
      * 检查手机号码和验证码是否对应
+     *
      * @param phoneNumber 手机号码
-     * @param code 验证码
+     * @param code        验证码
      * @return 是否对应
      */
-    boolean checkVerifyCode(String phoneNumber, String code) {
+    private boolean checkVerifyCode(String phoneNumber, String code) {
         return verify != null &&
                 phoneNumber.equals(verify.getKey()) &&
                 code.equals(verify.getValue());
@@ -97,14 +100,32 @@ public class LoginViewModel extends BaseViewModel {
 
     /**
      * 登录
+     *
      * @param phone 手机号码
      */
-    public void login(String phone) {
+    void loginByCache(String phone) {
         dataRepo.getWorkerInfo(phone, new Callback<Worker>() {
             @Override
             public void onResponse(Worker result) {
                 isLoginSuccess.postValue(result != null);
             }
         });
+    }
+
+    void loginByVerify(String phone, String code) {
+        isLoginSuccess.postValue(checkVerifyCode(phone, code));
+    }
+
+    void clearVerifyEntry() {
+        verify = null;
+    }
+
+    boolean checkPhoneFormate(String phone) {
+        return !phone.isEmpty() &&
+                phone.toCharArray().length == 11;
+    }
+
+    boolean checkVerifyFormate(String code) {
+        return !code.isEmpty() && code.toCharArray().length == 4;
     }
 }

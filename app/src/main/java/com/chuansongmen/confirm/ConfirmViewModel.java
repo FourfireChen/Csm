@@ -20,9 +20,9 @@ public class ConfirmViewModel extends BaseViewModel {
         return changeDelayResult;
     }
 
-    void chageDelayResult(String orderPagerId, int isDelay, String remark) {
+    void delay(String orderPagerId, String remark) {
         // TODO: 2018/12/8 改订单备注
-        dataRepo.changeDelay(orderPagerId, isDelay, new Callback<String>() {
+        dataRepo.changeDelay(orderPagerId, 1, new Callback<String>() {
             @Override
             public void onResponse(String result) {
                 changeDelayResult.postValue(result);

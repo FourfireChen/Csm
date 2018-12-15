@@ -56,9 +56,7 @@ public class SendGetListAdapter extends RecyclerView.Adapter<SendGetListAdapter.
                                  final int i) {
         Order order = orders.get(i);
         sendGetViewHolder.sendgetItemAddress.setText(order.getRecipientAddress());
-        sendGetViewHolder.sendgetItemArea.setText(order.getRecipientAddress());
         sendGetViewHolder.sendgetItemName.setText(order.getRecipientName());
-        sendGetViewHolder.sendgetItemTime.setText(order.getReceiveTime());
         sendGetViewHolder.sendgetItemPhonenumber.setText(order.getRecipientPhone());
         sendGetViewHolder.sendgetItemCallButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +68,6 @@ public class SendGetListAdapter extends RecyclerView.Adapter<SendGetListAdapter.
         sendGetViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 2018/11/18 跳转activity，订单详情
                 if (itemClickListener != null) {
                     itemClickListener.onClick(i);
                 }
@@ -87,10 +84,6 @@ public class SendGetListAdapter extends RecyclerView.Adapter<SendGetListAdapter.
 
         @BindView(R.id.sendget_item_address)
         TextView sendgetItemAddress;
-        @BindView(R.id.sendget_item_area)
-        TextView sendgetItemArea;
-        @BindView(R.id.sendget_item_time)
-        TextView sendgetItemTime;
         @BindView(R.id.sendget_item_name)
         TextView sendgetItemName;
         @BindView(R.id.sendget_item_call_button)

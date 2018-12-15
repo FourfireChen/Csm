@@ -64,6 +64,6 @@ public class ConfirmActivity extends BaseActivity<ConfirmViewModel> {
 
     @OnClick(R.id.confirm_confirm_delay)
     public void onViewClicked() {
-        viewModel.chageDelayResult(order.getPagerId(), 1, confirmDelayRemark.getText().toString());
+        viewModel.delay(order.getPagerId(), confirmDelayRemark.getText().toString());
     }
 }

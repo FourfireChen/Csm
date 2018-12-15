@@ -122,5 +122,5 @@ public interface IDataRepository {
 
     void cacheUserPhoneNumber(Context context, String phoneNumber);
 
-    void logout(String id, Callback<Boolean> callback);
+    void logout(Context context, String id, Callback<Boolean> callback);
 }

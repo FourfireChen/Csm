@@ -29,7 +29,6 @@ public class LoginActivity extends BaseActivity<LoginViewModel> {
     @BindView(R.id.login_phone)
     EditText phone;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +44,7 @@ public class LoginActivity extends BaseActivity<LoginViewModel> {
             @Override
             public void onChanged(String phonenumber) {
                 if (!phonenumber.isEmpty()) {
-                    viewModel.login(phonenumber);
+                    viewModel.loginByCache(phonenumber);
                 }
             }
         });
@@ -67,6 +66,7 @@ public class LoginActivity extends BaseActivity<LoginViewModel> {
                         public void onFinish() {
                             msgSend.setText("发送验证码");
                             msgSend.setClickable(true);
+                            viewModel.clearVerifyEntry();
                         }
                     };
                     countDownTimer.start();
@@ -100,19 +100,20 @@ public class LoginActivity extends BaseActivity<LoginViewModel> {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.login_send_msg:
-                if (phone.getText().toString().isEmpty()) {
-                    toast("请填写手机号码");
-                } else {
+                if (viewModel.checkPhoneFormate(phone.getText().toString())) {
                     viewModel.sendVerifyCode(phone.getText().toString());
+                } else {
+                    toast("请填写正确的手机号码");
                 }
                 break;
             case R.id.login_confirm:
-                if (viewModel.checkVerifyCode(phone.getText().toString(),
-                        verifyCode.getText().toString())) {
-                    toast("登录成功");
-                    viewModel.login(phone.getText().toString());
+                if (!viewModel.checkPhoneFormate(phone.getText().toString())) {
+                    toast("请填写正确的手机号码");
+                } else if (!viewModel.checkVerifyFormate(verifyCode.getText().toString())) {
+                    toast("请填写4位数验证码");
                 } else {
-                    toast("验证码错误，请重新输入");
+                    viewModel.loginByVerify(phone.getText().toString(),
+                            verifyCode.getText().toString());
                 }
                 break;
         }

@@ -114,6 +114,7 @@ public interface IDataRepository {
 
     /**
      * 短信验证
+     *
      * @param code 验证码
      */
     void sendMessage(String phone, String code, Callback<Boolean> resultCallback);
@@ -123,4 +124,6 @@ public interface IDataRepository {
     void cacheUserPhoneNumber(Context context, String phoneNumber);
 
     void logout(Context context, String id, Callback<Boolean> callback);
+
+    void transferOrder(String pagerId, String workerId, Callback<Boolean> callback);
 }

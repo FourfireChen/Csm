@@ -52,7 +52,7 @@ import static com.chuansongmen.data.bean.Field.ROUTE;
 import static com.chuansongmen.data.bean.Field.START_TIME;
 import static com.chuansongmen.data.bean.Field.STATION;
 import static com.chuansongmen.data.bean.Field.TO_LATITUDE;
-import static com.chuansongmen.data.bean.Field.TO_LONGTITUDE;
+import static com.chuansongmen.data.bean.Field.TO_LONGITUDE;
 import static com.chuansongmen.data.bean.Field.WEIGHT;
 
 
@@ -98,7 +98,7 @@ public class OrdersConvertor implements Converter<ResponseBody, List<Order>> {
             out.name(FROM_LONGITUDE).value(value.getFrom().getLongitude());
             out.name(FROM_LATITUDE).value(value.getFrom().getLatitude());
             out.name(IS_ORDER_IN_CAINIAO).value(value.isInCainiao() ? 1 : 0);
-            out.name(TO_LONGTITUDE).value(value.getTo().getLongitude());
+            out.name(TO_LONGITUDE).value(value.getTo().getLongitude());
             out.name(TO_LATITUDE).value(value.getTo().getLatitude());
             out.name(NOW_WORKER).value(value.getNowWorker());
             out.name(PRICE).value(value.getPrice());
@@ -184,7 +184,7 @@ public class OrdersConvertor implements Converter<ResponseBody, List<Order>> {
                     case TO_LATITUDE:
                         to.setLatitude(in.nextDouble());
                         break;
-                    case TO_LONGTITUDE:
+                    case TO_LONGITUDE:
                         to.setLongitude(in.nextDouble());
                         break;
                     case NOW_WORKER:

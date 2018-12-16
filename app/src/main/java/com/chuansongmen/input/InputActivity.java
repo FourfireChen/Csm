@@ -17,7 +17,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.bingoogolapple.qrcode.core.BarcodeType;
-import cn.bingoogolapple.qrcode.core.QRCodeView;
 import cn.bingoogolapple.qrcode.zbar.ZBarView;
 
 public class InputActivity extends BaseActivity<InputViewModel> {

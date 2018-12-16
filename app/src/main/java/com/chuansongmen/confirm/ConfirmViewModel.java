@@ -9,10 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-public class ConfirmViewModel extends BaseViewModel {
+class ConfirmViewModel extends BaseViewModel {
     private MutableLiveData<String> changeDelayResult = new MutableLiveData<>();
 
-    public ConfirmViewModel(@NonNull Application application) {
+    ConfirmViewModel(@NonNull Application application) {
         super(application);
     }
 

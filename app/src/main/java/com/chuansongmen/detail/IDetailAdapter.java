@@ -6,7 +6,7 @@ import android.view.View;
 
 import java.util.List;
 
-public interface IDetailAdapter {
+interface IDetailAdapter {
     Customer getFrom();
 
     Customer getTo();
@@ -26,36 +26,36 @@ public interface IDetailAdapter {
         private String phone;
         private String address;
 
-        public Customer() {
+        Customer() {
         }
 
-        public Customer(String name, String phone, String address) {
+        Customer(String name, String phone, String address) {
             this.name = name;
             this.phone = phone;
             this.address = address;
         }
 
-        public String getName() {
+        String getName() {
             return name;
         }
 
-        public void setName(String name) {
+        void setName(String name) {
             this.name = name;
         }
 
-        public String getPhone() {
+        String getPhone() {
             return phone;
         }
 
-        public void setPhone(String phone) {
+        void setPhone(String phone) {
             this.phone = phone;
         }
 
-        public String getAddress() {
+        String getAddress() {
             return address;
         }
 
-        public void setAddress(String address) {
+        void setAddress(String address) {
             this.address = address;
         }
     }
@@ -65,7 +65,7 @@ public interface IDetailAdapter {
         private String text;
         private View.OnClickListener onClickListener;
 
-        public ButtonStatus() {
+        ButtonStatus() {
         }
 
         public ButtonStatus(Drawable icon, String text, View.OnClickListener onClickListener) {

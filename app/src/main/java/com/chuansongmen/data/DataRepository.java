@@ -34,19 +34,34 @@ import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
+import static com.chuansongmen.data.bean.Field.BELONG_STATION;
+import static com.chuansongmen.data.bean.Field.ORDER_ID;
+import static com.chuansongmen.data.bean.Field.ORDER_PAGER_ID;
+import static com.chuansongmen.data.bean.Field.WORKER_CATEGORY;
+import static com.chuansongmen.data.bean.Field.WORKER_ID;
+import static com.chuansongmen.data.bean.Field.WORKER_NAME;
+import static com.chuansongmen.data.bean.Field.WORKER_SEX;
+
 public class DataRepository implements IDataRepository {
     private static final String TAG = "DataRepository";
     private static IDataRepository instance;
     private IRemoteData remoteData;
     private LocalData localData;
-    // TODO: 2018/11/7 这里的URL是暂时的
+
     private static final String URL = "http://178.128.184.142:8080/portal/";
+
     public static final String SUCCESS = "成功";
     public static final String FAIL = "失败";
-    private final String product = "Dysmsapi";
-    private final String domain = "dysmsapi.aliyuncs.com";
-    private final String accessKeyId = "LTAIGwKgsjQoc4aR";
-    private final String accessKeySecret = "n8iIp5mZEsjm3ei9rgvHfiXl6XLN8W";
+
+    // 阿里云相关参数
+    private static final String REQUEST_TYPE = "application/json";
+    private static final String SMS_SIGN_NAME = "点链科技";
+    private static final String SMS_TEM_CODE = "SMS_151233416";
+    private static final String REGION_ID = "cn-hangzhou";
+    private static final String product = "Dysmsapi";
+    private static final String domain = "dysmsapi.aliyuncs.com";
+    private static final String accessKeyId = "LTAIGwKgsjQoc4aR";
+    private static final String accessKeySecret = "n8iIp5mZEsjm3ei9rgvHfiXl6XLN8W";
 
     private DataRepository() {
         Retrofit retrofit =
@@ -76,7 +91,7 @@ public class DataRepository implements IDataRepository {
                     isSuccess.onResponse(true);
                 } else {
                     try {
-                        Log.e(TAG, "onResponse: " + response.errorBody().string());
+                        Log.e(TAG, "updateOrder onResponse: " + response.errorBody().string());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -87,7 +102,7 @@ public class DataRepository implements IDataRepository {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 isSuccess.onResponse(false);
-                Log.e(TAG, "onFailure: ", t);
+                Log.e(TAG, "updateOrder onFailure: ", t);
             }
         });
     }
@@ -101,6 +116,7 @@ public class DataRepository implements IDataRepository {
                 if (response.isSuccessful()) {
                     callback.onResponse(response.body());
                 } else {
+                    Log.e(TAG, "queryOrderPos onResponse: ");
                     callback.onResponse(null);
                 }
             }
@@ -108,7 +124,7 @@ public class DataRepository implements IDataRepository {
             @Override
             public void onFailure(Call<Position> call, Throwable t) {
                 callback.onResponse(null);
-                Log.e(TAG, "onFailure: ", t);
+                Log.e(TAG, "queryOrderPos onFailure: ", t);
             }
         });
     }
@@ -145,12 +161,7 @@ public class DataRepository implements IDataRepository {
         List<Order> orders = new ArrayList<>();
         String[] name = {"张三", "里斯", "王五", "赵六", "陈七", "邓八"};
         String[] address = {"武汉", "洪山", "澄海", "汕头", "鄂尔多斯", "上海"};
-        String[] phone = {"1324567891231",
-                "3526412589745",
-                "2356985471256",
-                "1325489635124",
-                "1324567894562",
-                "5412365897452"};
+        String[] phone = {"10086", "15927157339"};
         String[] remark = {"hhh", "aaa", "bbb", "ccc", "ddd", "eee"};
         String[] id = {"239481", "df234235", "df2345", "sdfsdf32", "345234", "235235"};
         Random random = new Random();
@@ -159,11 +170,11 @@ public class DataRepository implements IDataRepository {
             order.setStatus(Order.Status.values()[Math.abs(random.nextInt()) % 6]);
             order.setRemark(remark[Math.abs(random.nextInt()) % 6]);
             order.setDelay(random.nextBoolean());
-            order.setPrice(Math.abs(random.nextInt()));
+            order.setPrice(Math.abs(random.nextInt() % 18));
             order.setRecipientAddress(address[Math.abs(random.nextInt()) % 6]);
-            order.setRecipientPhone(phone[Math.abs(random.nextInt()) % 6]);
+            order.setRecipientPhone(phone[Math.abs(random.nextInt()) % 2]);
             order.setRecipientName(name[Math.abs(random.nextInt()) % 6]);
-            order.setOrderUserId(phone[Math.abs(random.nextInt()) % 6]);
+            order.setOrderUserId(phone[Math.abs(random.nextInt()) % 2]);
             order.setOrderId(id[Math.abs(random.nextInt()) % 6]);
             order.setPagerId(id[Math.abs(random.nextInt()) % 6]);
             orders.add(order);
@@ -220,10 +231,10 @@ public class DataRepository implements IDataRepository {
     public void updateWorkerStatus(String workerId,
                                    Integer status,
                                    final Callback<Boolean> isSuccess) {
-        Call call = remoteData.updateWorkerStatus(workerId, status);
-        call.enqueue(new retrofit2.Callback() {
+        Call<ResponseBody> call = remoteData.updateWorkerStatus(workerId, status);
+        call.enqueue(new retrofit2.Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call call, Response response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
                     isSuccess.onResponse(true);
                 } else {
@@ -327,9 +338,9 @@ public class DataRepository implements IDataRepository {
             public void run() {
                 try {
                     JSONObject jsonObject = new JSONObject();
-                    jsonObject.put("order_id", orderSerialId);
-                    jsonObject.put("order_paper_id", pagerId);
-                    jsonObject.put("worker_id", workerId);
+                    jsonObject.put(ORDER_ID, orderSerialId);
+                    jsonObject.put(ORDER_PAGER_ID, pagerId);
+                    jsonObject.put(WORKER_ID, workerId);
                     Response body =
                             remoteData.receiveOrderFromUser(mapToJson(jsonObject)).execute();
                     if (body != null && body.isSuccessful()) {
@@ -352,11 +363,11 @@ public class DataRepository implements IDataRepository {
             public void run() {
                 try {
                     JSONObject jsonObject = new JSONObject();
-                    jsonObject.put("worker_id", 2);
-                    jsonObject.put("worker_name", "test2");
-                    jsonObject.put("worker_sex", 1);
-                    jsonObject.put("category", 3);
-                    jsonObject.put("belong_station", "test2");
+                    jsonObject.put(WORKER_ID, 2);
+                    jsonObject.put(WORKER_NAME, "test2");
+                    jsonObject.put(WORKER_SEX, 1);
+                    jsonObject.put(WORKER_CATEGORY, 3);
+                    jsonObject.put(BELONG_STATION, "test2");
                     RequestBody body = RequestBody.create(MediaType.parse("application/json"),
                             jsonObject.toString());
                     Call call = remoteData.addMan(body);
@@ -387,10 +398,10 @@ public class DataRepository implements IDataRepository {
                 System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
                 System.setProperty("sun.net.client.defaultReadTimeout", "10000");
 
-                IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId,
+                IClientProfile profile = DefaultProfile.getProfile(REGION_ID, accessKeyId,
                         accessKeySecret);
                 try {
-                    DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", product, domain);
+                    DefaultProfile.addEndpoint(REGION_ID, REGION_ID, product, domain);
                     IAcsClient acsClient = new DefaultAcsClient(profile);
 
                     SendSmsRequest request = new SendSmsRequest();
@@ -399,9 +410,9 @@ public class DataRepository implements IDataRepository {
                     //必填:待发送手机号。支持以逗号分隔的形式进行批量调用，批量上限为1000个手机号码,批量调用相对于单条调用及时性稍有延迟,验证码类型的短信推荐使用单条调用的方式；发送国际/港澳台消息时，接收号码格式为国际区号+号码，如“85200000000”
                     request.setPhoneNumbers(phone);
                     //必填:短信签名-可在短信控制台中找到
-                    request.setSignName("点链科技");
+                    request.setSignName(SMS_SIGN_NAME);
                     //必填:短信模板-可在短信控制台中找到，发送国际/港澳台消息时，请使用国际/港澳台短信模版
-                    request.setTemplateCode("SMS_151233416");
+                    request.setTemplateCode(SMS_TEM_CODE);
                     //可选:模板中的变量替换JSON串,如模板内容为"亲爱的${name},您的验证码为${code}"时,此处的值为
                     //友情提示:如果JSON中需要带换行符,请参照标准的JSON协议对换行符的要求,比如短信内容中包含\r\n的情况在JSON中需要表示成\\r\\n,否则会导致JSON在服务端解析失败
                     request.setTemplateParam("{\"code\":\"" + code + "\"}");
@@ -441,6 +452,11 @@ public class DataRepository implements IDataRepository {
     }
 
     @Override
+    public void transferOrder(String pagerId, String workerId, Callback<Boolean> callback) {
+
+    }
+
+    @Override
     public void getCacheUserPhoneNumber(final Context context, final Callback<String> callback) {
         ThreadUtil.execute(new Runnable() {
             @Override
@@ -451,6 +467,6 @@ public class DataRepository implements IDataRepository {
     }
 
     private RequestBody mapToJson(JSONObject jsonObject) {
-        return RequestBody.create(MediaType.parse("application/json"), jsonObject.toString());
+        return RequestBody.create(MediaType.parse(REQUEST_TYPE), jsonObject.toString());
     }
 }

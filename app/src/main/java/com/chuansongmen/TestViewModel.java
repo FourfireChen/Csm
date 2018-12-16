@@ -3,7 +3,6 @@ package com.chuansongmen;
 import android.app.Application;
 
 import com.chuansongmen.base.BaseViewModel;
-import com.chuansongmen.common.Callback;
 
 import androidx.annotation.NonNull;
 

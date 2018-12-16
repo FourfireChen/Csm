@@ -2,6 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.chuansongmen">
 
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <!--读取-->
@@ -40,12 +42,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".main.MainActivity" />
-        <activity android:name=".login.LoginActivity">
+        <activity android:name=".main.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".login.LoginActivity">
         </activity>
         <activity android:name=".scan.ScanActivity" />
         <activity android:name=".receipt.ReceiptActivity" />

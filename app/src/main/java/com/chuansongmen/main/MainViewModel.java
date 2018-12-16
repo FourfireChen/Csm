@@ -48,8 +48,6 @@ public class MainViewModel extends BaseViewModel {
     }
 
 
-
-
     void updateOrders() {
         dataRepo.getWorkerOrders("1", new Callback<List<Order>>() {
             @Override

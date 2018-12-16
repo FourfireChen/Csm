@@ -22,7 +22,7 @@ import com.chuansongmen.receipt.ReceiptActivity;
 import com.chuansongmen.scan.ScanActivity;
 import com.chuansongmen.sendget.SendGetFragment;
 import com.chuansongmen.sendget.SendGetViewPageAdapter;
-import com.chuansongmen.util.Util;
+import com.chuansongmen.util.UIUtil;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
 
@@ -42,7 +42,6 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 
 import static android.view.Gravity.START;
-import static android.view.Gravity.getAbsoluteGravity;
 
 public class MainFragment extends BaseFragment<MainViewModel> implements View.OnClickListener,
         CompoundButton.OnCheckedChangeListener, IMainActivity.IMainView {
@@ -170,7 +169,7 @@ public class MainFragment extends BaseFragment<MainViewModel> implements View.On
         mainBottomSend.setOnClickListener(this);
         mainBottomCenter.setOnClickListener(this);
 
-        Util.setTypeface(getString(R.string.font),
+        UIUtil.setTypeface(getString(R.string.font),
                 getActivity().getAssets(),
                 mainBottomGet,
                 mainBottomSend,

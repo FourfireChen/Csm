@@ -19,7 +19,7 @@ public class ScanViewModel extends BaseViewModel {
         return isSuccess;
     }
 
-    boolean checkCodeFormate(String code){
+    boolean checkCodeFormate(String code) {
         return false;
     }
 }

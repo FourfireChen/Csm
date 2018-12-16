@@ -14,7 +14,7 @@
         <TextView
             android:id="@+id/main_bottom_left"
             android:layout_width="0dp"
-            android:textColor="@color/textColor"
+            android:textColor="@color/colorPrimary"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"

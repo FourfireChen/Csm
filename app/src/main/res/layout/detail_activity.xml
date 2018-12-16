@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -63,14 +62,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/detail_from_name" />
 
-    <ImageView
+    <Button
         android:id="@+id/detail_call_sender"
-        android:layout_width="40dp"
+        android:layout_width="60dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="56dp"
         android:layout_marginEnd="8dp"
-        android:src="@drawable/ic_phone_black_24dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:foreground="@drawable/ic_phone_black_24dp"
+        android:foregroundGravity="center"
+        android:foregroundTint="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.041"
         app:layout_constraintStart_toEndOf="@id/detail_from_phone"
@@ -129,13 +131,16 @@
         app:layout_constraintStart_toStartOf="@id/detail_to_name"
         app:layout_constraintTop_toBottomOf="@id/detail_to_name" />
 
-    <ImageView
+    <Button
         android:id="@+id/detail_call_getter"
-        android:layout_width="40dp"
+        android:layout_width="60dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:src="@drawable/ic_phone_black_24dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:foreground="@drawable/ic_phone_black_24dp"
+        android:foregroundGravity="center"
+        android:foregroundTint="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.041"
         app:layout_constraintStart_toEndOf="@id/detail_to_phone"
@@ -270,9 +275,9 @@
                 <ImageView
                     android:id="@+id/detail_first_icon"
                     android:layout_width="40dp"
-                    android:layout_margin="5dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
+                    android:layout_margin="5dp"
                     android:src="@drawable/ic_restore_black_48dp" />
 
                 <TextView
@@ -301,9 +306,9 @@
                 <ImageView
                     android:id="@+id/detail_second_icon"
                     android:layout_width="40dp"
-                    android:layout_margin="5dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
+                    android:layout_margin="5dp"
                     android:src="@drawable/ic_camera_amber_800_36dp" />
 
                 <TextView
@@ -332,9 +337,9 @@
                 <ImageView
                     android:id="@+id/detail_third_icon"
                     android:layout_width="40dp"
-                    android:layout_margin="5dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
+                    android:layout_margin="5dp"
                     android:src="@drawable/ic_print_black_24dp" />
 
                 <TextView

@@ -18,7 +18,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class ConfirmActivity extends BaseActivity<ConfirmViewModel> {
-    private static final String TAG = "CofirmActivity";
+    private static final String TAG = "ConfirmActivity";
     @BindView(R.id.confirm_warning_text)
     TextView confirmWarningText;
     @BindView(R.id.confirm_delay_remark)

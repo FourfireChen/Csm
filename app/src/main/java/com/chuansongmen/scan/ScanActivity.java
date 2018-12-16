@@ -16,10 +16,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.bingoogolapple.qrcode.core.BarcodeType;
-import cn.bingoogolapple.qrcode.core.QRCodeView;
 import cn.bingoogolapple.qrcode.zbar.ZBarView;
 
-public class ScanActivity extends BaseActivity<ScanViewModel>{
+public class ScanActivity extends BaseActivity<ScanViewModel> {
     @BindView(R.id.scan_zxingview)
     ZBarView scanScanView;
     @BindView(R.id.scan_edit)

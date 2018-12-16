@@ -15,25 +15,30 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import static com.chuansongmen.data.DataRepository.FAIL;
+import static com.chuansongmen.data.DataRepository.SUCCESS;
 
-public class LoginViewModel extends BaseViewModel {
+class LoginViewModel extends BaseViewModel {
 
     /**
      * @return 成功时返回验证码，失败是返回{@Link DataRepository.FAIL}
      */
     private MutableLiveData<String> sendMessageResult = new MutableLiveData<>();
-    private MutableLiveData<Boolean> isLoginSuccess = new MutableLiveData<>();
+    /**
+     * @return 成功时返回SUCCESS，缓存登录失败时返回“”，验证登录失败时返回原因
+     */
+    private MutableLiveData<String> isLoginSuccess = new MutableLiveData<>();
+
     private Map.Entry<String, String> verify = null;
 
-    public LoginViewModel(@NonNull Application application) {
+    LoginViewModel(@NonNull Application application) {
         super(application);
     }
 
-    public MutableLiveData<String> getSendMessageResult() {
+    MutableLiveData<String> getSendMessageResult() {
         return sendMessageResult;
     }
 
-    public MutableLiveData<Boolean> getIsLoginSuccess() {
+    MutableLiveData<String> getIsLoginSuccess() {
         return isLoginSuccess;
     }
 
@@ -82,12 +87,12 @@ public class LoginViewModel extends BaseViewModel {
                 code.equals(verify.getValue());
     }
 
-    public void cacheUserPhoneNumber(String phoneNumber) {
+    void cacheUserPhoneNumber(String phoneNumber) {
         dataRepo.cacheUserPhoneNumber(getApplication(), phoneNumber);
     }
 
 
-    public LiveData<String> hadUserPhoneNumberCache() {
+    LiveData<String> hadUserPhoneNumberCache() {
         final MutableLiveData<String> hadCache = new MutableLiveData<>();
         dataRepo.getCacheUserPhoneNumber(getApplication(), new Callback<String>() {
             @Override
@@ -98,6 +103,7 @@ public class LoginViewModel extends BaseViewModel {
         return hadCache;
     }
 
+
     /**
      * 登录
      *
@@ -107,13 +113,14 @@ public class LoginViewModel extends BaseViewModel {
         dataRepo.getWorkerInfo(phone, new Callback<Worker>() {
             @Override
             public void onResponse(Worker result) {
-                isLoginSuccess.postValue(result != null);
+                // 这里去后台查员工信息，后台暂时还没好，所以总是返回null；
+                isLoginSuccess.postValue(result != null ? SUCCESS : "");
             }
         });
     }
 
     void loginByVerify(String phone, String code) {
-        isLoginSuccess.postValue(checkVerifyCode(phone, code));
+        isLoginSuccess.postValue(checkVerifyCode(phone, code) ? SUCCESS : "登录失败，请检查网络");
     }
 
     void clearVerifyEntry() {

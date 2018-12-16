@@ -9,7 +9,7 @@ import android.widget.EditText;
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseActivity;
 import com.chuansongmen.main.MainActivity;
-import com.chuansongmen.util.Util;
+import com.chuansongmen.util.UIUtil;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
@@ -18,6 +18,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.chuansongmen.data.DataRepository.FAIL;
+import static com.chuansongmen.data.DataRepository.SUCCESS;
 
 public class LoginActivity extends BaseActivity<LoginViewModel> {
     @BindView(R.id.login_send_msg)
@@ -28,6 +29,8 @@ public class LoginActivity extends BaseActivity<LoginViewModel> {
     EditText verifyCode;
     @BindView(R.id.login_phone)
     EditText phone;
+    private static final String BAD_PHONE_TIP = "请填写正确的手机号码";
+    private static final String BAD_VERIFY_CODE_TIP = "请填写4位数验证码";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,9 +45,9 @@ public class LoginActivity extends BaseActivity<LoginViewModel> {
     private void hadCache() {
         viewModel.hadUserPhoneNumberCache().observe(this, new Observer<String>() {
             @Override
-            public void onChanged(String phonenumber) {
-                if (!phonenumber.isEmpty()) {
-                    viewModel.loginByCache(phonenumber);
+            public void onChanged(String phoneNumber) {
+                if (!phoneNumber.isEmpty()) {
+                    viewModel.loginByCache(phoneNumber);
                 }
             }
         });
@@ -76,23 +79,23 @@ public class LoginActivity extends BaseActivity<LoginViewModel> {
             }
         });
 
-        viewModel.getIsLoginSuccess().observe(this, new Observer<Boolean>() {
+        viewModel.getIsLoginSuccess().observe(this, new Observer<String>() {
             @Override
-            public void onChanged(Boolean aBoolean) {
-                if (aBoolean) {
-                    toast("登录成功");
+            public void onChanged(String s) {
+                if (s.equals(SUCCESS)) {
+                    toast(getString(R.string.login_success));
                     startActivity(MainActivity.class, null);
                     viewModel.cacheUserPhoneNumber(phone.getText().toString());
                     finish();
-                } else {
-                    toast("登录失败，请检查网络");
+                } else if (!s.isEmpty()) {
+                    toast(s);
                 }
             }
         });
     }
 
     protected void initView() {
-        Util.setTypeface("fonts/type.ttf", getAssets());
+        UIUtil.setTypeface(getString(R.string.font), getAssets());
     }
 
 
@@ -103,14 +106,14 @@ public class LoginActivity extends BaseActivity<LoginViewModel> {
                 if (viewModel.checkPhoneFormate(phone.getText().toString())) {
                     viewModel.sendVerifyCode(phone.getText().toString());
                 } else {
-                    toast("请填写正确的手机号码");
+                    toast(BAD_PHONE_TIP);
                 }
                 break;
             case R.id.login_confirm:
                 if (!viewModel.checkPhoneFormate(phone.getText().toString())) {
-                    toast("请填写正确的手机号码");
+                    toast(BAD_PHONE_TIP);
                 } else if (!viewModel.checkVerifyFormate(verifyCode.getText().toString())) {
-                    toast("请填写4位数验证码");
+                    toast(BAD_VERIFY_CODE_TIP);
                 } else {
                     viewModel.loginByVerify(phone.getText().toString(),
                             verifyCode.getText().toString());

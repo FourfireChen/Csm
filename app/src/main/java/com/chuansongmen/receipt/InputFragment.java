@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseFragment;
-import com.chuansongmen.util.Util;
+import com.chuansongmen.util.UIUtil;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -45,7 +45,7 @@ public class InputFragment extends BaseFragment {
     }
 
     private void initTextTypeface() {
-        Util.setTypeface("fonts/type.ttf",
+        UIUtil.setTypeface("fonts/type.ttf",
                 getContext().getAssets(),
                 receiptTitle,
                 receiptConfirm,

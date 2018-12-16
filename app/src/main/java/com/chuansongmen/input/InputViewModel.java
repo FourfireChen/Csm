@@ -14,7 +14,7 @@ class InputViewModel extends BaseViewModel {
     private MutableLiveData<String> inputMessage = new MutableLiveData<>();
     private MutableLiveData<String> pageIdLegality = new MutableLiveData<>();
 
-    public InputViewModel(@NonNull Application application) {
+    InputViewModel(@NonNull Application application) {
         super(application);
     }
 
@@ -28,6 +28,7 @@ class InputViewModel extends BaseViewModel {
 
     /**
      * 检查扫描到的单号是否符合格式
+     *
      * @param code 输入的合法性
      * @return 如果不符合，返回"非法单号"空字符串，如果符合，照常返回单号
      */
@@ -38,8 +39,9 @@ class InputViewModel extends BaseViewModel {
 
     /**
      * 订单录入
+     *
      * @param serialId 订单流水号
-     * @param pagerId 订单号
+     * @param pagerId  订单号
      */
     void input(String serialId, String pagerId) {
         dataRepo.receiveOrderFromUser(serialId,

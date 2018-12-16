@@ -2,13 +2,15 @@ package com.chuansongmen.detail;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseActivity;
 import com.chuansongmen.data.bean.Order;
-import com.chuansongmen.util.Util;
+import com.chuansongmen.util.CallUtil;
+import com.chuansongmen.util.UIUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,7 +23,7 @@ import butterknife.ButterKnife;
 
 import static android.view.View.GONE;
 
-public class DetailActivity extends BaseActivity<DetailViewModel> {
+public class DetailActivity extends BaseActivity<DetailViewModel> implements View.OnClickListener {
 
     @BindView(R.id.detail_from_name)
     TextView detailFromName;
@@ -30,7 +32,7 @@ public class DetailActivity extends BaseActivity<DetailViewModel> {
     @BindView(R.id.detail_from_address)
     TextView detailFromAddress;
     @BindView(R.id.detail_call_sender)
-    ImageView detailCallSender;
+    Button detailCallSender;
     @BindView(R.id.detail_to_name)
     TextView detailToName;
     @BindView(R.id.detail_to_phone)
@@ -38,7 +40,7 @@ public class DetailActivity extends BaseActivity<DetailViewModel> {
     @BindView(R.id.detail_to_address)
     TextView detailToAddress;
     @BindView(R.id.detail_call_getter)
-    ImageView detailCallGetter;
+    Button detailCallGetter;
     @BindView(R.id.detail_serialnumber)
     TextView detailSerialnumber;
     @BindView(R.id.order_id)
@@ -94,7 +96,7 @@ public class DetailActivity extends BaseActivity<DetailViewModel> {
     @Override
     protected void initView() {
         super.initView();
-        Util.setTypeface(getString(R.string.font),
+        UIUtil.setTypeface(getString(R.string.font),
                 getAssets(),
                 textView,
                 textView2,
@@ -115,6 +117,9 @@ public class DetailActivity extends BaseActivity<DetailViewModel> {
         detailRemark.setText(adapter.getRemark());
 
         detailOrderStatus.setText(adapter.getStatus());
+
+        detailCallGetter.setOnClickListener(this);
+        detailCallSender.setOnClickListener(this);
 
         List<IDetailAdapter.ButtonStatus> statuses = adapter.getButtonStatus(this);
 
@@ -145,6 +150,22 @@ public class DetailActivity extends BaseActivity<DetailViewModel> {
                     }
                 });
             }
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        String phoneNumber = "";
+        switch (v.getId()) {
+            case R.id.detail_call_getter:
+                phoneNumber = order.getRecipientPhone();
+                break;
+            case R.id.detail_call_sender:
+                phoneNumber = order.getOrderUserId();
+                break;
+        }
+        if (!phoneNumber.isEmpty()) {
+            CallUtil.call(this, phoneNumber);
         }
     }
 }

@@ -10,10 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import cn.bingoogolapple.qrcode.zxing.QRCodeEncoder;
 
-public class CareerInfoViewModel extends BaseViewModel {
+class CareerInfoViewModel extends BaseViewModel {
     private MutableLiveData<Bitmap> careerQRCode = new MutableLiveData<>();
 
-    public CareerInfoViewModel(
+    CareerInfoViewModel(
             @NonNull Application application) {
         super(application);
     }

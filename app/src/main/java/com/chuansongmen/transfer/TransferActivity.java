@@ -3,7 +3,6 @@ package com.chuansongmen.transfer;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseActivity;
@@ -18,7 +17,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.bingoogolapple.qrcode.zbar.ZBarView;
 
-public class  TransferActivity extends BaseActivity<TransferViewModel> {
+public class TransferActivity extends BaseActivity<TransferViewModel> {
     @BindView(R.id.transfer_scanview)
     ZBarView transferScanview;
     @BindView(R.id.transfer_name)

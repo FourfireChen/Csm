@@ -32,8 +32,9 @@ public class ScanDelegate implements QRCodeView.Delegate {
         scanCallback.onFail();
     }
 
-    public interface ScanCallback{
+    public interface ScanCallback {
         void onSuccess(String result);
+
         void onFail();
     }
 }

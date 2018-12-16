@@ -20,7 +20,7 @@ import static com.chuansongmen.data.DataRepository.SUCCESS;
 
 class DetailViewModel extends BaseViewModel {
 
-    public DetailViewModel(@NonNull Application application) {
+    DetailViewModel(@NonNull Application application) {
         super(application);
     }
 

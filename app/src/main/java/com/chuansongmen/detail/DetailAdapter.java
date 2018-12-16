@@ -10,7 +10,8 @@ import com.chuansongmen.data.bean.Order;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DetailAdapter implements IDetailAdapter {
+// TODO: 2018/12/16 这里的状态判断应该做成标志位运算
+class DetailAdapter implements IDetailAdapter {
     private Order order;
 
     DetailAdapter(Order order, DetailViewModel viewModel) {
@@ -63,6 +64,7 @@ public class DetailAdapter implements IDetailAdapter {
 
     /**
      * 订单号
+     *
      * @return
      */
     @Override
@@ -95,7 +97,8 @@ public class DetailAdapter implements IDetailAdapter {
                 status.setIcon(context.getDrawable(R.drawable.logo_icon));
                 buttonStatuses.add(status);
             }
-            return buttonStatuses;
+            if (!buttonStatuses.isEmpty())
+                return buttonStatuses;
         }
 
         List<Drawable> icons = new ArrayList<>();

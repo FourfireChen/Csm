@@ -1,7 +1,5 @@
 package com.chuansongmen.data.bean;
 
-import retrofit2.http.PUT;
-
 public class Field {
     /**
      * Order
@@ -14,7 +12,7 @@ public class Field {
     public static final String FROM_LONGITUDE = "from_longitude";
     public static final String FROM_LATITUDE = "from_latitude";
     public static final String IS_ORDER_IN_CAINIAO = "is_order_in_cainiao";
-    public static final String TO_LONGTITUDE = "to_longitude";
+    public static final String TO_LONGITUDE = "to_longitude";
     public static final String TO_LATITUDE = "to_latitude";
     public static final String NOW_WORKER = "now_worker";
     public static final String PRICE = "price";
@@ -28,7 +26,6 @@ public class Field {
     public static final String WEIGHT = "weight";
     public static final String START_TIME = "order_start_time";
     public static final String COMPLETE_TIME = "order_complete_time";
-    public static final String RECEIVE_TIME = "receiveTime";
     public static final String ORDER_CATEGORY = "category";
     public static final String STATION = "station";
     public static final String ROUTE = "route";
@@ -39,7 +36,6 @@ public class Field {
     public static final String COLLECT_FROM_USER_TIME = "collect_from_usr_time";
     public static final String COLLECT_FROM_STATION_TIME = "collect_from_station_time";
     public static final String MESSAGE_STR = "message_str";
-    public static final String ISINCAINIAO = "is_order_in_cainiao";
 
 
     /**

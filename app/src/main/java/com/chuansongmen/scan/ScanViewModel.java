@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-public class ScanViewModel extends BaseViewModel {
+class ScanViewModel extends BaseViewModel {
     private MutableLiveData<Boolean> isSuccess = new MutableLiveData<>();
 
     ScanViewModel(@NonNull Application application) {
@@ -19,7 +19,7 @@ public class ScanViewModel extends BaseViewModel {
         return isSuccess;
     }
 
-    boolean checkCodeFormate(String code) {
+    boolean checkCodeFormat(String code) {
         return false;
     }
 }

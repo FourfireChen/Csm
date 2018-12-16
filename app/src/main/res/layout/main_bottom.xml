@@ -26,7 +26,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="bottom"
-            app:srcCompat="@drawable/ic_camera_amber_800_36dp" />
+            app:srcCompat="@drawable/ic_camera_amber_36dp" />
 
         <TextView
             android:id="@+id/main_bottom_right"

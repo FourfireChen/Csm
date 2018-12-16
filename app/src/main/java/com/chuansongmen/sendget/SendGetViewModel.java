@@ -6,9 +6,9 @@ import com.chuansongmen.base.BaseViewModel;
 
 import androidx.annotation.NonNull;
 
-public class SendGetViewModel extends BaseViewModel {
+class SendGetViewModel extends BaseViewModel {
 
-    public SendGetViewModel(@NonNull Application application) {
+    SendGetViewModel(@NonNull Application application) {
         super(application);
     }
 

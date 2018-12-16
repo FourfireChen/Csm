@@ -6,7 +6,7 @@
     android:layout_height="150dp">
     <ImageView
         android:id="@+id/main_drawer_head_image"
-        app:srcCompat="@drawable/ic_camera_amber_800_36dp"
+        app:srcCompat="@drawable/ic_camera_amber_36dp"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
         android:layout_marginStart="40dp"

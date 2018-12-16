@@ -103,16 +103,16 @@ public class LoginActivity extends BaseActivity<LoginViewModel> {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.login_send_msg:
-                if (viewModel.checkPhoneFormate(phone.getText().toString())) {
+                if (viewModel.checkPhoneNumberFormat(phone.getText().toString())) {
                     viewModel.sendVerifyCode(phone.getText().toString());
                 } else {
                     toast(BAD_PHONE_TIP);
                 }
                 break;
             case R.id.login_confirm:
-                if (!viewModel.checkPhoneFormate(phone.getText().toString())) {
+                if (!viewModel.checkPhoneNumberFormat(phone.getText().toString())) {
                     toast(BAD_PHONE_TIP);
-                } else if (!viewModel.checkVerifyFormate(verifyCode.getText().toString())) {
+                } else if (!viewModel.checkVerifyCodeFormat(verifyCode.getText().toString())) {
                     toast(BAD_VERIFY_CODE_TIP);
                 } else {
                     viewModel.loginByVerify(phone.getText().toString(),

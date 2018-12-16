@@ -32,7 +32,7 @@
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            app:srcCompat="@drawable/ic_perm_identity_black_24dp" />
+            app:srcCompat="@drawable/ic_perm_identity_24dp" />
 
         <TextView
             android:layout_width="160dp"
@@ -45,7 +45,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="end"
-            app:srcCompat="@drawable/ic_chevron_right_black_24dp" />
+            app:srcCompat="@drawable/ic_chevron_right_24dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -64,7 +64,7 @@
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            app:srcCompat="@drawable/ic_work_black_24dp" />
+            app:srcCompat="@drawable/ic_work_24dp" />
 
         <TextView
             android:layout_width="150dp"
@@ -96,7 +96,7 @@
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            app:srcCompat="@drawable/ic_hearing_black_24dp" />
+            app:srcCompat="@drawable/ic_hearing_24dp" />
 
         <TextView
             android:layout_width="160dp"
@@ -109,7 +109,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="end"
-            app:srcCompat="@drawable/ic_chevron_right_black_24dp" />
+            app:srcCompat="@drawable/ic_chevron_right_24dp" />
     </LinearLayout>
 
     <Button

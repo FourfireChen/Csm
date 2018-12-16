@@ -106,23 +106,23 @@ class DetailAdapter implements IDetailAdapter {
         List<View.OnClickListener> listeners = new ArrayList<>();
         switch (order.getStatus()) {
             case NON_PICK_UP:
-                icons.add(context.getDrawable(R.drawable.ic_restore_black_48dp));
+                icons.add(context.getDrawable(R.drawable.ic_restore_48dp));
                 texts.add("滞留");
-                icons.add(context.getDrawable(R.drawable.ic_camera_amber_800_36dp));
+                icons.add(context.getDrawable(R.drawable.ic_camera_amber_36dp));
                 texts.add("录入");
                 break;
             case HAS_PICKED_UP:
             case IN_STATION:
             case TRANSPOTING:
-                icons.add(context.getDrawable(R.drawable.ic_restore_black_48dp));
+                icons.add(context.getDrawable(R.drawable.ic_restore_48dp));
                 texts.add("滞留");
                 icons.add(context.getDrawable(R.drawable.ic_attach_money_24dp));
                 texts.add("补差");
-                icons.add(context.getDrawable(R.drawable.ic_print_black_24dp));
+                icons.add(context.getDrawable(R.drawable.ic_print_24dp));
                 texts.add("印单");
                 break;
             case SENDING:
-                icons.add(context.getDrawable(R.drawable.ic_restore_black_48dp));
+                icons.add(context.getDrawable(R.drawable.ic_restore_48dp));
                 texts.add("滞留");
                 icons.add(context.getDrawable(R.drawable.ic_compare_arrows_24dp));
                 texts.add("移交");

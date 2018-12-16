@@ -77,8 +77,8 @@ public interface IDataRepository {
      *                 1：表示上班
      * @return 改变的结果
      */
-//    void updateWorkerStatus(Integer workerId, Integer status, MutableLiveData<Boolean> isSuccess);
-    void updateWorkerStatus(String workerId, Integer status, Callback<Boolean> isSuccess);
+//    void updateWorkerStatus(Integer workerId, Integer status, MutableLiveData<Boolean> callback);
+    void updateWorkerStatus(String workerId, Integer status, Callback<Boolean> callback);
 
     /**
      * 获取员工信息
@@ -104,7 +104,7 @@ public interface IDataRepository {
      * @param orderPagerId 订单号
      * @param isDelay      1为滞留，0为取消滞留
      */
-    void changeDelay(String orderPagerId, int isDelay, Callback<String> result);
+    void changeDelay(String orderPagerId, int isDelay, Callback<String> callback);
 
 
     void receiveOrderFromUser(String orderSerialId,
@@ -117,7 +117,7 @@ public interface IDataRepository {
      *
      * @param code 验证码
      */
-    void sendMessage(String phone, String code, Callback<Boolean> resultCallback);
+    void sendMessage(String phoneNumber, String code, Callback<Boolean> resultCallback);
 
     void getCacheUserPhoneNumber(Context context, Callback<String> callback);
 

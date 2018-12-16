@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SendGetListAdapter extends RecyclerView.Adapter<SendGetListAdapter.SendGetViewHolder> {
+class SendGetListAdapter extends RecyclerView.Adapter<SendGetListAdapter.SendGetViewHolder> {
 
     private List<Order> orders;
     private ItemClickListener itemCallButtonListener;
@@ -55,10 +55,10 @@ public class SendGetListAdapter extends RecyclerView.Adapter<SendGetListAdapter.
     public void onBindViewHolder(@NonNull SendGetViewHolder sendGetViewHolder,
                                  final int i) {
         Order order = orders.get(i);
-        sendGetViewHolder.sendgetItemAddress.setText(order.getRecipientAddress());
-        sendGetViewHolder.sendgetItemName.setText(order.getRecipientName());
-        sendGetViewHolder.sendgetItemPhonenumber.setText(order.getRecipientPhone());
-        sendGetViewHolder.sendgetItemCallButton.setOnClickListener(new View.OnClickListener() {
+        sendGetViewHolder.sendGetItemAddress.setText(order.getRecipientAddress());
+        sendGetViewHolder.sendGetItemName.setText(order.getRecipientName());
+        sendGetViewHolder.sendGetItemPhoneNumber.setText(order.getRecipientPhone());
+        sendGetViewHolder.sendGetItemCallButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (itemCallButtonListener != null)
@@ -83,13 +83,13 @@ public class SendGetListAdapter extends RecyclerView.Adapter<SendGetListAdapter.
     class SendGetViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.sendget_item_address)
-        TextView sendgetItemAddress;
+        TextView sendGetItemAddress;
         @BindView(R.id.sendget_item_name)
-        TextView sendgetItemName;
+        TextView sendGetItemName;
         @BindView(R.id.sendget_item_call_button)
-        Button sendgetItemCallButton;
+        Button sendGetItemCallButton;
         @BindView(R.id.sendget_item_phonenumber)
-        TextView sendgetItemPhonenumber;
+        TextView sendGetItemPhoneNumber;
 
         SendGetViewHolder(@NonNull View itemView) {
             super(itemView);

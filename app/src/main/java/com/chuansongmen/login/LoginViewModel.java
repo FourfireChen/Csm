@@ -34,11 +34,11 @@ class LoginViewModel extends BaseViewModel {
         super(application);
     }
 
-    MutableLiveData<String> getSendMessageResult() {
+    LiveData<String> getSendMessageResult() {
         return sendMessageResult;
     }
 
-    MutableLiveData<String> getIsLoginSuccess() {
+    LiveData<String> getIsLoginSuccess() {
         return isLoginSuccess;
     }
 
@@ -127,12 +127,12 @@ class LoginViewModel extends BaseViewModel {
         verify = null;
     }
 
-    boolean checkPhoneFormate(String phone) {
-        return !phone.isEmpty() &&
-                phone.toCharArray().length == 11;
+    boolean checkPhoneNumberFormat(String phoneNumber) {
+        return !phoneNumber.isEmpty() &&
+                phoneNumber.toCharArray().length == 11;
     }
 
-    boolean checkVerifyFormate(String code) {
+    boolean checkVerifyCodeFormat(String code) {
         return !code.isEmpty() && code.toCharArray().length == 4;
     }
 }

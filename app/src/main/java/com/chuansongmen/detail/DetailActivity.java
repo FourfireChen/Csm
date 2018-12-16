@@ -36,7 +36,7 @@ public class DetailActivity extends BaseActivity<DetailViewModel> implements Vie
     @BindView(R.id.detail_to_name)
     TextView detailToName;
     @BindView(R.id.detail_to_phone)
-    TextView detailToPhone;
+    TextView detailToPhoneNumber;
     @BindView(R.id.detail_to_address)
     TextView detailToAddress;
     @BindView(R.id.detail_call_getter)
@@ -103,11 +103,11 @@ public class DetailActivity extends BaseActivity<DetailViewModel> implements Vie
                 detailOrderStatus);
 
         detailFromName.setText(adapter.getFrom().getName());
-        detailFromPhone.setText(adapter.getFrom().getPhone());
+        detailFromPhone.setText(adapter.getFrom().getPhoneNumber());
         detailFromAddress.setText(adapter.getFrom().getAddress());
 
         detailToName.setText(adapter.getTo().getName());
-        detailToPhone.setText(adapter.getTo().getPhone());
+        detailToPhoneNumber.setText(adapter.getTo().getPhoneNumber());
         detailToAddress.setText(adapter.getTo().getAddress());
 
         detailSerialnumber.setText(adapter.getSerialId());

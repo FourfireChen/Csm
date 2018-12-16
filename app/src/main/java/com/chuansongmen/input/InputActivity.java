@@ -64,10 +64,10 @@ public class InputActivity extends BaseActivity<InputViewModel> {
             @Override
             public void onChanged(String s) {
                 if (s.equals(DataRepository.SUCCESS)) {
-                    Toast.makeText(InputActivity.this, "录入成功", Toast.LENGTH_SHORT).show();
+                    toast("录入成功");
                     finish();
                 } else {
-                    Toast.makeText(InputActivity.this, s, Toast.LENGTH_SHORT).show();
+                    toast(s);
                     inputScan.startSpot();
                 }
             }

@@ -10,6 +10,6 @@
     <string name="order">orders</string>
     <string name="confirm_warning">在客户的要求下 与客户明确约定其他时间收派 才可选择滞留 私自滞留导致客户投诉将受到重罚</string>
     <string name="sharedpreferences_name">csm</string>
-    <string name="phone">phonenumber</string>
+    <string name="phoneNumber">phonenumber</string>
     <string name="login_success">登录成功</string>
 </resources>

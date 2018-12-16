@@ -8,9 +8,8 @@ import androidx.annotation.NonNull;
 
 class PrintViewModel extends BaseViewModel {
 
-    public PrintViewModel(@NonNull Application application) {
+    PrintViewModel(@NonNull Application application) {
         super(application);
     }
-
 
 }

@@ -23,15 +23,15 @@ interface IDetailAdapter {
 
     class Customer {
         private String name;
-        private String phone;
+        private String phoneNumber;
         private String address;
 
         Customer() {
         }
 
-        Customer(String name, String phone, String address) {
+        Customer(String name, String phoneNumber, String address) {
             this.name = name;
-            this.phone = phone;
+            this.phoneNumber = phoneNumber;
             this.address = address;
         }
 
@@ -43,12 +43,12 @@ interface IDetailAdapter {
             this.name = name;
         }
 
-        String getPhone() {
-            return phone;
+        String getPhoneNumber() {
+            return phoneNumber;
         }
 
-        void setPhone(String phone) {
-            this.phone = phone;
+        void setPhoneNumber(String phoneNumber) {
+            this.phoneNumber = phoneNumber;
         }
 
         String getAddress() {

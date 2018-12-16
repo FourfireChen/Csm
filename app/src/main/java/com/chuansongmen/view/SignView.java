@@ -70,9 +70,9 @@ public class SignView extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        //这里创建了一个bitmap用来保存绘制图形
-        //并且要通过canvas来操作绘制
-        //然后先把背景颜色画了
+        // 这里创建了一个bitmap用来保存绘制图形
+        // 并且要通过canvas来操作绘制
+        // 然后先把背景颜色画了
         cacheBitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
         cacheCanvas = new Canvas(cacheBitmap);
         cacheCanvas.drawColor(backColor);

@@ -20,7 +20,7 @@ public class Field {
     public static final String IS_DELAY = "is_delay";
     public static final String DELAY_TIME = "delay_time";
     public static final String RECIPIENT_NAME = "recipient_name";
-    public static final String RECIPIENT_PHONE = "recipient_phone";
+    public static final String RECIPIENT_PHONENUMBER = "recipient_phone";
     public static final String RECIPIENT_ADDRESS = "recipient_address";
     public static final String PRICE_PROTECTION = "price_protection";
     public static final String WEIGHT = "weight";

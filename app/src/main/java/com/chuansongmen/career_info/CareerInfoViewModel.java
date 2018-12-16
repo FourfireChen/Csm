@@ -7,6 +7,7 @@ import com.chuansongmen.base.BaseViewModel;
 import com.chuansongmen.util.ThreadUtil;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import cn.bingoogolapple.qrcode.zxing.QRCodeEncoder;
 
@@ -18,7 +19,7 @@ class CareerInfoViewModel extends BaseViewModel {
         super(application);
     }
 
-    MutableLiveData<Bitmap> getCareerQRCode() {
+    LiveData<Bitmap> getCareerQRCode() {
         return careerQRCode;
     }
 

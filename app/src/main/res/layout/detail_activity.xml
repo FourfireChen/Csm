@@ -70,7 +70,7 @@
         android:layout_marginTop="56dp"
         android:layout_marginEnd="8dp"
         android:backgroundTint="@color/colorPrimary"
-        android:foreground="@drawable/ic_phone_black_24dp"
+        android:foreground="@drawable/ic_phone_24dp"
         android:foregroundGravity="center"
         android:foregroundTint="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -138,7 +138,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:backgroundTint="@color/colorPrimary"
-        android:foreground="@drawable/ic_phone_black_24dp"
+        android:foreground="@drawable/ic_phone_24dp"
         android:foregroundGravity="center"
         android:foregroundTint="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -278,7 +278,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
-                    android:src="@drawable/ic_restore_black_48dp" />
+                    android:src="@drawable/ic_restore_48dp" />
 
                 <TextView
                     android:id="@+id/detail_first_text"
@@ -309,7 +309,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
-                    android:src="@drawable/ic_camera_amber_800_36dp" />
+                    android:src="@drawable/ic_camera_amber_36dp" />
 
                 <TextView
                     android:id="@+id/detail_second_text"
@@ -340,7 +340,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
-                    android:src="@drawable/ic_print_black_24dp" />
+                    android:src="@drawable/ic_print_24dp" />
 
                 <TextView
                     android:id="@+id/detail_third_text"

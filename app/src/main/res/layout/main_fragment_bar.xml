@@ -32,7 +32,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center_vertical"
-                    app:srcCompat="@drawable/ic_person_pin_black_24dp" />
+                    app:srcCompat="@drawable/ic_person_pin_24dp" />
 
                 <TextView
                     android:id="@+id/main_toolbar_title"
@@ -47,7 +47,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center|end"
-                    app:srcCompat="@drawable/ic_payment_black_24dp" />
+                    app:srcCompat="@drawable/ic_payment_24dp" />
             </FrameLayout>
         </androidx.appcompat.widget.Toolbar>
 

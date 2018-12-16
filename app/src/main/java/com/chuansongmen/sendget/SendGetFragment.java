@@ -24,11 +24,11 @@ import butterknife.Unbinder;
 
 public class SendGetFragment extends BaseFragment<SendGetViewModel> {
     @BindView(R.id.sendget_lists)
-    RecyclerView sendgetLists;
+    RecyclerView sendGetLists;
     @BindView(R.id.sendget_progress)
-    ProgressBar sendgetProgress;
+    ProgressBar sendGetProgress;
     private SendGetListAdapter adapter = new SendGetListAdapter();
-    Unbinder unbinder;
+    private Unbinder unbinder;
 
 
     @Nullable
@@ -38,8 +38,8 @@ public class SendGetFragment extends BaseFragment<SendGetViewModel> {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.send_get_fragment, container, false);
         unbinder = ButterKnife.bind(this, view);
-        sendgetLists.setAdapter(adapter);
-        sendgetLists.setLayoutManager(new LinearLayoutManager(container.getContext()));
+        sendGetLists.setAdapter(adapter);
+        sendGetLists.setLayoutManager(new LinearLayoutManager(container.getContext()));
         return view;
     }
 

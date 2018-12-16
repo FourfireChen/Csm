@@ -7,6 +7,7 @@ import com.chuansongmen.common.Callback;
 import com.chuansongmen.data.bean.Worker;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 class InputViewModel extends BaseViewModel {
@@ -18,11 +19,11 @@ class InputViewModel extends BaseViewModel {
         super(application);
     }
 
-    MutableLiveData<String> getInputMessage() {
+    LiveData<String> getInputMessage() {
         return inputMessage;
     }
 
-    MutableLiveData<String> getPageIdLegality() {
+    LiveData<String> getPageIdLegality() {
         return pageIdLegality;
     }
 

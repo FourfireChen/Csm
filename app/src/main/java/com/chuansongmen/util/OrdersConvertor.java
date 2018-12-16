@@ -46,7 +46,7 @@ import static com.chuansongmen.data.bean.Field.PRICE;
 import static com.chuansongmen.data.bean.Field.PRICE_PROTECTION;
 import static com.chuansongmen.data.bean.Field.RECIPIENT_ADDRESS;
 import static com.chuansongmen.data.bean.Field.RECIPIENT_NAME;
-import static com.chuansongmen.data.bean.Field.RECIPIENT_PHONE;
+import static com.chuansongmen.data.bean.Field.RECIPIENT_PHONENUMBER;
 import static com.chuansongmen.data.bean.Field.REMARK;
 import static com.chuansongmen.data.bean.Field.ROUTE;
 import static com.chuansongmen.data.bean.Field.START_TIME;
@@ -107,7 +107,7 @@ public class OrdersConvertor implements Converter<ResponseBody, List<Order>> {
                     .value(Arrays.asList(Order.Status.values()).indexOf(value.getStatus()));
             out.name(IS_DELAY).value(value.isDelay() ? 1 : 0);
             out.name(RECIPIENT_NAME).value(value.getRecipientName());
-            out.name(RECIPIENT_PHONE).value(value.getRecipientPhone());
+            out.name(RECIPIENT_PHONENUMBER).value(value.getRecipientPhone());
             out.name(RECIPIENT_ADDRESS).value(value.getRecipientAddress());
             out.name(PRICE_PROTECTION).value(value.getPriceProtection());
             out.name(WEIGHT).value(value.getWeight());
@@ -209,7 +209,7 @@ public class OrdersConvertor implements Converter<ResponseBody, List<Order>> {
                     case RECIPIENT_NAME:
                         order.setRecipientName(in.nextString());
                         break;
-                    case RECIPIENT_PHONE:
+                    case RECIPIENT_PHONENUMBER:
                         order.setRecipientPhone(in.nextString());
                         break;
                     case RECIPIENT_ADDRESS:

@@ -7,6 +7,7 @@ import com.chuansongmen.common.Callback;
 import com.chuansongmen.data.bean.Worker;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 class TransferViewModel extends BaseViewModel {
@@ -17,11 +18,11 @@ class TransferViewModel extends BaseViewModel {
         super(application);
     }
 
-    MutableLiveData<Worker> getTargetWorker() {
+    LiveData<Worker> getTargetWorker() {
         return targetWorker;
     }
 
-    MutableLiveData<Boolean> getIsTransferSuccess() {
+    LiveData<Boolean> getIsTransferSuccess() {
         return isTransferSuccess;
     }
 

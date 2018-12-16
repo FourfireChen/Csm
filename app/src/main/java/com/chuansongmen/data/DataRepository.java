@@ -208,17 +208,17 @@ public class DataRepository implements IDataRepository {
     @Override
     public void updateWorkerStatus(String workerId,
                                    Integer status,
-                                   final Callback<Boolean> isSuccess) {
+                                   final Callback<Boolean> callback) {
         Call<ResponseBody> call = remoteData.updateWorkerStatus(workerId, status);
         call.enqueue(new retrofit2.Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                isSuccess.onResponse(response.isSuccessful());
+                callback.onResponse(response.isSuccessful());
             }
 
             @Override
             public void onFailure(Call call, Throwable t) {
-                isSuccess.onResponse(false);
+                callback.onResponse(false);
                 Log.e(TAG, "onFailure: ", t);
                 t.printStackTrace();
             }
@@ -265,7 +265,7 @@ public class DataRepository implements IDataRepository {
     @Override
     public void changeDelay(final String orderPagerId,
                             final int isDelay,
-                            final Callback<String> result) {
+                            final Callback<String> callback) {
         ThreadUtil.execute(new Runnable() {
             @Override
             public void run() {
@@ -276,16 +276,16 @@ public class DataRepository implements IDataRepository {
                     Response response = call.execute();
                     if (response != null) {
                         if (response.isSuccessful()) {
-                            result.onResponse(SUCCESS);
+                            callback.onResponse(SUCCESS);
                         } else {
-                            result.onResponse(
+                            callback.onResponse(
                                     response.errorBody() != null ? response.errorBody().string() :
                                             FAIL);
                         }
                     }
                 } catch (JSONException | IOException e) {
                     e.printStackTrace();
-                    result.onResponse(e.getMessage());
+                    callback.onResponse(e.getMessage());
                 }
             }
         });
@@ -350,7 +350,7 @@ public class DataRepository implements IDataRepository {
     }
 
     @Override
-    public void sendMessage(final String phone,
+    public void sendMessage(final String phoneNumber,
                             final String code,
                             final Callback<Boolean> resultCallback) {
         ThreadUtil.execute(new Runnable() {
@@ -369,7 +369,7 @@ public class DataRepository implements IDataRepository {
                     //使用post提交
                     request.setMethod(MethodType.POST);
                     //必填:待发送手机号。支持以逗号分隔的形式进行批量调用，批量上限为1000个手机号码,批量调用相对于单条调用及时性稍有延迟,验证码类型的短信推荐使用单条调用的方式；发送国际/港澳台消息时，接收号码格式为国际区号+号码，如“85200000000”
-                    request.setPhoneNumbers(phone);
+                    request.setPhoneNumbers(phoneNumber);
                     //必填:短信签名-可在短信控制台中找到
                     request.setSignName(SMS_SIGN_NAME);
                     //必填:短信模板-可在短信控制台中找到，发送国际/港澳台消息时，请使用国际/港澳台短信模版

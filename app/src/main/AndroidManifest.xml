@@ -45,13 +45,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".main.MainActivity" >
+        <activity android:name=".main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".login.LoginActivity">
+
         </activity>
         <activity android:name=".scan.ScanActivity" />
         <activity android:name=".receipt.ReceiptActivity" />
@@ -61,10 +62,13 @@
         <activity android:name=".print.PrintActivity" />
         <activity android:name=".input.InputActivity" />
         <activity android:name=".transfer.TransferActivity" />
+
         <service android:name=".position.PositionService" />
         <receiver android:name=".position.PositionUploadReceiver" />
+
         <service android:name="com.amap.api.location.APSService" />
         <service android:name=".position.PositionServiceFore" />
+
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="fa989ce2f1b0f38a74d14e5e373c81d2" />

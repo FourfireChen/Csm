@@ -52,4 +52,6 @@ dependencies {
 
     implementation 'com.amap.api:location:4.4.0'
 
+    // bugly
+    implementation 'com.tencent.bugly:crashreport:2.8.6.0'
 }

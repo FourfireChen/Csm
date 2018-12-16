@@ -87,16 +87,7 @@ public class DataRepository implements IDataRepository {
         call.enqueue(new retrofit2.Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.isSuccessful()) {
-                    isSuccess.onResponse(true);
-                } else {
-                    try {
-                        Log.e(TAG, "updateOrder onResponse: " + response.errorBody().string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    isSuccess.onResponse(false);
-                }
+                isSuccess.onResponse(response.isSuccessful());
             }
 
             @Override
@@ -113,12 +104,7 @@ public class DataRepository implements IDataRepository {
         call.enqueue(new retrofit2.Callback<Position>() {
             @Override
             public void onResponse(Call<Position> call, Response<Position> response) {
-                if (response.isSuccessful()) {
-                    callback.onResponse(response.body());
-                } else {
-                    Log.e(TAG, "queryOrderPos onResponse: ");
-                    callback.onResponse(null);
-                }
+                callback.onResponse(response.isSuccessful() ? response.body() : null);
             }
 
             @Override
@@ -190,11 +176,7 @@ public class DataRepository implements IDataRepository {
         remoteData.uploadForPush(workerId, regId).enqueue(new retrofit2.Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.isSuccessful()) {
-                    callback.onResponse(true);
-                } else {
-                    callback.onResponse(false);
-                }
+                callback.onResponse(response.isSuccessful());
             }
 
             @Override
@@ -212,11 +194,7 @@ public class DataRepository implements IDataRepository {
                     @Override
                     public void onResponse(Call<ResponseBody> call,
                                            Response<ResponseBody> response) {
-                        if (response.isSuccessful()) {
-                            callback.onResponse(true);
-                        } else {
-                            callback.onResponse(false);
-                        }
+                        callback.onResponse(response.isSuccessful());
                     }
 
                     @Override
@@ -235,16 +213,7 @@ public class DataRepository implements IDataRepository {
         call.enqueue(new retrofit2.Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.isSuccessful()) {
-                    isSuccess.onResponse(true);
-                } else {
-                    try {
-                        Log.e(TAG, "onResponse: " + response.errorBody().string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    isSuccess.onResponse(false);
-                }
+                isSuccess.onResponse(response.isSuccessful());
             }
 
             @Override
@@ -261,10 +230,7 @@ public class DataRepository implements IDataRepository {
         remoteData.getWorkerInfo(workerId).enqueue(new retrofit2.Callback<Worker>() {
             @Override
             public void onResponse(Call<Worker> call, Response<Worker> response) {
-                if (response.isSuccessful())
-                    callback.onResponse(response.body());
-                else
-                    callback.onResponse(null);
+                callback.onResponse(response.isSuccessful() ? response.body() : null);
             }
 
             @Override
@@ -280,10 +246,7 @@ public class DataRepository implements IDataRepository {
         remoteData.getAllRoutes().enqueue(new retrofit2.Callback<List<Route>>() {
             @Override
             public void onResponse(Call<List<Route>> call, Response<List<Route>> response) {
-                if (response.isSuccessful())
-                    callback.onResponse(response.body());
-                else
-                    callback.onResponse(null);
+                callback.onResponse(response.isSuccessful() ? response.body() : null);
             }
 
             @Override
@@ -368,19 +331,17 @@ public class DataRepository implements IDataRepository {
                     jsonObject.put(WORKER_SEX, 1);
                     jsonObject.put(WORKER_CATEGORY, 3);
                     jsonObject.put(BELONG_STATION, "test2");
-                    RequestBody body = RequestBody.create(MediaType.parse("application/json"),
+                    RequestBody body = RequestBody.create(MediaType.parse(REQUEST_TYPE),
                             jsonObject.toString());
                     Call call = remoteData.addMan(body);
-                    Log.i(TAG, "run: " + call.request().body().contentType().toString());
+
                     Response response = call.execute();
 
-                    if (response.isSuccessful()) {
-                        callback.onResponse(true);
-                        Log.i(TAG, "addTestWorker: 成功");
-                    } else {
-                        callback.onResponse(false);
-                        Log.i(TAG, "addTestWorker: 失败" + response.errorBody().string());
-                    }
+                    callback.onResponse(response.isSuccessful());
+                    Log.i(TAG,
+                            "addTestWorker:" +
+                                    (response.isSuccessful() ? "成功" :
+                                            "失败" + response.errorBody().toString()));
                 } catch (IOException | JSONException e) {
                     e.printStackTrace();
                 }

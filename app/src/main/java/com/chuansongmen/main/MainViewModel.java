@@ -15,14 +15,14 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 
-public class MainViewModel extends BaseViewModel {
+class MainViewModel extends BaseViewModel {
     private MutableLiveData<Boolean> isWorked = new MutableLiveData<>();
-    private static final int POINT_ORDER_PRICE = 10;
+
     private MutableLiveData<List<List<Order>>> orders = new MutableLiveData<>();
+
     private MutableLiveData<Boolean> isLogoutSuccess = new MutableLiveData<>();
 
-    public MainViewModel(
-            @NonNull Application application) {
+    MainViewModel(@NonNull Application application) {
         super(application);
     }
 
@@ -30,16 +30,16 @@ public class MainViewModel extends BaseViewModel {
         return isWorked;
     }
 
-    MutableLiveData<List<List<Order>>> getOrders() {
+    LiveData<List<List<Order>>> getOrders() {
         return orders;
     }
 
-    MutableLiveData<Boolean> getIsLogoutSuccess() {
+    LiveData<Boolean> getIsLogoutSuccess() {
         return isLogoutSuccess;
     }
 
     void updateWorkerStatus(int status) {
-        dataRepo.updateWorkerStatus("1", status, new Callback<Boolean>() {
+        dataRepo.updateWorkerStatus(Worker.getInstance().getId(), status, new Callback<Boolean>() {
             @Override
             public void onResponse(Boolean result) {
                 isWorked.postValue(result);
@@ -47,9 +47,8 @@ public class MainViewModel extends BaseViewModel {
         });
     }
 
-
     void updateOrders() {
-        dataRepo.getWorkerOrders("1", new Callback<List<Order>>() {
+        dataRepo.getWorkerOrders(Worker.getInstance().getId(), new Callback<List<Order>>() {
             @Override
             public void onResponse(List<Order> result) {
                 List<List<Order>> value;
@@ -63,7 +62,6 @@ public class MainViewModel extends BaseViewModel {
             }
         });
     }
-
 
     private List<List<Order>> classifyOrders(List<Order> allOrders) {
         List<List<Order>> result = new ArrayList<>();
@@ -105,7 +103,6 @@ public class MainViewModel extends BaseViewModel {
         }
         return result;
     }
-
 
     void logout() {
         dataRepo.logout(getApplication(), Worker.getInstance().getId(), new Callback<Boolean>() {

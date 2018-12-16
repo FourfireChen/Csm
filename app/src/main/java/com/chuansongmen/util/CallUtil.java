@@ -18,7 +18,7 @@ public class CallUtil {
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) !=
                 PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(context, "没有拨打电话权限，请检查权限", Toast.LENGTH_SHORT).show();
-            Log.e("Shawn", "call: 没有权限");
+            Log.e(context.getPackageName(), "拨打电话: 没有权限");
             return;
         }
         context.startActivity(intent);

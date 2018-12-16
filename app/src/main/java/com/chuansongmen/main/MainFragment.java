@@ -74,7 +74,6 @@ public class MainFragment extends BaseFragment<MainViewModel> implements View.On
     @BindView(R.id.main_viewpager)
     ViewPager mainViewpager;
     private TextView mainBottomGet, mainBottomSend;
-    private Button logout;
     private DrawerLayout mainDrawerLayout;
     private Switch workerStatus;
 
@@ -154,7 +153,7 @@ public class MainFragment extends BaseFragment<MainViewModel> implements View.On
         workerStatus = mainDrawerLayout.findViewById(R.id.main_drawer_workswitch);
         LinearLayout workerSound = mainDrawerLayout.findViewById(R.id.main_drawer_careersound);
         LinearLayout workerId = mainDrawerLayout.findViewById(R.id.main_drawer_id);
-        logout = mainDrawerLayout.findViewById(R.id.main_logout);
+        Button logout = mainDrawerLayout.findViewById(R.id.main_logout);
         CardView mainBottom = mainActivity.getBottom();
         mainBottomGet = mainBottom.findViewById(R.id.main_bottom_left);
         mainBottomSend = mainBottom.findViewById(R.id.main_bottom_right);
@@ -285,7 +284,7 @@ public class MainFragment extends BaseFragment<MainViewModel> implements View.On
     }
 
     @Override
-    public void changeWorkderStatus(boolean status) {
+    public void changeWorkerStatus(boolean status) {
         workerStatus.setChecked(status);
     }
 

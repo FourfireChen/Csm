@@ -13,7 +13,7 @@ interface IMainActivity {
     CardView getBottom();
 
     interface IMainView {
-        void changeWorkderStatus(boolean status);
+        void changeWorkerStatus(boolean status);
 
         void refreshList(List<List<Order>> data);
     }

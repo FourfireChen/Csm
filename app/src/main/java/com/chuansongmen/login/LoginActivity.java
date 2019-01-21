@@ -1,6 +1,5 @@
 package com.chuansongmen.login;
 
-import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
@@ -11,10 +10,8 @@ import com.chuansongmen.base.BaseActivity;
 import com.chuansongmen.main.MainActivity;
 import com.chuansongmen.util.UIUtil;
 
-import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.chuansongmen.data.DataRepository.FAIL;
@@ -33,14 +30,10 @@ public class LoginActivity extends BaseActivity<LoginViewModel> {
     private static final String BAD_VERIFY_CODE_TIP = "请填写4位数验证码";
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        hadCache();
-        setContentView(R.layout.login_activity);
-        ButterKnife.bind(this);
-        initView();
-        initData();
+    protected int getContentLayoutId() {
+        return R.layout.login_activity;
     }
+
 
     private void hadCache() {
         viewModel.hadUserPhoneNumberCache().observe(this, new Observer<String>() {
@@ -53,7 +46,12 @@ public class LoginActivity extends BaseActivity<LoginViewModel> {
         });
     }
 
-    private void initData() {
+    protected void initData() {
+        hadCache();
+    }
+
+    @Override
+    protected void initBind() {
         viewModel.getSendMessageResult().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {

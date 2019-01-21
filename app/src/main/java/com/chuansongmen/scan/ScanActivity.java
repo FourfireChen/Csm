@@ -1,6 +1,5 @@
 package com.chuansongmen.scan;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,9 +10,7 @@ import com.chuansongmen.base.BaseActivity;
 import com.chuansongmen.util.ScanDelegate;
 import com.chuansongmen.view.SignView;
 
-import androidx.annotation.Nullable;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.bingoogolapple.qrcode.core.BarcodeType;
 import cn.bingoogolapple.qrcode.zbar.ZBarView;
@@ -31,11 +28,8 @@ public class ScanActivity extends BaseActivity<ScanViewModel> {
     Button scanSignClear;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.scan_activity);
-        ButterKnife.bind(this);
-        initView();
+    protected int getContentLayoutId() {
+        return R.layout.scan_activity;
     }
 
     @Override

@@ -1,11 +1,6 @@
 package com.chuansongmen;
 
-import android.os.Bundle;
-
 import com.chuansongmen.base.BaseActivity;
-
-import androidx.annotation.Nullable;
-import butterknife.ButterKnife;
 
 public class TestActivity extends BaseActivity<TestViewModel> {
 
@@ -35,11 +30,8 @@ public class TestActivity extends BaseActivity<TestViewModel> {
 
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_activity);
-        ButterKnife.bind(this);
-        initView();
+    protected int getContentLayoutId() {
+        return R.layout.main_activity;
     }
 
     @Override

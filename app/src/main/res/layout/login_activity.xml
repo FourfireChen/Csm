@@ -5,15 +5,6 @@
 
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:scaleType="fitXY"
-        android:src="@mipmap/login_header"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -27,66 +18,60 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/login_phone"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/edittext_background"
+        android:backgroundTint="@color/mb_gray"
+        android:hint="手机号码"
+        android:paddingStart="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="26dp"
         android:layout_marginEnd="8dp"
-        android:elevation="20dp"
-        app:cardBackgroundColor="@color/colorAccent"
-        app:cardCornerRadius="10dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2">
+        app:layout_constraintTop_toBottomOf="@+id/login_phone">
 
-        <LinearLayout
-            android:layout_width="280dp"
+        <EditText
+            android:id="@+id/login_verify_code"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_gravity="center"
+            android:layout_weight="4"
+            android:background="@drawable/edittext_background"
+            android:backgroundTint="@color/mb_gray"
+            android:hint="请输入验证码"
+            android:paddingStart="16dp"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/login_send_msg"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="20dp"
-            android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/login_phone"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/edittext_background"
-                android:gravity="center"
-                android:hint="手机号码" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25sp"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/login_verify_code"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="4"
-                    android:background="@drawable/edittext_background"
-                    android:gravity="center"
-                    android:hint="请输入验证码"
-                    android:textSize="20sp" />
-
-                <Button
-                    android:id="@+id/login_send_msg"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="5dp"
-                    android:layout_weight="3"
-                    android:backgroundTint="@color/colorPrimary"
-                    android:minHeight="60dp"
-                    android:text="发送验证码"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="18sp" />
-            </LinearLayout>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+            android:layout_marginStart="5dp"
+            android:layout_weight="3"
+            android:backgroundTint="@color/colorPrimary"
+            android:minHeight="60dp"
+            android:text="发送验证码"
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp" />
+    </LinearLayout>
 
 
     <Button
@@ -94,15 +79,16 @@
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:backgroundTint="@color/colorPrimary"
         android:gravity="center"
         android:padding="15dp"
         android:text="确认登录"
-        android:textColor="@color/colorAccent"
+        android:textColor="@android:color/background_light"
         android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
 </androidx.constraintlayout.widget.ConstraintLayout>

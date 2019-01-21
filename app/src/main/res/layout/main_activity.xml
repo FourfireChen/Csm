@@ -4,27 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <LinearLayout
-        android:orientation="vertical"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <LinearLayout
             android:id="@+id/main_fragment_container"
+            android:layout_above="@id/main_bottom"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="8"
+            android:layout_height="match_parent"
             android:orientation="horizontal" />
 
         <include
+            android:id="@+id/main_bottom"
             layout="@layout/main_bottom"
-
+            android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:layout_height="0dp"
+            android:layout_height="65dp"
             android:layout_gravity="bottom" />
-    </LinearLayout>
+    </RelativeLayout>
 
     <include
         android:id="@+id/main_drawer"
@@ -32,6 +29,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start" />
-
 
 </androidx.drawerlayout.widget.DrawerLayout>

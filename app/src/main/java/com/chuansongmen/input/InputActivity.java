@@ -14,7 +14,6 @@ import com.chuansongmen.util.ScanDelegate;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.bingoogolapple.qrcode.core.BarcodeType;
 import cn.bingoogolapple.qrcode.zbar.ZBarView;
@@ -34,10 +33,13 @@ public class InputActivity extends BaseActivity<InputViewModel> {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.input_activity);
-        ButterKnife.bind(this);
         initView();
         initData();
+    }
+
+    @Override
+    protected int getContentLayoutId() {
+        return R.layout.input_activity;
     }
 
     @Override
@@ -57,9 +59,9 @@ public class InputActivity extends BaseActivity<InputViewModel> {
         }, true));
     }
 
-    private void initData() {
-        order = getIntent().getExtras().getParcelable(getString(R.string.order));
-
+    @Override
+    protected void initBind() {
+        super.initBind();
         viewModel.getInputMessage().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
@@ -78,6 +80,10 @@ public class InputActivity extends BaseActivity<InputViewModel> {
                 inputOrderStatus.setText(s);
             }
         });
+    }
+
+    protected void initData() {
+        order = getIntent().getExtras().getParcelable(getString(R.string.order));
     }
 
     @Override

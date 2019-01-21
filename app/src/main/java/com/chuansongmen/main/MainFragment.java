@@ -256,7 +256,7 @@ public class MainFragment extends BaseFragment<MainViewModel> implements View.On
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.main_drawer_careersound:
-
+                // TODO: 2018/12/17 职员之声
                 break;
             case R.id.main_drawer_id:
                 startActivity(CareerInfoActivity.class, null);

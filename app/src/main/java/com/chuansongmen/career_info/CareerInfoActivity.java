@@ -1,17 +1,14 @@
 package com.chuansongmen.career_info;
 
 import android.graphics.Bitmap;
-import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseActivity;
 
-import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class CareerInfoActivity extends BaseActivity<CareerInfoViewModel> {
     @BindView(R.id.careerinfo_name)
@@ -27,13 +24,9 @@ public class CareerInfoActivity extends BaseActivity<CareerInfoViewModel> {
     @BindView(R.id.careerinfo_id)
     TextView careerinfoId;
 
-
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.careerinfo_activity);
-        ButterKnife.bind(this);
-        initView();
+    protected int getContentLayoutId() {
+        return R.layout.careerinfo_activity;
     }
 
     @Override

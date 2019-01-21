@@ -154,7 +154,7 @@
         android:layout_marginTop="28dp"
         android:layout_marginEnd="8dp"
         android:text="流水号"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -178,7 +178,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="单号"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintStart_toStartOf="@id/textView3"
         app:layout_constraintTop_toBottomOf="@id/textView3" />
 
@@ -202,7 +202,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:text="订单状态"
-        android:textColor="@color/colorWarning"
+        android:textColor="@color/colorAccent"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -229,7 +229,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="发件人备注"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/textView3"
@@ -278,6 +278,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
+                    android:tint="@color/colorAccent"
                     android:src="@drawable/ic_restore_48dp" />
 
                 <TextView
@@ -309,6 +310,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
+                    android:tint="@color/colorAccent"
                     android:src="@drawable/ic_camera_amber_36dp" />
 
                 <TextView
@@ -340,6 +342,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
+                    android:tint="@color/colorAccent"
                     android:src="@drawable/ic_print_24dp" />
 
                 <TextView

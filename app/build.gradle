@@ -29,13 +29,14 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
-    //butterknife
+    // butterknife
     implementation 'com.jakewharton:butterknife:9.0.0-rc1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0-rc1'
-    //jetpack
+    // jetpack
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     implementation "androidx.room:room-runtime:2.1.0-alpha03"
     //二维码

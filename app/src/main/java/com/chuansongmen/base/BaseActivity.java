@@ -8,9 +8,11 @@ import android.widget.Toast;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
+import butterknife.ButterKnife;
 
 /**
  * 这个类是本项目中封装的基本类，提供一些自己封装的方法，并且提供默认的viewModel
@@ -26,9 +28,26 @@ public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatAct
         super.onCreate(savedInstanceState);
         //禁止横屏了
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
+        setContentView(getContentLayoutId());
+        ButterKnife.bind(this);
+        // 初始化从其它Activity传过来的数据
+        initData();
+        // 初始化ViewModel
         initViewModel();
+        // 初始化视图
+        initView();
+        // 初始化绑定关系
+        initBind();
+        // 初始化服务
+        initService();
     }
+
+    protected void initService() {
+    }
+
+
+    protected abstract @LayoutRes
+    int getContentLayoutId();
 
     /**
      * 这里用了反射，获取了子类的泛型Class
@@ -42,7 +61,14 @@ public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatAct
         }
     }
 
+    protected void initBind() {
+    }
+
     protected void initView() {
+    }
+
+    protected void initData() {
+
     }
 
     public void startActivity(Class<?> target, @Nullable Bundle bundle) {

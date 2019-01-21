@@ -10,7 +10,7 @@ class LocalData {
         SharedPreferences sharedPreferences =
                 context.getSharedPreferences(context.getString(R.string.sharedpreferences_name),
                         Context.MODE_PRIVATE);
-        return sharedPreferences.getString(context.getString(R.string.phone), "");
+        return sharedPreferences.getString(context.getString(R.string.phoneNumber), "");
     }
 
     void cacheUserPhoneNumber(Context context, String phoneNumber) {
@@ -18,7 +18,7 @@ class LocalData {
                 context.getSharedPreferences(context.getString(R.string.sharedpreferences_name),
                         Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(context.getString(R.string.phone), phoneNumber);
+        editor.putString(context.getString(R.string.phoneNumber), phoneNumber);
         editor.apply();
     }
 

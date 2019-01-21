@@ -2,24 +2,21 @@ package com.chuansongmen.main;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.Gravity;
 
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseActivity;
 import com.chuansongmen.position.PositionService;
 
-import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 public class MainActivity extends BaseActivity<MainViewModel> implements IMainActivity {
 
-    Unbinder unbinder;
+    private Unbinder unbinder;
     @BindView(R.id.main_drawer_layout)
     DrawerLayout mainDrawerLayout;
     @BindView(R.id.main_bottom_navigation)
@@ -27,25 +24,14 @@ public class MainActivity extends BaseActivity<MainViewModel> implements IMainAc
     private MainFragment mainFragment = new MainFragment();
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_activity);
-        unbinder = ButterKnife.bind(this);
-        initData();
-        initView();
-        initService();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unbinder.unbind();
+    protected int getContentLayoutId() {
+        return R.layout.main_activity;
     }
 
     /**
      * 这里做必须对员工信息做初始化，不然会nullpoint，但之后这里要向服务器请求员工信息。
      */
-    private void initData() {
+    protected void initData() {
 
     }
 
@@ -57,7 +43,7 @@ public class MainActivity extends BaseActivity<MainViewModel> implements IMainAc
                 .commit();
     }
 
-    private void initService() {
+    protected void initService() {
         Intent intent = new Intent(this, PositionService.class);
         startService(intent);
     }
@@ -73,6 +59,12 @@ public class MainActivity extends BaseActivity<MainViewModel> implements IMainAc
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbinder.unbind();
     }
 
     @Override

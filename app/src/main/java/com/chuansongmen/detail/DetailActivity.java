@@ -16,10 +16,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 import static android.view.View.GONE;
 
@@ -76,11 +74,10 @@ public class DetailActivity extends BaseActivity<DetailViewModel> implements Vie
     private Order order;
     private IDetailAdapter adapter;
 
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.detail_activity);
-        ButterKnife.bind(this);
+    protected void initData() {
+        super.initData();
         Bundle data = getIntent().getExtras();
 
         if (data != null) {
@@ -89,8 +86,11 @@ public class DetailActivity extends BaseActivity<DetailViewModel> implements Vie
 
         if (order != null)
             adapter = new DetailAdapter(order, viewModel);
+    }
 
-        initView();
+    @Override
+    protected int getContentLayoutId() {
+        return R.layout.detail_activity;
     }
 
     @Override

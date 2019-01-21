@@ -1,6 +1,5 @@
 package com.chuansongmen.transfer;
 
-import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -10,10 +9,8 @@ import com.chuansongmen.data.bean.Order;
 import com.chuansongmen.data.bean.Worker;
 import com.chuansongmen.util.ScanDelegate;
 
-import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.bingoogolapple.qrcode.zbar.ZBarView;
 
@@ -29,15 +26,11 @@ public class TransferActivity extends BaseActivity<TransferViewModel> {
     private Order order;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.transfer_activity);
-        ButterKnife.bind(this);
-        initView();
-        initData();
+    protected int getContentLayoutId() {
+        return R.layout.transfer_activity;
     }
 
-    private void initData() {
+    protected void initBind() {
         viewModel.getTargetWorker().observe(this, new Observer<Worker>() {
             @Override
             public void onChanged(Worker worker) {

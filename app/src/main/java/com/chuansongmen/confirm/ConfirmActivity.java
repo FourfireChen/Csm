@@ -11,10 +11,8 @@ import com.chuansongmen.R;
 import com.chuansongmen.base.BaseActivity;
 import com.chuansongmen.data.bean.Order;
 
-import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class ConfirmActivity extends BaseActivity<ConfirmViewModel> {
@@ -28,16 +26,8 @@ public class ConfirmActivity extends BaseActivity<ConfirmViewModel> {
     Order order;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.confirm_activity);
-        ButterKnife.bind(this);
-        Bundle data = getIntent().getExtras();
-        if (data != null) {
-            order = data.getParcelable(getString(R.string.order));
-        }
-        initView();
-        initData();
+    protected int getContentLayoutId() {
+        return R.layout.confirm_activity;
     }
 
     @Override
@@ -46,7 +36,8 @@ public class ConfirmActivity extends BaseActivity<ConfirmViewModel> {
         confirmWarningText.setText(R.string.confirm_warning);
     }
 
-    private void initData() {
+    @Override
+    protected void initBind() {
         viewModel.getChangeDelayResult().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
@@ -60,6 +51,13 @@ public class ConfirmActivity extends BaseActivity<ConfirmViewModel> {
                 }
             }
         });
+    }
+
+    protected void initData() {
+        Bundle data = getIntent().getExtras();
+        if (data != null) {
+            order = data.getParcelable(getString(R.string.order));
+        }
     }
 
     @OnClick(R.id.confirm_confirm_delay)

@@ -25,6 +25,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="bottom"
+            android:tint="@color/colorPrimaryDark"
             app:srcCompat="@drawable/ic_camera_amber_36dp" />
 
         <TextView

@@ -151,8 +151,8 @@ public class MainFragment extends BaseFragment<MainViewModel> implements View.On
     private void initActivityView() {
         mainDrawerLayout = mainActivity.getDrawerLayout();
         workerStatus = mainDrawerLayout.findViewById(R.id.main_drawer_workswitch);
-        LinearLayout workerSound = mainDrawerLayout.findViewById(R.id.main_drawer_careersound);
-        LinearLayout workerId = mainDrawerLayout.findViewById(R.id.main_drawer_id);
+        TextView workerSound = mainDrawerLayout.findViewById(R.id.main_drawer_careersound);
+        TextView workerId = mainDrawerLayout.findViewById(R.id.main_drawer_id);
         Button logout = mainDrawerLayout.findViewById(R.id.main_logout);
         CardView mainBottom = mainActivity.getBottom();
         mainBottomGet = mainBottom.findViewById(R.id.main_bottom_left);

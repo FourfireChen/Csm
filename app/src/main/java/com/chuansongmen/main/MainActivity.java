@@ -23,6 +23,7 @@ public class MainActivity extends BaseActivity<MainViewModel> implements IMainAc
     CardView mainBottomNavigation;
     private MainFragment mainFragment = new MainFragment();
 
+
     @Override
     protected int getContentLayoutId() {
         return R.layout.main_activity;

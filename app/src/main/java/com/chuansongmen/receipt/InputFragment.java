@@ -1,16 +1,21 @@
 package com.chuansongmen.receipt;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseFragment;
 import com.chuansongmen.util.UIUtil;
+
+import java.text.NumberFormat;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,11 +31,13 @@ public class InputFragment extends BaseFragment {
     EditText receiptMoney;
     @BindView(R.id.receipt_confirm)
     Button receiptConfirm;
-    @BindView(R.id.receipt_money_title)
-    TextView receiptMoneyTitle;
-    @BindView(R.id.receipt_money_suggest)
-    TextView receiptMoneySuggest;
     Unbinder unbinder;
+    @BindView(R.id.receipt_money_flag)
+    TextView receiptMoneyFlag;
+    @BindView(R.id.pay_qrcode)
+    ImageView payQrcode;
+    @BindView(R.id.receipt_money_show)
+    TextView receiptMoneyShow;
 
 
     @Nullable
@@ -40,27 +47,28 @@ public class InputFragment extends BaseFragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.receipt_input_fragment, container, false);
         unbinder = ButterKnife.bind(this, view);
-        initTextTypeface();
+        initView();
         return view;
     }
 
-    private void initTextTypeface() {
-        UIUtil.setTypeface("fonts/type.ttf",
+    private void initView() {
+        UIUtil.setTypeface(getString(R.string.font),
                 getContext().getAssets(),
                 receiptTitle,
                 receiptConfirm,
-                receiptMoneyTitle,
-                receiptMoneySuggest);
-    }
-
-    @OnClick(R.id.receipt_confirm)
-    public void onViewClicked() {
-        startFragmentInActivity(R.id.receipt_container, new PayFragment(), true);
+                receiptMoneyFlag,
+                receiptMoneyShow);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @OnClick(R.id.receipt_confirm)
+    public void onViewClicked() {
+        // TODO: 1/25/19 生成收款二维码，并监听是否收到付款
+        receiptMoneyShow.setText(receiptMoney.getText());
     }
 }

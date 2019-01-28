@@ -1,5 +1,6 @@
 package com.chuansongmen.scan;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,10 +27,18 @@ public class ScanActivity extends BaseActivity<ScanViewModel> {
     SignView scanSign;
     @BindView(R.id.scan_sign_clear)
     Button scanSignClear;
-
+    private static final String TAG = "ScanActivity";
     @Override
     protected int getContentLayoutId() {
         return R.layout.scan_activity;
+    }
+
+    @Override
+    protected void initBind() {
+        super.initBind();
+        viewModel.isUpdateSuccess().observe(this, isUpdateSuccess -> {
+            toast("更新成功");
+        });
     }
 
     @Override
@@ -37,6 +46,7 @@ public class ScanActivity extends BaseActivity<ScanViewModel> {
         scanScanView.setDelegate(new ScanDelegate(scanScanView, new ScanDelegate.ScanCallback() {
             @Override
             public void onSuccess(String result) {
+                Log.i(TAG, "单号扫描成功" + result);
                 Toast.makeText(ScanActivity.this, "扫描成功" + result, Toast.LENGTH_SHORT).show();
                 scanEdit.setText(result);
             }
@@ -76,6 +86,8 @@ public class ScanActivity extends BaseActivity<ScanViewModel> {
             case R.id.scan_confirm:
                 // TODO: 2018/11/18 这里应该调用单号格式检查
 //                codeFormatCheck(scanEdit.getText().toString());
+//                viewModel.updateOrder()
+                viewModel.updateOrder(scanEdit.getText().toString());
                 break;
             case R.id.scan_sign_clear:
                 scanSign.clear();

@@ -1,18 +1,26 @@
 package com.chuansongmen.base;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.chuansongmen.util.PermissionUtil;
+
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 import butterknife.ButterKnife;
+import pub.devrel.easypermissions.EasyPermissions;
+
+import static com.chuansongmen.common.Field.REQUEST_LOCATION;
+import static com.chuansongmen.common.Field.REQUEST_LOCATION_AND_NETWORK;
 
 /**
  * 这个类是本项目中封装的基本类，提供一些自己封装的方法，并且提供默认的viewModel
@@ -40,14 +48,34 @@ public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatAct
         initBind();
         // 初始化服务
         initService();
+        PermissionUtil.permissionsCheckAndRequest(this, REQUEST_LOCATION_AND_NETWORK,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.INTERNET);
     }
 
     protected void initService() {
     }
 
-
     protected abstract @LayoutRes
     int getContentLayoutId();
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+        switch (requestCode) {
+            case REQUEST_LOCATION:
+                PermissionUtil.permissionsCheckAndRequest(this, REQUEST_LOCATION_AND_NETWORK,
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.INTERNET);
+                break;
+        }
+    }
+
 
     /**
      * 这里用了反射，获取了子类的泛型Class
@@ -68,7 +96,6 @@ public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatAct
     }
 
     protected void initData() {
-
     }
 
     public void startActivity(Class<?> target, @Nullable Bundle bundle) {

@@ -9,17 +9,17 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 class ScanViewModel extends BaseViewModel {
-    private MutableLiveData<Boolean> isSuccess = new MutableLiveData<>();
+    private LiveData<Boolean> isUpdateSuccess = new MutableLiveData<>();
 
     ScanViewModel(@NonNull Application application) {
         super(application);
     }
 
-    LiveData<Boolean> updateOrder() {
-        return isSuccess;
+    public LiveData<Boolean> isUpdateSuccess() {
+        return isUpdateSuccess;
     }
 
-    boolean checkCodeFormat(String code) {
-        return false;
+    public void updateOrder(String orderId) {
+        // TODO: 1/25/19 更新订单状态
     }
 }

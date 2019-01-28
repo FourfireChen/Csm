@@ -12,18 +12,18 @@ import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Converter;
 
-import static com.chuansongmen.data.bean.Field.BELONG_STATION;
-import static com.chuansongmen.data.bean.Field.COLLECT_NUM;
-import static com.chuansongmen.data.bean.Field.COLLECT_ROOKIE_NUM;
-import static com.chuansongmen.data.bean.Field.NOW_LATITUDE;
-import static com.chuansongmen.data.bean.Field.NOW_LONGITUDE;
-import static com.chuansongmen.data.bean.Field.REG_ID;
-import static com.chuansongmen.data.bean.Field.SEND_NUM;
-import static com.chuansongmen.data.bean.Field.WORKER_CATEGORY;
-import static com.chuansongmen.data.bean.Field.WORKER_ID;
-import static com.chuansongmen.data.bean.Field.WORKER_NAME;
-import static com.chuansongmen.data.bean.Field.WORKER_SEX;
-import static com.chuansongmen.data.bean.Field.WORKER_STATUS;
+import static com.chuansongmen.common.Field.BELONG_STATION;
+import static com.chuansongmen.common.Field.COLLECT_NUM;
+import static com.chuansongmen.common.Field.COLLECT_ROOKIE_NUM;
+import static com.chuansongmen.common.Field.NOW_LATITUDE;
+import static com.chuansongmen.common.Field.NOW_LONGITUDE;
+import static com.chuansongmen.common.Field.REG_ID;
+import static com.chuansongmen.common.Field.SEND_NUM;
+import static com.chuansongmen.common.Field.WORKER_CATEGORY;
+import static com.chuansongmen.common.Field.WORKER_ID;
+import static com.chuansongmen.common.Field.WORKER_NAME;
+import static com.chuansongmen.common.Field.WORKER_SEX;
+import static com.chuansongmen.common.Field.WORKER_STATUS;
 
 public class WorkerConvertor implements Converter<ResponseBody, Worker> {
     @Override

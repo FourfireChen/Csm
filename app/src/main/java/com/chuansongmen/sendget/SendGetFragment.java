@@ -48,7 +48,8 @@ public class SendGetFragment extends BaseFragment<SendGetViewModel> {
         adapter.setItemCallButtonListener(new SendGetListAdapter.ItemClickListener() {
             @Override
             public void onClick(int position) {
-                CallUtil.call(getContext(), orders.get(position).getRecipientPhone());
+                CallUtil.call(getContext().getApplicationContext(),
+                        orders.get(position).getRecipientPhone());
             }
         });
 
@@ -60,11 +61,9 @@ public class SendGetFragment extends BaseFragment<SendGetViewModel> {
                 startActivity(DetailActivity.class, data);
             }
         });
-
         adapter.setOrders(orders);
         adapter.notifyDataSetChanged();
     }
-
 
     @Override
     public void onDestroyView() {

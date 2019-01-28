@@ -13,9 +13,9 @@ import java.util.List;
 import okhttp3.ResponseBody;
 import retrofit2.Converter;
 
-import static com.chuansongmen.data.bean.Field.ROUTE_ID;
-import static com.chuansongmen.data.bean.Field.ROUTE_WORKER_ID;
-import static com.chuansongmen.data.bean.Field.ROUTE_WORKER_NAME;
+import static com.chuansongmen.common.Field.ROUTE_ID;
+import static com.chuansongmen.common.Field.ROUTE_WORKER_ID;
+import static com.chuansongmen.common.Field.ROUTE_WORKER_NAME;
 
 public class RoutesConvertor implements Converter<ResponseBody, List<Route>> {
     @Override

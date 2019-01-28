@@ -22,6 +22,7 @@ import com.chuansongmen.receipt.ReceiptActivity;
 import com.chuansongmen.scan.ScanActivity;
 import com.chuansongmen.sendget.SendGetFragment;
 import com.chuansongmen.sendget.SendGetViewPageAdapter;
+import com.chuansongmen.util.PermissionUtil;
 import com.chuansongmen.util.UIUtil;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
@@ -41,7 +42,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
+import static android.Manifest.permission.CAMERA;
 import static android.view.Gravity.START;
+import static com.chuansongmen.common.Field.REQUEST_CAMERA;
 
 public class MainFragment extends BaseFragment<MainViewModel> implements View.OnClickListener,
         CompoundButton.OnCheckedChangeListener, IMainActivity.IMainView {
@@ -270,7 +273,9 @@ public class MainFragment extends BaseFragment<MainViewModel> implements View.On
                 mainViewpager.setCurrentItem(4, true);
                 break;
             case R.id.main_bottom_center:
-                startActivity(ScanActivity.class, null);
+                if (PermissionUtil.permissionsCheckAndRequest(this, REQUEST_CAMERA, CAMERA)) {
+                    startActivity(ScanActivity.class, null);
+                }
                 break;
             case R.id.main_logout:
                 viewModel.logout();

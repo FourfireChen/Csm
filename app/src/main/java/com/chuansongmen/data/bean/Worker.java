@@ -187,7 +187,17 @@ public class Worker implements Parcelable {
 
 
     public enum Category {
-        STATION_MASTER, DRIVER, RIDER
+        STATION_MASTER("站长"), DRIVER("司机"), RIDER("收派员");
+        private String name;
+
+        Category(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
     }
 
     @Override

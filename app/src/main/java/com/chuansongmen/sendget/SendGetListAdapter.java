@@ -58,19 +58,13 @@ class SendGetListAdapter extends RecyclerView.Adapter<SendGetListAdapter.SendGet
         sendGetViewHolder.sendGetItemAddress.setText(order.getRecipientAddress());
         sendGetViewHolder.sendGetItemName.setText(order.getRecipientName());
         sendGetViewHolder.sendGetItemPhoneNumber.setText(order.getRecipientPhone());
-        sendGetViewHolder.sendGetItemCallButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (itemCallButtonListener != null)
-                    itemCallButtonListener.onClick(i);
-            }
+        sendGetViewHolder.sendGetItemCallButton.setOnClickListener(v -> {
+            if (itemCallButtonListener != null)
+                itemCallButtonListener.onClick(i);
         });
-        sendGetViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (itemClickListener != null) {
-                    itemClickListener.onClick(i);
-                }
+        sendGetViewHolder.itemView.setOnClickListener(v -> {
+            if (itemClickListener != null) {
+                itemClickListener.onClick(i);
             }
         });
     }

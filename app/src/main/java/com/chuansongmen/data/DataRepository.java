@@ -34,13 +34,13 @@ import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-import static com.chuansongmen.data.bean.Field.BELONG_STATION;
-import static com.chuansongmen.data.bean.Field.ORDER_ID;
-import static com.chuansongmen.data.bean.Field.ORDER_PAGER_ID;
-import static com.chuansongmen.data.bean.Field.WORKER_CATEGORY;
-import static com.chuansongmen.data.bean.Field.WORKER_ID;
-import static com.chuansongmen.data.bean.Field.WORKER_NAME;
-import static com.chuansongmen.data.bean.Field.WORKER_SEX;
+import static com.chuansongmen.common.Field.BELONG_STATION;
+import static com.chuansongmen.common.Field.ORDER_ID;
+import static com.chuansongmen.common.Field.ORDER_PAGER_ID;
+import static com.chuansongmen.common.Field.WORKER_CATEGORY;
+import static com.chuansongmen.common.Field.WORKER_ID;
+import static com.chuansongmen.common.Field.WORKER_NAME;
+import static com.chuansongmen.common.Field.WORKER_SEX;
 
 public class DataRepository implements IDataRepository {
     private static final String TAG = "DataRepository";

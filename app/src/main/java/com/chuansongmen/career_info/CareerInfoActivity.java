@@ -1,18 +1,16 @@
 package com.chuansongmen.career_info;
 
-import android.graphics.Bitmap;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseActivity;
 
-import androidx.lifecycle.Observer;
 import butterknife.BindView;
 
 public class CareerInfoActivity extends BaseActivity<CareerInfoViewModel> {
     @BindView(R.id.careerinfo_name)
-    TextView careerinfoName;
+    TextView careerInfoName;
     @BindView(R.id.careerinfo_career)
     TextView careerinfoCareer;
     @BindView(R.id.careerinfo_entrytime)
@@ -30,13 +28,15 @@ public class CareerInfoActivity extends BaseActivity<CareerInfoViewModel> {
     }
 
     @Override
-    protected void initView() {
-        viewModel.getCareerQRCode().observe(this, new Observer<Bitmap>() {
-            @Override
-            public void onChanged(Bitmap bitmap) {
-                careerinfoQrcode.setImageBitmap(bitmap);
-            }
+    protected void initBind() {
+        super.initBind();
+        viewModel.getCareerQRCode()
+                .observe(this, bitmap -> careerinfoQrcode.setImageBitmap(bitmap));
+        viewModel.getWorkerInfo().observe(this, worker -> {
+            careerInfoName.setText(worker.getName());
+            careerinfoCareer.setText(worker.getCategory().toString());
+            careerinfoId.setText(worker.getId());
         });
-        viewModel.createQRCode();
+        viewModel.init();
     }
 }

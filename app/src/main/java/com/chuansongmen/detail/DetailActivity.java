@@ -165,7 +165,9 @@ public class DetailActivity extends BaseActivity<DetailViewModel> implements Vie
                 break;
         }
         if (!phoneNumber.isEmpty()) {
-            CallUtil.call(this, phoneNumber);
+            CallUtil.call(getApplicationContext(), phoneNumber);
         }
     }
+
+
 }

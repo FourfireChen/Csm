@@ -10,8 +10,8 @@ import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Converter;
 
-import static com.chuansongmen.data.bean.Field.LATITUDE;
-import static com.chuansongmen.data.bean.Field.LONGITUDE;
+import static com.chuansongmen.common.Field.LATITUDE;
+import static com.chuansongmen.common.Field.LONGITUDE;
 
 public class PositionConvertor implements Converter<ResponseBody, Position> {
     @Override

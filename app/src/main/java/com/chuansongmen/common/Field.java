@@ -1,6 +1,6 @@
-package com.chuansongmen.data.bean;
+package com.chuansongmen.common;
 
-public class Field {
+public abstract class Field {
     /**
      * Order
      */
@@ -67,4 +67,8 @@ public class Field {
     public static final String LONGITUDE = "longitude";
     public static final String LATITUDE = "latitude";
 
+    public static final int REQUEST_CALL = 111;
+    public static final int REQUEST_LOCATION = 112;
+    public static final int REQUEST_CAMERA = 113;
+    public static final int REQUEST_LOCATION_AND_NETWORK = 114;
 }

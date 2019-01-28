@@ -8,11 +8,13 @@ import com.chuansongmen.R;
 import com.chuansongmen.base.BaseActivity;
 import com.chuansongmen.position.PositionService;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import butterknife.BindView;
 import butterknife.Unbinder;
+import pub.devrel.easypermissions.EasyPermissions;
 
 public class MainActivity extends BaseActivity<MainViewModel> implements IMainActivity {
 
@@ -61,6 +63,7 @@ public class MainActivity extends BaseActivity<MainViewModel> implements IMainAc
             super.onBackPressed();
         }
     }
+
 
     @Override
     protected void onDestroy() {

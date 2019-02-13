@@ -23,7 +23,7 @@ public class ConfirmActivity extends BaseActivity<ConfirmViewModel> {
     EditText confirmDelayRemark;
     @BindView(R.id.confirm_confirm_delay)
     Button confirm;
-    Order order;
+    private Order order;
 
     @Override
     protected int getContentLayoutId() {

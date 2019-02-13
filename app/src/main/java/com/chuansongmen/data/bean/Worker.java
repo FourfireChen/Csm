@@ -4,30 +4,36 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Worker implements Parcelable {
+    public static final Parcelable.Creator<Worker> CREATOR = new Parcelable.Creator<Worker>() {
+        @Override
+        public Worker createFromParcel(Parcel source) {
+            return new Worker(source);
+        }
+
+        @Override
+        public Worker[] newArray(int size) {
+            return new Worker[size];
+        }
+    };
+    private static Worker worker;
     /**
      * 员工id/电话号码
      */
     private String id;
-
     private String name;
-
     private int sex;
-
     /**
      * 当前状态，是否在工作
      */
     private boolean isWorking;
-
     /**
      * 小米推送中使用的设备id
      */
     private String regId;
-
     /**
      * 现在的经纬度
      */
     private Position now;
-
     /**
      * 员工分类
      * 分类：0：站长
@@ -35,23 +41,18 @@ public class Worker implements Parcelable {
      * 2：收派员
      */
     private Category category;
-
     /**
      * 该员工所属的站点名称
      */
     private Station belongStation;
-
     /**
      * 收派员收单量、派单量
      */
     private int collectNum, sendNum;
-
     /**
      * 从菜鸟的派单量
      */
     private int collctRookieNum;
-
-    private static Worker worker;
 
     public Worker() {
     }
@@ -78,6 +79,21 @@ public class Worker implements Parcelable {
         this.collectNum = collectNum;
         this.sendNum = sendNum;
         this.collctRookieNum = collctRookieNum;
+    }
+
+    protected Worker(Parcel in) {
+        this.id = in.readString();
+        this.name = in.readString();
+        this.sex = in.readInt();
+        this.isWorking = in.readByte() != 0;
+        this.regId = in.readString();
+        this.now = in.readParcelable(Position.class.getClassLoader());
+        int tmpCategory = in.readInt();
+        this.category = tmpCategory == -1 ? null : Category.values()[tmpCategory];
+        this.belongStation = in.readParcelable(Station.class.getClassLoader());
+        this.collectNum = in.readInt();
+        this.sendNum = in.readInt();
+        this.collctRookieNum = in.readInt();
     }
 
     public static Worker getInstance() {
@@ -185,21 +201,6 @@ public class Worker implements Parcelable {
         return this;
     }
 
-
-    public enum Category {
-        STATION_MASTER("站长"), DRIVER("司机"), RIDER("收派员");
-        private String name;
-
-        Category(String name) {
-            this.name = name;
-        }
-
-        @Override
-        public String toString() {
-            return name;
-        }
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -220,30 +221,17 @@ public class Worker implements Parcelable {
         dest.writeInt(this.collctRookieNum);
     }
 
-    protected Worker(Parcel in) {
-        this.id = in.readString();
-        this.name = in.readString();
-        this.sex = in.readInt();
-        this.isWorking = in.readByte() != 0;
-        this.regId = in.readString();
-        this.now = in.readParcelable(Position.class.getClassLoader());
-        int tmpCategory = in.readInt();
-        this.category = tmpCategory == -1 ? null : Category.values()[tmpCategory];
-        this.belongStation = in.readParcelable(Station.class.getClassLoader());
-        this.collectNum = in.readInt();
-        this.sendNum = in.readInt();
-        this.collctRookieNum = in.readInt();
+    public enum Category {
+        STATION_MASTER("站长"), DRIVER("司机"), RIDER("收派员");
+        private String name;
+
+        Category(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
     }
-
-    public static final Parcelable.Creator<Worker> CREATOR = new Parcelable.Creator<Worker>() {
-        @Override
-        public Worker createFromParcel(Parcel source) {
-            return new Worker(source);
-        }
-
-        @Override
-        public Worker[] newArray(int size) {
-            return new Worker[size];
-        }
-    };
 }

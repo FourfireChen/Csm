@@ -14,7 +14,6 @@ import com.aliyuncs.profile.IClientProfile;
 import com.chuansongmen.common.Callback;
 import com.chuansongmen.data.bean.Order;
 import com.chuansongmen.data.bean.Position;
-import com.chuansongmen.data.bean.Route;
 import com.chuansongmen.data.bean.Worker;
 import com.chuansongmen.util.ConvertorFactory;
 import com.chuansongmen.util.ThreadUtil;
@@ -34,25 +33,15 @@ import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-import static com.chuansongmen.common.Field.BELONG_STATION;
 import static com.chuansongmen.common.Field.ORDER_ID;
 import static com.chuansongmen.common.Field.ORDER_PAGER_ID;
-import static com.chuansongmen.common.Field.WORKER_CATEGORY;
 import static com.chuansongmen.common.Field.WORKER_ID;
-import static com.chuansongmen.common.Field.WORKER_NAME;
-import static com.chuansongmen.common.Field.WORKER_SEX;
 
 public class DataRepository implements IDataRepository {
-    private static final String TAG = "DataRepository";
-    private static IDataRepository instance;
-    private IRemoteData remoteData;
-    private LocalData localData;
-
-    private static final String URL = "http://178.128.184.142:8080/portal/";
-
     public static final String SUCCESS = "成功";
     public static final String FAIL = "失败";
-
+    private static final String TAG = "DataRepository";
+    private static final String URL = "http://68.183.171.207:8088/portal";
     // 阿里云相关参数
     private static final String REQUEST_TYPE = "application/json";
     private static final String SMS_SIGN_NAME = "点链科技";
@@ -62,6 +51,9 @@ public class DataRepository implements IDataRepository {
     private static final String domain = "dysmsapi.aliyuncs.com";
     private static final String accessKeyId = "LTAIGwKgsjQoc4aR";
     private static final String accessKeySecret = "n8iIp5mZEsjm3ei9rgvHfiXl6XLN8W";
+    private static IDataRepository instance;
+    private IRemoteData remoteData;
+    private LocalData localData;
 
     private DataRepository() {
         Retrofit retrofit =
@@ -78,41 +70,9 @@ public class DataRepository implements IDataRepository {
         return instance;
     }
 
-
     @Override
-    public void updateOrder(String demandOrderStr,
-                            String targetOrderStr,
-                            final Callback<Boolean> isSuccess) {
-        Call<ResponseBody> call = remoteData.updateOrder(demandOrderStr, targetOrderStr);
-        call.enqueue(new retrofit2.Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                isSuccess.onResponse(response.isSuccessful());
-            }
+    public void completeOrder(String orderPagerId, Callback<Boolean> isSuccess) {
 
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                isSuccess.onResponse(false);
-                Log.e(TAG, "updateOrder onFailure: ", t);
-            }
-        });
-    }
-
-    @Override
-    public void queryOrderPos(Order order, final Callback<Position> callback) {
-        Call<Position> call = remoteData.queryOrderPos(order.getOrderId());
-        call.enqueue(new retrofit2.Callback<Position>() {
-            @Override
-            public void onResponse(Call<Position> call, Response<Position> response) {
-                callback.onResponse(response.isSuccessful() ? response.body() : null);
-            }
-
-            @Override
-            public void onFailure(Call<Position> call, Throwable t) {
-                callback.onResponse(null);
-                Log.e(TAG, "queryOrderPos onFailure: ", t);
-            }
-        });
     }
 
 
@@ -170,10 +130,10 @@ public class DataRepository implements IDataRepository {
 
 
     @Override
-    public void uploadForPush(String workerId,
-                              final String regId,
-                              final Callback<Boolean> callback) {
-        remoteData.uploadForPush(workerId, regId).enqueue(new retrofit2.Callback<ResponseBody>() {
+    public void uploadRegId(String workerId,
+                            final String regId,
+                            final Callback<Boolean> callback) {
+        remoteData.uploadRegId(workerId, regId).enqueue(new retrofit2.Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 callback.onResponse(response.isSuccessful());
@@ -206,10 +166,10 @@ public class DataRepository implements IDataRepository {
     }
 
     @Override
-    public void updateWorkerStatus(String workerId,
+    public void changeWorkerStatus(String workerId,
                                    Integer status,
                                    final Callback<Boolean> callback) {
-        Call<ResponseBody> call = remoteData.updateWorkerStatus(workerId, status);
+        Call<ResponseBody> call = remoteData.changeWorkerStatus(workerId, status);
         call.enqueue(new retrofit2.Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -241,21 +201,6 @@ public class DataRepository implements IDataRepository {
         });
     }
 
-    @Override
-    public void getAllRoute(final Callback<List<Route>> callback) {
-        remoteData.getAllRoutes().enqueue(new retrofit2.Callback<List<Route>>() {
-            @Override
-            public void onResponse(Call<List<Route>> call, Response<List<Route>> response) {
-                callback.onResponse(response.isSuccessful() ? response.body() : null);
-            }
-
-            @Override
-            public void onFailure(Call<List<Route>> call, Throwable t) {
-                callback.onResponse(null);
-                Log.e(TAG, "onFailure: ", t);
-            }
-        });
-    }
 
     @Override
     public void stopAll() {
@@ -292,8 +237,8 @@ public class DataRepository implements IDataRepository {
     }
 
     @Override
-    public void receiveOrderFromUser(final String orderSerialId,
-                                     final String pagerId,
+    public void receiveOrderFromUser(final String orderId,
+                                     final String orderPaperId,
                                      final String workerId,
                                      final Callback<String> messageCallback) {
         ThreadUtil.execute(new Runnable() {
@@ -301,8 +246,8 @@ public class DataRepository implements IDataRepository {
             public void run() {
                 try {
                     JSONObject jsonObject = new JSONObject();
-                    jsonObject.put(ORDER_ID, orderSerialId);
-                    jsonObject.put(ORDER_PAGER_ID, pagerId);
+                    jsonObject.put(ORDER_ID, orderId);
+                    jsonObject.put(ORDER_PAGER_ID, orderPaperId);
                     jsonObject.put(WORKER_ID, workerId);
                     Response body =
                             remoteData.receiveOrderFromUser(mapToJson(jsonObject)).execute();
@@ -315,35 +260,6 @@ public class DataRepository implements IDataRepository {
                 } catch (JSONException | IOException e) {
                     e.printStackTrace();
                     messageCallback.onResponse(e.getMessage());
-                }
-            }
-        });
-    }
-
-    public void addTestWorker(final Callback<Boolean> callback) {
-        ThreadUtil.execute(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    JSONObject jsonObject = new JSONObject();
-                    jsonObject.put(WORKER_ID, 2);
-                    jsonObject.put(WORKER_NAME, "test2");
-                    jsonObject.put(WORKER_SEX, 1);
-                    jsonObject.put(WORKER_CATEGORY, 3);
-                    jsonObject.put(BELONG_STATION, "test2");
-                    RequestBody body = RequestBody.create(MediaType.parse(REQUEST_TYPE),
-                            jsonObject.toString());
-                    Call call = remoteData.addMan(body);
-
-                    Response response = call.execute();
-
-                    callback.onResponse(response.isSuccessful());
-                    Log.i(TAG,
-                            "addTestWorker:" +
-                                    (response.isSuccessful() ? "成功" :
-                                            "失败" + response.errorBody().toString()));
-                } catch (IOException | JSONException e) {
-                    e.printStackTrace();
                 }
             }
         });
@@ -412,8 +328,17 @@ public class DataRepository implements IDataRepository {
         });
     }
 
+
     @Override
-    public void transferOrder(String pagerId, String workerId, Callback<Boolean> callback) {
+    public void hostOrder(String pagerId,
+                          String previousWorkerId,
+                          String toWorkerId,
+                          Callback<Boolean> callback) {
+
+    }
+
+    @Override
+    public void hostWork(String fromWorkerId, String toWorkerId, Callback<Boolean> callback) {
 
     }
 

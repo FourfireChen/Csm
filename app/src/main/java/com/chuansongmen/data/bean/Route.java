@@ -4,13 +4,22 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Route implements Parcelable {
-    private String id;
+    public static final Parcelable.Creator<Route> CREATOR = new Parcelable.Creator<Route>() {
+        @Override
+        public Route createFromParcel(Parcel source) {
+            return new Route(source);
+        }
 
+        @Override
+        public Route[] newArray(int size) {
+            return new Route[size];
+        }
+    };
+    private String id;
     /**
      * 司机Id
      */
     private int workerId;
-
     /**
      * 司机名
      */
@@ -21,6 +30,12 @@ public class Route implements Parcelable {
 
     public Route(String id) {
         this.id = id;
+    }
+
+    protected Route(Parcel in) {
+        this.id = in.readString();
+        this.workerId = in.readInt();
+        this.workerName = in.readString();
     }
 
     public String getId() {
@@ -47,7 +62,6 @@ public class Route implements Parcelable {
         this.workerName = workerName;
     }
 
-
     @Override
     public int describeContents() {
         return 0;
@@ -59,22 +73,4 @@ public class Route implements Parcelable {
         dest.writeInt(this.workerId);
         dest.writeString(this.workerName);
     }
-
-    protected Route(Parcel in) {
-        this.id = in.readString();
-        this.workerId = in.readInt();
-        this.workerName = in.readString();
-    }
-
-    public static final Parcelable.Creator<Route> CREATOR = new Parcelable.Creator<Route>() {
-        @Override
-        public Route createFromParcel(Parcel source) {
-            return new Route(source);
-        }
-
-        @Override
-        public Route[] newArray(int size) {
-            return new Route[size];
-        }
-    };
 }

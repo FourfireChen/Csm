@@ -18,6 +18,8 @@ import static com.chuansongmen.data.DataRepository.FAIL;
 import static com.chuansongmen.data.DataRepository.SUCCESS;
 
 public class LoginActivity extends BaseActivity<LoginViewModel> {
+    private static final String BAD_PHONE_TIP = "请填写正确的手机号码";
+    private static final String BAD_VERIFY_CODE_TIP = "请填写4位数验证码";
     @BindView(R.id.login_send_msg)
     Button msgSend;
     @BindView(R.id.login_confirm)
@@ -26,8 +28,6 @@ public class LoginActivity extends BaseActivity<LoginViewModel> {
     EditText verifyCode;
     @BindView(R.id.login_phone)
     EditText phone;
-    private static final String BAD_PHONE_TIP = "请填写正确的手机号码";
-    private static final String BAD_VERIFY_CODE_TIP = "请填写4位数验证码";
 
     @Override
     protected int getContentLayoutId() {

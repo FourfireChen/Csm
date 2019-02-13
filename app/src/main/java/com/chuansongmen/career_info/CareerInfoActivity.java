@@ -12,15 +12,15 @@ public class CareerInfoActivity extends BaseActivity<CareerInfoViewModel> {
     @BindView(R.id.careerinfo_name)
     TextView careerInfoName;
     @BindView(R.id.careerinfo_career)
-    TextView careerinfoCareer;
+    TextView careerInfoCareer;
     @BindView(R.id.careerinfo_entrytime)
-    TextView careerinfoEntrytime;
+    TextView careerInfoEntrytime;
     @BindView(R.id.careerinfo_rate)
-    TextView careerinfoRate;
+    TextView careerInfoRate;
     @BindView(R.id.careerinfo_qrcode)
-    ImageView careerinfoQrcode;
+    ImageView careerInfoQrcode;
     @BindView(R.id.careerinfo_id)
-    TextView careerinfoId;
+    TextView careerInfoId;
 
     @Override
     protected int getContentLayoutId() {
@@ -31,11 +31,11 @@ public class CareerInfoActivity extends BaseActivity<CareerInfoViewModel> {
     protected void initBind() {
         super.initBind();
         viewModel.getCareerQRCode()
-                .observe(this, bitmap -> careerinfoQrcode.setImageBitmap(bitmap));
+                .observe(this, bitmap -> careerInfoQrcode.setImageBitmap(bitmap));
         viewModel.getWorkerInfo().observe(this, worker -> {
             careerInfoName.setText(worker.getName());
-            careerinfoCareer.setText(worker.getCategory().toString());
-            careerinfoId.setText(worker.getId());
+            careerInfoCareer.setText(worker.getCategory().toString());
+            careerInfoId.setText(worker.getId());
         });
         viewModel.init();
     }

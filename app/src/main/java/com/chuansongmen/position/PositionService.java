@@ -8,10 +8,9 @@ import android.os.IBinder;
 import androidx.annotation.Nullable;
 
 public class PositionService extends Service {
+    private static final String TAG = "PositionServiceBack";
     private PositionUploadReceiver positionUploadReceiver = new PositionUploadReceiver();
     private ScreenOffReceiver screenOffReceiver = new ScreenOffReceiver();
-
-    private static final String TAG = "PositionServiceBack";
 
     @Nullable
     @Override

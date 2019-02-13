@@ -7,53 +7,54 @@ import java.util.List;
 
 public class Order implements Parcelable {
 
+    public static final Creator<Order> CREATOR = new Creator<Order>() {
+        @Override
+        public Order createFromParcel(Parcel source) {
+            return new Order(source);
+        }
+
+        @Override
+        public Order[] newArray(int size) {
+            return new Order[size];
+        }
+    };
     private static final int IMPORTANT_ORDER_PRICE = 15;
     /**
      * 流水号
      */
     private String orderId;
-
     /**
      * 订单号
      */
     private String pagerId;
-
     /**
      * 发起订单的用户ID/电话号码
      */
     private String orderUserId;
-
     /**
      * 发起订单的用户的名字
      */
     private String userName;
-
     /**
      * 发起订单的用户地址
      */
     private String userAddress;
-
     /**
      * 收发件的经纬度
      */
     private Position from, to;
-
     /**
      * 是否在菜鸟
      */
     private boolean isInCainiao;
-
     /**
      * 当前员工工号
      */
     private String nowWorker;
-
-
     /**
      * 订单价格
      */
     private int price;
-
     /**
      * 订单状态
      * 类别：0：收派员未取件
@@ -64,103 +65,122 @@ public class Order implements Parcelable {
      * 5：收派员收派完毕
      */
     private Status status;
-
     /**
      * 是否滞留
      */
     private boolean isDelay;
-
     /**
      * 滞留事件
      */
     private String delayTime;
-
     /**
      * 是否是重点件
      */
     private boolean isImportant;
-
     /**
      * 收件人姓名、电话号码（用户Id)、收件人具体地址
      */
     private String recipientName;
     private String recipientPhone;
     private String recipientAddress;
-
     /**
      * 保价
      */
     private int priceProtection;
-
     /**
      * 寄件重量
      */
     private int weight;
-
     /**
      * 下单时间
      */
     private String startTime;
-
     /**
      * 订单完成时间
      */
     private String completeTime;
-
     /**
      * 寄件类别
      * 值：
      */
     private int category;
-
     /**
      * 途径的中转站点信息
      */
     private List<Station> stations;
-
     /**
      * 路线信息拼成的字符串，表示该商品要经过的所有路线
      * 也以;分割
      */
     private List<Route> routes;
-
     /**
      * 该商品的下条路线
      */
     private String nextRoute;
-
     /**
      * 优惠卷id
      */
     private String couponId;
-
     /**
      * 收派员给的备注
      */
     private String remark;
-
     /**
      * 快件到达每个站点的时间信息,每个时间以;隔开。
      * 前端部分根据这个字段和快件当前状态生成快递跟踪信息表
      * 总的信息(这个时间和station字段的站点对应)
      */
     private String arriveStationTime;
-
     /**
      * 收派员从用户手里拿取快件的时间(由服务器生成)
      */
     private String collectFromUserTime;
-
     /**
      * 收派员从站点拿取快件的时间(由服务器生成)
      */
     private String collectFromStationTime;
-
     /**
      * 所有的订单跟踪信息(每次改变订单状态修改此字符串)
      */
     private String messageStr;
 
+    public Order() {
+    }
+
+    protected Order(Parcel in) {
+        this.orderId = in.readString();
+        this.pagerId = in.readString();
+        this.orderUserId = in.readString();
+        this.userName = in.readString();
+        this.userAddress = in.readString();
+        this.from = in.readParcelable(Position.class.getClassLoader());
+        this.to = in.readParcelable(Position.class.getClassLoader());
+        this.isInCainiao = in.readByte() != 0;
+        this.nowWorker = in.readString();
+        this.price = in.readInt();
+        int tmpStatus = in.readInt();
+        this.status = tmpStatus == -1 ? null : Status.values()[tmpStatus];
+        this.isDelay = in.readByte() != 0;
+        this.delayTime = in.readString();
+        this.isImportant = in.readByte() != 0;
+        this.recipientName = in.readString();
+        this.recipientPhone = in.readString();
+        this.recipientAddress = in.readString();
+        this.priceProtection = in.readInt();
+        this.weight = in.readInt();
+        this.startTime = in.readString();
+        this.completeTime = in.readString();
+        this.category = in.readInt();
+        this.stations = in.createTypedArrayList(Station.CREATOR);
+        this.routes = in.createTypedArrayList(Route.CREATOR);
+        this.nextRoute = in.readString();
+        this.couponId = in.readString();
+        this.remark = in.readString();
+        this.arriveStationTime = in.readString();
+        this.collectFromUserTime = in.readString();
+        this.collectFromStationTime = in.readString();
+        this.messageStr = in.readString();
+    }
 
     public String getOrderId() {
         return orderId;
@@ -412,26 +432,6 @@ public class Order implements Parcelable {
         this.messageStr = messageStr;
     }
 
-    public enum Status {
-        NON_PICK_UP("未收件"),
-        HAS_PICKED_UP("已收件"),
-        IN_STATION("在仓库"),
-        TRANSPOTING("正在运输"),
-        SENDING("正在派送"),
-        HAS_SENDED("已派送");
-        private String description;
-
-        Status(String description) {
-            this.description = description;
-        }
-
-        @Override
-        public String toString() {
-            return description;
-        }
-    }
-
-
     @Override
     public int describeContents() {
         return 0;
@@ -472,53 +472,22 @@ public class Order implements Parcelable {
         dest.writeString(this.messageStr);
     }
 
-    public Order() {
-    }
+    public enum Status {
+        NON_PICK_UP("未收件"),
+        HAS_PICKED_UP("已收件"),
+        IN_STATION("在仓库"),
+        TRANSPOTING("正在运输"),
+        SENDING("正在派送"),
+        HAS_SENDED("已派送");
+        private String description;
 
-    protected Order(Parcel in) {
-        this.orderId = in.readString();
-        this.pagerId = in.readString();
-        this.orderUserId = in.readString();
-        this.userName = in.readString();
-        this.userAddress = in.readString();
-        this.from = in.readParcelable(Position.class.getClassLoader());
-        this.to = in.readParcelable(Position.class.getClassLoader());
-        this.isInCainiao = in.readByte() != 0;
-        this.nowWorker = in.readString();
-        this.price = in.readInt();
-        int tmpStatus = in.readInt();
-        this.status = tmpStatus == -1 ? null : Status.values()[tmpStatus];
-        this.isDelay = in.readByte() != 0;
-        this.delayTime = in.readString();
-        this.isImportant = in.readByte() != 0;
-        this.recipientName = in.readString();
-        this.recipientPhone = in.readString();
-        this.recipientAddress = in.readString();
-        this.priceProtection = in.readInt();
-        this.weight = in.readInt();
-        this.startTime = in.readString();
-        this.completeTime = in.readString();
-        this.category = in.readInt();
-        this.stations = in.createTypedArrayList(Station.CREATOR);
-        this.routes = in.createTypedArrayList(Route.CREATOR);
-        this.nextRoute = in.readString();
-        this.couponId = in.readString();
-        this.remark = in.readString();
-        this.arriveStationTime = in.readString();
-        this.collectFromUserTime = in.readString();
-        this.collectFromStationTime = in.readString();
-        this.messageStr = in.readString();
-    }
-
-    public static final Creator<Order> CREATOR = new Creator<Order>() {
-        @Override
-        public Order createFromParcel(Parcel source) {
-            return new Order(source);
+        Status(String description) {
+            this.description = description;
         }
 
         @Override
-        public Order[] newArray(int size) {
-            return new Order[size];
+        public String toString() {
+            return description;
         }
-    };
+    }
 }

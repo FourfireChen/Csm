@@ -1,8 +1,6 @@
 package com.chuansongmen.receipt;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +12,6 @@ import android.widget.TextView;
 import com.chuansongmen.R;
 import com.chuansongmen.base.BaseFragment;
 import com.chuansongmen.util.UIUtil;
-
-import java.text.NumberFormat;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

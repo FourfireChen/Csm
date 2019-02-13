@@ -17,6 +17,7 @@ import cn.bingoogolapple.qrcode.core.BarcodeType;
 import cn.bingoogolapple.qrcode.zbar.ZBarView;
 
 public class ScanActivity extends BaseActivity<ScanViewModel> {
+    private static final String TAG = "ScanActivity";
     @BindView(R.id.scan_zxingview)
     ZBarView scanScanView;
     @BindView(R.id.scan_edit)
@@ -27,7 +28,7 @@ public class ScanActivity extends BaseActivity<ScanViewModel> {
     SignView scanSign;
     @BindView(R.id.scan_sign_clear)
     Button scanSignClear;
-    private static final String TAG = "ScanActivity";
+
     @Override
     protected int getContentLayoutId() {
         return R.layout.scan_activity;

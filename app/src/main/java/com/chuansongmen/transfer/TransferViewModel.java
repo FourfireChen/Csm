@@ -49,11 +49,14 @@ class TransferViewModel extends BaseViewModel {
      * @param workerId 要移交的目标职员
      */
     void transferOrder(String pagerId, String workerId) {
-        dataRepo.transferOrder(pagerId, workerId, new Callback<Boolean>() {
-            @Override
-            public void onResponse(Boolean result) {
-                isTransferSuccess.postValue(result);
-            }
-        });
+        dataRepo.hostOrder(pagerId,
+                Worker.getInstance().getId(),
+                workerId,
+                new Callback<Boolean>() {
+                    @Override
+                    public void onResponse(Boolean result) {
+                        isTransferSuccess.postValue(result);
+                    }
+                });
     }
 }

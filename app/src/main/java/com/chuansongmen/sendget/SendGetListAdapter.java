@@ -74,6 +74,10 @@ class SendGetListAdapter extends RecyclerView.Adapter<SendGetListAdapter.SendGet
         return orders == null ? 0 : orders.size();
     }
 
+    interface ItemClickListener {
+        void onClick(int position);
+    }
+
     class SendGetViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.sendget_item_address)
@@ -89,9 +93,5 @@ class SendGetListAdapter extends RecyclerView.Adapter<SendGetListAdapter.SendGet
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
-    }
-
-    interface ItemClickListener {
-        void onClick(int position);
     }
 }

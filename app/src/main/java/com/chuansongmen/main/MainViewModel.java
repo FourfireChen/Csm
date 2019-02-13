@@ -39,7 +39,7 @@ class MainViewModel extends BaseViewModel {
     }
 
     void updateWorkerStatus(int status) {
-        dataRepo.updateWorkerStatus(Worker.getInstance().getId(), status, new Callback<Boolean>() {
+        dataRepo.changeWorkerStatus(Worker.getInstance().getId(), status, new Callback<Boolean>() {
             @Override
             public void onResponse(Boolean result) {
                 isWorked.postValue(result);

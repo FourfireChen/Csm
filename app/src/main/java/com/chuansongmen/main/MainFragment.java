@@ -17,6 +17,7 @@ import com.chuansongmen.R;
 import com.chuansongmen.base.BaseFragment;
 import com.chuansongmen.career_info.CareerInfoActivity;
 import com.chuansongmen.data.bean.Order;
+import com.chuansongmen.data.bean.Worker;
 import com.chuansongmen.login.LoginActivity;
 import com.chuansongmen.receipt.ReceiptActivity;
 import com.chuansongmen.scan.ScanActivity;
@@ -117,6 +118,8 @@ public class MainFragment extends BaseFragment<MainViewModel> implements View.On
     }
 
     private void initData() {
+        // TODO: 2/18/19 测试使用，记得删除
+        viewModel.initGetWorker("111");
         // TODO: 2018/12/4 这里要防止上班失败
         viewModel.getWorkerStatus().observe(this, new Observer<Boolean>() {
             @Override
@@ -146,6 +149,8 @@ public class MainFragment extends BaseFragment<MainViewModel> implements View.On
         mainActivity = (IMainActivity) getActivity();
 
         initActivityView();
+
+        initViewPager();
     }
 
     /**
@@ -188,8 +193,6 @@ public class MainFragment extends BaseFragment<MainViewModel> implements View.On
                 mainAppbarContent.setAlpha(contentToTranslate(height, offset));
             }
         });
-
-        initViewPager();
     }
 
     private void initViewPager() {
@@ -227,6 +230,7 @@ public class MainFragment extends BaseFragment<MainViewModel> implements View.On
         viewPageAdapter.setFragments(fragments);
         mainViewpager.setAdapter(viewPageAdapter);
         viewPageAdapter.setTitles(TITLE);
+        viewPageAdapter.notifyDataSetChanged();
     }
 
     private float contentToTranslate(float height, float offset) {

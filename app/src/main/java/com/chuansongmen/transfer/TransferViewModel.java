@@ -5,6 +5,7 @@ import android.app.Application;
 import com.chuansongmen.base.BaseViewModel;
 import com.chuansongmen.common.Callback;
 import com.chuansongmen.data.bean.Worker;
+import com.chuansongmen.exception.NotInitException;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -49,14 +50,18 @@ class TransferViewModel extends BaseViewModel {
      * @param workerId 要移交的目标职员
      */
     void transferOrder(String pagerId, String workerId) {
-        dataRepo.hostOrder(pagerId,
-                Worker.getInstance().getId(),
-                workerId,
-                new Callback<Boolean>() {
-                    @Override
-                    public void onResponse(Boolean result) {
-                        isTransferSuccess.postValue(result);
-                    }
-                });
+        try {
+            dataRepo.hostOrder(pagerId,
+                    Worker.getInstance().getId(),
+                    workerId,
+                    new Callback<Boolean>() {
+                        @Override
+                        public void onResponse(Boolean result) {
+                            isTransferSuccess.postValue(result);
+                        }
+                    });
+        } catch (NotInitException e) {
+            e.printStackTrace();
+        }
     }
 }

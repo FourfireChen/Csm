@@ -56,7 +56,7 @@ import static com.chuansongmen.common.Field.TO_LONGITUDE;
 import static com.chuansongmen.common.Field.WEIGHT;
 
 
-public class OrdersConvertor implements Converter<ResponseBody, List<Order>> {
+public class OrdersConverter implements Converter<ResponseBody, List<Order>> {
     @Override
     public List<Order> convert(ResponseBody value) throws IOException {
         List<Order> orders = new ArrayList<>();
@@ -65,7 +65,7 @@ public class OrdersConvertor implements Converter<ResponseBody, List<Order>> {
         boolean isSuccess;
         try {
             jsonObject = new JSONObject(string);
-            isSuccess = jsonObject.getString("code").equals("SUCCESS");
+            isSuccess = jsonObject.getString("code").equals("200");
             if (isSuccess) {
                 String ordersString = jsonObject.getString("data");
                 orders.addAll(analysisOrders(ordersString));

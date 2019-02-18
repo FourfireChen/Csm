@@ -18,6 +18,7 @@ import com.chuansongmen.data.DataRepository;
 import com.chuansongmen.data.IDataRepository;
 import com.chuansongmen.data.bean.Position;
 import com.chuansongmen.data.bean.Worker;
+import com.chuansongmen.exception.NotInitException;
 import com.chuansongmen.main.MainActivity;
 
 import java.util.Timer;
@@ -80,25 +81,30 @@ public class PositionServiceFore extends Service {
                 public void onLocationChanged(AMapLocation aMapLocation) {
                     if (aMapLocation.getErrorCode() == 0) {
                         client.stopLocation();
-                        final Worker worker = Worker.getInstance();
-                        final Position position = new Position(aMapLocation.getLongitude(),
-                                aMapLocation.getLatitude());
-                        Log.i(TAG,
-                                "onLocationChanged: 经度" +
-                                        position.getLongitude() +
-                                        "  纬度" +
-                                        position.getLatitude());
-                        worker.setNow(position);
-                        dataRepository.uploadPos(worker.getId(), position, new Callback<Boolean>() {
-                            @Override
-                            public void onResponse(Boolean result) {
-                                if (result) {
-                                    Log.i(TAG, "onResponse: 定位上传成功");
-                                } else {
-                                    Log.e(TAG, "onResponse: 定位上传失败");
+                        try {
+                            Worker worker = Worker.getInstance();
+                            final Position position = new Position(aMapLocation.getLongitude(),
+                                    aMapLocation.getLatitude());
+                            Log.i(TAG,
+                                    "onLocationChanged: 经度" +
+                                            position.getLongitude() +
+                                            "  纬度" +
+                                            position.getLatitude());
+                            worker.setNow(position);
+                            dataRepository.uploadPos(worker.getId(), position, new Callback<Boolean>() {
+                                @Override
+                                public void onResponse(Boolean result) {
+                                    if (result) {
+                                        Log.i(TAG, "onResponse: 定位上传成功");
+                                    } else {
+                                        Log.e(TAG, "onResponse: 定位上传失败");
+                                    }
                                 }
-                            }
-                        });
+                            });
+                        } catch (NotInitException e) {
+                            e.printStackTrace();
+                        }
+
                     } else {
                         Log.e(TAG,
                                 "onLocationChanged: " + "第一次请求定位失败:" + aMapLocation.getErrorInfo());

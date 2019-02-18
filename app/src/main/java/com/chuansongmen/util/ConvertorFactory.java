@@ -14,10 +14,10 @@ import retrofit2.Converter;
 import retrofit2.Retrofit;
 
 public class ConvertorFactory extends Converter.Factory {
-    private OrdersConvertor ordersConvertor = new OrdersConvertor();
-    private PositionConvertor positionConvertor = new PositionConvertor();
-    private RoutesConvertor routesConvertor = new RoutesConvertor();
-    private WorkerConvertor workerConvertor = new WorkerConvertor();
+    private OrdersConverter ordersConverter = new OrdersConverter();
+    private PositionConverter positionConverter = new PositionConverter();
+    private RoutesConverter routesConverter = new RoutesConverter();
+    private WorkerConverter workerConverter = new WorkerConverter();
 
     @Override
     public Converter<ResponseBody, ?> responseBodyConverter(Type type,
@@ -28,14 +28,14 @@ public class ConvertorFactory extends Converter.Factory {
             if (actualTypeArgs.length > 0) {
                 Type actualType = actualTypeArgs[0];
                 if (actualType == Order.class)
-                    return ordersConvertor;
+                    return ordersConverter;
                 else if (actualType == Route.class)
-                    return routesConvertor;
+                    return routesConverter;
             }
         } else if (type == Position.class) {
-            return positionConvertor;
+            return positionConverter;
         } else if (type == Worker.class) {
-            return workerConvertor;
+            return workerConverter;
         }
         return super.responseBodyConverter(type, annotations, retrofit);
     }

@@ -13,7 +13,7 @@ import retrofit2.Converter;
 import static com.chuansongmen.common.Field.LATITUDE;
 import static com.chuansongmen.common.Field.LONGITUDE;
 
-public class PositionConvertor implements Converter<ResponseBody, Position> {
+public class PositionConverter implements Converter<ResponseBody, Position> {
     @Override
     public Position convert(ResponseBody value) throws IOException {
         String body = value.string();

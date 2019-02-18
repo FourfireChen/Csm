@@ -17,7 +17,7 @@ import static com.chuansongmen.common.Field.ROUTE_ID;
 import static com.chuansongmen.common.Field.ROUTE_WORKER_ID;
 import static com.chuansongmen.common.Field.ROUTE_WORKER_NAME;
 
-public class RoutesConvertor implements Converter<ResponseBody, List<Route>> {
+public class RoutesConverter implements Converter<ResponseBody, List<Route>> {
     @Override
     public List<Route> convert(ResponseBody value) throws IOException {
         List<Route> routes = new ArrayList<>();

@@ -5,6 +5,7 @@ import android.app.Application;
 import com.chuansongmen.base.BaseViewModel;
 import com.chuansongmen.common.Callback;
 import com.chuansongmen.data.bean.Worker;
+import com.chuansongmen.exception.NotInitException;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -45,15 +46,19 @@ class InputViewModel extends BaseViewModel {
      * @param pagerId  订单号
      */
     void input(String serialId, String pagerId) {
-        dataRepo.receiveOrderFromUser(serialId,
-                pagerId,
-                Worker.getInstance().getId(),
-                new Callback<String>() {
-                    @Override
-                    public void onResponse(String result) {
-                        inputMessage.postValue(result);
-                    }
-                });
+        try {
+            dataRepo.receiveOrderFromUser(serialId,
+                    pagerId,
+                    Worker.getInstance().getId(),
+                    new Callback<String>() {
+                        @Override
+                        public void onResponse(String result) {
+                            inputMessage.postValue(result);
+                        }
+                    });
+        } catch (NotInitException e) {
+            e.printStackTrace();
+        }
     }
 
 

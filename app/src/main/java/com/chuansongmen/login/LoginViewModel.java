@@ -5,6 +5,7 @@ import android.app.Application;
 import com.chuansongmen.base.BaseViewModel;
 import com.chuansongmen.common.Callback;
 import com.chuansongmen.data.bean.Worker;
+import com.chuansongmen.exception.RepetitiveInitException;
 
 import java.util.AbstractMap;
 import java.util.Map;
@@ -114,6 +115,11 @@ class LoginViewModel extends BaseViewModel {
             @Override
             public void onResponse(Worker result) {
                 // 这里去后台查员工信息，后台暂时还没好，所以总是返回null；
+                try {
+                    Worker.initWorker(result);
+                } catch (RepetitiveInitException e) {
+                    e.printStackTrace();
+                }
                 isLoginSuccess.postValue(result != null ? SUCCESS : "");
             }
         });

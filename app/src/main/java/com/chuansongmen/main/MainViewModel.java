@@ -6,6 +6,8 @@ import com.chuansongmen.base.BaseViewModel;
 import com.chuansongmen.common.Callback;
 import com.chuansongmen.data.bean.Order;
 import com.chuansongmen.data.bean.Worker;
+import com.chuansongmen.exception.NotInitException;
+import com.chuansongmen.exception.RepetitiveInitException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +23,7 @@ class MainViewModel extends BaseViewModel {
     private MutableLiveData<List<List<Order>>> orders = new MutableLiveData<>();
 
     private MutableLiveData<Boolean> isLogoutSuccess = new MutableLiveData<>();
+    private LiveData<Worker> worker = new MutableLiveData<>();
 
     MainViewModel(@NonNull Application application) {
         super(application);
@@ -38,29 +41,62 @@ class MainViewModel extends BaseViewModel {
         return isLogoutSuccess;
     }
 
-    void updateWorkerStatus(int status) {
-        dataRepo.changeWorkerStatus(Worker.getInstance().getId(), status, new Callback<Boolean>() {
+    LiveData<Worker> getWorker() {
+        return worker;
+    }
+
+    /**
+     * 这只是测试的时候用的，正常情况下的初始化不在这里
+     * @param phone
+     */
+    // TODO: 2/18/19 测试结束记得删除
+    void initGetWorker(String phone) {
+        dataRepo.getWorkerInfo(phone, new Callback<Worker>() {
             @Override
-            public void onResponse(Boolean result) {
-                isWorked.postValue(result);
+            public void onResponse(Worker result) {
+                try {
+                    Worker.initWorker(result);
+                    updateOrders();
+                } catch (RepetitiveInitException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
 
+    void updateWorkerStatus(int status) {
+        try {
+            dataRepo.changeWorkerStatus(Worker.getInstance().getId(),
+                    status,
+                    new Callback<Boolean>() {
+                        @Override
+                        public void onResponse(Boolean result) {
+                            isWorked.postValue(result);
+                        }
+                    });
+        } catch (NotInitException e) {
+            e.printStackTrace();
+        }
+    }
+
     void updateOrders() {
-        dataRepo.getWorkerOrders(Worker.getInstance().getId(), new Callback<List<Order>>() {
-            @Override
-            public void onResponse(List<Order> result) {
-                List<List<Order>> value;
-                if (result == null) {
-                    value = orders.getValue() == null ? new ArrayList<List<Order>>() :
-                            orders.getValue();
-                } else {
-                    value = classifyOrders(result);
+        try {
+            dataRepo.getWorkerOrders(Worker.getInstance().getId(), new Callback<List<Order>>() {
+                @Override
+                public void onResponse(List<Order> result) {
+                    List<List<Order>> value;
+                    if (result == null) {
+                        value = orders.getValue() == null ? new ArrayList<List<Order>>() :
+                                orders.getValue();
+                    } else {
+                        value = classifyOrders(result);
+                    }
+                    orders.postValue(value);
                 }
-                orders.postValue(value);
-            }
-        });
+            });
+        } catch (NotInitException e) {
+            e.printStackTrace();
+        }
     }
 
     private List<List<Order>> classifyOrders(List<Order> allOrders) {
@@ -105,11 +141,17 @@ class MainViewModel extends BaseViewModel {
     }
 
     void logout() {
-        dataRepo.logout(getApplication(), Worker.getInstance().getId(), new Callback<Boolean>() {
-            @Override
-            public void onResponse(Boolean result) {
-                isLogoutSuccess.postValue(result);
-            }
-        });
+        try {
+            dataRepo.logout(getApplication(),
+                    Worker.getInstance().getId(),
+                    new Callback<Boolean>() {
+                        @Override
+                        public void onResponse(Boolean result) {
+                            isLogoutSuccess.postValue(result);
+                        }
+                    });
+        } catch (NotInitException e) {
+            e.printStackTrace();
+        }
     }
 }

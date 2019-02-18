@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 
 import com.chuansongmen.base.BaseViewModel;
 import com.chuansongmen.data.bean.Worker;
+import com.chuansongmen.exception.NotInitException;
 import com.chuansongmen.util.ThreadUtil;
 
 import androidx.annotation.NonNull;
@@ -26,9 +27,16 @@ class CareerInfoViewModel extends BaseViewModel {
     }
 
     void init() {
-        ThreadUtil.execute(() -> careerQRCode.postValue(QRCodeEncoder.syncEncodeQRCode(String.valueOf(
-                Worker.getInstance().getId()), 120)));
-        workerInfo.postValue(Worker.getInstance());
+        ThreadUtil.execute(() -> {
+            try {
+                careerQRCode.postValue(QRCodeEncoder.syncEncodeQRCode(String.valueOf(
+                        Worker.getInstance().getId()), 120));
+                workerInfo.postValue(Worker.getInstance());
+            } catch (NotInitException e) {
+                e.printStackTrace();
+            }
+        });
+
     }
 
     LiveData<Worker> getWorkerInfo() {

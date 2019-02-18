@@ -38,7 +38,7 @@ public interface IRemoteData {
      *                       order_paper_id 订单号
      *                       worker_id 收派员id
      */
-    @POST("/order/changeOrder/receiveOrderFromUser")
+    @POST("order/changeOrder/receiveOrderFromUser")
     Call<ResponseBody> receiveOrderFromUser(@Body RequestBody receiveRequest);
 
     /**
@@ -47,7 +47,7 @@ public interface IRemoteData {
      * @param orderDelayRequest order_paper_id 订单号
      *                          id_delay 是否滞留 1表示滞留 2表示解除滞留
      */
-    @POST("/order/delay")
+    @POST("order/delay")
     Call<ResponseBody> changeDelay(@Body RequestBody orderDelayRequest);
 
     /**
@@ -55,7 +55,7 @@ public interface IRemoteData {
      *
      * @param orderPagerId 订单号
      */
-    @POST("/order/changeOrder/complete")
+    @POST("order/changeOrder/complete")
     Call<ResponseBody> completeOrder(@Body RequestBody orderPagerId);
 
     /**
@@ -76,7 +76,7 @@ public interface IRemoteData {
      * @param workerId 要查找的员工的id
      * @return 返回所有与该员工有关的订单，如果是null，查询失败；如果list为空，数据库中没有结果
      */
-    @GET("/order")
+    @GET("order")
     Call<List<Order>> getWorkerOrders(@Query("worker_id") String workerId);
 
     /**
@@ -86,7 +86,7 @@ public interface IRemoteData {
      * @param regId    设备id
      * @return 是否上传成功
      */
-    @PATCH("/worker/reg")
+    @PATCH("worker/reg")
     Call<ResponseBody> uploadRegId(@Query("worker_id") String workerId,
                                    @Query("reg_id") String regId);
 
@@ -98,7 +98,7 @@ public interface IRemoteData {
      * @param latitude  当前纬度
      * @return 是否上传成功
      */
-    @PATCH("/worker/location")
+    @PATCH("worker/location")
     Call<ResponseBody> uploadPos(@Query("worker_id") String workerId,
                                  @Query("longitude") double longitude,
                                  @Query("latitude") double latitude);
@@ -112,7 +112,7 @@ public interface IRemoteData {
      *                 1：表示上班
      * @return 是否改变成功
      */
-    @PATCH("/worker/status")
+    @PATCH("worker/status")
     Call<ResponseBody> changeWorkerStatus(@Query("worker_id") String workerId,
                                           @Query("status") Integer status);
 
@@ -122,7 +122,7 @@ public interface IRemoteData {
      * @param workerId 要获取的员工的Id/手机号码
      * @return 查询到的员工信息
      */
-    @GET("/worker/one")
+    @GET("worker/one")
     Call<Worker> getWorkerInfo(@Query("worker_id") String workerId);
 
 
@@ -132,7 +132,7 @@ public interface IRemoteData {
      * @param fromWorkerId 需要离开的员工id
      * @param toWorkerId   接管工作的员工id
      */
-    @PATCH("/worker/workstatus")
+    @PATCH("worker/workstatus")
     Call<ResponseBody> hostWork(@Query("from_worker_id") String fromWorkerId,
                                 @Query("to_worker_id") String toWorkerId);
 }

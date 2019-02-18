@@ -41,7 +41,7 @@ public class DataRepository implements IDataRepository {
     public static final String SUCCESS = "成功";
     public static final String FAIL = "失败";
     private static final String TAG = "DataRepository";
-    private static final String URL = "http://68.183.171.207:8088/portal";
+    private static final String URL = "http://47.100.31.84:8088/portal/";
     // 阿里云相关参数
     private static final String REQUEST_TYPE = "application/json";
     private static final String SMS_SIGN_NAME = "点链科技";
@@ -78,29 +78,29 @@ public class DataRepository implements IDataRepository {
 
     @Override
     public void getWorkerOrders(String workerId, final Callback<List<Order>> orders) {
-//        Call<List<Order>> call = remoteData.getWorkerOrders(workerId);
-//        call.enqueue(new retrofit2.Callback<List<Order>>() {
-//            @Override
-//            public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
-//                if (response.isSuccessful()) {
-//                    orders.onResponse(response.body());
-//                } else {
-//                    try {
-//                        Log.e(TAG, "onResponse: " + response.errorBody().string());
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                    orders.onResponse(null);
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Order>> call, Throwable t) {
-//                Log.e(TAG, "onResponse: ", t);
-//                orders.onResponse(null);
-//            }
-//        });
-        orders.onResponse(testGenerateOrders());
+        Call<List<Order>> call = remoteData.getWorkerOrders(workerId);
+        call.enqueue(new retrofit2.Callback<List<Order>>() {
+            @Override
+            public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
+                if (response.isSuccessful()) {
+                    orders.onResponse(response.body());
+                } else {
+                    try {
+                        Log.e(TAG, "onResponse: " + response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    orders.onResponse(null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Order>> call, Throwable t) {
+                Log.e(TAG, "onResponse: ", t);
+                orders.onResponse(null);
+            }
+        });
+//        orders.onResponse(testGenerateOrders());
     }
 
     private List<Order> testGenerateOrders() {

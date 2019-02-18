@@ -3,6 +3,9 @@ package com.chuansongmen.data.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.chuansongmen.exception.NotInitException;
+import com.chuansongmen.exception.RepetitiveInitException;
+
 public class Worker implements Parcelable {
     public static final Parcelable.Creator<Worker> CREATOR = new Parcelable.Creator<Worker>() {
         @Override
@@ -96,9 +99,16 @@ public class Worker implements Parcelable {
         this.collctRookieNum = in.readInt();
     }
 
-    public static Worker getInstance() {
+    public static void initWorker(Worker worker) throws RepetitiveInitException {
+        if (Worker.worker == null)
+            Worker.worker = worker;
+        else
+            throw new RepetitiveInitException();
+    }
+
+    public static Worker getInstance() throws NotInitException {
         if (worker == null)
-            worker = new Worker();
+            throw new NotInitException();
         return worker;
     }
 

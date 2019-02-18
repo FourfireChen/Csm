@@ -25,14 +25,15 @@ import static com.chuansongmen.common.Field.WORKER_NAME;
 import static com.chuansongmen.common.Field.WORKER_SEX;
 import static com.chuansongmen.common.Field.WORKER_STATUS;
 
-public class WorkerConvertor implements Converter<ResponseBody, Worker> {
+public class WorkerConverter implements Converter<ResponseBody, Worker> {
     @Override
     public Worker convert(ResponseBody value) throws IOException {
         String body = value.string();
-        Worker worker = Worker.getInstance();
+        Worker worker = new Worker();
         try {
             JSONObject bodyObj = new JSONObject(body);
-            if (bodyObj.getString("code").equals("200")) {
+//            if (bodyObj.getString("code").equals("200")) {
+            if (bodyObj.getString("data") != null) {
                 String workerString = bodyObj.getString("data");
                 JSONObject workerJson = new JSONObject(workerString);
                 worker.setId(workerJson.getString(WORKER_ID))
@@ -45,8 +46,7 @@ public class WorkerConvertor implements Converter<ResponseBody, Worker> {
                         .setSendNum(workerJson.getInt(SEND_NUM))
                         .setSex(workerJson.getInt(WORKER_SEX))
                         .setWorking(workerJson.getInt(WORKER_STATUS) > 0)
-                        .setCategory(Worker.Category.values()[workerJson.getInt(WORKER_CATEGORY)])
-                        .setCollctRookieNum(workerJson.getInt(COLLECT_ROOKIE_NUM));
+                        .setCategory(Worker.Category.values()[workerJson.getInt(WORKER_CATEGORY)]);
                 return worker;
             } else {
                 return null;

@@ -38,7 +38,7 @@ public class SendGetFragment extends BaseFragment<SendGetViewModel> {
     private Handler closeRefresh = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
-            if (refreshLayout.isRefreshing()) {
+            if (refreshLayout != null && refreshLayout.isRefreshing()) {
                 refreshLayout.setRefreshing(false);
                 toast("刷新失败,请检查网络");
             }
@@ -62,6 +62,9 @@ public class SendGetFragment extends BaseFragment<SendGetViewModel> {
                 if (mainFragment != null) {
                     // 这里要重新通知回mainFragment，因为数据都在那边，保证数据同步性
                     mainFragment.updateOrders();
+                    if (refreshLayout.isRefreshing()) {
+                        closeRefresh.removeMessages(0);
+                    }
                     closeRefresh.sendEmptyMessageDelayed(0, 5000);
                 }
             }
@@ -71,7 +74,7 @@ public class SendGetFragment extends BaseFragment<SendGetViewModel> {
 
     public void showOrders(final List<Order> orders) {
         // 如果正在刷新，就关掉，刷新完成
-        if (refreshLayout.isRefreshing()) {
+        if (refreshLayout != null && refreshLayout.isRefreshing()) {
             refreshLayout.setRefreshing(false);
         }
 

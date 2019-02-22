@@ -1,4 +1,4 @@
-package com.chuansongmen.confirm;
+package com.chuansongmen.delay_confirm;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -41,7 +41,7 @@ public class ConfirmActivity extends BaseActivity<ConfirmViewModel> {
         viewModel.getChangeDelayResult().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                if (s == null) {
+                if (s.equals("成功")) {
                     // 成功
                     finish();
                     Log.i(TAG, "滞留成功");

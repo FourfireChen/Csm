@@ -58,7 +58,7 @@
         <activity android:name=".receipt.ReceiptActivity" />
         <activity android:name=".career_info.CareerInfoActivity" />
         <activity android:name=".detail.DetailActivity" />
-        <activity android:name=".confirm.ConfirmActivity" />
+        <activity android:name=".delay_confirm.ConfirmActivity" />
         <activity android:name=".print.PrintActivity" />
         <activity android:name=".input.InputActivity" />
         <activity android:name=".transfer.TransferActivity" />

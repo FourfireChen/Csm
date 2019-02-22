@@ -301,6 +301,8 @@ public class MainFragment extends BaseFragment<MainViewModel> implements View.On
         for (int i = 0; i < 8; i++) {
             fragments.get(i).showOrders(data.get(i));
         }
+        todayGetValue.setText(String.valueOf(data.get(1).size()));
+        todaySendValue.setText(String.valueOf(data.get(5).size()));
         viewPageAdapter.notifyDataSetChanged();
     }
 

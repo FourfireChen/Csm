@@ -9,7 +9,7 @@
         android:id="@+id/input_scan"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:qrcv_maskColor="@color/colorAccent"
+        app:qrcv_maskColor="#fff"
         app:qrcv_rectWidth="300dp"
         app:qrcv_topOffset="30dp" />
 

@@ -114,8 +114,6 @@ class DetailAdapter implements IDetailAdapter {
             case HAS_PICKED_UP:
             case IN_STATION:
             case TRANSPOTING:
-                icons.add(context.getDrawable(R.drawable.ic_restore_48dp));
-                texts.add("滞留");
                 icons.add(context.getDrawable(R.drawable.ic_attach_money_24dp));
                 texts.add("补差");
                 icons.add(context.getDrawable(R.drawable.ic_print_24dp));

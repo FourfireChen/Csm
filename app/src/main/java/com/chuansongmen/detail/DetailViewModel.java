@@ -7,7 +7,7 @@ import com.chuansongmen.R;
 import com.chuansongmen.base.BaseActivity;
 import com.chuansongmen.base.BaseViewModel;
 import com.chuansongmen.common.Callback;
-import com.chuansongmen.confirm.ConfirmActivity;
+import com.chuansongmen.delay_confirm.ConfirmActivity;
 import com.chuansongmen.data.bean.Order;
 import com.chuansongmen.input.InputActivity;
 import com.chuansongmen.print.PrintActivity;

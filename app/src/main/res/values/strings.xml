@@ -12,4 +12,5 @@
     <string name="sharedpreferences_name">csm</string>
     <string name="phoneNumber">phonenumber</string>
     <string name="login_success">登录成功</string>
+    <string name="MAIN_TAG">main</string>
 </resources>

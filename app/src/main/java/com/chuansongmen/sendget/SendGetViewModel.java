@@ -13,4 +13,7 @@ class SendGetViewModel extends BaseViewModel {
     }
 
 
+    public void updateOrders() {
+
+    }
 }

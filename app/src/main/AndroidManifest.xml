@@ -62,6 +62,9 @@
         <activity android:name=".print.PrintActivity" />
         <activity android:name=".input.InputActivity" />
         <activity android:name=".transfer.TransferActivity" />
+        <activity android:name=".TestActivity" >
+
+        </activity>
 
         <service android:name=".position.PositionService" />
         <receiver android:name=".position.PositionUploadReceiver" />

@@ -11,6 +11,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -65,8 +66,15 @@ public class OrdersConverter implements Converter<ResponseBody, List<Order>> {
         boolean isSuccess;
         try {
             jsonObject = new JSONObject(string);
-            isSuccess = jsonObject.getString("code").equals("200");
-            if (isSuccess) {
+//            这里才是照着接口写的，有返回code的写法
+//            isSuccess = jsonObject.getString("code").equals("200");
+//            if (isSuccess) {
+//                String ordersString = jsonObject.getString("data");
+//                orders.addAll(analysisOrders(ordersString));
+
+//          这是暂时的写法
+            JSONArray data = jsonObject.getJSONArray("data");
+            if (data != null && (data.length() == 0 || data.getJSONObject(0).has(ORDER_ID))) {
                 String ordersString = jsonObject.getString("data");
                 orders.addAll(analysisOrders(ordersString));
             } else {

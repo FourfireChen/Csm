@@ -40,7 +40,7 @@ public class MainActivity extends BaseActivity<MainViewModel> implements IMainAc
     protected void initView() {
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction()
-                .replace(R.id.main_fragment_container, mainFragment)
+                .replace(R.id.main_fragment_container, mainFragment, getString(R.string.MAIN_TAG))
                 .commit();
     }
 

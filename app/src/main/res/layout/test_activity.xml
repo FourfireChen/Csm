@@ -4,32 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.chuansongmen.view.SignView
-        android:id="@+id/test_sign"
+    <com.chuansongmen.view.SwipeAndLoadRecyclerView
+        android:id="@+id/test_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="300dp" />
-
-    <LinearLayout
-        android:layout_gravity="center"
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:id="@+id/add"
-            android:text="加一个"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:id="@+id/show"
-            android:text="显示"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
-    <ImageView
-        android:id="@+id/test_show"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+    </com.chuansongmen.view.SwipeAndLoadRecyclerView>
 </LinearLayout>

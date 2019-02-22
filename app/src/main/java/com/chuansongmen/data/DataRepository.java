@@ -78,29 +78,29 @@ public class DataRepository implements IDataRepository {
 
     @Override
     public void getWorkerOrders(String workerId, final Callback<List<Order>> orders) {
-        Call<List<Order>> call = remoteData.getWorkerOrders(workerId);
-        call.enqueue(new retrofit2.Callback<List<Order>>() {
-            @Override
-            public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
-                if (response.isSuccessful()) {
-                    orders.onResponse(response.body());
-                } else {
-                    try {
-                        Log.e(TAG, "onResponse: " + response.errorBody().string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    orders.onResponse(null);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Order>> call, Throwable t) {
-                Log.e(TAG, "onResponse: ", t);
-                orders.onResponse(null);
-            }
-        });
-//        orders.onResponse(testGenerateOrders());
+//        Call<List<Order>> call = remoteData.getWorkerOrders(workerId);
+//        call.enqueue(new retrofit2.Callback<List<Order>>() {
+//            @Override
+//            public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
+//                if (response.isSuccessful()) {
+//                    orders.onResponse(response.body());
+//                } else {
+//                    try {
+//                        Log.e(TAG, "onResponse: " + response.errorBody().string());
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                    orders.onResponse(null);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<Order>> call, Throwable t) {
+//                Log.e(TAG, "onResponse: ", t);
+//                orders.onResponse(null);
+//            }
+//        });
+        orders.onResponse(testGenerateOrders());
     }
 
     private List<Order> testGenerateOrders() {

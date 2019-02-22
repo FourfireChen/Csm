@@ -1,8 +1,19 @@
 package com.chuansongmen;
 
+import android.os.Bundle;
+import android.widget.Toast;
+
 import com.chuansongmen.base.BaseActivity;
+import com.chuansongmen.base.BaseAdapter;
+import com.chuansongmen.view.SwipeAndLoadRecyclerView;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class TestActivity extends BaseActivity<TestViewModel> {
+    @BindView(R.id.test_recyclerview)
+    SwipeAndLoadRecyclerView testRecyclerview;
 
 //
 //    @BindView(R.id.main_toolbar_me)
@@ -31,7 +42,7 @@ public class TestActivity extends BaseActivity<TestViewModel> {
 
     @Override
     protected int getContentLayoutId() {
-        return R.layout.main_activity;
+        return R.layout.test_activity;
     }
 
     @Override
@@ -44,9 +55,16 @@ public class TestActivity extends BaseActivity<TestViewModel> {
 //                mainAppbarContent.setAlpha(contentToTranslate(height, offset));
 //            }
 //        });
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_fragment_container, new TestFragment())
-                .commit();
+        testRecyclerview.setLayoutManager(new LinearLayoutManager(this));
+
+        testRecyclerview.setAdapter(new BaseAdapter(R.layout.send_get_item));
+
+        testRecyclerview.switchOnRefresh(new SwipeAndLoadRecyclerView.RefreshListener() {
+            @Override
+            public void onRefreshing(SwipeAndLoadRecyclerView swipeAndLoadRecyclerView) {
+                toast("成功");
+            }
+        });
     }
 
     private float contentToTranslate(float height, float offset) {

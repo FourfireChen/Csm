@@ -17,7 +17,6 @@ import com.chuansongmen.R;
 import com.chuansongmen.base.BaseFragment;
 import com.chuansongmen.career_info.CareerInfoActivity;
 import com.chuansongmen.data.bean.Order;
-import com.chuansongmen.data.bean.Worker;
 import com.chuansongmen.login.LoginActivity;
 import com.chuansongmen.receipt.ReceiptActivity;
 import com.chuansongmen.scan.ScanActivity;
@@ -300,8 +299,15 @@ public class MainFragment extends BaseFragment<MainViewModel> implements View.On
     @Override
     public void refreshList(List<List<Order>> data) {
         for (int i = 0; i < 8; i++) {
-            fragments.get(i).refreshList(data.get(i));
+            fragments.get(i).showOrders(data.get(i));
         }
         viewPageAdapter.notifyDataSetChanged();
+    }
+
+    /**
+     * 提供给子fragment调用的接口
+     */
+    public void updateOrders() {
+        viewModel.updateOrders();
     }
 }
